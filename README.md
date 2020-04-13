@@ -222,7 +222,7 @@ segment_image.segmentImage("sample2.jpg", output_image_name = "image_new.jpg", s
 ```python
 segment_image.segmentImage("sample2.jpg", output_image_name = "image_new.jpg", show_boxes = False)
 ```
-**show_boxes** is set to false objects in the image are segmented with no bounding boxes.
+**show_boxes** is set to false, objects in the image are segmented with no bounding boxes.
 ![alt_output2](instance_mask/result2.jpg)
 
 # sample3.jpg
