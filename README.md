@@ -40,7 +40,7 @@ Install h5py with:
 ## Install Pixellib with:
 **pip3 install pixellib**
 
-** Note: The whl file of pixellib is not yet available on pypi, get it from [here](https://github.com/ayoolaolafenwa/PixelLib/releases/download/0.1.0/pixellib-0.1.0-py3-none-any.whl).**
+# Note: The whl file of pixellib is not yet available on pypi, get it from [here](https://github.com/ayoolaolafenwa/PixelLib/releases/download/0.1.0/pixellib-0.1.0-py3-none-any.whl).
 
 # SEMANTIC SEGMENTATION WITH PIXELLIB:
 Pixellib is implemented with Deeplabv3+ framework to perform semantic segmentation.  Xception models pretrained on pascalvoc and cityscapes datasets are used for semantic segmentation. 
@@ -66,7 +66,7 @@ The class for performing semantic segmentation is imported from pixellib and we 
 ```python
 segment_image.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5") 
 ```
-We called the function to load the xception model trained on pascal voc. The xception model can be download from here.
+We called the function to load the xception model trained on pascal voc. The xception model can be download from [here](https://github.com/bonlime/keras-deeplab-v3-plus/releases/download/1.1/deeplabv3_xception_tf_dim_ordering_tf_kernels.h5).
 
 ```python
 segment_image.segmentAsPascalvoc("path_to_image", output_image_name = "path_to_output_image", segmap_only = True)
@@ -126,7 +126,7 @@ The class for performing semantic segmentation is imported from pixellib and we 
 ```python
 segment_image.load_cityscapes_model("deeplabv3_xception_tf_dim_ordering_tf_kernels_cityscapes.h5") 
 ```
-We called the function to load the xception model trained on cityscapes. 
+We called the function to load the xception model trained on cityscapes. xception can be downloaded from [here](https://github.com/bonlime/keras-deeplab-v3-plus/releases/download/1.2/deeplabv3_xception_tf_dim_ordering_tf_kernels_cityscapes.h5)
 
 ```python
 segment_image.segmentAsCityscapes("path_to_image", output_image_name = "output_image_path", segmap_only =True)
