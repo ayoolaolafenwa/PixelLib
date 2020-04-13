@@ -163,7 +163,45 @@ We shall observe the beautiful resuts of instance segmentation with pixellib by 
 
 Instance segmentation with Pixellib is based on Mask_RCNN framework.
 
-#Code to implement instance segmentation:
+# Code to implement instance segmentation:
 
 ```python
+from pixellib.instance import instance_segmentation
+
+segment_image = instance_segmentation()
+segment_image.load_model("mask_rcnn_coco.h5") 
+segment_image.segmentImage("path_to_iamge", output_image_name = "output_image_path", show_boxes = True)
+
 ```
+# Take a look at each line of code
+```python
+from pixellib.instance import instance_segmentation
+
+segment_image = instance_segmentation()
+```
+The class for performing instance segmentation is imported and we created an instance of the class.
+
+```python
+segment_image.load_model("mask_rcnn_coco.h5") 
+```
+This is the code to load the mask rcnn model to perform instance segmentation.
+
+```python
+segment_image.segmentImage("path_to_image", output_image_name = "output_image_path", show_boxes = True)
+```
+This is the code to perform instance segmentation on an image and it takes three parameters.
+*path_to_image:* The path to the image to be predicted by the model.
+
+*output_image_name:* The path to save the segmentation result. It will be save in your current working directory.
+
+*show_boxes:* This is a parameter with a boolean value it determined the type of segmentation result. If it is set to true it shows bounding boxes with their corresponding probabilities around each of the segmented objects in the image.
+
+```python
+from pixellib.instance import instance_segmentation
+
+segment_image = instance_segmentation()
+segment_image.load_model("mask_rcnn_coco.h5") 
+segment_image.segmentImage("sample2.jpg", output_image_name = "image_new.jpg", show_boxes = True)
+
+```
+![alt_output2](semantic_mask/result5.jpg)
