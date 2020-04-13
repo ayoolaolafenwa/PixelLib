@@ -78,7 +78,7 @@ We called the function to load the xception model trained on pascal voc. The xce
 ```python
 segment_image.segmentAsPascalvoc("path_to_image", output_image_name = "path_to_output_image", segmap_only = True)
 ```
-This is the line of code that performs segmentation on an image and the segmentation is done in the pascalvoc color format. This function takes in three parameters:
+This is the line of code that performs segmentation on an image and the segmentation is done in the pascalvoc's color format. This function takes in three parameters:
 
 *path_to_image:* the path to the image to be segemented.
 
@@ -139,7 +139,7 @@ We called the function to load the xception model trained on cityscapes. xceptio
 segment_image.segmentAsCityscapes("path_to_image", output_image_name = "output_image_path", segmap_only =True)
 
 ```
-This is the line of code that performs segmentation on an image and the segmentation is done in the cityscapes color format. This function takes in three parameters:
+This is the line of code that performs segmentation on an image and the segmentation is done in the cityscapes's color format. This function takes in three parameters:
 
 *path_to_image:* the path to the image to be segmented.
 
