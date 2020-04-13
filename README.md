@@ -143,7 +143,7 @@ This is the line of code that performs segmentation on an image and the segmenta
 
 *path_to_image:* the path to the image to be segmented.
 
-*path_to_output_image:* the path to save the output image.
+*path_to_output_image:* the path to save the output image. The image will be saved in your current working directory.
 
 *segmap_only:*  It is a parameter with a boolean value that determines the type of result obtained. If it is set to true only the segmentation map of the image is shown.If it is set to false it shows both the input image and the segmentation map.
 
@@ -201,7 +201,8 @@ This is the code to load the mask rcnn model to perform instance segmentation. D
 ```python
 segment_image.segmentImage("path_to_image", output_image_name = "output_image_path", show_boxes = True)
 ```
-This is the code to perform instance segmentation on an image and it takes three parameters.
+This is the code to perform instance segmentation on an image and it takes three parameters:
+
 *path_to_image:* The path to the image to be predicted by the model.
 
 *output_image_name:* The path to save the segmentation result. It will be saved in your current working directory.
