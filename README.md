@@ -125,7 +125,7 @@ segment_image.load_cityscapes_model("deeplabv3_xception_tf_dim_ordering_tf_kerne
 We called the function to load the xception model trained on cityscapes. 
 
 ```python
-segment_image.segmentAsCityscapes("/path_to_image", output_image_name = "output_image_path", segmap_only =True)
+segment_image.segmentAsCityscapes("path_to_image", output_image_name = "output_image_path", segmap_only =True)
 
 ```
 This is the line of code that perform segmentation on an image and the segmentation is done in the cityscapes color format. This function takes in three parameters:
@@ -157,3 +157,13 @@ segment_image.segmentAsPascalvoc("path_to_image", output_image_name = "path_to_o
 
 When the parameter *segmap_only* is set to False the output result include the input image, segementation overlay of the image and the segmentation map of the image.
 
+# INSTANCE SEGMENTATION WITH PIXELLIB:
+The results obtained with semantic segmentation look great, but it may not be enough for some specific use of image segmentation. In semantic segmentation objects of the same category are given the same colormap. For example if there are five persons in an image, they will all be given the same colormap. Semantic segmentation might not provide adequate information about an image. The need for an effective image segmentation gives rise to invention of *instance segmentation*. In instance segmentation objects of the same category are given different colormaps. 
+We shall observe the beautiful resuts of instance segmentation with pixellib by writing just few lines of code.
+
+Instance segmentation with Pixellib is based on Mask_RCNN framework.
+
+#Code to implement instance segmentation:
+
+```python
+```
