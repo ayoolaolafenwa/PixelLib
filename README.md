@@ -77,7 +77,7 @@ This is the line of code that perform segmentation on an image and the segmentat
 
 *segmap_only:*  It is a parameter with a bolean value that determines the type of result obtained. If it is set to true only the segmentation map of the image is shown.If it is set to false it shows both the input image, segmentation overlay on the image and the segmentation map.
 
-![alt_test1](images/sample1.jpg)
+![alt_test1](Images/sample1.jpg)
 
 ```python
 from pixellib.semantic import semantic_segmentation
