@@ -171,7 +171,7 @@ segment_image.segmentAsPascalvoc("path_to_image", output_image_name = "path_to_o
 When the parameter *segmap_only* is set to False the output result shows the input image and the segmentation map of the image.
 
 # INSTANCE SEGMENTATION WITH PIXELLIB:
-The results obtained with semantic segmentation look great, but it may not be enough for some specific uses of image segmentation. In semantic segmentation objects of the same category are given the same colormap. For example if there are five ppeople in an image, they will all be given the same colormap. Semantic segmentation might not provide adequate information about an image. The need for an effective image segmentation gives rise to the invention of *instance segmentation*. In instance segmentation objects of the same category are given different colormaps. 
+The results obtained with semantic segmentation look great, but it may not be enough for some specific uses of image segmentation. In semantic segmentation objects of the same category are given the same colormap. For example if there are five people in an image, they will all be given the same colormap. Semantic segmentation might not provide adequate information about an image. The need for an effective image segmentation gives rise to the invention of *instance segmentation*. In instance segmentation objects of the same category are given different colormaps. 
 
 Instance segmentation with Pixellib is based on MaskRCNN framework.
 
@@ -222,7 +222,7 @@ segment_image.segmentImage("sample2.jpg", output_image_name = "image_new.jpg", s
 ```python
 segment_image.segmentImage("sample2.jpg", output_image_name = "image_new.jpg", show_boxes = False)
 ```
-** show_boxes ** is set to false objects in the image are segmented with no bounding boxes.
+**show_boxes** is set to false objects in the image are segmented with no bounding boxes.
 ![alt_output2](instance_mask/result2.jpg)
 
 # sample3.jpg
