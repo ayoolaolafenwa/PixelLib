@@ -94,7 +94,7 @@ The segmentation mask of the image above. Only the segmentation map is shown bec
 ```python
 segment_image.segmentAsPascalvoc("path_to_image", output_image_name = "path_to_output_image", segmap_only = False)
 ```
-![alt_output2](semantic_mask/output image(6).jpg)
+![alt_output2](semantic_mask/result2.jpg)
 
 When the parameter *segmap_only* is set to False the output result include the input image, segementation overlay of the image and the segmentation map of the image.
 
