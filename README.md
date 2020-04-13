@@ -87,7 +87,7 @@ segment_image.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernel
 segment_image.segmentAsPascalvoc("sample1.jpg", output_image_name = "output_image.jpg", segmap_only = True)
 
 ```
-![alt_output1](semantic_mask/output image(1).jpg)
+![alt_output1](semantic_mask/result1.jpg)
 
 The segmentation mask of the image above. Only the segmentation map is shown because segmap_only is set to true.
 
