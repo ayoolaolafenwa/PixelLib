@@ -40,7 +40,7 @@ Install h5py with:
 ## Install Pixellib with:
 **pip3 install pixellib**
 
-# Note: The whl file of pixellib is not yet available on pypi, get it from [here](https://github.com/ayoolaolafenwa/PixelLib/releases/download/0.1.0/pixellib-0.1.0-py3-none-any.whl).
+** Note:** The whl file of pixellib is not yet available on pypi, get it from [here](https://github.com/ayoolaolafenwa/PixelLib/releases/download/0.1.0/pixellib-0.1.0-py3-none-any.whl).
 
 # SEMANTIC SEGMENTATION WITH PIXELLIB:
 Pixellib is implemented with Deeplabv3+ framework to perform semantic segmentation.  Xception models pretrained on pascalvoc and cityscapes datasets are used for semantic segmentation. 
@@ -190,7 +190,7 @@ The class for performing instance segmentation is imported and we created an ins
 ```python
 segment_image.load_model("mask_rcnn_coco.h5") 
 ```
-This is the code to load the mask rcnn model to perform instance segmentation.
+This is the code to load the mask rcnn model to perform instance segmentation. Download the mask rcnn model from [here](https://github.com/matterport/Mask_RCNN/releases/download/v2.0/mask_rcnn_coco.h5)
 
 ```python
 segment_image.segmentImage("path_to_image", output_image_name = "output_image_path", show_boxes = True)
