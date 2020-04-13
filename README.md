@@ -40,7 +40,11 @@ Install h5py with:
 ## Install Pixellib with:
 **pip3 install pixellib**
 
-** Note:** The whl file of pixellib is not yet available on pypi, get it from [here](https://github.com/ayoolaolafenwa/PixelLib/releases/download/0.1.0/pixellib-0.1.0-py3-none-any.whl).
+**Note:** The whl file of pixellib is not yet available on pypi, get it from [here](https://github.com/ayoolaolafenwa/PixelLib/releases/download/0.1.0/pixellib-0.1.0-py3-none-any.whl).
+
+[SEMANTIC SEGMENTATION WITH PIXELLIB](#semantic-segmentation-with-pixellib)
+[INSTANCE SEGMENTATION WITH PIXELLIB]()
+
 
 # SEMANTIC SEGMENTATION WITH PIXELLIB:
 Pixellib is implemented with Deeplabv3+ framework to perform semantic segmentation.  Xception models pretrained on pascalvoc and cityscapes datasets are used for semantic segmentation. 
