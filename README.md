@@ -78,13 +78,13 @@ We called the function to load the xception model trained on pascal voc. The xce
 ```python
 segment_image.segmentAsPascalvoc("path_to_image", output_image_name = "path_to_output_image", segmap_only = True)
 ```
-This is the line of code that perform segmentation on an image and the segmentation is done in the pascalvoc color format. This function takes in three parameters:
+This is the line of code that performs segmentation on an image and the segmentation is done in the pascalvoc color format. This function takes in three parameters:
 
 *path_to_image:* the path to the image to be segemented.
 
-*pth_to_output_image:* the path to save the output image.
+*pth_to_output_image:* the path to save the output image. The image will be saved in your current working directory.
 
-*segmap_only:*  It is a parameter with a bolean value that determines the type of result obtained. If it is set to true only the segmentation map of the image is shown.If it is set to false it shows both the input image, segmentation overlay on the image and the segmentation map.
+*segmap_only:*  It is a parameter with a boolean value that determines the type of result obtained. If it is set to true only the segmentation map of the image is shown.If it is set to false it shows both the input image, segmentation overlay on the image and the segmentation map.
 
 # sample1.jpg
 
@@ -107,7 +107,7 @@ segment_image.segmentAsPascalvoc("path_to_image", output_image_name = "path_to_o
 ```
 ![alt_output2](semantic_mask/result2.jpg)
 
-When the parameter *segmap_only* is set to False the output result include the input image, segementation overlay of the image and the segmentation map of the image.
+When the parameter *segmap_only* is set to False the output result shows the input image, segementation overlay and the segmentation map of the image.
 
 
 
@@ -133,19 +133,19 @@ The class for performing semantic segmentation is imported from pixellib and we 
 ```python
 segment_image.load_cityscapes_model("deeplabv3_xception_tf_dim_ordering_tf_kernels_cityscapes.h5") 
 ```
-We called the function to load the xception model trained on cityscapes. xception can be downloaded from [here](https://github.com/bonlime/keras-deeplab-v3-plus/releases/download/1.2/deeplabv3_xception_tf_dim_ordering_tf_kernels_cityscapes.h5)
+We called the function to load the xception model trained on cityscapes. xception model can be downloaded from [here](https://github.com/bonlime/keras-deeplab-v3-plus/releases/download/1.2/deeplabv3_xception_tf_dim_ordering_tf_kernels_cityscapes.h5)
 
 ```python
 segment_image.segmentAsCityscapes("path_to_image", output_image_name = "output_image_path", segmap_only =True)
 
 ```
-This is the line of code that perform segmentation on an image and the segmentation is done in the cityscapes color format. This function takes in three parameters:
+This is the line of code that performs segmentation on an image and the segmentation is done in the cityscapes color format. This function takes in three parameters:
 
-*path_to_image:* the path to the image to be segemented.
+*path_to_image:* the path to the image to be segmented.
 
 *path_to_output_image:* the path to save the output image.
 
-*segmap_only:*  It is a parameter with a bolean value that determines the type of result obtained. If it is set to true only the segmentation map of the image is shown.If it is set to false it shows both the input image, segmentation overlay on the image and the segmentation map.
+*segmap_only:*  It is a parameter with a boolean value that determines the type of result obtained. If it is set to true only the segmentation map of the image is shown.If it is set to false it shows both the input image, segmentation overlay on the image and the segmentation map.
 
 # sample2.jpg
 
@@ -161,20 +161,19 @@ segment_image.segmentAsCityscapes("sample2.jpg", output_image_name = "image_new"
 ```
 ![alt_output1](semantic_mask/result4.jpg)
 
-The segmentation mask of the image above. Only the segmentation map is shown because segmap_only is set to true.
+The segmentation map of the image above. Only the segmentation map is shown because segmap_only is set to true.
 
 ```python
 segment_image.segmentAsPascalvoc("path_to_image", output_image_name = "path_to_output_image", segmap_only = False)
 ```
 ![alt_output2](semantic_mask/result5.jpg)
 
-When the parameter *segmap_only* is set to False the output result include the input image and the segmentation map of the image.
+When the parameter *segmap_only* is set to False the output result shows the input image and the segmentation map of the image.
 
 # INSTANCE SEGMENTATION WITH PIXELLIB:
-The results obtained with semantic segmentation look great, but it may not be enough for some specific use of image segmentation. In semantic segmentation objects of the same category are given the same colormap. For example if there are five persons in an image, they will all be given the same colormap. Semantic segmentation might not provide adequate information about an image. The need for an effective image segmentation gives rise to invention of *instance segmentation*. In instance segmentation objects of the same category are given different colormaps. 
-We shall observe the beautiful resuts of instance segmentation with pixellib by writing just few lines of code.
+The results obtained with semantic segmentation look great, but it may not be enough for some specific uses of image segmentation. In semantic segmentation objects of the same category are given the same colormap. For example if there are five ppeople in an image, they will all be given the same colormap. Semantic segmentation might not provide adequate information about an image. The need for an effective image segmentation gives rise to the invention of *instance segmentation*. In instance segmentation objects of the same category are given different colormaps. 
 
-Instance segmentation with Pixellib is based on Mask_RCNN framework.
+Instance segmentation with Pixellib is based on MaskRCNN framework.
 
 # Code to implement instance segmentation:
 
@@ -186,7 +185,7 @@ segment_image.load_model("mask_rcnn_coco.h5")
 segment_image.segmentImage("path_to_iamge", output_image_name = "output_image_path", show_boxes = True)
 
 ```
-# Take a look at each line of code
+##Take a look at each line of code
 ```python
 from pixellib.instance import instance_segmentation
 
@@ -205,9 +204,9 @@ segment_image.segmentImage("path_to_image", output_image_name = "output_image_pa
 This is the code to perform instance segmentation on an image and it takes three parameters.
 *path_to_image:* The path to the image to be predicted by the model.
 
-*output_image_name:* The path to save the segmentation result. It will be save in your current working directory.
+*output_image_name:* The path to save the segmentation result. It will be saved in your current working directory.
 
-*show_boxes:* This is a parameter with a boolean value it determined the type of segmentation result. If it is set to true it shows bounding boxes with their corresponding probabilities around each of the segmented objects in the image.
+*show_boxes:* This is a parameter with a boolean value it determines the type of segmentation result. If it is set to true it shows bounding boxes with their corresponding probabilities around each of the segmented objects in the image.
 
 ```python
 from pixellib.instance import instance_segmentation
@@ -222,7 +221,7 @@ segment_image.segmentImage("sample2.jpg", output_image_name = "image_new.jpg", s
 ```python
 segment_image.segmentImage("sample2.jpg", output_image_name = "image_new.jpg", show_boxes = False)
 ```
-** show_boxes ** is set to false an image with only the segmentation masks is produced.
+** show_boxes ** is set to false objects in the image are segmented with no bounding boxes.
 ![alt_output2](instance_mask/result2.jpg)
 
 # sample3.jpg
