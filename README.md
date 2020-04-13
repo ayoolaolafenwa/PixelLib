@@ -82,7 +82,7 @@ This is the line of code that performs segmentation on an image and the segmenta
 
 *path_to_image:* the path to the image to be segemented.
 
-*pth_to_output_image:* the path to save the output image. The image will be saved in your current working directory.
+*path_to_output_image:* the path to save the output image. The image will be saved in your current working directory.
 
 *segmap_only:*  It is a parameter with a boolean value that determines the type of result obtained. If it is set to true only the segmentation map of the image is shown.If it is set to false it shows both the input image, segmentation overlay on the image and the segmentation map.
 
@@ -145,7 +145,7 @@ This is the line of code that performs segmentation on an image and the segmenta
 
 *path_to_output_image:* the path to save the output image.
 
-*segmap_only:*  It is a parameter with a boolean value that determines the type of result obtained. If it is set to true only the segmentation map of the image is shown.If it is set to false it shows both the input image, segmentation overlay on the image and the segmentation map.
+*segmap_only:*  It is a parameter with a boolean value that determines the type of result obtained. If it is set to true only the segmentation map of the image is shown.If it is set to false it shows both the input image and the segmentation map.
 
 # sample2.jpg
 
@@ -185,7 +185,7 @@ segment_image.load_model("mask_rcnn_coco.h5")
 segment_image.segmentImage("path_to_iamge", output_image_name = "output_image_path", show_boxes = True)
 
 ```
-##Take a look at each line of code
+## Take a look at each line of code
 ```python
 from pixellib.instance import instance_segmentation
 
