@@ -204,4 +204,4 @@ segment_image.load_model("mask_rcnn_coco.h5")
 segment_image.segmentImage("sample2.jpg", output_image_name = "image_new.jpg", show_boxes = True)
 
 ```
-![alt_output2](semantic_mask/result5.jpg)
+![alt_output2](instance_mask/result1.jpg)
