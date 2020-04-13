@@ -209,6 +209,17 @@ segment_image.segmentImage("sample2.jpg", output_image_name = "image_new.jpg", s
 ```python
 segment_image.segmentImage("sample2.jpg", output_image_name = "image_new.jpg", show_boxes = False)
 ```
-** show_boxes is set to false an image with only the segmentation masks is produced.**
+** show_boxes ** is set to false an image with only the segmentation masks is produced.
 ![alt_output2](instance_mask/result2.jpg)
+
+# sample3.jpg
+![alt_output2](Images/sample3.jpg)
+
+```python
+segment_image.segmentImage("sample3.jpg", output_image_name = "image_new.jpg", show_boxes = True)
+```
+
+![alt_output2](instance_mask/result3.jpg)
+
+
 
