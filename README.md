@@ -240,4 +240,4 @@ segment_image.segmentImage("sample3.jpg", output_image_name = "image_new.jpg", s
 
 ![alt_output2](instance_mask/result4.jpg)
 
-
+[Back To Top](#pixellib)
