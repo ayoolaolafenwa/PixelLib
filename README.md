@@ -77,6 +77,8 @@ This is the line of code that perform segmentation on an image and the segmentat
 
 *segmap_only:*  It is a parameter with a bolean value that determines the type of result obtained. If it is set to true only the segmentation map of the image is shown.If it is set to false it shows both the input image, segmentation overlay on the image and the segmentation map.
 
+# sample1.jpg
+
 ![alt_test1](Images/sample1.jpg)
 
 ```python
@@ -135,6 +137,8 @@ This is the line of code that perform segmentation on an image and the segmentat
 *path_to_output_image:* the path to save the output image.
 
 *segmap_only:*  It is a parameter with a bolean value that determines the type of result obtained. If it is set to true only the segmentation map of the image is shown.If it is set to false it shows both the input image, segmentation overlay on the image and the segmentation map.
+
+# sample2.jpg
 
 ![alt_test1](Images/sample4.jpg)
 
@@ -221,5 +225,11 @@ segment_image.segmentImage("sample3.jpg", output_image_name = "image_new.jpg", s
 
 ![alt_output2](instance_mask/result3.jpg)
 
+
+```python
+segment_image.segmentImage("sample3.jpg", output_image_name = "image_new.jpg", show_boxes = False)
+```
+
+![alt_output2](instance_mask/result4.jpg)
 
 
