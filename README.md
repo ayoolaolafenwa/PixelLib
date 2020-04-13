@@ -98,3 +98,62 @@ segment_image.segmentAsPascalvoc("path_to_image", output_image_name = "path_to_o
 
 When the parameter *segmap_only* is set to False the output result include the input image, segementation overlay of the image and the segmentation map of the image.
 
+
+
+
+## Semantic segmentation with xception model pretrained on cityscapes.
+```python
+from pixellib.semantic import semantic_segmentation
+
+segment_image = semantic_segmentation()
+segment_image.load_cityscapes_model("deeplabv3_xception_tf_dim_ordering_tf_kernels_cityscapes.h5") 
+segment_image.segmentAsCityscapes("/path_to_image", output_image_name = "output_image_path", segmap_only =True)
+
+```
+We shall take a look into each line of code....
+```python
+from pixellib.semantic import semantic_segmentation
+
+#created an instance of semantic segmentation class
+segment_image = semantic_segmentation()
+```
+The class for performing semantic segmentation is imported from pixellib and we created an instance of the class. 
+
+```python
+segment_image.load_cityscapes_model("deeplabv3_xception_tf_dim_ordering_tf_kernels_cityscapes.h5") 
+```
+We called the function to load the xception model trained on cityscapes. 
+
+```python
+segment_image.segmentAsCityscapes("/path_to_image", output_image_name = "output_image_path", segmap_only =True)
+
+```
+This is the line of code that perform segmentation on an image and the segmentation is done in the cityscapes color format. This function takes in three parameters:
+
+*path_to_image:* the path to the image to be segemented.
+
+*path_to_output_image:* the path to save the output image.
+
+*segmap_only:*  It is a parameter with a bolean value that determines the type of result obtained. If it is set to true only the segmentation map of the image is shown.If it is set to false it shows both the input image, segmentation overlay on the image and the segmentation map.
+
+![alt_test1](Images/sample4.jpg)
+
+```python
+from pixellib.semantic import semantic_segmentation
+
+segment_image = semantic_segmentation()
+segment_image.load_cityscapes_model("deeplabv3_xception_tf_dim_ordering_tf_kernels_cityscapes.h5") 
+segment_image.segmentAsCityscapes("sample2.jpg", output_image_name = "image_new", segmap_only = True)
+
+```
+![alt_output1](semantic_mask/result4.jpg)
+
+The segmentation mask of the image above. Only the segmentation map is shown because segmap_only is set to true.
+
+```python
+segment_image.segmentAsPascalvoc("path_to_image", output_image_name = "path_to_output_image", segmap_only = False)
+```
+![alt_output2](semantic_mask/result5.jpg)
+
+When the parameter *segmap_only* is set to False the output result include the input image, segementation overlay of the image and the segmentation map of the image.
+
