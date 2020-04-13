@@ -40,6 +40,8 @@ Install h5py with:
 ## Install Pixellib with:
 **pip3 install pixellib**
 
+** Note: The whl file of pixellib is not yet available on pypi, get it from [here](https://github.com/ayoolaolafenwa/PixelLib/releases/download/0.1.0/pixellib-0.1.0-py3-none-any.whl).**
+
 # SEMANTIC SEGMENTATION WITH PIXELLIB:
 Pixellib is implemented with Deeplabv3+ framework to perform semantic segmentation.  Xception models pretrained on pascalvoc and cityscapes datasets are used for semantic segmentation. 
 
@@ -64,7 +66,7 @@ The class for performing semantic segmentation is imported from pixellib and we 
 ```python
 segment_image.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5") 
 ```
-We called the function to load the xception model trained on pascal voc. 
+We called the function to load the xception model trained on pascal voc. The xception model can be download from here.
 
 ```python
 segment_image.segmentAsPascalvoc("path_to_image", output_image_name = "path_to_output_image", segmap_only = True)
@@ -159,7 +161,7 @@ segment_image.segmentAsPascalvoc("path_to_image", output_image_name = "path_to_o
 ```
 ![alt_output2](semantic_mask/result5.jpg)
 
-When the parameter *segmap_only* is set to False the output result include the input image, segementation overlay of the image and the segmentation map of the image.
+When the parameter *segmap_only* is set to False the output result include the input image and the segmentation map of the image.
 
 # INSTANCE SEGMENTATION WITH PIXELLIB:
 The results obtained with semantic segmentation look great, but it may not be enough for some specific use of image segmentation. In semantic segmentation objects of the same category are given the same colormap. For example if there are five persons in an image, they will all be given the same colormap. Semantic segmentation might not provide adequate information about an image. The need for an effective image segmentation gives rise to invention of *instance segmentation*. In instance segmentation objects of the same category are given different colormaps. 
