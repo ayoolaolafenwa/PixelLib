@@ -70,11 +70,12 @@ We called the function to load the xception model trained on pascal voc.
 segment_image.segmentAsPascalvoc("path_to_image", output_image_name = "path_to_output_image", segmap_only = True)
 ```
 This is the line of code that perform segmentation on an image and the segmentation is done in the pascalvoc color format. This function takes in three parameters:
-*path_to_image:*the path to the image to be segemented.
+
+*path_to_image:* the path to the image to be segemented.
 
 *pth_to_output_image:* the path to save the output image.
 
-*segmap_only:* It parameter with a bolean value that determines the type of result obtained. If it is set to true only the segmentation map of the image is shown.If it is set to false it shows both the input image, segmentation overlay on the image and the segmentation map.
+*segmap_only:*  It is a parameter with a bolean value that determines the type of result obtained. If it is set to true only the segmentation map of the image is shown.If it is set to false it shows both the input image, segmentation overlay on the image and the segmentation map.
 
 ![alt_test1](images/sample1.jpg)
 
