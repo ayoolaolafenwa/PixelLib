@@ -243,8 +243,10 @@ segment_image.segmentImage("sample3.jpg", output_image_name = "image_new.jpg", s
 
 ## References
 1. Keras implementation of Deeplab v3+ with pretrained weights  https://github.com/bonlime/keras-deeplab-v3-plus
+
 2. Liang-Chieh Chen. et al, Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation
 https://arxiv.org/abs/1802.02611
+
 3.@misc{matterport_maskrcnn_2017,
   title={Mask R-CNN for object detection and instance segmentation on Keras and TensorFlow},
   author={Waleed Abdulla},
@@ -253,6 +255,7 @@ https://arxiv.org/abs/1802.02611
   journal={GitHub repository},
   howpublished={\url{https://github.com/matterport/Mask_RCNN}},
 }
+
 4.Kaiming He et al, Mask R-CNN https://arxiv.org/abs/1703.06870
 
 [Back To Top](#pixellib)
