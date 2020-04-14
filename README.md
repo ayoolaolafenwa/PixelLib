@@ -30,7 +30,7 @@ Install Ipython with:
 
 **pip3 install Ipython**
 
-Install Skimage with:
+Install scikit-image with:
 
 **pip3 install scikit-image**
 
@@ -88,7 +88,7 @@ This is the line of code that performs segmentation on an image and the segmenta
 
 # sample1.jpg
 
-![alt_test1](Images/sample1.jpg)
+![alt_test1](Images/resize2.jpg)
 
 ```python
 from pixellib.semantic import semantic_segmentation
