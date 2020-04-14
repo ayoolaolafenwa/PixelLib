@@ -198,6 +198,8 @@ segment_image.load_model("mask_rcnn_coco.h5")
 ```
 This is the code to load the mask rcnn model to perform instance segmentation. Download the mask rcnn model from [here](https://github.com/matterport/Mask_RCNN/releases/download/v2.0/mask_rcnn_coco.h5)
 
+The model is trained on Coco dataset with 80 common object categories. The model can perform instance segmentation on these object categories. check this [text file](https://github.com/ayoolaolafenwa/PixelLib/blob/master/coco_object_categories.txt) to see a list of the 80 object categories.
+
 ```python
 segment_image.segmentImage("path_to_image", output_image_name = "output_image_path", show_boxes = True)
 ```
@@ -246,7 +248,7 @@ segment_image.segmentImage("sample3.jpg", output_image_name = "image_new.jpg", s
 ## References
 1. Bonlime, Keras implementation of Deeplab v3+ with pretrained weights  https://github.com/bonlime/keras-deeplab-v3-plus
 
-2. Liang-Chieh Chen. et al, Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentationhttps://arxiv.org/abs/1802.02611
+2. Liang-Chieh Chen. et al, Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation https://arxiv.org/abs/1802.02611
 
 3. Matterport, Mask R-CNN for object detection and instance segmentation on Keras and TensorFlow https://github.com/matterport/Mask_RCNN
 
