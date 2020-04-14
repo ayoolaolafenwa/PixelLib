@@ -74,7 +74,7 @@ The class for performing semantic segmentation is imported from pixellib and we 
 segment_image.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5") 
 ```
 We called the function to load the xception model trained on pascal voc. The xception model can be download from [here](https://github.com/bonlime/keras-deeplab-v3-plus/releases/download/1.1/deeplabv3_xception_tf_dim_ordering_tf_kernels.h5).
-
+ 
 ```python
 segment_image.segmentAsPascalvoc("path_to_image", output_image_name = "path_to_output_image", segmap_only = True)
 ```
@@ -109,7 +109,11 @@ segment_image.segmentAsPascalvoc("path_to_image", output_image_name = "path_to_o
 
 When the parameter *segmap_only* is set to False the output result shows the input image, segementation overlay and the segmentation map of the image.
 
+This xception model is trained with pascalvoc dataset with 20 common object categories. 
 
+Objects and their corresponding color maps
+
+[alt_pascal](Images/pascal.png)
 
 
 ## Semantic segmentation with xception model pretrained on cityscapes.
@@ -135,6 +139,10 @@ segment_image.load_cityscapes_model("deeplabv3_xception_tf_dim_ordering_tf_kerne
 ```
 We called the function to load the xception model trained on cityscapes. xception model can be downloaded from [here](https://github.com/bonlime/keras-deeplab-v3-plus/releases/download/1.2/deeplabv3_xception_tf_dim_ordering_tf_kernels_cityscapes.h5)
 
+The cityscapes's model is used for segmenting city scenes's images. 
+
+** Note:** Complex city scenes with many people and dense traffic use the instance segmentation model.
+
 ```python
 segment_image.segmentAsCityscapes("path_to_image", output_image_name = "output_image_path", segmap_only =True)
 
@@ -145,7 +153,7 @@ This is the line of code that performs segmentation on an image and the segmenta
 
 *path_to_output_image:* the path to save the output image. The image will be saved in your current working directory.
 
-*segmap_only:*  It is a parameter with a boolean value that determines the type of result obtained. If it is set to true only the segmentation map of the image is shown.If it is set to false it shows both the input image and the segmentation map.
+*segmap_only:*  It is a parameter with a boolean value that determines the type of result obtained. If it is set to true, only the segmentation map of the image is shown.If it is set to false it shows both the input image and the segmentation map.
 
 # sample2.jpg
 
@@ -198,8 +206,6 @@ segment_image.load_model("mask_rcnn_coco.h5")
 ```
 This is the code to load the mask rcnn model to perform instance segmentation. Download the mask rcnn model from [here](https://github.com/matterport/Mask_RCNN/releases/download/v2.0/mask_rcnn_coco.h5)
 
-The model is trained on Coco dataset with 80 common object categories. The model can perform instance segmentation on these object categories. check this [text file](https://github.com/ayoolaolafenwa/PixelLib/blob/master/coco_object_categories.txt) to see a list of the 80 object categories.
-
 ```python
 segment_image.segmentImage("path_to_image", output_image_name = "output_image_path", show_boxes = True)
 ```
@@ -226,6 +232,8 @@ segment_image.segmentImage("sample2.jpg", output_image_name = "image_new.jpg", s
 ```
 **show_boxes** is set to false, objects in the image are segmented with no bounding boxes.
 ![alt_output2](instance_mask/result2.jpg)
+
+The Mask R_CNN model is trained on Coco dataset with 80 common object categories. The model can perform instance segmentation on these object categories. check this [text file](https://github.com/ayoolaolafenwa/PixelLib/blob/master/coco_object_categories.txt) to see a list of the 80 object categories.
 
 # sample3.jpg
 ![alt_output2](Images/sample3.jpg)
