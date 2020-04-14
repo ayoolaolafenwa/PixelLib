@@ -95,7 +95,7 @@ from pixellib.semantic import semantic_segmentation
 
 segment_image = semantic_segmentation()
 segment_image.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5") 
-segment_image.segmentAsPascalvoc("sample1.jpg", output_image_name = "output_image.jpg", segmap_only = True)
+segment_image.segmentAsPascalvoc("sample1.jpg", output_image_name = "image_new.jpg", segmap_only = True)
 
 ```
 ![alt_output1](semantic_mask/result1.jpg)
@@ -103,7 +103,7 @@ segment_image.segmentAsPascalvoc("sample1.jpg", output_image_name = "output_imag
 The segmentation mask of the image above. Only the segmentation map is shown because segmap_only is set to true.
 
 ```python
-segment_image.segmentAsPascalvoc("path_to_image", output_image_name = "path_to_output_image", segmap_only = False)
+segment_image.segmentAsPascalvoc("sample1.jpg", output_image_name = "image_new.jpg", segmap_only = False)
 ```
 ![alt_output2](semantic_mask/result2.jpg)
 
@@ -164,7 +164,7 @@ from pixellib.semantic import semantic_segmentation
 
 segment_image = semantic_segmentation()
 segment_image.load_cityscapes_model("deeplabv3_xception_tf_dim_ordering_tf_kernels_cityscapes.h5") 
-segment_image.segmentAsCityscapes("sample2.jpg", output_image_name = "image_new", segmap_only = True)
+segment_image.segmentAsCityscapes("sample2.jpg", output_image_name = "image_new.jpg", segmap_only = True)
 
 ```
 ![alt_output1](semantic_mask/result4.jpg)
@@ -172,7 +172,7 @@ segment_image.segmentAsCityscapes("sample2.jpg", output_image_name = "image_new"
 The segmentation map of the image above. Only the segmentation map is shown because segmap_only is set to true.
 
 ```python
-segment_image.segmentAsPascalvoc("path_to_image", output_image_name = "path_to_output_image", segmap_only = False)
+segment_image.segmentAsCityscapes("sample2.jpg", output_image_name = "image_new.jpg", segmap_only = False)
 ```
 ![alt_output2](semantic_mask/result5.jpg)
 
