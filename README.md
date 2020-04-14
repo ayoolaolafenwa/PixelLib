@@ -241,4 +241,9 @@ segment_image.segmentImage("sample3.jpg", output_image_name = "image_new.jpg", s
 
 ![alt_output2](instance_mask/result4.jpg)
 
+## References
+1. Keras implementation of Deeplab v3+ with pretrained weights  https://github.com/bonlime/keras-deeplab-v3-plus
+2.
+
+
 [Back To Top](#pixellib)
