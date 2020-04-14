@@ -113,7 +113,7 @@ This xception model is trained with pascalvoc dataset with 20 common object cate
 
 Objects and their corresponding color maps
 
-[alt_pascal](Images/pascal.png)
+![alt_test1](Images/pascal.png)
 
 
 ## Semantic segmentation with xception model pretrained on cityscapes.
@@ -141,7 +141,7 @@ We called the function to load the xception model trained on cityscapes. xceptio
 
 The cityscapes's model is used for segmenting city scenes's images. 
 
-** Note:** Complex city scenes with many people and dense traffic use the instance segmentation model.
+**Note:** Complex city scenes with many people and dense traffic use the instance segmentation model(Mask R-CNN model).
 
 ```python
 segment_image.segmentAsCityscapes("path_to_image", output_image_name = "output_image_path", segmap_only =True)
