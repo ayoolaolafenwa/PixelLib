@@ -1,5 +1,5 @@
 ![alt_test1](instance_mask/result5.jpg)
-# PixelLib Library
+# PixelLib 
 Pixellib is a library for performing segmentation of images. It supports the two major types of image segmentation: 
 
 **1.Semantic segmentation**
