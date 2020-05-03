@@ -113,7 +113,7 @@ def Deeplab_xcep_pascal(weights=None, input_tensor=None, input_shape=(512, 512, 
     if not (weights in {'pascalvoc', None}):
         raise ValueError('The `weights` argument should be either '
                          '`None` (random initialization), `pascalvoc` '
-                         '(pre-trained on PASCALVOC)')
+                         '(pre-trained on PascalVoc)')
 
     if input_tensor is None:
         img_input = Input(shape=input_shape)
@@ -281,7 +281,7 @@ def Deeplab_xcep_pascal(weights=None, input_tensor=None, input_shape=(512, 512, 
 
     model = Model(inputs, x, name='deeplabv3plus')
 
-    if weights == 'pascal_voc':
+    if weights == 'pascalvoc':
         weights_path = model_path
         model.load_weights(weights_path, by_name=True)
     return model

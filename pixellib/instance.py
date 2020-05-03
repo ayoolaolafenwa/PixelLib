@@ -50,6 +50,7 @@ class instance_segmentation():
         r = results[0]       
         if show_bboxes == False:
             
+            #apply segmentation mask
             output = display_instances(image, r['rois'], r['masks'], r['class_ids'], class_names)
             
             if output_image_name is not None:
@@ -58,6 +59,7 @@ class instance_segmentation():
                 return output
 
         else:
+            #apply segmentation mask with bounding boxes
             output = display_box_instances(image, r['rois'], r['masks'], r['class_ids'], class_names, r['scores'])
 
             if output_image_name is not None:

@@ -10,11 +10,11 @@ class semantic_segmentation():
 
   def __init__(self):
 
-    self.model1 = Deeplab_xcep_pascal()
+    self.model = Deeplab_xcep_pascal()
     
       
   def load_pascalvoc_model(self, model_path):
-    self.model1.load_weights(model_path)
+    self.model.load_weights(model_path)
 
 
   def segmentAsPascalvoc(self, image_path, output_image_name=None,overlay=False):            
@@ -37,8 +37,8 @@ class semantic_segmentation():
 
     print("Processing image....")
 
-    
-    res = self.model1.predict(np.expand_dims(resized_image, 0))
+    #run prediction
+    res = self.model.predict(np.expand_dims(resized_image, 0))
     
     labels = np.argmax(res.squeeze(), -1)
     # remove padding and resize back to original image
