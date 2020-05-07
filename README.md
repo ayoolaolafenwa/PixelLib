@@ -1,4 +1,4 @@
-![alt_test1](instance_mask/result5.jpg)
+![alt_test1](instance_mask/cover.jpg)
 # PixelLib 
 Pixellib is a library for performing segmentation of images. It supports the two major types of image segmentation: 
 
@@ -39,10 +39,11 @@ Install scikit-image with:
 
 
 # SEMANTIC SEGMENTATION WITH PIXELLIB:
-Pixellib is implemented with Deeplabv3+ framework to perform semantic segmentation.  Xception models pretrained on pascalvoc and cityscapes datasets are used for semantic segmentation. 
+Pixellib is implemented with Deeplabv3+ framework to perform semantic segmentation.  Xception model pretrained on pascalvoc  is used for semantic segmentation. 
 
 ## Semantic segmentation with xception model pretrained on pascalvoc.
 ```python
+import pixellib
 from pixellib.semantic import semantic_segmentation
 
 segment_image = semantic_segmentation()
@@ -52,6 +53,7 @@ segment_image.segmentAsPascalvoc("path_to_image", output_image_name = "path_to_o
 ```
 We shall take a look into each line of code....
 ```python
+import pixellib
 from pixellib.semantic import semantic_segmentation
 
 #created an instance of semantic segmentation class
@@ -78,6 +80,7 @@ This is the line of code that performs segmentation on an image and the segmenta
 ![alt_test1](Images/resize2.jpg)
 
 ```python
+import pixellib
 from pixellib.semantic import semantic_segmentation
 
 segment_image = semantic_segmentation()
@@ -119,6 +122,7 @@ Instance segmentation with Pixellib is based on MaskRCNN framework.
 # Code to implement instance segmentation:
 
 ```python
+import pixellib
 from pixellib.instance import instance_segmentation
 
 segment_image = instance_segmentation()
@@ -128,6 +132,7 @@ segment_image.segmentImage("path_to_image", output_image_name = "output_image_pa
 ```
 ## Take a look at each line of code
 ```python
+import pixellib
 from pixellib.instance import instance_segmentation
 
 segment_image = instance_segmentation()
@@ -142,7 +147,7 @@ This is the code to load the mask rcnn model to perform instance segmentation. D
 ```python
 segment_image.segmentImage("path_to_image", output_image_name = "output_image_path")
 ```
-This is the code to perform instance segmentation on an image and it takes three parameters:
+This is the code to perform instance segmentation on an image and it takes two parameters:
 
 *path_to_image:* The path to the image to be predicted by the model.
 
@@ -150,6 +155,7 @@ This is the code to perform instance segmentation on an image and it takes three
 
 
 ```python
+import pixellib
 from pixellib.instance import instance_segmentation
 
 segment_image = instance_segmentation()
