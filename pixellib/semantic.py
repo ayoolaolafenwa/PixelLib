@@ -72,7 +72,7 @@ class semantic_segmentation():
 
           print("Processed Image saved successfuly in your current working directory.")
 
-        return new_img
+        return new_img, None
     
     
 
