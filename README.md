@@ -99,7 +99,7 @@ segment_image.segmentAsPascalvoc("sample1.jpg", output_image_name = "image_new.j
 ```
 
 We added an extra parameter overlay set to true, we produced an image with segmentation overlay.
-![alt_output2](semantic_mask/result2.jpg)
+![alt_output2](semantic_mask/lay.jpg)
 
 
 This xception model is trained with pascalvoc dataset with 20 common object categories. 
