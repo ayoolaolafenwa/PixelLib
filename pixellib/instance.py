@@ -56,7 +56,7 @@ class instance_segmentation():
             if output_image_name is not None:
                 cv2.imwrite(output_image_name, output)
                 print("Processed image saved successfully in your current working directory.")
-                return output
+            return r, output
 
         else:
             #apply segmentation mask with bounding boxes
@@ -65,7 +65,7 @@ class instance_segmentation():
             if output_image_name is not None:
                 cv2.imwrite(output_image_name, output)
                 print("Processed Image saved successfully in your current working directory.")
-            return output
+            return r, output
 
 def random_colors(N):
     np.random.seed(1)
@@ -74,15 +74,17 @@ def random_colors(N):
 
 
 
-def apply_mask(image, mask, color, alpha=0.8):
+def apply_mask(input_image, mask, color, alpha=0.8):
     #apply mask to image
     for n, c in enumerate(color):
-        image[:, :, n] = np.where(
+        input_image[:, :, n] = np.where(
             mask == 1,
-            image[:, :, n] * (1 - alpha) + alpha * c,
-            image[:, :, n]
+            input_image[:, :, n] * (1 - alpha) + alpha * c,
+            input_image[:, :, n]
         )
-    return image
+    return input_image
+
+    
 
 
 def display_instances(image, boxes, masks, class_ids,  class_names):

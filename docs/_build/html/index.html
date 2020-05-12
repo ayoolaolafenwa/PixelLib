@@ -1,0 +1,245 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PIXELLIB’S OFFICIAL DOCUMENTATION &mdash; PixelLib 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="SEMANTIC SEGMENTATION WITH PIXELLIB" href="semantic.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home"> PixelLib
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="semantic.html"><strong>SEMANTIC SEGMENTATION WITH PIXELLIB</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="instance.html"><strong>INSTANCE SEGMENTATION WITH PIXELLIB</strong></a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">PixelLib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>PIXELLIB’S OFFICIAL DOCUMENTATION</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pixellib-s-official-documentation">
+<h1>PIXELLIB’S OFFICIAL DOCUMENTATION<a class="headerlink" href="#pixellib-s-official-documentation" title="Permalink to this headline">¶</a></h1>
+<p>PixelLib is a library created for performing image segmentation using few lines of code. It is a flexible library created to allow easy integration of image segmentation into software solutions.</p>
+<p>PixelLib requires python’s version 3.5-3.7, <a class="reference external" href="https://www.python.org/downloads/">Download python</a></p>
+<p>It requires pip’s version &gt;= 19.0</p>
+<p>Install pip with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">pip</span>
+</pre></div>
+</div>
+<p>Install PixelLib and its dependencies:</p>
+<p>Install  the latest version of tensorflow(Tensorflow 2.0+) with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">tensorflow</span>
+</pre></div>
+</div>
+<p>Install Opencv-python with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">opencv</span><span class="o">-</span><span class="n">python</span>
+</pre></div>
+</div>
+<p>Install Pillow with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">pillow</span>
+</pre></div>
+</div>
+<p>Install scikit-image with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">scikit</span><span class="o">-</span><span class="n">image</span>
+</pre></div>
+</div>
+<p>Install PixelLib with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">pixellib</span>
+</pre></div>
+</div>
+<p>PixelLib supports the two major types of segmentation:</p>
+<p>1 <strong>Semantic segmentation</strong>:
+Objects in an image with the same pixel values are segmented with the same colormaps.</p>
+<img alt="_images/semantic.jpg" src="_images/semantic.jpg" />
+<p><a class="reference internal" href="semantic.html#semantic"><span class="std std-ref">SEMANTIC SEGMENTATION WITH PIXELLIB</span></a></p>
+<p>2 <strong>Instance segmentation</strong>:
+Instances of the same object are segmented with different color maps.</p>
+<img alt="_images/instance.jpg" src="_images/instance.jpg" />
+<p><a class="reference internal" href="instance.html#instance"><span class="std std-ref">INSTANCE SEGMENTATION WITH PIXELLIB</span></a></p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="semantic.html"><strong>SEMANTIC SEGMENTATION WITH PIXELLIB</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="instance.html"><strong>INSTANCE SEGMENTATION WITH PIXELLIB</strong></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="semantic.html" class="btn btn-neutral float-right" title="SEMANTIC SEGMENTATION WITH PIXELLIB" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Ayoola Olafenwa
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
