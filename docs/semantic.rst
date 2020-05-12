@@ -3,11 +3,9 @@
 **SEMANTIC SEGMENTATION WITH PIXELLIB**
 =========================================
 
-PixelLib is implemented with Deeplabv3+ framework to perform semantic segmentation. Xception model pretrained on pascalvoc is used for semantic segmentation.
+PixelLib is implemented with Deeplabv3+ framework to perform semantic segmentation. Xception model trained on pascalvoc dataset is used for semantic segmentation.
 
-Semantic segmentation with xception model trained on pascalvoc.
-
-
+*Code to implement semantic segmentation*:
 
 .. code-block:: python
 
