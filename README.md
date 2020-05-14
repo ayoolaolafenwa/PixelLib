@@ -76,6 +76,7 @@ This is the line of code that performs segmentation on an image and the segmenta
 *path_to_output_image:* the path to save the output image. The image will be saved in your current working directory.
 
 # sample1.jpg
+Image's source: Pinterest
 
 ![alt_test1](Images/resize2.jpg)
 
@@ -189,7 +190,8 @@ You get a saved image with both segmentation masks and bounding boxes.
 
 The Mask R_CNN model is trained on Coco dataset with 80 common object categories. The model can perform instance segmentation on these object categories. check this [text file](https://github.com/ayoolaolafenwa/PixelLib/blob/master/coco_object_categories.txt) to see a list of the 80 object categories.
 
-# Specialised uses of PixelLib for Instance Segmentatio.
+
+# Specialised uses of PixelLib for Instance Segmentation.
 
 ## Obtain the following arrays:
 
