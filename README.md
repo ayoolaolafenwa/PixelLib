@@ -76,7 +76,7 @@ This is the line of code that performs segmentation on an image and the segmenta
 *path_to_output_image:* the path to save the output image. The image will be saved in your current working directory.
 
 # sample1.jpg
-Image's source: Pinterest
+
 
 ![alt_test1](Images/resize2.jpg)
 
