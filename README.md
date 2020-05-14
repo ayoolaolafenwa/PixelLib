@@ -1,4 +1,4 @@
-![alt_test1](instance_mask/cover2.jpg)
+![alt_test1](instance_mask/cover.jpg)
 # PixelLib 
 Pixellib is a library for performing segmentation of images. It supports the two major types of image segmentation: 
 
