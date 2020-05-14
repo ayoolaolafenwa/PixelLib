@@ -200,6 +200,19 @@
 </div>
 <p>We added an extra parameter <strong>overlay</strong> and set it to <strong>true</strong>, we produced an image with segmentation overlay.</p>
 <img alt="_images/overlay.jpg" src="_images/overlay.jpg" />
+<p><strong>Specialised uses of PixelLib may require you to return the array of the segmentation’s output.</strong></p>
+<ul class="simple">
+<li><p>Obtain the array of the segmentation’s output by using this code,</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="p">,</span> <span class="n">segmap</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentAsPascalvoc</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Obtain both the output and the segmentation overlay’s arrays by using this code,</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="p">,</span> <span class="n">segoverlay</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentAsPascalvoc</span><span class="p">(</span><span class="n">overlay</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>This xception model is trained on pascal voc dataset, a dataset with 20 object categories.</p>
 <p>Objects and their corresponding colormaps.</p>
 <img alt="_images/pascal.png" src="_images/pascal.png" />

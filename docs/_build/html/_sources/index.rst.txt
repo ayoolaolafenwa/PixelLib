@@ -63,6 +63,7 @@ Instances of the same object are segmented with different color maps.
 
 .. image:: photos/instance.jpg
 
+
 :ref:`instance`
 
 
@@ -74,7 +75,17 @@ Instances of the same object are segmented with different color maps.
    instance.rst
    
 
+*CONTACT INFO:*
 
+`olafenwaayoola@gmail.com <https://mail.google.com/mail/u/0/#inbox>`_
+
+`Github.com <https://github.com/ayoolaolafenwa>`_
+
+`Twitter.com <https://twitter.com/AyoolaOlafenwa>`_
+
+`Facebook.com <https://web.facebook.com/ayofen?ref=bookmarks>`_
+
+`Linkedin.com <https://www.linkedin.com/in/ayoola-olafenwa-003b901a9/>`_
 
 .. Indices and tables
 .. ==================

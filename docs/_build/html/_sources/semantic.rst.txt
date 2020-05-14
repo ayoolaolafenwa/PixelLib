@@ -79,6 +79,21 @@ We added an extra parameter **overlay** and set it to **true**, we produced an i
 
 
 
+**Specialised uses of PixelLib may require you to return the array of the segmentation's output.**
+
+* Obtain the array of the segmentation's output by using this code, 
+
+.. code-block:: python
+
+  output, segmap = segment_image.segmentAsPascalvoc()
+
+* Obtain both the output and the segmentation overlay's arrays by using this code,
+
+.. code-block:: python
+
+  output, segoverlay = segment_image.segmentAsPascalvoc(overlay = True)
+
+
 This xception model is trained on pascal voc dataset, a dataset with 20 object categories.
 
 Objects and their corresponding colormaps.

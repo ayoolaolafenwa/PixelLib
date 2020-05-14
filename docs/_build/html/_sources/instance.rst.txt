@@ -80,3 +80,30 @@ We added an extra parameter **show_bboxes** and set it to **true**, the segmenta
 
 
 You get a saved image with both segmentation masks and bounding boxes.
+
+**Specialised uses of PixelLib may require you to return the array of the segmentation's output.**
+
+*Obtain the following arrays*:
+
+-Detected Objects' arrays
+
+-Objects' corresponding class_ids' arrays
+
+-Segmentation masks' arrays
+
+-Output's array
+
+By using this code
+
+.. code-block:: python
+
+  segmask, output = segment_image.segmentImage()
+
+
+* Segmentation with bounding boxes, modify the code by including the parameter *show_bboxes.*
+
+.. code-block:: python
+
+  segmask, output = segment_image.segmentImage(show_bboxes = True)
+
+  
