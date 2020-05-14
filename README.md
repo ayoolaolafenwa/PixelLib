@@ -112,7 +112,17 @@ Objects and their corresponding color maps
 
 ![alt_test2](Images/cycle.jpg)
 
+# Specialised uses of PixelLib may require you to return the array of the segmentation’s output.
 
+## Obtain the array of the segmentation’s output by using this code,
+```python
+output, segmap = segment_image.segmentAsPascalvoc()
+```
+## Obtain both the output and the segmentation overlay’s arrays by using this code,
+
+```python
+output, segoverlay = segment_image.segmentAsPascalvoc(overlay = True)
+```
 
 # INSTANCE SEGMENTATION WITH PIXELLIB:
 The results obtained with semantic segmentation look great, but it may not be enough for some specific uses of image segmentation. In semantic segmentation objects of the same category are given the same colormap. For example if there are five people in an image, they will all be given the same colormap. Semantic segmentation might not provide adequate information about an image. The need for an effective image segmentation gives rise to the invention of *instance segmentation*. In instance segmentation objects of the same category are given different colormaps. 
@@ -179,7 +189,29 @@ You get a saved image with both segmentation masks and bounding boxes.
 
 The Mask R_CNN model is trained on Coco dataset with 80 common object categories. The model can perform instance segmentation on these object categories. check this [text file](https://github.com/ayoolaolafenwa/PixelLib/blob/master/coco_object_categories.txt) to see a list of the 80 object categories.
 
+# Specialised uses of PixelLib for Instance Segmentatio.
 
+## Obtain the following arrays:
+
+-Detected Objects’ arrays
+
+-Objects’ corresponding class_ids’ arrays
+
+-Segmentation masks’ arrays
+
+-Output’s array
+
+## By using this code
+
+```python
+segmask, output = segment_image.segmentImage()
+```
+
+Segmentation with bounding boxes, modify the code by including the parameter ## show_bboxes.
+
+```python
+segmask, output = segment_image.segmentImage(show_bboxes = True)
+```
 
 ## References
 1. Bonlime, Keras implementation of Deeplab v3+ with pretrained weights  https://github.com/bonlime/keras-deeplab-v3-plus
