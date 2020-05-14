@@ -109,9 +109,6 @@ Objects and their corresponding color maps
 
 ![alt_test1](Images/pascal.png)
 
-#Sample2.jpg
-
-![alt_test2](Images/cycle.jpg)
 
 # Specialised uses of PixelLib may require you to return the array of the segmentation’s output.
 
@@ -164,6 +161,9 @@ This is the code to perform instance segmentation on an image and it takes two p
 
 *output_image_name:* The path to save the segmentation result. It will be saved in your current working directory.
 
+# Sample2.jpg
+
+![alt_test2](Images/cycle.jpg)
 
 ```python
 import pixellib
