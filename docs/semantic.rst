@@ -98,9 +98,9 @@ We added an extra parameter **overlay** and set it to **true**, we produced an i
 
 .. code-block:: python
 
-  Inference Time: 10.02seconds
+  Inference Time: 10.02 seconds
   
-The total time taken to perform semantic segmentation on the image was 10.02 seconds.
+It took 10.02  seconds to run semantic segmentation on the image.
 
 **Specialised uses of PixelLib may require you to return the array of the segmentation's output.**
 

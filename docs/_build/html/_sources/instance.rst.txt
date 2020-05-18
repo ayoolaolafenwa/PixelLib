@@ -104,9 +104,9 @@ You get a saved image with both segmentation masks and bounding boxes.
 
 .. code-block:: python
 
-  Inference Time: 19.35seconds
+  Inference Time: 19.35 seconds
 
-The total time taken to perform instance segmentation on the image was 19.35 seconds.
+It took 19.35 seconds to run instance segmentation on the image.
 
 **Specialised uses of PixelLib may require you to return the array of the segmentation's output.**
 
