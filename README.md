@@ -117,10 +117,10 @@ import pixellib
 from pixellib.semantic import semantic_segmentation
 import time
 
-start = time.time()
-
 segment_image = semantic_segmentation()
 segment_image.load_pascalvoc_model("pascal.h5")
+
+start = time.time()
 segment_image.segmentAsPascalvoc("sample1.jpg", output_image_name= "image_new.jpg")
 
 end = time.time()
