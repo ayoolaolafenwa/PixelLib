@@ -109,6 +109,32 @@ We added an extra parameter overlay set to true, we produced an image with segme
 ![alt_output2](semantic_mask/lay.jpg)
 
 
+* You can check the inference time required for performing segmentation by modifying the code below..
+
+``` python
+  
+import pixellib
+from pixellib.semantic import semantic_segmentation
+import cv2
+import time
+
+start = time.time()
+
+segment_image = semantic_segmentation()
+segment_image.load_pascalvoc_model("pascal.h5")
+segment_image.segmentAsPascalvoc("sample1.jpg", output_image_name= "image_new.jpg")
+
+end = time.time()
+print(f"Inference Time: {end-start:.2f}seconds")
+```  
+
+
+```
+  Inference Time: 10.02seconds
+```  
+The total time taken to perform semantic segmentation on the image was 10.02 seconds.
+
+
 This xception model is trained with pascalvoc dataset with 20 common object categories. 
 
 Objects and their corresponding color maps
@@ -221,6 +247,33 @@ segment_image.segmentImage("sample2.jpg", output_image_name = "image_new.jpg", s
 You get a saved image with both segmentation masks and bounding boxes.
 
 ![alt_output2](instance_mask/result2.jpg)
+
+
+* You can check the inference time required for performing segmentation by modifying the code below..
+
+
+```python  
+import pixellib
+from pixellib.instance import instance_segmentation
+import cv2
+import time
+
+start = time.time()
+
+segment_image = instance_segmentation()
+segment_image.load_model("mask_rcnn_coco.h5")
+segment_image.segmentImage("former.jpg", output_image_name= "image_new.jpg")
+
+end = time.time()
+print(f"Inference Time: {end-start:.2f}seconds")
+```
+
+```
+Inference Time: 19.35seconds
+```
+
+The total time taken to perform instance segmentation on the image was 19.35 seconds.
+
 
 The Mask R_CNN model is trained on Coco dataset with 80 common object categories. The model can perform instance segmentation on these object categories. check this [text file](https://github.com/ayoolaolafenwa/PixelLib/blob/master/coco_object_categories.txt) to see a list of the 80 object categories.
 
