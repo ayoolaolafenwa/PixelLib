@@ -30,7 +30,8 @@ Install scikit-image with:
 ## Install Pixellib with:
 **pip3 install pixellib**
 
-**Note:** The whl file of pixellib is not yet available on pypi, get it from [here](https://github.com/ayoolaolafenwa/PixelLib/releases/download/0.1.0/pixellib-0.1.0-py3-none-any.whl).
+**Note** Deeplab and mask r-ccn models are available  in the [release] (https://github.com/ayoolaolafenwa/PixelLib/releases) of this repository.
+
 
 --[SEMANTIC SEGMENTATION WITH PIXELLIB](#semantic-segmentation-with-pixellib)
 
