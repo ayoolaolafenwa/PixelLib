@@ -30,7 +30,7 @@ Install scikit-image with:
 ## Install Pixellib with:
 **pip3 install pixellib**
 
-**Note** Deeplab and mask r-ccn models are available  in the [release] (https://github.com/ayoolaolafenwa/PixelLib/releases) of this repository.
+**Note** Deeplab and mask r-ccn models are available  in the [release](https://github.com/ayoolaolafenwa/PixelLib/releases) of this repository.
 
 
 --[SEMANTIC SEGMENTATION WITH PIXELLIB](#semantic-segmentation-with-pixellib)
@@ -252,7 +252,7 @@ segmask, output = instance_seg.segmentImage("sample2.jpg")
 cv2.imwrite("img.jpg", output)
 print(output.shape)
 ```
-Obtain arrays of segmentation with bounding boxes by including the parameter ## show_bboxes.
+Obtain arrays of segmentation with bounding boxes by including the parameter show_bboxes.
 
 ```python
 segmask, output = segment_image.segmentImage(show_bboxes = True)
