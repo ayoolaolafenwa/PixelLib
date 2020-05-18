@@ -115,7 +115,6 @@ We added an extra parameter overlay set to true, we produced an image with segme
   
 import pixellib
 from pixellib.semantic import semantic_segmentation
-import cv2
 import time
 
 start = time.time()
@@ -255,7 +254,6 @@ You get a saved image with both segmentation masks and bounding boxes.
 ```python  
 import pixellib
 from pixellib.instance import instance_segmentation
-import cv2
 import time
 
 start = time.time()

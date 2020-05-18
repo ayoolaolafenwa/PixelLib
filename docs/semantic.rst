@@ -85,7 +85,6 @@ We added an extra parameter **overlay** and set it to **true**, we produced an i
   
   import pixellib
   from pixellib.semantic import semantic_segmentation
-  import cv2
   import time
 
   start = time.time()

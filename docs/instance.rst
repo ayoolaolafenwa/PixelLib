@@ -84,6 +84,30 @@ We added an extra parameter **show_bboxes** and set it to **true**, the segmenta
 
 You get a saved image with both segmentation masks and bounding boxes.
 
+
+* You can check the inference time required for performing segmentation by modifying the code below..
+
+.. code-block:: python
+  
+  import pixellib
+  from pixellib.instance import instance_segmentation
+  import time
+
+  start = time.time()
+
+  segment_image = instance_segmentation()
+  segment_image.load_model("mask_rcnn_coco.h5")
+  segment_image.segmentImage("former.jpg", output_image_name= "image_new.jpg")
+
+  end = time.time()
+  print(f"Inference Time: {end-start:.2f}seconds")
+
+.. code-block:: python
+
+  Inference Time: 19.35seconds
+
+The total time taken to perform instance segmentation on the image was 19.35 seconds.
+
 **Specialised uses of PixelLib may require you to return the array of the segmentation's output.**
 
 *Obtain the following arrays*:
@@ -102,30 +126,6 @@ By using this code
 
   segmask, output = segment_image.segmentImage()
 
-
-* You can check the inference time required for performing segmentation by modifying the code below..
-
-.. code-block:: python
-  
-  import pixellib
-  from pixellib.instance import instance_segmentation
-  import cv2
-  import time
-
-  start = time.time()
-
-  segment_image = instance_segmentation()
-  segment_image.load_model("mask_rcnn_coco.h5")
-  segment_image.segmentImage("former.jpg", output_image_name= "image_new.jpg")
-
-  end = time.time()
-  print(f"Inference Time: {end-start:.2f}seconds")
-
-.. code-block:: python
-
-  Inference Time: 19.35seconds
-
-The total time taken to perform instance segmentation on the image was 19.35 seconds.
 
 
 

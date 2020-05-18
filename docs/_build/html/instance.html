@@ -200,22 +200,11 @@
 <p>We added an extra parameter <strong>show_bboxes</strong> and set it to <strong>true</strong>, the segmentation masks are produced with bounding boxes.</p>
 <img alt="_images/maskboxes.jpg" src="_images/maskboxes.jpg" />
 <p>You get a saved image with both segmentation masks and bounding boxes.</p>
-<p><strong>Specialised uses of PixelLib may require you to return the array of the segmentation’s output.</strong></p>
-<p><em>Obtain the following arrays</em>:</p>
-<p>-Detected Objects’ arrays</p>
-<p>-Objects’ corresponding class_ids’ arrays</p>
-<p>-Segmentation masks’ arrays</p>
-<p>-Output’s array</p>
-<p>By using this code</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">segmask</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">()</span>
-</pre></div>
-</div>
 <ul class="simple">
 <li><p>You can check the inference time required for performing segmentation by modifying the code below..</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">instance_segmentation</span>
-<span class="kn">import</span> <span class="nn">cv2</span>
 <span class="kn">import</span> <span class="nn">time</span>
 
 <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
@@ -232,6 +221,16 @@
 </pre></div>
 </div>
 <p>The total time taken to perform instance segmentation on the image was 19.35 seconds.</p>
+<p><strong>Specialised uses of PixelLib may require you to return the array of the segmentation’s output.</strong></p>
+<p><em>Obtain the following arrays</em>:</p>
+<p>-Detected Objects’ arrays</p>
+<p>-Objects’ corresponding class_ids’ arrays</p>
+<p>-Segmentation masks’ arrays</p>
+<p>-Output’s array</p>
+<p>By using this code</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">segmask</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">()</span>
+</pre></div>
+</div>
 <ul class="simple">
 <li><p>You can test the code for obtaining arrays and print out the shape of the output by modifying the instance segmentation code below.</p></li>
 </ul>
