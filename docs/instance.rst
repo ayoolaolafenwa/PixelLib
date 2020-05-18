@@ -6,6 +6,8 @@
 
 Instance segmentation with PixelLib is based on MaskRCNN framework.
 
+Download the mask rcnn model from `here <https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.2/mask_rcnn_coco.h5>`_
+
 *Code to implement instance segmentation*:
 
 .. code-block:: python
@@ -32,7 +34,7 @@ The class for performing instance segmentation is imported and we created an ins
 
   segment_image.load_model("mask_rcnn_coco.h5") 
 
-This is the code to load the mask rcnn model to perform instance segmentation. Download the mask rcnn model from `here <https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.2/mask_rcnn_coco.h5>`_
+This is the code to load the mask rcnn model to perform instance segmentation. 
 
 .. code-block:: python
 
@@ -48,7 +50,7 @@ This is the code to perform instance segmentation on an image and it takes two p
 
 .. image:: photos/sample2.jpg  
 
-Image's source:Wikimedia
+Image's source:Wikicommons
 
 
 
@@ -73,6 +75,7 @@ You can implement segmentation with bounding boxes. This can be achieved by modi
 .. code-block:: python
 
   segment_image.segmentImage("sample2.jpg", output_image_name = "image_new.jpg", show_bboxes = True)
+
 
 We added an extra parameter **show_bboxes** and set it to **true**, the segmentation masks are produced with bounding boxes.
 
@@ -100,10 +103,37 @@ By using this code
   segmask, output = segment_image.segmentImage()
 
 
-* Segmentation with bounding boxes, modify the code by including the parameter *show_bboxes.*
+* You can test the code for obtaining arrays and print out the shape of the output by modifying the instance segmentation code below.
+
+.. code-block:: python
+
+  import pixellib
+  from pixellib.instance import instance_segmentation
+  import cv2
+
+  instance_seg = instance_segmentation()
+  instance_seg.load_model("mask_rcnn_coco.h5")
+  segmask, output = instance_seg.segmentImage("sample2.jpg")
+  cv2.imwrite("img.jpg", output)
+  print(output.shape)
+
+
+* Obtain arrays of segmentation with bounding boxes by including the parameter *show_bboxes*.
 
 .. code-block:: python
 
   segmask, output = segment_image.segmentImage(show_bboxes = True)
+
+.. code-block:: python
+
+  import pixellib
+  from pixellib.instance import instance_segmentation
+  import cv2
+
+  instance_seg = instance_segmentation()
+  instance_seg.load_model("mask_rcnn_coco.h5")
+  segmask, output = instance_seg.segmentImage("sample2.jpg", show_bboxes= True)
+  cv2.imwrite("img.jpg", output)
+  print(output.shape)
 
   

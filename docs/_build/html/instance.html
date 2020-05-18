@@ -150,6 +150,7 @@
   <div class="section" id="instance-segmentation-with-pixellib">
 <span id="instance"></span><h1><strong>INSTANCE SEGMENTATION WITH PIXELLIB</strong><a class="headerlink" href="#instance-segmentation-with-pixellib" title="Permalink to this headline">¶</a></h1>
 <p>Instance segmentation with PixelLib is based on MaskRCNN framework.</p>
+<p>Download the mask rcnn model from <a class="reference external" href="https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.2/mask_rcnn_coco.h5">here</a></p>
 <p><em>Code to implement instance segmentation</em>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">instance_segmentation</span>
@@ -170,7 +171,7 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">segment_image</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_coco.h5&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>This is the code to load the mask rcnn model to perform instance segmentation. Download the mask rcnn model from <a class="reference external" href="https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.2/mask_rcnn_coco.h5">here</a></p>
+<p>This is the code to load the mask rcnn model to perform instance segmentation.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">segment_image</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">(</span><span class="s2">&quot;path_to_image&quot;</span><span class="p">,</span> <span class="n">output_image_name</span> <span class="o">=</span> <span class="s2">&quot;output_image_path&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -181,7 +182,7 @@
 </div></blockquote>
 <p><strong>Sample2.jpg</strong></p>
 <img alt="_images/sample2.jpg" src="_images/sample2.jpg" />
-<p>Image’s source:Wikimedia</p>
+<p>Image’s source:Wikicommons</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">instance_segmentation</span>
 
@@ -210,9 +211,34 @@
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>Segmentation with bounding boxes, modify the code by including the parameter <em>show_bboxes.</em></p></li>
+<li><p>You can test the code for obtaining arrays and print out the shape of the output by modifying the instance segmentation code below.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">instance_segmentation</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+<span class="n">instance_seg</span> <span class="o">=</span> <span class="n">instance_segmentation</span><span class="p">()</span>
+<span class="n">instance_seg</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_coco.h5&quot;</span><span class="p">)</span>
+<span class="n">segmask</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="n">instance_seg</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">(</span><span class="s2">&quot;sample2.jpg&quot;</span><span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s2">&quot;img.jpg&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Obtain arrays of segmentation with bounding boxes by including the parameter <em>show_bboxes</em>.</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">segmask</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">(</span><span class="n">show_bboxes</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">instance_segmentation</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+<span class="n">instance_seg</span> <span class="o">=</span> <span class="n">instance_segmentation</span><span class="p">()</span>
+<span class="n">instance_seg</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_coco.h5&quot;</span><span class="p">)</span>
+<span class="n">segmask</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="n">instance_seg</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">(</span><span class="s2">&quot;sample2.jpg&quot;</span><span class="p">,</span> <span class="n">show_bboxes</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s2">&quot;img.jpg&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

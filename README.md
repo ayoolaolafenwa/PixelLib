@@ -116,10 +116,38 @@ Objects and their corresponding color maps
 ```python
 output, segmap = segment_image.segmentAsPascalvoc()
 ```
+
+## You can test the code for obtaining arrays and print out the shape of the output by modifying the semantic segmentation code below.
+
+``` python 
+import pixellib
+from pixellib.semantic import semantic_segmentation
+import cv2
+
+segment_image = semantic_segmentation()
+segment_image.load_pascalvoc_model("pascal.h5")
+output, segmap = segment_image.segmentAsPascalvoc("sample1.jpg")
+cv2.imwrite("img.jpg", output)
+print(output.shape)
+```
+
 ## Obtain both the output and the segmentation overlay’s arrays by using this code,
 
 ```python
 output, segoverlay = segment_image.segmentAsPascalvoc(overlay = True)
+```
+
+
+```python
+import pixellib
+from pixellib.semantic import semantic_segmentation
+import cv2
+
+segment_image = semantic_segmentation()
+segment_image.load_pascalvoc_model("pascal.h5")
+segmap, segoverlay = segment_image.segmentAsPascalvoc("sample1.jpg", overlay= True)
+cv2.imwrite("img.jpg", segoverlay)
+print(segoverlay.shape)
 ```
 
 # INSTANCE SEGMENTATION WITH PIXELLIB:
@@ -209,11 +237,38 @@ The Mask R_CNN model is trained on Coco dataset with 80 common object categories
 segmask, output = segment_image.segmentImage()
 ```
 
-Segmentation with bounding boxes, modify the code by including the parameter ## show_bboxes.
+##  You can test the code for obtaining arrays and print out the shape of the output by modifying the instance segmentation code below.
+
+
+```python
+import pixellib
+from pixellib.instance import instance_segmentation
+import cv2
+
+instance_seg = instance_segmentation()
+instance_seg.load_model("mask_rcnn_coco.h5")
+segmask, output = instance_seg.segmentImage("sample2.jpg")
+cv2.imwrite("img.jpg", output)
+print(output.shape)
+```
+Obtain arrays of segmentation with bounding boxes by including the parameter ## show_bboxes.
 
 ```python
 segmask, output = segment_image.segmentImage(show_bboxes = True)
 ```
+
+```python
+import pixellib
+from pixellib.instance import instance_segmentation
+import cv2
+
+instance_seg = instance_segmentation()
+instance_seg.load_model("mask_rcnn_coco.h5")
+segmask, output = instance_seg.segmentImage("sample2.jpg", show_bboxes= True)
+cv2.imwrite("img.jpg", output)
+print(output.shape)
+```
+
 
 ## References
 1. Bonlime, Keras implementation of Deeplab v3+ with pretrained weights  https://github.com/bonlime/keras-deeplab-v3-plus

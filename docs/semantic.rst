@@ -5,6 +5,8 @@
 
 PixelLib is implemented with Deeplabv3+ framework to perform semantic segmentation. Xception model trained on pascalvoc dataset is used for semantic segmentation.
 
+Download the xception model from `here <https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.1/deeplabv3_xception_tf_dim_ordering_tf_kernels.h5>`_.
+
 *Code to implement semantic segmentation*:
 
 .. code-block:: python
@@ -35,7 +37,7 @@ The class for performing semantic segmentation is imported from pixellib and we 
 
   segment_image.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5") 
 
-We called the function to load the xception model trained on pascal voc. The xception model can be download from `here <https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.1/deeplabv3_xception_tf_dim_ordering_tf_kernels.h5>`_
+We called the function to load the xception model trained on pascal voc. 
 
 .. code-block:: python
 
@@ -87,12 +89,38 @@ We added an extra parameter **overlay** and set it to **true**, we produced an i
 
   output, segmap = segment_image.segmentAsPascalvoc()
 
+* You can test the code for obtaining arrays and print out the shape of the output by modifying the semantic segmentation code below.
+
+.. code-block:: python
+  
+  import pixellib
+  from pixellib.semantic import semantic_segmentation
+  import cv2
+
+  segment_image = semantic_segmentation()
+  segment_image.load_pascalvoc_model("pascal.h5")
+  output, segmap = segment_image.segmentAsPascalvoc("sample1.jpg")
+  cv2.imwrite("img.jpg", output)
+  print(output.shape)
+
 * Obtain both the output and the segmentation overlay's arrays by using this code,
 
 .. code-block:: python
 
   output, segoverlay = segment_image.segmentAsPascalvoc(overlay = True)
 
+
+.. code-block:: python
+  
+  import pixellib
+  from pixellib.semantic import semantic_segmentation
+  import cv2
+
+  segment_image = semantic_segmentation()
+  segment_image.load_pascalvoc_model("pascal.h5")
+  segmap, segoverlay = segment_image.segmentAsPascalvoc("sample1.jpg", overlay= True)
+  cv2.imwrite("img.jpg", segoverlay)
+  print(segoverlay.shape)
 
 This xception model is trained on pascal voc dataset, a dataset with 20 object categories.
 
