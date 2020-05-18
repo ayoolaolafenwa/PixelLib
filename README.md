@@ -32,6 +32,7 @@ Install scikit-image with:
 
 **Note** Deeplab and mask r-ccn models are available  in the [release](https://github.com/ayoolaolafenwa/PixelLib/releases) of this repository.
 
+* Check out tutorials on PixelLib on [medium](https://medium.com/@olafenwaayoola/image-segmentation-with-six-lines-0f-code-acb870a462e8) and documentation on [readthedocs](https://pixellib.readthedocs.io/en/latest/)
 
 --[SEMANTIC SEGMENTATION WITH PIXELLIB](#semantic-segmentation-with-pixellib)
 
