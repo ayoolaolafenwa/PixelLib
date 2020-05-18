@@ -87,10 +87,10 @@ We added an extra parameter **overlay** and set it to **true**, we produced an i
   from pixellib.semantic import semantic_segmentation
   import time
 
-  start = time.time()
-
   segment_image = semantic_segmentation()
   segment_image.load_pascalvoc_model("pascal.h5")
+
+  start = time.time()
   segment_image.segmentAsPascalvoc("sample1.jpg", output_image_name= "image_new.jpg")
 
   end = time.time()
@@ -98,9 +98,9 @@ We added an extra parameter **overlay** and set it to **true**, we produced an i
 
 .. code-block:: python
 
-  Inference Time: 10.02 seconds
+  Inference Time: 8.19seconds
   
-It took 10.02  seconds to run semantic segmentation on the image.
+It took 8.19 seconds to run semantic segmentation on the image.
 
 **Specialised uses of PixelLib may require you to return the array of the segmentation's output.**
 

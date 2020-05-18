@@ -129,9 +129,9 @@ print(f"Inference Time: {end-start:.2f}seconds")
 
 
 ```
-  Inference Time: 10.02seconds
+  Inference Time: 8.19seconds
 ```  
-It took 10.02 seconds to run semantic segmentation on the image.
+It took 8.19 seconds to run semantic segmentation on the image.
 
 This xception model is trained with pascalvoc dataset with 20 common object categories. 
 
@@ -255,10 +255,10 @@ import pixellib
 from pixellib.instance import instance_segmentation
 import time
 
-start = time.time()
-
 segment_image = instance_segmentation()
 segment_image.load_model("mask_rcnn_coco.h5")
+
+start = time.time()
 segment_image.segmentImage("former.jpg", output_image_name= "image_new.jpg")
 
 end = time.time()
@@ -266,10 +266,10 @@ print(f"Inference Time: {end-start:.2f}seconds")
 ```
 
 ```
-Inference Time: 19.35 seconds
+Inference Time: 12.55 seconds
 ```
 
-It took 19.35 seconds to run instance segmentation on the image.
+It took 12.55 seconds to run instance segmentation on the image.
 
 
 The Mask R_CNN model is trained on Coco dataset with 80 common object categories. The model can perform instance segmentation on these object categories. check this [text file](https://github.com/ayoolaolafenwa/PixelLib/blob/master/coco_object_categories.txt) to see a list of the 80 object categories.

@@ -93,10 +93,10 @@ You get a saved image with both segmentation masks and bounding boxes.
   from pixellib.instance import instance_segmentation
   import time
 
-  start = time.time()
-
   segment_image = instance_segmentation()
   segment_image.load_model("mask_rcnn_coco.h5")
+
+  start = time.time()
   segment_image.segmentImage("former.jpg", output_image_name= "image_new.jpg")
 
   end = time.time()
@@ -104,9 +104,9 @@ You get a saved image with both segmentation masks and bounding boxes.
 
 .. code-block:: python
 
-  Inference Time: 19.35 seconds
+  Inference Time: 12.87seconds
 
-It took 19.35 seconds to run instance segmentation on the image.
+It took 12.87 seconds to run instance segmentation on the image.
 
 **Specialised uses of PixelLib may require you to return the array of the segmentation's output.**
 

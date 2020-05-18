@@ -207,20 +207,20 @@
 <span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">instance_segmentation</span>
 <span class="kn">import</span> <span class="nn">time</span>
 
-<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-
 <span class="n">segment_image</span> <span class="o">=</span> <span class="n">instance_segmentation</span><span class="p">()</span>
 <span class="n">segment_image</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_coco.h5&quot;</span><span class="p">)</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">(</span><span class="s2">&quot;former.jpg&quot;</span><span class="p">,</span> <span class="n">output_image_name</span><span class="o">=</span> <span class="s2">&quot;image_new.jpg&quot;</span><span class="p">)</span>
 
 <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inference Time: </span><span class="si">{</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">seconds&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Inference</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">19.35</span> <span class="n">seconds</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Inference</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">12.87</span><span class="n">seconds</span>
 </pre></div>
 </div>
-<p>It took 19.35 seconds to run instance segmentation on the image.</p>
+<p>It took 12.87 seconds to run instance segmentation on the image.</p>
 <p><strong>Specialised uses of PixelLib may require you to return the array of the segmentation’s output.</strong></p>
 <p><em>Obtain the following arrays</em>:</p>
 <p>-Detected Objects’ arrays</p>
