@@ -201,6 +201,28 @@
 </div>
 <p>We added an extra parameter <strong>overlay</strong> and set it to <strong>true</strong>, we produced an image with segmentation overlay.</p>
 <img alt="_images/overlay.jpg" src="_images/overlay.jpg" />
+<ul class="simple">
+<li><p>You can check the inference time required for performing segmentation by modifying the code below..</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.semantic</span> <span class="kn">import</span> <span class="n">semantic_segmentation</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="n">segment_image</span> <span class="o">=</span> <span class="n">semantic_segmentation</span><span class="p">()</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;pascal.h5&quot;</span><span class="p">)</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">segmentAsPascalvoc</span><span class="p">(</span><span class="s2">&quot;sample1.jpg&quot;</span><span class="p">,</span> <span class="n">output_image_name</span><span class="o">=</span> <span class="s2">&quot;image_new.jpg&quot;</span><span class="p">)</span>
+
+<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inference Time: </span><span class="si">{</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">seconds&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Inference</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">10.02</span><span class="n">seconds</span>
+</pre></div>
+</div>
+<p>The total time taken to perform semantic segmentation on the image was 10.02 seconds.</p>
 <p><strong>Specialised uses of PixelLib may require you to return the array of the segmentation’s output.</strong></p>
 <ul class="simple">
 <li><p>Obtain the array of the segmentation’s output by using this code,</p></li>
