@@ -26,7 +26,7 @@ class instance_segmentation():
         self.model.load_weights(model_path, by_name= True)
 
     def segmentImage(self, image_path, show_bboxes = False, output_image_name = None):
-        
+
         image = cv2.imread(image_path)
         new_img = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         # Run detection
@@ -67,12 +67,51 @@ class instance_segmentation():
                 print("Processed Image saved successfully in your current working directory.")
             return r, output
 
+    def segmentFrame(self, frame, show_bboxes = False, output_image_name = None):
+
+        new_img = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+        # Run detection
+        results = self.model.detect([new_img], verbose=1)
+
+        class_names = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
+               'bus', 'train', 'truck', 'boat', 'traffic light',
+               'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird',
+               'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear',
+               'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie',
+               'suitcase', 'frisbee', 'skis', 'snowboard', 'sports ball',
+               'kite', 'baseball bat', 'baseball glove', 'skateboard',
+               'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup',
+               'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple',
+               'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza',
+               'donut', 'cake', 'chair', 'couch', 'potted plant', 'bed',
+               'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote',
+               'keyboard', 'cell phone', 'microwave', 'oven', 'toaster',
+               'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors',
+               'teddy bear', 'hair drier', 'toothbrush']
+        r = results[0]       
+        if show_bboxes == False:
+            
+            #apply segmentation mask
+            output = display_instances(frame, r['rois'], r['masks'], r['class_ids'], class_names)
+            
+            if output_image_name is not None:
+                cv2.imwrite(output_image_name, output)
+                print("Processed image saved successfully in your current working directory.")
+            return r, output
+
+        else:
+            #apply segmentation mask with bounding boxes
+            output = display_box_instances(frame, r['rois'], r['masks'], r['class_ids'], class_names, r['scores'])
+
+            if output_image_name is not None:
+                cv2.imwrite(output_image_name, output)
+                print("Processed Image saved successfully in your current working directory.")
+            return r, output
+        
 def random_colors(N):
     np.random.seed(1)
     colors = [tuple(255 * np.random.rand(3)) for _ in range(N)]
     return colors
-
-
 
 def apply_mask(input_image, mask, color, alpha=0.8):
     #apply mask to image
