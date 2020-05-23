@@ -73,7 +73,67 @@ class semantic_segmentation():
           print("Processed Image saved successfuly in your current working directory.")
 
         return new_img, None
+
+        
+  def segmentFrameAsPascalvoc(self, frame, output_image_name=None,overlay=False):            
+    target_size=512
+    mean_subtraction_value=127.5
+      
+    output = frame.copy()
+
+    # resize to max dimension of images from training dataset
+    w, h, _ = frame.shape
+    ratio = float(target_size) / np.max([w, h])
+    resized_frame = np.array(Image.fromarray(frame.astype('uint8')).resize((int(ratio * h), int(ratio * w))))
+    resized_frame = (resized_frame / mean_subtraction_value) -1
+
+
+    # pad array to square image to match training images
+    pad_x = int(target_size - resized_frame.shape[0])
+    pad_y = int(target_size - resized_frame.shape[1])
+    resized_frame = np.pad(resized_frame, ((0, pad_x), (0, pad_y), (0, 0)), mode='constant')
+
+    print("Processing image....")
+
+    #run prediction
+    res = self.model.predict(np.expand_dims(resized_frame, 0))
     
+    labels = np.argmax(res.squeeze(), -1)
+    # remove padding and resize back to original image
+    if pad_x > 0:
+        labels = labels[:-pad_x]
+    if pad_y > 0:
+        labels = labels[:, :-pad_y]
+        
+    #Apply segmentation color map
+    labels = labelP_to_color_image(labels)   
+    labels = np.array(Image.fromarray(labels.astype('uint8')).resize((h, w)))
+    
+    
+    new_img = cv2.cvtColor(labels, cv2.COLOR_RGB2BGR)
+
+    if overlay == True:
+        alpha = 0.7
+        cv2.addWeighted(new_img, alpha, output, 1 - alpha,0, output)
+
+        if output_image_name is not None:
+          cv2.imwrite(output_image_name, output)
+          print("Processed Image saved successfully in your current working directory.")
+
+        return new_img, output
+
+        
+    else:  
+        if output_image_name is not None:
+  
+          cv2.imwrite(output_image_name, new_img)
+
+          print("Processed Image saved successfuly in your current working directory.")
+
+        return new_img, None
+      
+
+      
     
 
     
