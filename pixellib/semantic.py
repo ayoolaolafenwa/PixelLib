@@ -75,6 +75,7 @@ class semantic_segmentation():
         return new_img, None
 
         
+  
   def segmentFrameAsPascalvoc(self, frame, output_image_name=None,overlay=False):            
     target_size=512
     mean_subtraction_value=127.5
@@ -130,8 +131,7 @@ class semantic_segmentation():
 
           print("Processed Image saved successfuly in your current working directory.")
 
-        return new_img, None
-      
+        return new_img, None    
 
       
     
