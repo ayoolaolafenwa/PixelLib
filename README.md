@@ -1,5 +1,8 @@
 ![alt_test1](instance_mask/cover.jpg)
 # PixelLib 
+
+[![Downloads](https://pepy.tech/badge/pixellib)](https://pepy.tech/project/pixellib)  [![Downloads](https://pepy.tech/badge/pixellib/month)](https://pepy.tech/project/pixellib/month)  [![Downloads](https://pepy.tech/badge/pixellib/week)](https://pepy.tech/project/pixellib/week)
+
 Pixellib is a library for performing segmentation of images. It supports the two major types of image segmentation: 
 
 **1.Semantic segmentation**
