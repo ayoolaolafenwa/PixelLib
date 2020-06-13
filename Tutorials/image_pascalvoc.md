@@ -150,7 +150,7 @@ Objects and their corresponding colormaps.
 
 # Process opencv's frames 
 
-.. code-block:: python
+```python
 
   import pixellib
   from pixellib.semantic import semantic_segmentation
@@ -164,6 +164,6 @@ Objects and their corresponding colormaps.
     ret, frame = capture.read()
     segment_video.segmentFrameAsPascalvoc(frame, output_image_name= "hi.jpg")
 
-  
+``` 
 
 

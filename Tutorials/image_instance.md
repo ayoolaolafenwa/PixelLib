@@ -158,7 +158,7 @@ Obtain arrays of segmentation with bounding boxes by including the parameter **s
 
 # Process opencv's frames 
 
-.. code-block:: python
+```python
 
   import pixellib
   from pixellib.instance import instance_segmentation
@@ -171,3 +171,4 @@ Obtain arrays of segmentation with bounding boxes by including the parameter **s
   while True:
     ret, frame = capture.read()
     segment_video.segmentFrame(frame)
+```    

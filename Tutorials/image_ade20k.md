@@ -156,7 +156,7 @@ This xception model is trained on ade20k dataset, a dataset with 150 object cate
 
 # Process opencv's frames 
 
-.. code-block:: python
+```python
 
   import pixellib
   from pixellib.semantic import semantic_segmentation
@@ -169,3 +169,5 @@ This xception model is trained on ade20k dataset, a dataset with 150 object cate
   while True:
     ret, frame = capture.read()
     segment_video.segmentFrameAsAde20k(frame)
+
+```    
