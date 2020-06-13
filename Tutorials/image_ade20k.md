@@ -2,7 +2,7 @@
 
 PixelLib is implemented with Deeplabv3+ framework to perform semantic segmentation. Xception model trained on ade20k dataset is used for semantic segmentation.
 
-Download the xception model from [here] (https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.3/deeplabv3_xception65_ade20k.h5)
+Download the xception model from [here](https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.3/deeplabv3_xception65_ade20k.h5)
 
 **Code to implement semantic segmentation**:
 
@@ -46,7 +46,7 @@ This is the line of code that performs segmentation on an image and the segmenta
 
 **Sample1.jpg**  
 
-![alt_test1](ade_test.jpg)
+![alt_test4](ade_test.jpg)
 
 
 ```python
@@ -59,7 +59,7 @@ This is the line of code that performs segmentation on an image and the segmenta
   segment_video.segmentAsAde20k("sample1.jpg", output_image_name="image_new.jpg")
 ```
 
-![alt_test2](ade_segmap.jpg)
+![alt_test5](ade_segmap.jpg)
 
 Your saved image with all the objects present segmented.
 
@@ -71,12 +71,12 @@ You can obtain an image with segmentation overlay on the objects with a modified
 ```
 We added an extra parameter **overlay** and set it to **true**, we produced an image with segmentation overlay.
 
-![alt_test3](ade_overlay.jpg)
+![alt_test6](ade_overlay.jpg)
 
 
 **Sample2.jpg**
 
-![alt_test4](bed1.jpg)
+![alt_test7](bed1.jpg)
 
 ```python
   

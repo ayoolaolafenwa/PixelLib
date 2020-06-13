@@ -2,7 +2,7 @@
 
 Instance segmentation with PixelLib is based on MaskRCNN framework.
 
-Download the mask rcnn model from [here] (https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.2/mask_rcnn_coco.h5)
+Download the mask rcnn model from [here](https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.2/mask_rcnn_coco.h5)
 
 **Code to implement instance segmentation**:
 
@@ -44,7 +44,7 @@ This is the code to perform instance segmentation on an image and it takes two p
 
 **Sample2.jpg**
 
-![alt_test1](Images/cycle.jpg)
+![alt_test8](Images/cycle.jpg)
 
 
 ```python
@@ -57,7 +57,7 @@ This is the code to perform instance segmentation on an image and it takes two p
   segment_image.segmentImage("sample2.jpg", output_image_name = "image_new.jpg")
 ```
 
-![alt_test2](Images/result1.jpg)
+![alt_test9](Images/result1.jpg)
 
 
 This is the saved image in your current working directory. 
@@ -71,7 +71,7 @@ You can implement segmentation with bounding boxes. This can be achieved by modi
 ```
 We added an extra parameter **show_bboxes** and set it to **true**, the segmentation masks are produced with bounding boxes.
 
-![alt_test1](Images/result2.jpg)
+![alt_test10](Images/result2.jpg)
 
 You get a saved image with both segmentation masks and bounding boxes.
 
@@ -95,7 +95,7 @@ You get a saved image with both segmentation masks and bounding boxes.
 ```
 ``` python
 
-  Inference Time: 12.87seconds
+  Inference Time: 12.87 seconds
 ```
 It took 12.87 seconds to run instance segmentation on the image.
 
