@@ -1,0 +1,321 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SEMANTIC SEGMENTATION OF IMAGES WITH PIXELLIB USING PASCAL VOC MODEL &mdash; PixelLib 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="INSTANCE SEGMENTATION IMAGES WITH PIXELLIB" href="Image_instance.html" />
+    <link rel="prev" title="SEMANTIC SEGMENTATION OF VIDEOS WITH PIXELLIB USING ADE20K MODEL" href="video_ade20k.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> PixelLib
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="image_ade20k.html"><strong>SEMANTIC SEGMENTATION OF IMAGES WITH PIXELLIB USING ADE20K MODEL</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_ade20k.html"><strong>SEMANTIC SEGMENTATION OF VIDEOS WITH PIXELLIB USING ADE20K MODEL</strong></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><strong>SEMANTIC SEGMENTATION OF IMAGES WITH PIXELLIB USING PASCAL VOC MODEL</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Image_instance.html"><strong>INSTANCE SEGMENTATION IMAGES WITH PIXELLIB</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_semantic.html"><strong>SEMANTIC SEGMENTATION OF VIDEOS WITH PIXELLIB USING PASCAL VOC MODEL</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_instance.html"><strong>INSTANCE SEGMENTATION OF VIDEOS WITH PIXELLIB</strong></a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PixelLib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li><strong>SEMANTIC SEGMENTATION OF IMAGES WITH PIXELLIB USING PASCAL VOC MODEL</strong></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Image_semantic.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="semantic-segmentation-of-images-with-pixellib-using-pascal-voc-model">
+<span id="image-semantic"></span><h1><strong>SEMANTIC SEGMENTATION OF IMAGES WITH PIXELLIB USING PASCAL VOC MODEL</strong><a class="headerlink" href="#semantic-segmentation-of-images-with-pixellib-using-pascal-voc-model" title="Permalink to this headline">¶</a></h1>
+<p>PixelLib is implemented with Deeplabv3+ framework to perform semantic segmentation. Xception model trained on pascalvoc dataset is used for semantic segmentation.</p>
+<p>Download the xception model from <a class="reference external" href="https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.1/deeplabv3_xception_tf_dim_ordering_tf_kernels.h5">here</a>.</p>
+<p><em>Code to implement semantic segmentation</em>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.semantic</span> <span class="kn">import</span> <span class="n">semantic_segmentation</span>
+
+<span class="n">segment_image</span> <span class="o">=</span> <span class="n">semantic_segmentation</span><span class="p">()</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">segmentAsPascalvoc</span><span class="p">(</span><span class="s2">&quot;path_to_image&quot;</span><span class="p">,</span> <span class="n">output_image_name</span> <span class="o">=</span> <span class="s2">&quot;path_to_output_image&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We shall take a look into each line of code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.semantic</span> <span class="kn">import</span> <span class="n">semantic_segmentation</span>
+
+<span class="c1">#created an instance of semantic segmentation class</span>
+<span class="n">segment_image</span> <span class="o">=</span> <span class="n">semantic_segmentation</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The class for performing semantic segmentation is imported from pixellib and we created an instance of the class.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">segment_image</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We called the function to load the xception model trained on pascal voc.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">segment_image</span><span class="o">.</span><span class="n">segmentAsPascalvoc</span><span class="p">(</span><span class="s2">&quot;path_to_image&quot;</span><span class="p">,</span> <span class="n">output_image_name</span> <span class="o">=</span> <span class="s2">&quot;path_to_output_image&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is the line of code that performs segmentation on an image and the segmentation is done in the pascalvoc’s color format. This function takes in two parameters:</p>
+<blockquote>
+<div><p><em>path_to_image</em>: the path to the image to be segemented.</p>
+<p><em>path_to_output_image</em>: the path to save the output image. The image will be saved in your current working directory.</p>
+</div></blockquote>
+<p><strong>Sample1.jpg</strong></p>
+<img alt="_images/sample1.jpg" src="_images/sample1.jpg" />
+<p>Image’s source: Pinterest</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.semantic</span> <span class="kn">import</span> <span class="n">semantic_segmentation</span>
+
+<span class="n">segment_image</span> <span class="o">=</span> <span class="n">semantic_segmentation</span><span class="p">()</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">segmentAsPascalvoc</span><span class="p">(</span><span class="s2">&quot;sample1.jpg&quot;</span><span class="p">,</span> <span class="n">output_image_name</span> <span class="o">=</span> <span class="s2">&quot;image_new.jpg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/result.jpg" src="_images/result.jpg" />
+<p>Your saved image with all the objects present segmented.</p>
+<p>You can obtain an image with segmentation overlay on the objects with a modified code below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">segment_image</span><span class="o">.</span><span class="n">segmentAsPascalvoc</span><span class="p">(</span><span class="s2">&quot;sample1.jpg&quot;</span><span class="p">,</span> <span class="n">output_image_name</span> <span class="o">=</span> <span class="s2">&quot;image_new.jpg&quot;</span><span class="p">,</span> <span class="n">overlay</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We added an extra parameter <strong>overlay</strong> and set it to <strong>true</strong>, we produced an image with segmentation overlay.</p>
+<img alt="_images/overlay.jpg" src="_images/overlay.jpg" />
+<ul class="simple">
+<li><p>You can check the inference time required for performing segmentation by modifying the code below..</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.semantic</span> <span class="kn">import</span> <span class="n">semantic_segmentation</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">segment_image</span> <span class="o">=</span> <span class="n">semantic_segmentation</span><span class="p">()</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;pascal.h5&quot;</span><span class="p">)</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">segmentAsPascalvoc</span><span class="p">(</span><span class="s2">&quot;sample1.jpg&quot;</span><span class="p">,</span> <span class="n">output_image_name</span><span class="o">=</span> <span class="s2">&quot;image_new.jpg&quot;</span><span class="p">)</span>
+
+<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inference Time: </span><span class="si">{</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">seconds&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Inference</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">8.19</span><span class="n">seconds</span>
+</pre></div>
+</div>
+<p>It took 8.19 seconds to run semantic segmentation on the image.</p>
+<p><strong>Specialised uses of PixelLib may require you to return the array of the segmentation’s output.</strong></p>
+<ul class="simple">
+<li><p>Obtain the array of the segmentation’s output by using this code,</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="p">,</span> <span class="n">segmap</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentAsPascalvoc</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>You can test the code for obtaining arrays and print out the shape of the output by modifying the semantic segmentation code below.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.semantic</span> <span class="kn">import</span> <span class="n">semantic_segmentation</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+<span class="n">segment_image</span> <span class="o">=</span> <span class="n">semantic_segmentation</span><span class="p">()</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;pascal.h5&quot;</span><span class="p">)</span>
+<span class="n">output</span><span class="p">,</span> <span class="n">segmap</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentAsPascalvoc</span><span class="p">(</span><span class="s2">&quot;sample1.jpg&quot;</span><span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s2">&quot;img.jpg&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Obtain both the output and the segmentation overlay’s arrays by using this code,</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="p">,</span> <span class="n">segoverlay</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentAsPascalvoc</span><span class="p">(</span><span class="n">overlay</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.semantic</span> <span class="kn">import</span> <span class="n">semantic_segmentation</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+<span class="n">segment_image</span> <span class="o">=</span> <span class="n">semantic_segmentation</span><span class="p">()</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;pascal.h5&quot;</span><span class="p">)</span>
+<span class="n">segmap</span><span class="p">,</span> <span class="n">segoverlay</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentAsPascalvoc</span><span class="p">(</span><span class="s2">&quot;sample1.jpg&quot;</span><span class="p">,</span> <span class="n">overlay</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s2">&quot;img.jpg&quot;</span><span class="p">,</span> <span class="n">segoverlay</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">segoverlay</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This xception model is trained on pascal voc dataset, a dataset with 20 object categories.</p>
+<p>Objects and their corresponding colormaps.</p>
+<img alt="_images/pascal.png" src="_images/pascal.png" />
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Image_instance.html" class="btn btn-neutral float-right" title="INSTANCE SEGMENTATION IMAGES WITH PIXELLIB" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="video_ade20k.html" class="btn btn-neutral float-left" title="SEMANTIC SEGMENTATION OF VIDEOS WITH PIXELLIB USING ADE20K MODEL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Ayoola Olafenwa
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,319 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SEMANTIC SEGMENTATION OF VIDEOS WITH PIXELLIB USING PASCAL VOC MODEL &mdash; PixelLib 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="INSTANCE SEGMENTATION OF VIDEOS WITH PIXELLIB" href="video_instance.html" />
+    <link rel="prev" title="INSTANCE SEGMENTATION IMAGES WITH PIXELLIB" href="Image_instance.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> PixelLib
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="image_ade20k.html"><strong>SEMANTIC SEGMENTATION OF IMAGES WITH PIXELLIB USING ADE20K MODEL</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_ade20k.html"><strong>SEMANTIC SEGMENTATION OF VIDEOS WITH PIXELLIB USING ADE20K MODEL</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Image_semantic.html"><strong>SEMANTIC SEGMENTATION OF 20 CLASSES OF OBJECTS WITH PIXELLIB</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Image_instance.html"><strong>INSTANCE SEGMENTATION IMAGES WITH PIXELLIB</strong></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><strong>SEMANTIC SEGMENTATION OF VIDEOS WITH PIXELLIB USING PASCAL VOC MODEL</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_instance.html"><strong>INSTANCE SEGMENTATION OF VIDEOS WITH PIXELLIB</strong></a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PixelLib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li><strong>SEMANTIC SEGMENTATION OF VIDEOS WITH PIXELLIB USING PASCAL VOC MODEL</strong></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/video_semantic.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="semantic-segmentation-of-videos-with-pixellib-using-pascal-voc-model">
+<span id="video-semantic"></span><h1><strong>SEMANTIC SEGMENTATION OF VIDEOS WITH PIXELLIB USING PASCAL VOC MODEL</strong><a class="headerlink" href="#semantic-segmentation-of-videos-with-pixellib-using-pascal-voc-model" title="Permalink to this headline">¶</a></h1>
+<p>PixelLib is implemented with Deeplabv3+ framework to perform semantic segmentation. Xception model trained on pascalvoc dataset is used for semantic segmentation.</p>
+<p>Download the xception model from <a class="reference external" href="https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.1/deeplabv3_xception_tf_dim_ordering_tf_kernels.h5">here</a>.</p>
+<p><strong>Code to implement semantic segmentation of a video with pascalvoc model</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.semantic</span> <span class="kn">import</span> <span class="n">semantic_segmentation</span>
+
+<span class="n">segment_video</span> <span class="o">=</span> <span class="n">semantic_segmentation</span><span class="p">()</span>
+<span class="n">segment_video</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
+<span class="n">segment_video</span><span class="o">.</span><span class="n">process_video_pascalvoc</span><span class="p">(</span><span class="s2">&quot;video_path&quot;</span><span class="p">,</span>  <span class="n">overlay</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;path_to_output_video&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We shall take a look into each line of code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.semantic</span> <span class="kn">import</span> <span class="n">semantic_segmentation</span>
+
+<span class="c1">#created an instance of semantic segmentation class</span>
+<span class="n">segment_image</span> <span class="o">=</span> <span class="n">semantic_segmentation</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The class for performing semantic segmentation is imported from pixellib and we created an instance of the class.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">segment_image</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We called the function to load the xception model trained on pascal voc.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">segment_video</span><span class="o">.</span><span class="n">process_video_pascalvoc</span><span class="p">(</span><span class="s2">&quot;video_path&quot;</span><span class="p">,</span>  <span class="n">overlay</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;path_to_output_video&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is the line of code that performs segmentation on an image and the segmentation is done in the pascalvoc’s color format. This function takes in two parameters:</p>
+<p><em>video_path:</em> the path to the video file we want to perform segmentation on.</p>
+<p><em>frames_per_second:</em> this is parameter to set the number of frames per second for the output video file. In this case it is set to 15 i.e the saved video file will have 15 frames per second.</p>
+<p><em>output_video_name:</em> the saved segmented video. The output video will be saved in your current working directory.</p>
+<p><strong>sample_video1</strong></p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+    <iframe src="https://www.youtube.com/embed/8fkthbwqmB0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+https://www.youtube.com/watch?v=_NsELe67UxM
+</div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.semantic</span> <span class="kn">import</span> <span class="n">semantic_segmentation</span>
+
+<span class="n">segment_video</span> <span class="o">=</span> <span class="n">semantic_segmentation</span><span class="p">()</span>
+<span class="n">segment_video</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
+<span class="n">segment_video</span><span class="o">.</span><span class="n">process_video_pascalvoc</span><span class="p">(</span><span class="s2">&quot;sample_video1.mp4&quot;</span><span class="p">,</span>  <span class="n">overlay</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output video</strong></p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+    <iframe src="https://www.youtube.com/embed/l9WMqT2znJE" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+https://www.youtube.com/watch?v=_NsELe67UxM
+</div><p><em>Segmentation of live camera</em>:</p>
+<p>We can use the same model to perform semantic segmentation on camera. This can be done by few modifications to the code to process video file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.semantic</span> <span class="kn">import</span> <span class="n">semantic_segmentation</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+
+<span class="n">capture</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">segment_video</span> <span class="o">=</span> <span class="n">semantic_segmentation</span><span class="p">()</span>
+<span class="n">segment_video</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
+<span class="n">segment_video</span><span class="o">.</span><span class="n">process_camera_pascalvoc</span><span class="p">(</span><span class="n">capture</span><span class="p">,</span>  <span class="n">overlay</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">show_frames</span><span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="n">frame_name</span><span class="o">=</span> <span class="s2">&quot;frame&quot;</span><span class="p">,</span> <span class="n">check_fps</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We imported cv2 and included the code to capture camera frames.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">segment_video</span><span class="o">.</span><span class="n">process_camera_pascalvoc</span><span class="p">(</span><span class="n">capture</span><span class="p">,</span>  <span class="n">overlay</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">show_frames</span><span class="o">=</span> <span class="kc">True</span><span class="p">,</span><span class="n">frame_name</span><span class="o">=</span> <span class="s2">&quot;video_display&quot;</span><span class="p">,</span> <span class="n">check_fps</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the code for performing segmentation, we replaced the video filepath to capture i.e we are going to process a stream camera frames instead of a video file.We added extra parameters for the purpose of showing the camera frames:</p>
+<p><em>show_frames:</em> this parameter handles showing of segmented camera frames.
+<em>frame_name:</em> this is the name given to the shown camera’s frame.</p>
+<p><em>check_fps:</em> You may want to check the number of frames processed, just set the parameter check_fps is true.It will print out the number of frames per seconds. In this case it is 30 frames per second.</p>
+<p><strong>Video Segmentation with Ade20k model:</strong></p>
+<p>Pascal voc’s model supports segmentation of 20 categories of object and it has limited uses when it comes to segmenting multiple objects. It is now possible to perform segmentation on 150 classes of objects using ade20k model with PixelLib. Ade20k model is a deeplabv3+ model trained on ade20k dataset with 150 classes. Thanks to tensorflow deeplab model zoo, I extracted ade20k model from its tensorflow model checkpoint provided.</p>
+<p><strong>sample_video2</strong></p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+    <iframe src="https://www.youtube.com/embed/EivIBccZURA" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+https://www.youtube.com/watch?v=_NsELe67UxM
+</div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.semantic</span> <span class="kn">import</span> <span class="n">semantic_segmentation</span>
+
+<span class="n">segment_video</span> <span class="o">=</span> <span class="n">semantic_segmentation</span><span class="p">()</span>
+<span class="n">segment_video</span><span class="o">.</span><span class="n">load_ade20k_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception65_ade20k.h5&quot;</span><span class="p">)</span>
+<span class="n">segment_video</span><span class="o">.</span><span class="n">process_video_ade20k</span><span class="p">(</span><span class="s2">&quot;sample_video2.mp4&quot;</span><span class="p">,</span> <span class="n">overlay</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">segment_video</span><span class="o">.</span><span class="n">load_ade20k_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception65_ade20k.h5&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You loaded ade20k model for performing video segmentation and it can be downloaded from here.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">segment_video</span><span class="o">.</span><span class="n">process_video_ade20k</span><span class="p">(</span><span class="s2">&quot;sample_video1.mp4&quot;</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We called the function for performing video segmentation with ade20k model, but with the same parameters as the Pascal voc function for performing video segmentation.</p>
+<p><strong>Output video</strong></p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+    <iframe src="https://www.youtube.com/embed/hxczTe9U8jY" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+https://www.youtube.com/watch?v=_NsELe67UxM
+</div><p><strong>Semantic Segmentation of Live Camera With Ade20k model.</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.semantic</span> <span class="kn">import</span> <span class="n">semantic_segmentation</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+
+<span class="n">capture</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">segment_video</span> <span class="o">=</span> <span class="n">semantic_segmentation</span><span class="p">()</span>
+<span class="n">segment_video</span><span class="o">.</span><span class="n">load_ade20k_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception65_ade20k.h5&quot;</span><span class="p">)</span>
+<span class="n">segment_video</span><span class="o">.</span><span class="n">process_camera_ade20k</span><span class="p">(</span><span class="n">capture</span><span class="p">,</span> <span class="n">overlay</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">show_frames</span><span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="n">frame_name</span><span class="o">=</span> <span class="s2">&quot;frame&quot;</span><span class="p">,</span> <span class="n">check_fps</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We called the function for processing camera with ade20k model, we also replaced the video filepath to capture i.e we are going to process a stream camera frames instead of a video file.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="video_instance.html" class="btn btn-neutral float-right" title="INSTANCE SEGMENTATION OF VIDEOS WITH PIXELLIB" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Image_instance.html" class="btn btn-neutral float-left" title="INSTANCE SEGMENTATION IMAGES WITH PIXELLIB" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Ayoola Olafenwa
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

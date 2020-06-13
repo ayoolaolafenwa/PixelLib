@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="SEMANTIC SEGMENTATION WITH PIXELLIB" href="semantic.html" /> 
+    <link rel="next" title="Semantic segmentation of images with PixelLib using Ade20k model" href="image_ade20k.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -81,8 +81,14 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="semantic.html"><strong>SEMANTIC SEGMENTATION WITH PIXELLIB</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="instance.html"><strong>INSTANCE SEGMENTATION WITH PIXELLIB</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="image_ade20k.html"><strong>Semantic segmentation of images with PixelLib using Ade20k model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_ade20k.html"><strong>Semantic segmentation of videos with PixelLib using Ade20k model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_ade20k.html#segmentation-of-live-camera"><strong>Segmentation of live camera</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Image_pascal.html"><strong>Semantic segmentation of images with PixelLib using Pascalvoc model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_pascal.html"><strong>Semantic Segmentation of videos with PixelLib using Pascalvoc model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_pascal.html#segmentation-of-live-camera"><strong>Segmentation of live camera</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Image_instance.html"><strong>Instance segmentation of images with PixelLib</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_instance.html"><strong>Instance segmentation of videos with PixelLib</strong></a></li>
 </ul>
 
             
@@ -174,23 +180,43 @@
 </pre></div>
 </div>
 <p>Install PixelLib with:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">pixellib</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">pixellib</span> <span class="o">--</span><span class="n">upgrade</span>
 </pre></div>
 </div>
 <p>PixelLib supports the two major types of segmentation:</p>
 <p>1 <strong>Semantic segmentation</strong>:
 Objects in an image with the same pixel values are segmented with the same colormaps.</p>
-<img alt="_images/semantic.jpg" src="_images/semantic.jpg" />
-<p><a class="reference internal" href="semantic.html#semantic"><span class="std std-ref">SEMANTIC SEGMENTATION WITH PIXELLIB</span></a></p>
+<img alt="_images/ade_overlay.jpg" src="_images/ade_overlay.jpg" />
+<p><a class="reference internal" href="image_ade20k.html#semantic-ade20k"><span class="std std-ref">Semantic segmentation of images with PixelLib using Ade20k model</span></a></p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+    <iframe src="https://www.youtube.com/embed/hxczTe9U8jY" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+https://www.youtube.com/watch?v=_NsELe67UxM
+</div><p><a class="reference internal" href="video_ade20k.html#video-ade20k"><span class="std std-ref">Semantic segmentation of videos with PixelLib using Ade20k model</span></a></p>
+<img alt="_images/pascal.jpg" src="_images/pascal.jpg" />
+<p><a class="reference internal" href="Image_pascal.html#image-pascal"><span class="std std-ref">Semantic segmentation of images with PixelLib using Pascalvoc model</span></a></p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+    <iframe src="https://www.youtube.com/embed/l9WMqT2znJE" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+https://www.youtube.com/watch?v=_NsELe67UxM
+</div><p><a class="reference internal" href="video_pascal.html#video-pascal"><span class="std std-ref">Semantic Segmentation of videos with PixelLib using Pascalvoc model</span></a></p>
 <p>2 <strong>Instance segmentation</strong>:
 Instances of the same object are segmented with different color maps.</p>
-<img alt="_images/instance.jpg" src="_images/instance.jpg" />
-<p><a class="reference internal" href="instance.html#instance"><span class="std std-ref">INSTANCE SEGMENTATION WITH PIXELLIB</span></a></p>
+<img alt="_images/ins.jpg" src="_images/ins.jpg" />
+<p><a class="reference internal" href="Image_instance.html#image-instance"><span class="std std-ref">Instance segmentation of images with PixelLib</span></a></p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+    <iframe src="https://www.youtube.com/embed/bGPO1bCZLAo" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+
+</div><p><a class="reference internal" href="video_instance.html#video-instance"><span class="std std-ref">Instance segmentation of videos with PixelLib</span></a></p>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="semantic.html"><strong>SEMANTIC SEGMENTATION WITH PIXELLIB</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="instance.html"><strong>INSTANCE SEGMENTATION WITH PIXELLIB</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="image_ade20k.html"><strong>Semantic segmentation of images with PixelLib using Ade20k model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_ade20k.html"><strong>Semantic segmentation of videos with PixelLib using Ade20k model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_ade20k.html#segmentation-of-live-camera"><strong>Segmentation of live camera</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Image_pascal.html"><strong>Semantic segmentation of images with PixelLib using Pascalvoc model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_pascal.html"><strong>Semantic Segmentation of videos with PixelLib using Pascalvoc model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_pascal.html#segmentation-of-live-camera"><strong>Segmentation of live camera</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Image_instance.html"><strong>Instance segmentation of images with PixelLib</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_instance.html"><strong>Instance segmentation of videos with PixelLib</strong></a></li>
 </ul>
 </div>
 <p><em>CONTACT INFO:</em></p>
@@ -209,7 +235,7 @@ Instances of the same object are segmented with different color maps.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="semantic.html" class="btn btn-neutral float-right" title="SEMANTIC SEGMENTATION WITH PIXELLIB" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="image_ade20k.html" class="btn btn-neutral float-right" title="Semantic segmentation of images with PixelLib using Ade20k model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>

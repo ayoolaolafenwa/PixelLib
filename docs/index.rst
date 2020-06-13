@@ -22,7 +22,6 @@ Install  the latest version of tensorflow(Tensorflow 2.0+) with:
 
   pip3 install tensorflow
 
-
 Install Opencv-python with:
 
 .. code-block:: python
@@ -45,7 +44,7 @@ Install PixelLib with:
 
 .. code-block:: python
 
-  pip3 install pixellib
+  pip3 install pixellib --upgrade
 
 
 
@@ -54,25 +53,67 @@ PixelLib supports the two major types of segmentation:
 1 **Semantic segmentation**:
 Objects in an image with the same pixel values are segmented with the same colormaps.
 
-.. image:: photos/semantic.jpg
+.. image:: photos/ade_overlay.jpg
 
-:ref:`semantic`
+:ref:`semantic_ade20k`
+
+.. raw:: html
+
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube.com/embed/hxczTe9U8jY" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    https://www.youtube.com/watch?v=_NsELe67UxM
+    </div>
+
+
+:ref:`video_ade20k`
+
+.. image:: photos/pascal.jpg
+
+:ref:`image_pascal`
+
+.. raw:: html
+
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube.com/embed/l9WMqT2znJE" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    https://www.youtube.com/watch?v=_NsELe67UxM
+    </div>
+
+:ref:`video_pascal`
+
+
+
 
 2 **Instance segmentation**:
 Instances of the same object are segmented with different color maps.
 
-.. image:: photos/instance.jpg
+.. image:: photos/ins.jpg
 
 
-:ref:`instance`
+:ref:`image_instance`
+
+
+.. raw:: html
+
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube.com/embed/bGPO1bCZLAo" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    
+    </div>
+
+:ref:`video_instance`
+
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    :caption: Contents:
-
-   semantic.rst
-   instance.rst
+   
+   image_ade20k.rst
+   video_ade20k.rst
+   Image_pascal.rst
+   video_pascal.rst
+   Image_instance.rst
+   video_instance.rst
+   
    
 
 *CONTACT INFO:*
