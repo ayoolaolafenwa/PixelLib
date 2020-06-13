@@ -46,7 +46,7 @@ This is the line of code that performs segmentation on an image and the segmenta
 
 **Sample1.jpg**  
 
-![alt_test4](ade_test.jpg)
+![alt_test4](ade_test1.jpg)
 
 
 ```python
