@@ -46,7 +46,7 @@ This is the line of code that performs segmentation on an image and the segmenta
 
 **Sample1.jpg**  
 
-![alt_test4](ade_test1.jpg)
+![alt_test4](Images/ade_test1.jpg)
 
 
 ```python
@@ -59,7 +59,7 @@ This is the line of code that performs segmentation on an image and the segmenta
   segment_video.segmentAsAde20k("sample1.jpg", output_image_name="image_new.jpg")
 ```
 
-![alt_test5](ade_segmap.jpg)
+![alt_test5](Images/ade_segmap.jpg)
 
 Your saved image with all the objects present segmented.
 
@@ -71,19 +71,19 @@ You can obtain an image with segmentation overlay on the objects with a modified
 ```
 We added an extra parameter **overlay** and set it to **true**, we produced an image with segmentation overlay.
 
-![alt_test6](ade_overlay.jpg)
+![alt_test6](Images/ade_overlay.jpg)
 
 
 **Sample2.jpg**
 
-![alt_test7](bed1.jpg)
+![alt_test7](Images/bed1.jpg)
 
 ```python
   
   segment_video.segmentAsAde20k("sample2.jpg", output_image_name="image_new2.jpg")
 
 ```
-.. image:: photos/bedad1.jpg
+![alt](Images/bedad1.jpg)
 
 * You can check the inference time required for performing segmentation by modifying the code below..
 
