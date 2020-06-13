@@ -30,21 +30,13 @@ Install latest version of tensorflow(Tensorflow 2.0+) with:
 ![alt_test1](Images/ade_overlay.jpg)
 # [Semantic Segmentation of Images With PixelLib Using Ade20k model](Tutorials/image_ade20k.md)
 
-![alt_test1](Images/ade.png)
-# [Semantic Segmentation of Videos With PixelLib Using Ade20k model](Tutorials/video_ade20k.md)
 
 ![alt_test3](Images/pascal.jpg)
 # [Semantic Segmentation of Images With PixelLib Using Pascalvoc model](Tutorials/image_pascalvoc.md)
 
-![alt_test1](Images/voc.png)
-# [Semantic Segmentation of Videos With PixelLib Using Pascalvoc model](Tutorials/video_pascalvoc.md)
-
-
 ![alt_test1](instance_mask/result2.jpg)
 # [Instance Segmentation of Images With PixelLib Using Mask-RCNN](Tutorials/image_instance.md)
 
-![alt_test1](Images/ins.png)
-# [Instance Segmentation of Videos With PixelLib Using Mask-RCNN](Tutorials/video_instance.md)
 
 
 ## References
