@@ -63,7 +63,7 @@ It takes the following parameters:-
 ```
 **Output video**
 
-[![alt_myvid2](Images/new_vid.jpg)](https://www.youtube.com/watch?v=yu03363mlNM)
+[![alt_myvid2](Images/vid.jpg)](https://www.youtube.com/watch?v=yu03363mlNM)
 
 
 
@@ -134,5 +134,5 @@ In the code for performing segmentation, we replaced the video filepath to captu
 
 A demo by me showing the output of pixelLib's instance segmentation on camera's feeds using MASK-RCNN model.
 
-[![alt_myvid3](Images/cam_ins.jpg)](https://www.youtube.com/watch?v=HD1m-g7cOKw)
+[![alt_myvid3](Images/cam_ins.png)](https://www.youtube.com/watch?v=HD1m-g7cOKw)
 
