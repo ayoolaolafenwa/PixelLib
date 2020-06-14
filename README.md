@@ -3,7 +3,7 @@
 
 [![Downloads](https://pepy.tech/badge/pixellib)](https://pepy.tech/project/pixellib)  [![Downloads](https://pepy.tech/badge/pixellib/month)](https://pepy.tech/project/pixellib/month)  [![Downloads](https://pepy.tech/badge/pixellib/week)](https://pepy.tech/project/pixellib/week)
 
-Pixellib is a library for performing segmentation of images. It supports the two major types of image segmentation: 
+Pixellib is a library for performing segmentation of images and videos. It supports the two major types of image segmentation: 
 
 **1.Semantic segmentation**
 
@@ -48,10 +48,19 @@ Install latest version of tensorflow(Tensorflow 2.0+) with:
 ![alt_test3](Images/pascal.jpg)
 # [Tutorial OnSemantic Segmentation of Images With PixelLib Using Pascalvoc model](Tutorials/image_pascalvoc.md)
 
+[![alt_vid2](Images/pascal_voc.png)](https://www.youtube.com/watch?v=l9WMqT2znJE)
+
+# [Tutorial On Semantic Segmentation of Videos With PixelLib Using Ade20k model](Tutorials/video_pascalvoc.md)
+
+
 ![alt_test1](instance_mask/result2.jpg)
+
 # [Tutorial On Instance Segmentation of Images With PixelLib Using Mask-RCNN](Tutorials/image_instance.md)
 
+[![alt_vid3](Images/vid_ins.jpg)](https://www.youtube.com/watch?v=bGPO1bCZLAo)
 
+
+# [Tutorial On Instance Segmentation of Videos With PixelLib Using Mask-RCNN](Tutorials/video_instance.md)
 
 ## References
 1. Bonlime, Keras implementation of Deeplab v3+ with pretrained weights  https://github.com/bonlime/keras-deeplab-v3-plus

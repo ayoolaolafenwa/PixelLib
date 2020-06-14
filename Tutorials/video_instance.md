@@ -48,14 +48,8 @@ It takes the following parameters:-
 
 **output_video_name:** the saved segmented video. The output video will be saved in your current working directory.  
 
-**Sample video2**
-
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/EivIBccZURA" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
-
+**Sample video**
+[![alt_myvid1](Images/new_vid1.jpg)](https://www.youtube.com/watch?v=EivIBccZURA)
 
 
 ```python
@@ -65,15 +59,12 @@ allowfullscreen></iframe>
 
   segment_video = instance_segmentation()
   segment_video.load_model("mask_rcnn_coco.h5")
-  segment_video.process_video("sample_video2.mp4", frames_per_second= 15, output_video_name="output_video.mp4")
+  segment_video.process_video("sample_video.mp4", frames_per_second= 15, output_video_name="output_video.mp4")
 ```
 **Output video**
 
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/yu03363mlNM" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
+[![alt_myvid2](Images/new_vid.jpg)](https://www.youtube.com/watch?v=yu03363mlNM)
+
 
 
 
@@ -93,11 +84,9 @@ We can perform instance segmentation with object detection by setting the parame
 
 **Output video with bounding boxes**
 
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/bGPO1bCZLAo" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
+
+[![alt_myvid3](Images/vid_ins.jpg)](https://www.youtube.com/watch?v=bGPO1bCZLAo)
+
 
 
 
@@ -143,10 +132,7 @@ In the code for performing segmentation, we replaced the video filepath to captu
 **check_fps** You may want to check the number of frames processed, just set the parameter check_fps is true.It will print out the number of frames per seconds. In this case it is *30 frames per second*.
 
 
-A demo showing the output of pixelLib's instance segmentation on camera's feeds using MASK-RCNN model.
+A demo by me showing the output of pixelLib's instance segmentation on camera's feeds using MASK-RCNN model.
 
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/HD1m-g7cOKw&list=PLtFkVrcr8LqNgbwdOb6of5X19ytm4ycHC&index=6&t=0s" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
+[![alt_myvid3](Images/cam_ins.jpg)](https://www.youtube.com/watch?v=HD1m-g7cOKw)
+

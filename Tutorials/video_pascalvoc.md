@@ -48,11 +48,7 @@ This is the line of code that performs segmentation on an image and the segmenta
 
 **sample_video1**  
 
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/8fkthbwqmB0" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
+[![alt_vid2](Images/save_vid3.jpg)](https://www.youtube.com/watch?v=8fkthbwqmB0)
 
 
 ```python
@@ -67,12 +63,7 @@ allowfullscreen></iframe>
 
 **Output video**
 
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/l9WMqT2znJE" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
-
+[![alt_vid2](Images/vide_pascal.png)](https://www.youtube.com/watch?v=l9WMqT2znJE)
 
 
 # Segmentation of live camera**
@@ -111,10 +102,6 @@ In the code for performing segmentation, we replaced the video's filepath to cap
 
 
 
-A demo showing the output of pixelLib's semantic segmentation on camera's feeds using pascalvoc model.
+A demo by me showing the output of pixelLib's semantic segmentation on camera's feeds using pascalvoc model.
 
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/8oSRYf9Ow2E" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
+[![alt_vid3](Images/cam_pascal.png)](https://www.youtube.com/watch?v=8oSRYf9Ow2E)
