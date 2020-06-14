@@ -46,7 +46,7 @@ Install latest version of tensorflow(Tensorflow 2.0+) with:
 
 
 ![alt_test3](Images/pascal.jpg)
-# [Tutorial OnSemantic Segmentation of Images With PixelLib Using Pascalvoc model](Tutorials/image_pascalvoc.md)
+# [Tutorial On Semantic Segmentation of Images With PixelLib Using Pascalvoc model](Tutorials/image_pascalvoc.md)
 
 [![alt_vid2](Images/pascal_voc.png)](https://www.youtube.com/watch?v=l9WMqT2znJE)
 
