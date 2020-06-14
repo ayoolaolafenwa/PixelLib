@@ -1,7 +1,7 @@
 PIXELLIB'S OFFICIAL DOCUMENTATION
 ====================================
 
-PixelLib is a library created for performing image segmentation using few lines of code. It is a flexible library created to allow easy integration of image segmentation into software solutions.
+PixelLib is a library created for performing image and video segmentation using few lines of code. It is a flexible library created to allow easy integration of image and video segmentation into software solutions.
 
 
 PixelLib requires python's version 3.5-3.7, `Download python <https://www.python.org/downloads/>`_
