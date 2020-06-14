@@ -1,4 +1,4 @@
-# Instance segmentation of videos with PixelLib**
+# Instance segmentation of videos with PixelLib
 
 Instance segmentation with PixelLib is based on MaskRCNN framework.
 

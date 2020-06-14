@@ -1,4 +1,4 @@
-# Semantic segmentation of videos with PixelLib using Ade20k model**
+# Semantic segmentation of videos with PixelLib using Ade20k model
 
 PixelLib is implemented with Deeplabv3+ framework to perform semantic segmentation. Xception model trained on ade20k dataset is used for semantic segmentation.
 
