@@ -39,7 +39,7 @@ Install latest version of tensorflow(Tensorflow 2.0+) with:
 # [Tutorial On Semantic Segmentation of Images With PixelLib Using Ade20k model](Tutorials/image_ade20k.md)
 
 
-[![alt_vid1](Images/save_vid2.jpg)](https://www.youtube.com/watch?v=hxczTe9U8jY)
+[![alt_vid1](Images/new_vid2.jpg)](https://www.youtube.com/watch?v=hxczTe9U8jY)
 
 # [Tutorial On Semantic Segmentation of Videos With PixelLib Using Ade20k model](Tutorials/video_ade20k.md)
 
