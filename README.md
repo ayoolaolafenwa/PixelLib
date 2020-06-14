@@ -11,6 +11,15 @@ Pixellib is a library for performing segmentation of images. It supports the two
 
 You can implement both semantic and instance segmentation with few lines of code.
 
+There are two types of Deeplabv3+ models available for performing **semantic segmentation** with PixelLib:
+
+1. Deeplabv3+ model with xception as network backbone trained on Ade20k dataset, a dataset with 150 classes of objects.
+2. Deeplabv3+ model with xception as network backbone trained on Pascalvoc dataset, a dataset with 20 classes of objects. 
+
+Instance segmentation is implemented with PixelLib by using Mask R-CNN model trained on coco dataset.
+
+**Note** Deeplab and mask r-ccn models are available  in the [release](https://github.com/ayoolaolafenwa/PixelLib/releases) of this repository.
+
 # Install Tensorflow:
 
 Install latest version of tensorflow(Tensorflow 2.0+) with:
@@ -24,18 +33,17 @@ Install latest version of tensorflow(Tensorflow 2.0+) with:
 * Check out tutorials on PixelLib on [medium](https://medium.com/@olafenwaayoola/image-segmentation-with-six-lines-0f-code-acb870a462e8)and documentation on [readthedocs](https://pixellib.readthedocs.io/en/latest/)
 
 
-**Note** Deeplab and mask r-ccn models are available  in the [release](https://github.com/ayoolaolafenwa/PixelLib/releases) of this repository.
-
+## Read the following tutorials on performing both semantic and instance segmentation with PixelLib.
 
 ![alt_test1](Images/ade_overlay.jpg)
-# [Semantic Segmentation of Images With PixelLib Using Ade20k model](Tutorials/image_ade20k.md)
+# [Tutorial On Semantic Segmentation of Images With PixelLib Using Ade20k model](Tutorials/image_ade20k.md)
 
 
 ![alt_test3](Images/pascal.jpg)
-# [Semantic Segmentation of Images With PixelLib Using Pascalvoc model](Tutorials/image_pascalvoc.md)
+# [Tutorial OnSemantic Segmentation of Images With PixelLib Using Pascalvoc model](Tutorials/image_pascalvoc.md)
 
 ![alt_test1](instance_mask/result2.jpg)
-# [Instance Segmentation of Images With PixelLib Using Mask-RCNN](Tutorials/image_instance.md)
+# [Tutorial On Instance Segmentation of Images With PixelLib Using Mask-RCNN](Tutorials/image_instance.md)
 
 
 
