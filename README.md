@@ -35,7 +35,7 @@ Install latest version of tensorflow(Tensorflow 2.0+) with:
 
 ## Read the following tutorials on performing both semantic and instance segmentation with PixelLib.
 
-![alt_test1](Images/ade_overlay.jpg)
+![alt_test1](Images/ade_cover.jpg)
 # [Tutorial On Semantic Segmentation of Images With PixelLib Using Ade20k model](Tutorials/image_ade20k.md)
 
 
