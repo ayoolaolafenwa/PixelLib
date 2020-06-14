@@ -83,7 +83,8 @@ This is the line of code that performs segmentation on an image and the segmenta
 
 
 
-**Segmentation of live camera**
+**Segmentation of live camera with Ade20k model**
+==================================================
 
 We can use the same model to perform semantic segmentation on camera. This can be done by few modifications to the code to process video file.
 

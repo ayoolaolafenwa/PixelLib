@@ -109,7 +109,8 @@ We can perform instance segmentation with object detection by setting the parame
 
 
 
-**Instance Segmentation of Live Camera.**
+**Instance Segmentation of Live Camera with Mask R-cnn.**
+==========================================================
 
 We can use the same model to perform semantic segmentation on camera. This can be done by few modifications to the code used to process video file.
 

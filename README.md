@@ -33,7 +33,7 @@ Install latest version of tensorflow(Tensorflow 2.0+) with:
 * Check out tutorials on PixelLib on [medium](https://medium.com/@olafenwaayoola/image-segmentation-with-six-lines-0f-code-acb870a462e8)and documentation on [readthedocs](https://pixellib.readthedocs.io/en/latest/)
 
 
-## Read the following tutorials on performing both semantic and instance segmentation with PixelLib.
+## Read the following tutorials on performing both semantic and instance segmentation of images and videos with PixelLib.
 
 ![alt_test1](Images/ade_cover.jpg)
 # [Tutorial On Semantic Segmentation of Images With PixelLib Using Ade20k model](Tutorials/image_ade20k.md)
