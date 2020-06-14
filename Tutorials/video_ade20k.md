@@ -2,7 +2,7 @@
 
 PixelLib is implemented with Deeplabv3+ framework to perform semantic segmentation. Xception model trained on ade20k dataset is used for semantic segmentation.
 
-Download the xception model from [here] (https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.3/deeplabv3_xception65_ade20k.h5)
+Download the xception model from [here](https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.3/deeplabv3_xception65_ade20k.h5)
 
 **Code to implement semantic segmentation of a video with ade20k model**:
 
