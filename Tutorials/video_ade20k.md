@@ -50,11 +50,7 @@ This is the line of code that performs segmentation on an image and the segmenta
 
 **sample_video**  
 
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/EivIBccZURA" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
+[![alt_vid1](Images/new_vid1.jpg)](https://www.youtube.com/watch?v=EivIBccZURA)
 
 
 ```python
@@ -70,11 +66,7 @@ allowfullscreen></iframe>
 
 **Output video**
 
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/hxczTe9U8jY" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
+[![alt_vid2](Images/new_vid2.jpg)](https://www.youtube.com/watch?v=hxczTe9U8jY)
 
 
 # Segmentation of live camera
@@ -114,11 +106,7 @@ In the code for performing segmentation, we replaced the video filepath to captu
 
 **check_fps:** You may want to check the number of frames processed, just set the parameter check_fps is true.It will print out the number of frames per seconds. In this case it is 30 frames per second.
 
-A demo showing the output of pixelLib's semantic segmentation on camera's feeds using ade20k model.
+A demo by me showing the output of pixelLib's semantic segmentation on camera's feeds using ade20k model.
 
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/lOaFJpgCMB4&list=PLtFkVrcr8LqNgbwdOb6of5X19ytm4ycHC&index=5&t=0s
-" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
+[![alt_vid3](Images/ayo_ade.png)](https://www.youtube.com/watch?v=lOaFJpgCMB4&list=PLtFkVrcr8LqNgbwdOb6of5X19ytm4ycHC&index=4)
+
