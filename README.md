@@ -30,7 +30,7 @@ Install latest version of tensorflow(Tensorflow 2.0+) with:
 ## Install Pixellib with:
 **pip3 install pixellib --upgrade**
 
-*Visit PixelLib's official documentation on [readthedocs](https://pixellib.readthedocs.io/en/latest/)
+**Visit PixelLib's official documentation on** [readthedocs](https://pixellib.readthedocs.io/en/latest/)
 
 
 ## Read the following tutorials on performing both semantic and instance segmentation of images and videos with PixelLib.
