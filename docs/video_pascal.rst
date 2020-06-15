@@ -119,3 +119,13 @@ In the code for performing segmentation, we replaced the video's filepath to cap
 
 
 
+.. raw:: html
+
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube.com/watch?v=8oSRYf9Ow2E" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+
+
+A demo showing the output of pixelLib’s semantic segmentation of camera’s feeds using pascal voc model.
+*Good work! It was able to successfully segment me and the plastic bottle in front of me.*
+

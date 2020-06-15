@@ -148,3 +148,13 @@ In the code for performing segmentation, we replaced the video filepath to captu
 *frame_name* this is the name given to the shown camera's frame.
 
 *check_fps* You may want to check the number of frames processed, just set the parameter check_fps is true.It will print out the number of frames per seconds. In this case it is *30 frames per second*.
+
+.. raw:: html
+
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube.com/embed/HD1m-g7cOKw" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+
+
+A demo showing the output of pixelLib’s instance segmentation of camera’s feeds using Mask-RCNN. 
+*Good work! It was able to successfully detect me and my phone.*
