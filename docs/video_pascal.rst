@@ -72,7 +72,7 @@ This is the line of code that performs segmentation on an image and the segmenta
     https://www.youtube.com/watch?v=_NsELe67UxM
     </div>
 
-This is a saved segmented video using pascal voc.
+This is a saved segmented video using pascal voc model.
 
 **Segmentation of live camera with pascalvoc model**
 ====================================================
