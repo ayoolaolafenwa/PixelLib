@@ -53,6 +53,7 @@ This is the line of code that performs segmentation on an image and the segmenta
 
 
 
+
 .. code-block:: python
 
   import pixellib
@@ -72,7 +73,6 @@ This is the line of code that performs segmentation on an image and the segmenta
     </div>
 
 This is a saved segmented video using pascal voc.
-
 
 **Segmentation of live camera with pascalvoc model**
 ====================================================
