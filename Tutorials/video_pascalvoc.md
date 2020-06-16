@@ -46,10 +46,6 @@ This is the line of code that performs segmentation on an image and the segmenta
 
 **output_video_name:** the saved segmented video. The output video will be saved in your current working directory.
 
-**sample_video1**  
-
-[![alt_vid2](Images/save_vid3.jpg)](https://www.youtube.com/watch?v=8fkthbwqmB0)
-
 
 ```python
 
@@ -65,6 +61,7 @@ This is the line of code that performs segmentation on an image and the segmenta
 
 [![alt_vid2](Images/vide_pascal.png)](https://www.youtube.com/watch?v=l9WMqT2znJE)
 
+This is a saved segmented video using pascal voc.
 
 # Segmentation of live camera**
 
