@@ -188,10 +188,9 @@
 <p><em>video_path:</em> the path to the video file we want to perform segmentation on.</p>
 <p><em>frames_per_second:</em> this is parameter to set the number of frames per second for the output video file. In this case it is set to 15 i.e the saved video file will have 15 frames per second.</p>
 <p><em>output_video_name:</em> the saved segmented video. The output video will be saved in your current working directory.</p>
-<p><strong>sample_video1</strong></p>
+<p><strong>sample_video</strong></p>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
-    <iframe src="https://www.youtube.com/embed/8fkthbwqmB0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
-https://www.youtube.com/watch?v=_NsELe67UxM
+    <iframe src="https://www.youtube.com/watch?v=8fkthbwqmB0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.semantic</span> <span class="kn">import</span> <span class="n">semantic_segmentation</span>
 
@@ -204,7 +203,8 @@ https://www.youtube.com/watch?v=_NsELe67UxM
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
     <iframe src="https://www.youtube.com/embed/l9WMqT2znJE" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 https://www.youtube.com/watch?v=_NsELe67UxM
-</div></div>
+</div><p>This is a saved segmented video using pascal voc model.</p>
+</div>
 <div class="section" id="segmentation-of-live-camera-with-pascalvoc-model">
 <h1><strong>Segmentation of live camera with pascalvoc model</strong><a class="headerlink" href="#segmentation-of-live-camera-with-pascalvoc-model" title="Permalink to this headline">¶</a></h1>
 <p>We can use the same model to perform semantic segmentation on camera. This can be done by few modifications to the code to process video file.</p>
@@ -229,6 +229,10 @@ https://www.youtube.com/watch?v=_NsELe67UxM
 <p><em>show_frames:</em> this parameter handles showing of segmented camera frames and press q to exist.
 <em>frame_name:</em> this is the name given to the shown camera’s frames.</p>
 <p><em>check_fps:</em> You may want to check the number of frames processed, just set the parameter check_fps is true.It will print out the number of frames per seconds. In this case it is <em>30 frames per second</em>.</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+    <iframe src="https://www.youtube.com/embed/8oSRYf9Ow2E" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div><p>A demo showing the output of pixelLib’s semantic segmentation of camera’s feeds using pascal voc model.
+<em>Good work! It was able to successfully segment me and the plastic bottle in front of me.</em></p>
 </div>
 
 
