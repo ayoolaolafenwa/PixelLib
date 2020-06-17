@@ -71,4 +71,8 @@ Install latest version of tensorflow(Tensorflow 2.0+) with:
 
 4. Kaiming He et al, Mask R-CNN https://arxiv.org/abs/1703.06870
 
+5. TensorFlow DeepLab Model Zoo https://github.com/tensorflow/models/blob/master/research/deeplab/g3doc/model_zoo.md
+
+6. Pascalvoc and Ade20k datasets' colormaps https://github.com/tensorflow/models/blob/master/research/deeplab/utils/get_dataset_colormap.py
+
 [Back To Top](#pixellib)
