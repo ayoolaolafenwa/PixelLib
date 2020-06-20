@@ -37,30 +37,40 @@ Install latest version of tensorflow(Tensorflow 2.0+) with:
 
 ![alt_test1](Images/ade_cover.jpg)
 # [Tutorial On Semantic Segmentation of Images With PixelLib Using Ade20k model](Tutorials/image_ade20k.md)
-
+Learn how to perform state of the art semantic segmentation of 150 classes of objects with Ade20k model using 5 Lines of Code. Perform indoor and outdoor segmentation of scenes with PixelLib by using Ade20k model.
 
 [![alt_vid1](Images/new_vid2.jpg)](https://www.youtube.com/watch?v=hxczTe9U8jY)
 
 # [Tutorial On Semantic Segmentation of Videos With PixelLib Using Ade20k model](Tutorials/video_ade20k.md)
-
+Implement state of the art semantic segmentation of 150 classes objects in video's feeds using Ade20k model with PixelLib using 5 Lines of Code.
 
 
 ![alt_test3](Images/pascal.jpg)
 # [Tutorial On Semantic Segmentation of Images With PixelLib Using Pascalvoc model](Tutorials/image_pascalvoc.md)
+Learn how to perform state of the art semantic segmentation of 20 common objects with Pascalvoc model using 5 Lines of Code. Perform segmentation of unique objects with PixelLib by using Pascalvoc model.
+
 
 [![alt_vid2](Images/pascal_voc.png)](https://www.youtube.com/watch?v=l9WMqT2znJE)
 
 # [Tutorial On Semantic Segmentation of Videos With PixelLib Using Pascalvoc model](Tutorials/video_pascalvoc.md)
+Implement state of the art semantic segmentation of 20 unique objects in video's feeds using Pascalvoc model with PixelLib using 5 Lines of Code.
 
 
 ![alt_test1](instance_mask/result2.jpg)
 
 # [Tutorial On Instance Segmentation of Images With PixelLib Using Mask-RCNN](Tutorials/image_instance.md)
+Learn how to implement state of the art instance segmentation of objects with Mask-RCNN with PixelLib using 5 Lines of Code.
 
 [![alt_vid3](Images/vid_ins.jpg)](https://www.youtube.com/watch?v=bGPO1bCZLAo)
 
-
 # [Tutorial On Instance Segmentation of Videos With PixelLib Using Mask-RCNN](Tutorials/video_instance.md)
+Implement state of the art instance segmentation of objects in video's feeds with Mask-RCNN model using 5 Lines of Code.
+
+
+# Projects built with PixelLib
+A segmentation api integrated with PixelLib to perform Semantic and Instance Segmentation of images on ios https://github.com/omarmhaimdat/segmentation_api
+
+
 
 ## References
 1. Bonlime, Keras implementation of Deeplab v3+ with pretrained weights  https://github.com/bonlime/keras-deeplab-v3-plus
