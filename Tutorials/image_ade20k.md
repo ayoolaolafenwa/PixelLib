@@ -115,7 +115,7 @@ It took 7.52 seconds to run semantic segmentation on the image.
 
 ```python
 
-  output, segmap = segment_image.segmentAsAde20k()
+  segmap, output = segment_image.segmentAsAde20k()
 ```
 * You can test the code for obtaining arrays and print out the shape of the output by modifying the semantic segmentation code below.
 
@@ -127,7 +127,7 @@ It took 7.52 seconds to run semantic segmentation on the image.
 
   segment_image = semantic_segmentation()
   segment_image.load_ade20k_model("deeplabv3_xception65_ade20k.h5")
-  output, segmap = segment_image.segmentAsAde20k("sample2.jpg")
+  segmap, output = segment_image.segmentAsAde20k("sample2.jpg")
   cv2.imwrite("img.jpg", output)
   print(output.shape)
 ```
@@ -135,7 +135,7 @@ It took 7.52 seconds to run semantic segmentation on the image.
 
 ```python
 
-  output, segoverlay = segment_image.segmentAsAde20k(overlay = True)
+  segmap, segoverlay = segment_image.segmentAsAde20k(overlay = True)
 
 ```
 ```python

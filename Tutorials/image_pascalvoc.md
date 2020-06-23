@@ -105,7 +105,7 @@ It took 7.71 seconds to run semantic segmentation on the image.
 * Obtain the array of the segmentation's output by using this code, 
 
 ```python
-output, segmap = segment_image.segmentAsPascalvoc()
+segmap, output = segment_image.segmentAsPascalvoc()
 ```
 * You can test the code for obtaining arrays and print out the shape of the output by modifying the semantic segmentation code below.
 
@@ -117,15 +117,15 @@ output, segmap = segment_image.segmentAsPascalvoc()
 
   segment_image = semantic_segmentation()
   segment_image.load_pascalvoc_model("pascal.h5")
-  output, segmap = segment_image.segmentAsPascalvoc("sample1.jpg")
+  segmap, output = segment_image.segmentAsPascalvoc("sample1.jpg")
   cv2.imwrite("img.jpg", output)
   print(output.shape)
 ```
-* Obtain both the output and the segmentation overlay's arrays by using this code,
+* Obtain both the segmap and the segmentation overlay's arrays by using this code,
 
 ```python
 
-  output, segoverlay = segment_image.segmentAsPascalvoc(overlay = True)
+  segmap, segoverlay = segment_image.segmentAsPascalvoc(overlay = True)
 
 ```
 ```python
