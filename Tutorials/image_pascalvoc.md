@@ -96,8 +96,11 @@ end = time.time()
 print(f"Inference Time: {end-start:.2f}seconds")
 
 ``` 
+```
   Inference Time: 7.71seconds
 ``` 
+
+
 It took 7.71 seconds to run semantic segmentation on the image.
 
 **Specialised uses of PixelLib may require you to return the array of the segmentation's output.**
