@@ -1306,8 +1306,8 @@ class MaskRCNN(object):
         assert len(
             images) == self.config.BATCH_SIZE, "len(images) must be equal to BATCH_SIZE"
 
-        if verbose:
-            log("Processing image....")
+        #if verbose:
+            #log("Processing image....")
             
         # Mold inputs to format expected by the neural network
         molded_images, image_metas, windows = self.mold_inputs(images)
@@ -1495,3 +1495,4 @@ def denorm_boxes_graph(boxes, shape):
     return tf.cast(tf.round(tf.multiply(boxes, scale) + shift), tf.int32)
 
    
+  
