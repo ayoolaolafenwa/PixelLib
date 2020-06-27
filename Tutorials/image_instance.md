@@ -143,7 +143,9 @@ Obtain arrays of segmentation with bounding boxes by including the parameter **s
 
 ```
 * Full code
-```
+
+```python
+
   import pixellib
   from pixellib.instance import instance_segmentation
   import cv2
