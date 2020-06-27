@@ -141,8 +141,9 @@ Obtain arrays of segmentation with bounding boxes by including the parameter **s
 
   segmask, output = segment_image.segmentImage(show_bboxes = True)
 
-.. code-block:: python
-
+```
+* Full code
+```
   import pixellib
   from pixellib.instance import instance_segmentation
   import cv2
