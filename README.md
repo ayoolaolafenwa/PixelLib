@@ -81,10 +81,12 @@ Implement state of the art instance segmentation of objects in video's feeds wit
 
 3. Matterport, Mask R-CNN for object detection and instance segmentation on Keras and TensorFlow https://github.com/matterport/Mask_RCNN
 
-4. Kaiming He et al, Mask R-CNN https://arxiv.org/abs/1703.06870
+4. Mask R-CNN code made compatible with tensorflow 2.0, https://github.com/tomgross/Mask_RCNN/tree/tensorflow-2.0
 
-5. TensorFlow DeepLab Model Zoo https://github.com/tensorflow/models/blob/master/research/deeplab/g3doc/model_zoo.md
+5. Kaiming He et al, Mask R-CNN https://arxiv.org/abs/1703.06870
 
-6. Pascalvoc and Ade20k datasets' colormaps https://github.com/tensorflow/models/blob/master/research/deeplab/utils/get_dataset_colormap.py
+6. TensorFlow DeepLab Model Zoo https://github.com/tensorflow/models/blob/master/research/deeplab/g3doc/model_zoo.md
+
+7. Pascalvoc and Ade20k datasets' colormaps https://github.com/tensorflow/models/blob/master/research/deeplab/utils/get_dataset_colormap.py
 
 [Back To Top](#pixellib)
