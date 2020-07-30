@@ -3,7 +3,7 @@
 
 [![Downloads](https://pepy.tech/badge/pixellib)](https://pepy.tech/project/pixellib)  [![Downloads](https://pepy.tech/badge/pixellib/month)](https://pepy.tech/project/pixellib/month)  [![Downloads](https://pepy.tech/badge/pixellib/week)](https://pepy.tech/project/pixellib/week)
 
-Pixellib is a library for performing segmentation of images and videos. It supports the two major types of image segmentation: 
+Pixellib is a library for performing segmentation of objects in images and videos. It supports the two major types of image segmentation: 
 
 **1.Semantic segmentation**
 
