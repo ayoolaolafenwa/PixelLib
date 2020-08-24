@@ -1,7 +1,7 @@
 from setuptools import setup,find_packages
 
 setup(name= "pixellib",
-      version='0.2.0',
+      version='0.2.1',
       description='PixelLib is a library for performing semantic and instance segmentation of images and videos using few lines of code.',
       url="https://github.com/ayoolaolafenwa/PixelLib",
       author='Ayoola Olafenwa',

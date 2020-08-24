@@ -164,10 +164,11 @@ This xception model is trained on ade20k dataset, a dataset with 150 object cate
 
   segment_frame = semantic_segmentation()
   segment_frame.load_ade20k_model("deeplabv3_xception65_ade20k.h5")
-
   capture = cv2.VideoCapture(0)
   while True:
     ret, frame = capture.read()
-    segment_video.segmentFrameAsAde20k(frame)
-
+    segmap, output = segment_frame.segmentFrameAsPascalvoc(frame)
+    cv2.imshow("frame", output)
+    if  cv2.waitKey(25) & 0xff == ord('q'):
+        break
 ```    

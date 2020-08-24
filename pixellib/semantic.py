@@ -45,12 +45,14 @@ class semantic_segmentation():
     #run prediction
     res = self.model.predict(np.expand_dims(resized_image, 0))
     
-    pred_max = np.argmax(res.squeeze(), -1)
+    labels = np.argmax(res.squeeze(), -1)
     # remove padding and resize back to original image
     if pad_x > 0:
-        labels = pred_max[:-pad_x]
+        labels = labels[:-pad_x]
     if pad_y > 0:
-        labels = pred_max[:, :-pad_y]
+        labels = labels[:, :-pad_y]
+
+    raw_labels = labels
         
     #Apply segmentation color map
     labels = labelP_to_color_image(labels)   
@@ -67,7 +69,7 @@ class semantic_segmentation():
           cv2.imwrite(output_image_name, image_overlay)
           print("Processed Image saved successfully in your current working directory.")
 
-        return pred_max, image_overlay
+        return raw_labels, image_overlay
 
         
     else:  
@@ -77,7 +79,7 @@ class semantic_segmentation():
 
           print("Processed Image saved successfuly in your current working directory.")
 
-        return pred_max, new_img 
+        return raw_labels, new_img 
 
         
   def segmentAsAde20k(self, image_path, output_image_name=None,overlay=False):            
@@ -103,12 +105,14 @@ class semantic_segmentation():
     #run prediction
     res = self.model2.predict(np.expand_dims(resized_image, 0))
     
-    pred_max = np.argmax(res.squeeze(), -1)
+    labels = np.argmax(res.squeeze(), -1)
     # remove padding and resize back to original image
     if pad_x > 0:
-        labels = pred_max[:-pad_x]
+        labels = labels[:-pad_x]
     if pad_y > 0:
-        labels = pred_max[:, :-pad_y]
+        labels = labels[:, :-pad_y]
+
+    raw_labels = labels    
         
     #Apply segmentation color map
     labels = labelAde20k_to_color_image(labels)   
@@ -125,7 +129,7 @@ class semantic_segmentation():
           cv2.imwrite(output_image_name, image_overlay)
           print("Processed Image saved successfully in your current working directory.")
 
-        return pred_max, image_overlay 
+        return raw_labels, image_overlay 
 
         
     else:  
@@ -135,7 +139,7 @@ class semantic_segmentation():
 
           print("Processed Image saved successfuly in your current working directory.")
 
-        return pred_max, new_img 
+        return raw_labels, new_img 
 
   def segmentFrameAsPascalvoc(self, frame, output_image_name=None,overlay=False):            
     trained_frame_width=512
@@ -160,13 +164,14 @@ class semantic_segmentation():
     #run prediction
     res = self.model.predict(np.expand_dims(resized_frame, 0))
     
-    pred_max = np.argmax(res.squeeze(), -1)
+    labels = np.argmax(res.squeeze(), -1)
     # remove padding and resize back to original image
     if pad_x > 0:
-        labels = pred_max[:-pad_x]
+        labels = labels[:-pad_x]
     if pad_y > 0:
-        labels = pred_max[:, :-pad_y]
+        labels = labels[:, :-pad_y]
         
+    raw_labels = labels    
     #Apply segmentation color map
     labels = labelP_to_color_image(labels)   
     labels = np.array(Image.fromarray(labels.astype('uint8')).resize((h, w)))
@@ -182,7 +187,7 @@ class semantic_segmentation():
           cv2.imwrite(output_image_name, frame_overlay)
           print("Processed Image saved successfully in your current working directory.")
 
-        return  pred_max, frame_overlay
+        return  raw_labels, frame_overlay
 
         
     else:  
@@ -192,7 +197,7 @@ class semantic_segmentation():
 
           print("Processed Image saved successfuly in your current working directory.")
 
-        return pred_max, new_frame
+        return raw_labels, new_frame
 
 
 
@@ -218,13 +223,14 @@ class semantic_segmentation():
     #run prediction
     res = self.model2.predict(np.expand_dims(resized_frame, 0))
     
-    pred_max = np.argmax(res.squeeze(), -1)
+    labels = np.argmax(res.squeeze(), -1)
     # remove padding and resize back to original image
     if pad_x > 0:
-        labels = pred_max[:-pad_x]
+        labels = labels[:-pad_x]
     if pad_y > 0:
-        labels = pred_max[:, :-pad_y]
-        
+        labels = labels[:, :-pad_y]
+
+    raw_labels = labels    
     #Apply segmentation color map
     labels = labelAde20k_to_color_image(labels)   
     labels = np.array(Image.fromarray(labels.astype('uint8')).resize((h, w)))
@@ -240,7 +246,7 @@ class semantic_segmentation():
           cv2.imwrite(output_image_name, frame_overlay)
           print("Processed Image saved successfully in your current working directory.")
 
-        return pred_max, frame_overlay  
+        return raw_labels, frame_overlay  
 
         
     else:  
@@ -250,7 +256,7 @@ class semantic_segmentation():
 
           print("Processed Image saved successfuly in your current working directory.")
 
-        return pred_max, new_frame      
+        return raw_labels, new_frame      
 
 
 
@@ -291,13 +297,14 @@ class semantic_segmentation():
           pred = self.model.predict(np.expand_dims(resized_frame, axis = 0))
           print("No.of frames:", counter)
             
-          pred_max = np.argmax(pred.squeeze(), -1)
+          labels = np.argmax(pred.squeeze(), -1)
 
           if pad_x > 0:
-            labels = pred_max[:-pad_x]
+            labels = labels[:-pad_x]
           if pad_y > 0:
-            labels = pred_max[:, :-pad_y]
-            
+            labels = labels[:, :-pad_y]
+
+          raw_labels = labels  
           segmap = labelP_to_color_image(labels)
           labels = np.array(Image.fromarray(segmap.astype('uint8')).resize((h, w)))
           new_segmap = cv2.cvtColor(labels, cv2.COLOR_BGR2RGB)
@@ -316,7 +323,7 @@ class semantic_segmentation():
       capture.release()
       if frames_per_second is not None:
         save_video.release()
-      return  pred_max, output
+      return  raw_labels, output
 
     else:
       while True:
@@ -341,13 +348,14 @@ class semantic_segmentation():
           pred = self.model.predict(np.expand_dims(resized_frame, axis = 0))
           print("No.of frames:", counter)
             
-          pred_max = np.argmax(pred.squeeze(), -1)
+          labels = np.argmax(pred.squeeze(), -1)
 
           if pad_x > 0:
-            labels = pred_max[:-pad_x]
+            labels = labels[:-pad_x]
           if pad_y > 0:
-            labels = pred_max[:, :-pad_y]
-            
+            labels = labels[:, :-pad_y]
+
+          raw_labels = labels  
           segmap = labelP_to_color_image(labels)
           labels = np.array(Image.fromarray(segmap.astype('uint8')).resize((h, w)))
           new_segmap = cv2.cvtColor(labels, cv2.COLOR_BGR2RGB)
@@ -367,7 +375,7 @@ class semantic_segmentation():
       if frames_per_second is not None:
         save_video.release()
 
-      return  pred_max,  output
+      return  raw_labels,  output
 
   
 
@@ -406,13 +414,14 @@ class semantic_segmentation():
           pred = self.model.predict(np.expand_dims(resized_frame, axis = 0))
           print("No.of frames:", counter)
             
-          pred_max = np.argmax(pred.squeeze(), -1)
+          labels = np.argmax(pred.squeeze(), -1)
 
           if pad_x > 0:
-            labels = pred_max[:-pad_x]
+            labels = labels[:-pad_x]
           if pad_y > 0:
-            labels = pred_max[:, :-pad_y]
-            
+            labels = labels[:, :-pad_y]
+
+          raw_labels = labels  
           segmap = labelP_to_color_image(labels)
           labels = np.array(Image.fromarray(segmap.astype('uint8')).resize((h, w)))
           new_segmap = cv2.cvtColor(labels, cv2.COLOR_BGR2RGB)
@@ -447,7 +456,7 @@ class semantic_segmentation():
       if frames_per_second is not None:
         save_video.release()
 
-      return  pred_max, output
+      return  raw_labels, output
 
     else:
       while True:
@@ -472,13 +481,14 @@ class semantic_segmentation():
           pred = self.model.predict(np.expand_dims(resized_frame, axis = 0))
           print("No.of frames:", counter)
             
-          pred_max = np.argmax(pred.squeeze(), -1)
+          labels = np.argmax(pred.squeeze(), -1)
 
           if pad_x > 0:
-            labels = pred_max[:-pad_x]
+            labels = labels[:-pad_x]
           if pad_y > 0:
-            labels = pred_max[:, :-pad_y]
-            
+            labels = labels[:, :-pad_y]
+
+          raw_labels = labels  
           segmap = labelP_to_color_image(labels)
           labels = np.array(Image.fromarray(segmap.astype('uint8')).resize((h, w)))
           new_segmap = cv2.cvtColor(labels, cv2.COLOR_BGR2RGB)
@@ -511,7 +521,7 @@ class semantic_segmentation():
       if frames_per_second is not None:
         save_video.release()
 
-      return pred_max, output 
+      return raw_labels, output 
 
   
 
@@ -551,13 +561,14 @@ class semantic_segmentation():
           pred = self.model2.predict(np.expand_dims(resized_frame, axis = 0))
           print("No.of frames:", counter)
             
-          pred_max = np.argmax(pred.squeeze(), -1)
+          labels = np.argmax(pred.squeeze(), -1)
 
           if pad_x > 0:
-            labels = pred_max[:-pad_x]
+            labels = labels[:-pad_x]
           if pad_y > 0:
-            labels = pred_max[:, :-pad_y]
+            labels = labels[:, :-pad_y]
             
+          raw_labels = labels  
           segmap = labelAde20k_to_color_image(labels)
           labels = np.array(Image.fromarray(segmap.astype('uint8')).resize((h, w)))
           new_segmap = cv2.cvtColor(labels, cv2.COLOR_BGR2RGB)
@@ -581,7 +592,7 @@ class semantic_segmentation():
       if frames_per_second is not None:
         save_video.release()
 
-      return pred_max, output
+      return raw_labels, output
 
     else:
       while True:
@@ -607,13 +618,15 @@ class semantic_segmentation():
           pred = self.model2.predict(np.expand_dims(resized_frame, axis = 0))
           print("No.of frames:", counter)
             
-          pred_max = np.argmax(pred.squeeze(), -1)
+          labels = np.argmax(pred.squeeze(), -1)
 
           if pad_x > 0:
-            labels = pred_max[:-pad_x]
+            labels = labels[:-pad_x]
           if pad_y > 0:
-            labels = pred_max[:, :-pad_y]
-            
+            labels = labels[:, :-pad_y]
+
+
+          raw_labels = labels  
           segmap = labelAde20k_to_color_image(labels)
           labels = np.array(Image.fromarray(segmap.astype('uint8')).resize((h, w)))
           new_segmap = cv2.cvtColor(labels, cv2.COLOR_BGR2RGB)
@@ -638,7 +651,7 @@ class semantic_segmentation():
       if frames_per_second is not None:
         save_video.release()
 
-      return pred_max,  output    
+      return raw_labels,  output    
 
 
   
@@ -681,13 +694,14 @@ class semantic_segmentation():
           pred = self.model2.predict(np.expand_dims(resized_frame, axis = 0))
           print("No.of frames:", counter)
             
-          pred_max = np.argmax(pred.squeeze(), -1)
+          labels = np.argmax(pred.squeeze(), -1)
 
           if pad_x > 0:
-            labels = pred_max[:-pad_x]
+            labels = labels[:-pad_x]
           if pad_y > 0:
-            labels = pred_max[:, :-pad_y]
-            
+            labels = labels[:, :-pad_y]
+
+          raw_labels = labels  
           segmap = labelAde20k_to_color_image(labels)
           labels = np.array(Image.fromarray(segmap.astype('uint8')).resize((h, w)))
           new_segmap = cv2.cvtColor(labels, cv2.COLOR_BGR2RGB)
@@ -721,7 +735,7 @@ class semantic_segmentation():
       if frames_per_second is not None:
         save_video.release()
 
-      return pred_max, output
+      return raw_labels, output
 
     else:
       while True:
@@ -747,13 +761,14 @@ class semantic_segmentation():
           pred = self.model2.predict(np.expand_dims(resized_frame, axis = 0))
           print("No.of frames:", counter)
             
-          pred_max = np.argmax(pred.squeeze(), -1)
+          labels = np.argmax(pred.squeeze(), -1)
 
           if pad_x > 0:
-            labels = pred_max[:-pad_x]
+            labels = labels[:-pad_x]
           if pad_y > 0:
-            labels = pred_max[:, :-pad_y]
-            
+            labels = labels[:, :-pad_y]
+
+          raw_labels = labels  
           segmap = labelAde20k_to_color_image(labels)
           labels = np.array(Image.fromarray(segmap.astype('uint8')).resize((h, w)))
           new_segmap = cv2.cvtColor(labels, cv2.COLOR_BGR2RGB)
@@ -787,7 +802,7 @@ class semantic_segmentation():
       if frames_per_second is not None:
           save_video.release()
 
-      return pred_max,  output    
+      return raw_labels,  output    
 
 
   

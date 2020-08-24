@@ -174,4 +174,7 @@ Obtain arrays of segmentation with bounding boxes by including the parameter **s
   while True:
     ret, frame = capture.read()
     segment_video.segmentFrame(frame)
+    cv2.imshow("frame", frame)
+    if  cv2.waitKey(25) & 0xff == ord('q'):
+        break
 ```    

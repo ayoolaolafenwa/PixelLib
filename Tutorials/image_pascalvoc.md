@@ -165,7 +165,10 @@ Objects and their corresponding colormaps.
   capture = cv2.VideoCapture(0)
   while True:
     ret, frame = capture.read()
-    segment_video.segmentFrameAsPascalvoc(frame, output_image_name= "hi.jpg")
+    segmap, output = segment_frame.segmentFrameAsPascalvoc(frame)
+    cv2.imshow("frame", output)
+    if  cv2.waitKey(25) & 0xff == ord('q'):
+        break
 
 ``` 
 
