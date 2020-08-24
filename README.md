@@ -4,6 +4,7 @@
 [![Downloads](https://pepy.tech/badge/pixellib)](https://pepy.tech/project/pixellib)  [![Downloads](https://pepy.tech/badge/pixellib/month)](https://pepy.tech/project/pixellib/month)  [![Downloads](https://pepy.tech/badge/pixellib/week)](https://pepy.tech/project/pixellib/week)
 
 There is a bug in the older version of this library, upgrade to the latest version using:
+
 **pip3 install pixellib --upgrade**
 
 
