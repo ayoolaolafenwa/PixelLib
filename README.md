@@ -3,11 +3,16 @@
 
 [![Downloads](https://pepy.tech/badge/pixellib)](https://pepy.tech/project/pixellib)  [![Downloads](https://pepy.tech/badge/pixellib/month)](https://pepy.tech/project/pixellib/month)  [![Downloads](https://pepy.tech/badge/pixellib/week)](https://pepy.tech/project/pixellib/week)
 
+There is a bug in the older version of this library, upgrade to the latest version using:
+**pip3 install pixellib --upgrade**
+
+
 Pixellib is a library for performing segmentation of objects in images and videos. It supports the two major types of image segmentation: 
 
 **1.Semantic segmentation**
 
 **2.Instance segmentation**
+
 
 You can implement both semantic and instance segmentation with few lines of code.
 
@@ -28,7 +33,7 @@ Install latest version of tensorflow(Tensorflow 2.0+) with:
 
 
 ## Install Pixellib with:
-**pip3 install pixellib --upgrade**
+**pip3 install pixellib**
 
 **Visit PixelLib's official documentation on** [readthedocs](https://pixellib.readthedocs.io/en/latest/)
 
