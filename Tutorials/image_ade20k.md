@@ -11,8 +11,8 @@ Download the xception model from [here](https://github.com/ayoolaolafenwa/PixelL
   import pixellib
   from pixellib.semantic import semantic_segmentation
 
-  segment_video = semantic_segmentation()
-  segment_video.load_ade20k_model("deeplabv3_xception65_ade20k.h5")
+  segment_image = semantic_segmentation()
+  segment_image.load_ade20k_model("deeplabv3_xception65_ade20k.h5")
   segment_image.segmentAsAde20k("path_to_image", output_image_name= "path_to_output_image")
 ```
 We shall take a look into each line of code.
