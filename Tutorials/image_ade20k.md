@@ -54,9 +54,9 @@ This is the line of code that performs segmentation on an image and the segmenta
   import pixellib
   from pixellib.semantic import semantic_segmentation
 
-  segment_video = semantic_segmentation()
-  segment_video.load_ade20k_model("deeplabv3_xception65_ade20k.h5")
-  segment_video.segmentAsAde20k("sample1.jpg", output_image_name="image_new.jpg")
+  segment_image = semantic_segmentation()
+  segment_image.load_ade20k_model("deeplabv3_xception65_ade20k.h5")
+  segment_image.segmentAsAde20k("sample1.jpg", output_image_name="image_new.jpg")
 ```
 
 ![alt_test5](Images/ade_segmap.jpg)
