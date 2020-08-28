@@ -30,7 +30,7 @@ The class for performing semantic segmentation is imported from pixellib and we 
 
 ```python
   
-  segment_video.load_ade20k_model("deeplabv3_xception65_ade20k.h5")
+  segment_image.load_ade20k_model("deeplabv3_xception65_ade20k.h5")
 ```
 We called the function to load the xception model trained on ade20k dataset. 
 
