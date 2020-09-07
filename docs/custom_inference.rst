@@ -37,7 +37,7 @@ We imported the class custom_segmentation, the class for performing inference an
    
    class_names= ["BG", "butterfly", "squirrel"])
 
-**class_names:** It is a list containing  the names of classes the model is trained with. "BG", it refers to the background of the image, it is the first class and must be available along the names of the classes.
+**class_names:** It is a list containing  the names of classes the model is trained with.Butterfly has the class id 1 and squirrel has the class id 2 "BG", it refers to the background of the image, it is the first class and must be available along the names of the classes.
 
 **Note:** If you have multiple classes and you are confused of how to arrange the classes's names according to their class ids, in your test.json in the dataset's folder check the categories' list.
 

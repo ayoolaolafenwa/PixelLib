@@ -61,7 +61,7 @@ class_names= ["BG", "butterfly", "squirrel"])
 ```
 
 
-You can observe from the sample of the directory of test.json above, after the images's  list in your test.json is object categories's list, the classes's names are there with their corresponding class ids. Remember the first id "0" is kept in reserve for the background.
+You can observe from the sample of the directory of test.json above, after the images's  list in your test.json is object categories's list, the classes's names are there with their corresponding class ids. Butterfly has the class id 1 and squirrel has the class id 2.Remember the first id "0" is kept in reserve for the background.
 
 ```python
   
