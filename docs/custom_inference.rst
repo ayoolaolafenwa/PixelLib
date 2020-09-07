@@ -1,6 +1,6 @@
 .. _custom_inference:
 
-**Inference with a custom model**
+**Inference With A Custom Model**
 ===================================
 
 We have trained and evaluated the model, the next step is to see the performance of the model on unknown images. 
@@ -20,7 +20,7 @@ We are going to test the model on the classes we have trained it on. If you have
 
    segment_image = custom_segmentation()
    segment_image.inferConfig(num_classes= 2, class_names= ["BG", "butterfly", "squirrel"])
-   segment_image.load_model("mask_rcnn_model/Nature_model_resnet101.h5")
+   segment_image.load_model("mask_rcnn_models/Nature_model_resnet101.h5")
    segment_image.segmentImage("sample1.jpg", show_bboxes=True, output_image_name="sample_out.jpg")
 
 .. code-block:: python

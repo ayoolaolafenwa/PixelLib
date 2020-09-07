@@ -174,4 +174,7 @@ Implement state of the art semantic segmentation of 20 unique objects in video's
 
 7. Pascalvoc and Ade20k datasets' colormaps https://github.com/tensorflow/models/blob/master/research/deeplab/utils/get_dataset_colormap.py
 
+8. Labelme's repository https://github.com/wkentaro/labelme
+
+9. Object-Detection-Python https://github.com/Yunus0or1/Object-Detection-Python
 [Back To Top](#pixellib)

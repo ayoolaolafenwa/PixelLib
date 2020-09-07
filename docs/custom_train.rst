@@ -17,7 +17,7 @@ You will annotate both images in the train and test folder. Download `Nature's d
 unzip it to extract the images' folder. This dataset will serve as a guide for you to know how to organize your images.
 Ensure that the format of the directory of your own dataset directory is not different from it. Nature is a dataset with two categories butterfly and squirrel. There is 300 images for each class for training and 100 images for each class for testing i.e 600 images for training and 200 images for validation. Nature is a dataset with 800 images. 
 
-Read this tutorial and learn how to annotate objects with *Labelme*. 
+Read this article on `medium <https://medium.com/@olafenwaayoola/image-annotation-with-labelme-81687ac2d077>`_ and learn how to annotate objects with *Labelme*. 
 
 .. code-block:: python
    
@@ -288,4 +288,5 @@ Output log
 
 Visit Google Colaboratory set up for training a custom dataset
 
-Learn how how to perform inference with your custom model by reading this [tutorial](Tutorials/custom_inference.md). 
+Learn how how to perform inference with your custom model by reading `this <https://pixellib.readthedocs.io/en/latest/custom_inference.html>_`
+
