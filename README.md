@@ -65,46 +65,58 @@ There are two types of Deeplabv3+ models available for performing **semantic seg
 
 
 
-![alt_test1](instance_mask/result2.jpg)
-
 ## [Instance Segmentation of Images With PixelLib Using Mask-RCNN COCO Model](Tutorials/image_instance.md)
 Learn how to implement state of the art instance segmentation of objects with Mask-RCNN with PixelLib using 5 Lines of Code.
 
-[![alt_vid3](Images/vid_ins.jpg)](https://www.youtube.com/watch?v=bGPO1bCZLAo)
+![alt_test1](instance_mask/result2.jpg)
+
+
 
 ## [Instance Segmentation of Videos With PixelLib Using Mask-RCNN COCO Model](Tutorials/video_instance.md)
 Implement state of the art instance segmentation of objects in video's feeds with Mask-RCNN model using 5 Lines of Code.
 
-![alt_train](instance_mask/squirrel_seg.jpg)
+[![alt_vid3](Images/vid_ins.jpg)](https://www.youtube.com/watch?v=bGPO1bCZLAo)
+
+
 
 ## [Custom Instance Segmentation Training](Tutorials/custom_train.md)
 Perform instance segmentation on objects with your custom model with 7 Lines of Code.
 
-[![alt_infer](Images/but_vid.png)](https://www.youtube.com/watch?v=bWQGxaZIPOo)
+![alt_train](instance_mask/squirrel_seg.jpg)
+
 
 ## [Instance Segmentation of objects in images and videos With A Custom Model](Tutorials/custom_train.md)
 
 Perform inference on objects with your custom model.
 
-![alt_test1](Images/ade_cover.jpg)
+[![alt_infer](Images/but_vid.png)](https://www.youtube.com/watch?v=bWQGxaZIPOo)
+
+
 ## [Semantic Segmentation of Images With PixelLib Using Ade20k model](Tutorials/image_ade20k.md)
 Learn how to perform state of the art semantic segmentation of 150 classes of objects with Ade20k model using 5 Lines of Code. Perform indoor and outdoor segmentation of scenes with PixelLib by using Ade20k model.
 
-[![alt_vid1](Images/new_vid2.jpg)](https://www.youtube.com/watch?v=hxczTe9U8jY)
+![alt_test1](Images/ade_cover.jpg)
+
 
 ## [Semantic Segmentation of Videos With PixelLib Using Ade20k model](Tutorials/video_ade20k.md)
 Implement state of the art semantic segmentation of 150 classes objects in video's feeds using Ade20k model with PixelLib using 5 Lines of Code.
 
+[![alt_vid1](Images/new_vid2.jpg)](https://www.youtube.com/watch?v=hxczTe9U8jY)
 
-![alt_test3](Images/pascal.jpg)
+
+
+
 ## [Semantic Segmentation of Images With PixelLib Using Pascalvoc model](Tutorials/image_pascalvoc.md)
 Learn how to perform state of the art semantic segmentation of 20 common objects with Pascalvoc model using 5 Lines of Code. Perform segmentation of unique objects with PixelLib by using Pascalvoc model.
 
+![alt_test3](Images/pascal.jpg)
 
-[![alt_vid2](Images/pascal_voc.png)](https://www.youtube.com/watch?v=l9WMqT2znJE)
+
 
 ## [Semantic Segmentation of Videos With PixelLib Using Pascalvoc model](Tutorials/video_pascalvoc.md)
 Implement state of the art semantic segmentation of 20 unique objects in video's feeds using Pascalvoc model with PixelLib using 5 Lines of Code.
+
+[![alt_vid2](Images/pascal_voc.png)](https://www.youtube.com/watch?v=l9WMqT2znJE)
 
 
 
