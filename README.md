@@ -61,6 +61,7 @@ There are two types of Deeplabv3+ models available for performing **semantic seg
 * [Semantic Segmentation of Videos With PixelLib Using Pascalvoc model](#Semantic-Segmentation-of-Videos-With-PixelLib-Using-Pascalvoc-model)
 
 
+
 **Note** Deeplab and mask r-ccn models are available  in the [release](https://github.com/ayoolaolafenwa/PixelLib/releases) of this repository.
 
 
@@ -99,7 +100,7 @@ Perform instance segmentation on objects with your custom model with 7 Lines of 
 
 
 
-## [Instance Segmentation of objects in images and videos With A Custom Model](Tutorials/custom_train.md)
+## [Instance Segmentation of objects in images and videos With A Custom Model](Tutorials/custom_inference.md)
 
 Perform inference on objects with your custom model.
 
