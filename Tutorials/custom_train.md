@@ -266,4 +266,4 @@ mask_rcnn_models\mask_rcnn_model_058.h5 evaluation using iou_threshold 0.5 is 0.
 
 Visit [Google Colaboratory](https://colab.research.google.com/drive/1ADKE3lEUFFOsA6iMp0g2dE_KazTqY_4d#scrollTo=xZk4dhlvcuOG) set up for training a custom dataset.
 
-Learn how how to perform inference with your custom model by reading this [tutorial](Tutorials/custom_inference.md). 
+Learn how how to perform inference with your custom model by reading this [tutorial](custom_inference.md). 
