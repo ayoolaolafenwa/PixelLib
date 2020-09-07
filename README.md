@@ -45,9 +45,19 @@ There are two types of Deeplabv3+ models available for performing **semantic seg
 
 * [Instance Segmentation of Images With PixelLib Using Mask-RCNN COCO Model](#Instance-Segmentation-of-Images-With-PixelLib-Using-Mask-RCNN-COCO-Model)
 
-* [Instance Segmentation of Videos With PixelLib Using Mask-RCNN COCO Model](##Instance Segmentation of Videos With PixelLib Using Mask-RCNN COCO Model)
+* [Instance Segmentation of Videos With PixelLib Using Mask-RCNN COCO Model](#Instance-Segmentation-of-Videos-With-PixelLib-Using-Mask-RCNN-COCO-Model)
 
-* [Custom Instance Segmentation Training] (##Custom Instance Segmentation Training)
+* [Custom Instance Segmentation Training](#Custom-Instance-Segmentation-Training)
+
+* [Instance Segmentation of objects in images and videos With Custom Model](#Instance-Segmentation-of-objects-in-images-and-videos-With-A-Custom-Model)
+
+* [Semantic Segmentation of Images With PixelLib Using Ade20k model](#Semantic-Segmentation-of-Images-With-PixelLib-Using-Ade20k-model)
+
+* [Semantic Segmentation of Videos With PixelLib Using Ade20k model](#Semantic-Segmentation-of-Videos-With-PixelLib-Using-Ade20k-model)
+
+* [Semantic Segmentation of Images With PixelLib Using Pascalvoc model](#Semantic-Segmentation-of-Images-With-PixelLib-Using-Pascalvoc-model)
+
+* [Semantic Segmentation of Videos With PixelLib Using Pascalvoc model](#Semantic-Segmentation-of-Videos-With-PixelLib-Using-Pascalvoc-model)
 
 
 **Note** Deeplab and mask r-ccn models are available  in the [release](https://github.com/ayoolaolafenwa/PixelLib/releases) of this repository.
@@ -71,7 +81,7 @@ Perform instance segmentation on objects with your custom model with 7 Lines of 
 ![alt_train](instance_mask/squirrel_seg.jpg)
 
 
-## [Instance Segmentation of objects in images and videos With Custom Model](Tutorials/custom_train.md)
+## [Instance Segmentation of objects in images and videos With A Custom Model](Tutorials/custom_train.md)
 
 ![alt_infer](instance_mask/but_vid.png)
 Perform inference on objects with your custom model.
