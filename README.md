@@ -80,7 +80,8 @@ Implement state of the art instance segmentation of objects in video's feeds wit
 ## [Custom Instance Segmentation Training](Tutorials/custom_train.md)
 Perform instance segmentation on objects with your custom model with 7 Lines of Code.
 
-![alt_infer(instance_mask/but_vid.png)](https://www.youtube.com/watch?v=bWQGxaZIPOo)
+[![alt_infer](Images/but_vid.png)](https://www.youtube.com/watch?v=bWQGxaZIPOo)
+
 ## [Instance Segmentation of objects in images and videos With A Custom Model](Tutorials/custom_train.md)
 
 Perform inference on objects with your custom model.
