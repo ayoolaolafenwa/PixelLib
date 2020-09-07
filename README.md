@@ -21,6 +21,7 @@ Install latest version of tensorflow(Tensorflow 2.0+) with:
 
 If you have have a pc enabled GPU, Install tensorflow--gpu's version that is compatible with the cuda's version on your pc:
 
+
 *pip3 install tensorflow--gpu*
 
 
@@ -72,10 +73,18 @@ Learn how to implement state of the art instance segmentation of objects with Ma
 
 
 
+
+
+
+
 ## [Instance Segmentation of Videos With PixelLib Using Mask-RCNN COCO Model](Tutorials/video_instance.md)
 Implement state of the art instance segmentation of objects in video's feeds with Mask-RCNN model using 5 Lines of Code.
 
 [![alt_vid3](Images/vid_ins.jpg)](https://www.youtube.com/watch?v=bGPO1bCZLAo)
+
+
+
+
 
 
 
@@ -85,6 +94,11 @@ Perform instance segmentation on objects with your custom model with 7 Lines of 
 ![alt_train](instance_mask/squirrel_seg.jpg)
 
 
+
+
+
+
+
 ## [Instance Segmentation of objects in images and videos With A Custom Model](Tutorials/custom_train.md)
 
 Perform inference on objects with your custom model.
@@ -92,10 +106,19 @@ Perform inference on objects with your custom model.
 [![alt_infer](Images/but_vid.png)](https://www.youtube.com/watch?v=bWQGxaZIPOo)
 
 
+
+
+
+
+
 ## [Semantic Segmentation of Images With PixelLib Using Ade20k model](Tutorials/image_ade20k.md)
 Learn how to perform state of the art semantic segmentation of 150 classes of objects with Ade20k model using 5 Lines of Code. Perform indoor and outdoor segmentation of scenes with PixelLib by using Ade20k model.
 
 ![alt_test1](Images/ade_cover.jpg)
+
+
+
+
 
 
 ## [Semantic Segmentation of Videos With PixelLib Using Ade20k model](Tutorials/video_ade20k.md)
@@ -106,10 +129,17 @@ Implement state of the art semantic segmentation of 150 classes objects in video
 
 
 
+
+
+
 ## [Semantic Segmentation of Images With PixelLib Using Pascalvoc model](Tutorials/image_pascalvoc.md)
 Learn how to perform state of the art semantic segmentation of 20 common objects with Pascalvoc model using 5 Lines of Code. Perform segmentation of unique objects with PixelLib by using Pascalvoc model.
 
 ![alt_test3](Images/pascal.jpg)
+
+
+
+
 
 
 
