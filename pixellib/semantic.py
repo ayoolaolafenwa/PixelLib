@@ -3,7 +3,6 @@ import numpy as np
 from PIL import Image
 from .deeplab import Deeplab_xcep_pascal
 from .deeplab import Deeplab_xcep_ade20k
-import numpy as np
 import cv2
 import time
 
@@ -22,7 +21,7 @@ class semantic_segmentation():
   def load_ade20k_model(self, model_path):
     self.model2.load_weights(model_path)   
 
-  def segmentAsPascalvoc(self, image_path, output_image_name=None,overlay=False):            
+  def segmentAsPascalvoc(self, image_path, output_image_name=None,overlay=False, verbose = None):            
     trained_image_width=512
     mean_subtraction_value=127.5
     image = np.array(Image.open(image_path))     
@@ -40,7 +39,8 @@ class semantic_segmentation():
     pad_y = int(trained_image_width - resized_image.shape[1])
     resized_image = np.pad(resized_image, ((0, pad_x), (0, pad_y), (0, 0)), mode='constant')
 
-    print("Processing image....")
+    if verbose is not None:
+      print("Processing image....")
 
     #run prediction
     res = self.model.predict(np.expand_dims(resized_image, 0))
@@ -82,7 +82,7 @@ class semantic_segmentation():
         return raw_labels, new_img 
 
         
-  def segmentAsAde20k(self, image_path, output_image_name=None,overlay=False):            
+  def segmentAsAde20k(self, image_path, output_image_name=None,overlay=False, verbose = None):            
     trained_image_width=512
     mean_subtraction_value=127.5
     image = np.array(Image.open(image_path))     
@@ -100,8 +100,8 @@ class semantic_segmentation():
     pad_y = int(trained_image_width - resized_image.shape[1])
     resized_image = np.pad(resized_image, ((0, pad_x), (0, pad_y), (0, 0)), mode='constant')
 
-    print("Processing image....")
-
+    if verbose is not None:
+      print("Processing image....")
     #run prediction
     res = self.model2.predict(np.expand_dims(resized_image, 0))
     
@@ -141,7 +141,7 @@ class semantic_segmentation():
 
         return raw_labels, new_img 
 
-  def segmentFrameAsPascalvoc(self, frame, output_image_name=None,overlay=False):            
+  def segmentFrameAsPascalvoc(self, frame, output_image_name=None,overlay=False, verbose = None):            
     trained_frame_width=512
     mean_subtraction_value=127.5
        
@@ -159,7 +159,8 @@ class semantic_segmentation():
     pad_y = int(trained_frame_width - resized_frame.shape[1])
     resized_frame = np.pad(resized_frame, ((0, pad_x), (0, pad_y), (0, 0)), mode='constant')
 
-    print("Processing frame....")
+    if verbose is not None:
+      print("Processing frame....")
 
     #run prediction
     res = self.model.predict(np.expand_dims(resized_frame, 0))
@@ -201,7 +202,7 @@ class semantic_segmentation():
 
 
 
-  def segmentFrameAsAde20k(self, frame, output_image_name=None,overlay=False):            
+  def segmentFrameAsAde20k(self, frame, output_image_name=None,overlay=False, verbose = None):            
     trained_frame_width=512
     mean_subtraction_value=127.5     
     frame_overlay = frame.copy()
@@ -218,7 +219,8 @@ class semantic_segmentation():
     pad_y = int(trained_frame_width - resized_frame.shape[1])
     resized_frame = np.pad(resized_frame, ((0, pad_x), (0, pad_y), (0, 0)), mode='constant')
 
-    print("Processing frame....")
+    if verbose is not None:
+      print("Processing frame....")
 
     #run prediction
     res = self.model2.predict(np.expand_dims(resized_frame, 0))
@@ -295,6 +297,7 @@ class semantic_segmentation():
           resized_frame = np.pad(resized_frame, ((0, pad_x), (0, pad_y), (0, 0)), mode='constant')
 
           pred = self.model.predict(np.expand_dims(resized_frame, axis = 0))
+          
           print("No.of frames:", counter)
             
           labels = np.argmax(pred.squeeze(), -1)
@@ -379,7 +382,7 @@ class semantic_segmentation():
 
   
 
-  def process_camera_pascalvoc(self, cam, overlay = False,  check_fps = False, frames_per_second = None, output_video_name = None, show_frames = False, frame_name = None):
+  def process_camera_pascalvoc(self, cam, overlay = False,  check_fps = False, frames_per_second = None, output_video_name = None, show_frames = False, frame_name = None, verbose = None):
     capture = cam
     width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -412,7 +415,8 @@ class semantic_segmentation():
           resized_frame = np.pad(resized_frame, ((0, pad_x), (0, pad_y), (0, 0)), mode='constant')
 
           pred = self.model.predict(np.expand_dims(resized_frame, axis = 0))
-          print("No.of frames:", counter)
+          if verbose is not None:
+            print("No.of frames:", counter)
             
           labels = np.argmax(pred.squeeze(), -1)
 
@@ -451,7 +455,8 @@ class semantic_segmentation():
       capture.release()
 
       end = time.time()
-      print(f"Processed {counter} frames in {end-start:.1f} seconds")
+      if verbose is not None:
+        print(f"Processed {counter} frames in {end-start:.1f} seconds")
       
       if frames_per_second is not None:
         save_video.release()
@@ -479,7 +484,8 @@ class semantic_segmentation():
           resized_frame = np.pad(resized_frame, ((0, pad_x), (0, pad_y), (0, 0)), mode='constant')
 
           pred = self.model.predict(np.expand_dims(resized_frame, axis = 0))
-          print("No.of frames:", counter)
+          if verbose is not None:
+            print("No.of frames:", counter)
             
           labels = np.argmax(pred.squeeze(), -1)
 
@@ -515,7 +521,8 @@ class semantic_segmentation():
       capture.release()  
         
       end = time.time()
-      print(f"Processed {counter} frames in {end-start:.1f} seconds")
+      if verbose is not None:
+        print(f"Processed {counter} frames in {end-start:.1f} seconds")
      
 
       if frames_per_second is not None:
@@ -659,7 +666,7 @@ class semantic_segmentation():
 
 
 
-  def process_camera_ade20k(self, cam, overlay = False,  check_fps = False, frames_per_second = None, output_video_name = None, show_frames = False, frame_name = None):
+  def process_camera_ade20k(self, cam, overlay = False,  check_fps = False, frames_per_second = None, output_video_name = None, show_frames = False, frame_name = None, verbose = None):
     capture = cam
     width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -692,7 +699,8 @@ class semantic_segmentation():
           resized_frame = np.pad(resized_frame, ((0, pad_x), (0, pad_y), (0, 0)), mode='constant')
 
           pred = self.model2.predict(np.expand_dims(resized_frame, axis = 0))
-          print("No.of frames:", counter)
+          if verbose is not None:
+            print("No.of frames:", counter)
             
           labels = np.argmax(pred.squeeze(), -1)
 
@@ -729,7 +737,8 @@ class semantic_segmentation():
       capture.release()
 
       end = time.time()
-      print(f"Processed {counter} frames in {end-start:.1f} seconds")
+      if verbose is not None:
+        print(f"Processed {counter} frames in {end-start:.1f} seconds")
 
       
       if frames_per_second is not None:
@@ -759,7 +768,8 @@ class semantic_segmentation():
           resized_frame = np.pad(resized_frame, ((0, pad_x), (0, pad_y), (0, 0)), mode='constant')
 
           pred = self.model2.predict(np.expand_dims(resized_frame, axis = 0))
-          print("No.of frames:", counter)
+          if verbose is not None:
+            print("No.of frames:", counter)
             
           labels = np.argmax(pred.squeeze(), -1)
 
@@ -796,7 +806,8 @@ class semantic_segmentation():
       capture.release()  
 
       end = time.time()
-      print(f"Processed {counter} frames in {end-start:.1f} seconds")
+      if verbose is not None:
+        print(f"Processed {counter} frames in {end-start:.1f} seconds")
 
       
       if frames_per_second is not None:

@@ -32,6 +32,9 @@ Install latest version of tensorflow(Tensorflow 2.0+) with:
 
 **pip3 install tensorflow**
 
+If you have have a pc enabled GPU, Install tensorflow--gpu's version that is compatible with the cuda on your pc:
+**pip3 install tensorflow--gpu**
+
 
 ## Install Pixellib with:
 **pip3 install pixellib**

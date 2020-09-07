@@ -22,23 +22,6 @@ Install  the latest version of tensorflow(Tensorflow 2.0+) with:
 
   pip3 install tensorflow
 
-Install Opencv-python with:
-
-.. code-block:: python
-
-  pip3 install opencv-python
-
-Install Pillow with:
-
-.. code-block:: python
-
-  pip3 install pillow
-
-Install scikit-image with:
-
-.. code-block:: python
-
-  pip3 install scikit-image
 
 Install PixelLib with:
 

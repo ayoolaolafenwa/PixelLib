@@ -1,10 +1,9 @@
-
-
 """
 Mask R-CNN
 Common utility functions and classes.
 Copyright (c) 2017 Matterport, Inc.
-Licensed under the MIT License 
+Licensed under the MIT License (see LICENSE for details)
+Written by Waleed Abdulla
 """
 
 import sys
@@ -22,8 +21,10 @@ import urllib.request
 import shutil
 import warnings
 from distutils.version import LooseVersion
+import cv2
 
-
+# URL from which to download the latest COCO trained weights
+COCO_MODEL_URL = "https://github.com/matterport/Mask_RCNN/releases/download/v2.0/mask_rcnn_coco.h5"
 
 
 ############################################################
@@ -104,6 +105,17 @@ def compute_overlaps_masks(masks1, masks2):
     # flatten masks and compute their areas
     masks1 = np.reshape(masks1 > .5, (-1, masks1.shape[-1])).astype(np.float32)
     masks2 = np.reshape(masks2 > .5, (-1, masks2.shape[-1])).astype(np.float32)
+    
+    #a, _= masks1.shape
+    #_,b = masks2.shape
+    #masks2 = cv2.resize(masks2, (b,a))
+    #x = np.arange(3).reshape(1,3)
+    #y = np.arange(3,6).reshape(1,3)
+
+    #masks1 = y.reshape(3,1)
+    #print("masks1:", masks1.shape)
+    #print("masks2:", masks2.shape)
+    #resize_mask()
     area1 = np.sum(masks1, axis=0)
     area2 = np.sum(masks2, axis=0)
 

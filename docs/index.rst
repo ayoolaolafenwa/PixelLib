@@ -31,7 +31,7 @@ Install PixelLib with:
 
 
 
-PixelLib supports the two major types of segmentation: 
+PixelLib supports the two major types of segmentation and you create a custom model by training your dataset with PixelLib: 
 
 1 **Semantic segmentation**:
 Objects in an image with the same pixel values are segmented with the same colormaps.
@@ -85,6 +85,15 @@ Instances of the same object are segmented with different color maps.
 :ref:`video_instance`
 
 
+3 **Implement instance segmentation and object detection on objects by training your dataset..
+
+.. image:: photos/cover.jpg
+
+
+**Inference With a custom model trained with PixelLib**
+
+
+
 
 .. toctree::
    :maxdepth: 4
@@ -96,6 +105,8 @@ Instances of the same object are segmented with different color maps.
    video_pascal.rst
    Image_instance.rst
    video_instance.rst
+   custom_train.rst
+   custom_inference.rst
    
    
 

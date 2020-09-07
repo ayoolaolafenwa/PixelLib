@@ -1,0 +1,332 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Inference with a custom model &mdash; PixelLib 0.3.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> PixelLib
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="image_ade20k.html"><strong>Semantic segmentation of images with PixelLib using Ade20k model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_ade20k.html"><strong>Semantic segmentation of videos with PixelLib using Ade20k model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_ade20k.html#segmentation-of-live-camera-with-ade20k-model"><strong>Segmentation of live camera with Ade20k model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Image_pascal.html"><strong>Semantic segmentation of images with PixelLib using Pascalvoc model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_pascal.html"><strong>Semantic Segmentation of videos with PixelLib using Pascalvoc model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_pascal.html#segmentation-of-live-camera-with-pascalvoc-model"><strong>Segmentation of live camera with pascalvoc model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Image_instance.html"><strong>Instance segmentation of images with PixelLib</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_instance.html"><strong>Instance segmentation of videos with PixelLib</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_instance.html#instance-segmentation-of-live-camera-with-mask-r-cnn"><strong>Instance Segmentation of Live Camera with Mask R-cnn.</strong></a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PixelLib</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li><strong>Inference with a custom model</strong></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/custom_inference.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="inference-with-a-custom-model">
+<span id="custom-inference"></span><h1><strong>Inference with a custom model</strong><a class="headerlink" href="#inference-with-a-custom-model" title="Permalink to this headline">¶</a></h1>
+<p>We have trained and evaluated the model, the next step is to see the performance of the model on unknown images.
+We are going to test the model on the classes we have trained it on. If you have not download the trained model, download it from
+<a class="reference external" href="https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.0.0/Nature_model_resnet101.h5">here</a>.</p>
+<p><strong>sample1.jpg</strong></p>
+<img alt="_images/butterfly.jpg" src="_images/butterfly.jpg" />
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">custom_segmentation</span>
+
+<span class="n">segment_image</span> <span class="o">=</span> <span class="n">custom_segmentation</span><span class="p">()</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">inferConfig</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">class_names</span><span class="o">=</span> <span class="p">[</span><span class="s2">&quot;BG&quot;</span><span class="p">,</span> <span class="s2">&quot;butterfly&quot;</span><span class="p">,</span> <span class="s2">&quot;squirrel&quot;</span><span class="p">])</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_model/Nature_model_resnet101.h5&quot;</span><span class="p">)</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">(</span><span class="s2">&quot;sample1.jpg&quot;</span><span class="p">,</span> <span class="n">show_bboxes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;sample_out.jpg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">custom_segmentation</span>
+<span class="n">segment_image</span> <span class="o">=</span><span class="n">custom_segmentation</span><span class="p">()</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">inferConfig</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">class_names</span><span class="o">=</span> <span class="p">[</span><span class="s2">&quot;BG&quot;</span><span class="p">,</span> <span class="s2">&quot;butterfly&quot;</span><span class="p">,</span> <span class="s2">&quot;squirrel&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>We imported the class custom_segmentation, the class for performing inference and created an instance of the class. We called the model configuration and introduced an extra parameter class_names.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">class_names</span><span class="o">=</span> <span class="p">[</span><span class="s2">&quot;BG&quot;</span><span class="p">,</span> <span class="s2">&quot;butterfly&quot;</span><span class="p">,</span> <span class="s2">&quot;squirrel&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><strong>class_names:</strong> It is a list containing  the names of classes the model is trained with. “BG”, it refers to the background of the image, it is the first class and must be available along the names of the classes.</p>
+<p><strong>Note:</strong> If you have multiple classes and you are confused of how to arrange the classes’s names according to their class ids, in your test.json in the dataset’s folder check the categories’ list.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="s2">&quot;images&quot;</span><span class="p">:</span> <span class="p">[</span>
+<span class="p">{</span>
+<span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="mi">205</span><span class="p">,</span>
+<span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="mi">246</span><span class="p">,</span>
+<span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="s2">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;C:</span><span class="se">\\</span><span class="s2">Users</span><span class="se">\\</span><span class="s2">olafe</span><span class="se">\\</span><span class="s2">Documents</span><span class="se">\\</span><span class="s2">Ayoola</span><span class="se">\\</span><span class="s2">PIXELLIB</span><span class="se">\\</span><span class="s2">Final</span><span class="se">\\</span><span class="s2">Nature</span><span class="se">\\</span><span class="s2">test</span><span class="se">\\</span><span class="s2">butterfly (1).png&quot;</span>
+<span class="p">},</span>
+<span class="p">],</span>
+<span class="s2">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span>
+<span class="p">{</span>
+<span class="s2">&quot;supercategory&quot;</span><span class="p">:</span> <span class="s2">&quot;butterfly&quot;</span><span class="p">,</span>
+<span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;butterfly&quot;</span>
+<span class="p">},</span>
+<span class="p">{</span>
+<span class="s2">&quot;supercategory&quot;</span><span class="p">:</span> <span class="s2">&quot;squirrel&quot;</span><span class="p">,</span>
+<span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+<span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;squirrel&quot;</span>
+<span class="p">}</span>
+<span class="p">],</span>
+</pre></div>
+</div>
+<p>You can observe from the sample of the directory of test.json above, after the images’s  list in your test.json is object categories’s list, the classes’s names are there with their corresponding class ids. Remember the first id “0” is kept in reserve for the background.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">segment_image</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_model/Nature_model_resnet101.h5)</span>
+
+<span class="n">segment_image</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">(</span><span class="s2">&quot;sample1.jpg&quot;</span><span class="p">,</span> <span class="n">show_bboxes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;sample_out.jpg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The custom model is loaded and we called the function to segment the image.</p>
+<img alt="_images/butterfly_seg.jpg" src="_images/butterfly_seg.jpg" />
+<p><strong>sample2.jpg</strong></p>
+<img alt="_images/squirrel.jpg" src="_images/squirrel.jpg" />
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">test_maskrcnn</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">(</span><span class="s2">&quot;sample2.jpg&quot;</span><span class="p">,</span><span class="n">show_bboxes</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;sample_out.jpg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/squirrel_seg.jpg" src="_images/squirrel_seg.jpg" />
+<p><em>WOW! We have successfully trained a custom model for performing instance segmentation and object detection on butterflies and squirrels.</em></p>
+<p>Video segmentation with a custom model.</p>
+<p><strong>sample_video1</strong></p>
+<p>We want to perform segmentation on the butterflies in this video.</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+    <iframe src = "https://www.youtube.com/embed/5-QWJH0U4cA",  frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+https://www.youtube.com/watch?v=5-QWJH0U4cA
+</div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">custom_segmentation</span>
+
+<span class="n">test_video</span> <span class="o">=</span> <span class="n">custom_segmentation</span><span class="p">()</span>
+<span class="n">test_video</span><span class="o">.</span><span class="n">inferConfig</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span>  <span class="mi">2</span><span class="p">,</span> <span class="n">class_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;BG&quot;</span><span class="p">,</span> <span class="s2">&quot;butterfly&quot;</span><span class="p">,</span> <span class="s2">&quot;squirrel&quot;</span><span class="p">])</span>
+<span class="n">test_video</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;Nature_model_resnet101&quot;</span><span class="p">)</span>
+<span class="n">test_video</span><span class="o">.</span><span class="n">process_video</span><span class="p">(</span><span class="s2">&quot;sample_video1.mp4&quot;</span><span class="p">,</span> <span class="n">show_bboxes</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>  <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;video_out.mp4&quot;</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">test_video</span><span class="o">.</span><span class="n">process_video</span><span class="p">(</span><span class="s2">&quot;video.mp4&quot;</span><span class="p">,</span> <span class="n">show_bboxes</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>  <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;video_out.mp4&quot;</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The function process_video is called to perform segmentation on objects in a video.</p>
+<p>It takes the following parameters:-</p>
+<p><strong>video_path:</strong> this is the path to the video file we want to segment.</p>
+<p><strong>frames_per_second:</strong>  this is the parameter used to set the number of frames per second for the saved video file. In this case it is set to 15 i.e the saved video file will have 15 frames per second.</p>
+<p><strong>output_video_name:</strong> this is the name of the saved segmented video. The output video will be saved in your current working directory.</p>
+<p><strong>Output_video</strong></p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+    <iframe src="https://www.youtube.com/embed/bWQGxaZIPOo" ,  frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+https://www.youtube.com/watch?v=bWQGxaZIPOo
+</div><p>A sample of another segmented video with our custom model.</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+    <iframe src="https://www.youtube.com/embed/VUnI9hefAQQ" ,  frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+https://www.youtube.com/watch?v=VUnI9hefAQQ&t=2s
+</div><p>You can perform live camera segmentation with your custom model making use of this code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">custom_segmentation</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+
+<span class="n">capture</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">segment_camera</span> <span class="o">=</span> <span class="n">custom_segmentation</span><span class="p">()</span>
+<span class="n">segment_camera</span><span class="o">.</span><span class="n">inferConfig</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">class_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;BG&quot;</span><span class="p">,</span> <span class="s2">&quot;butterfly&quot;</span><span class="p">,</span> <span class="s2">&quot;squirrel&quot;</span><span class="p">])</span>
+<span class="n">segment_camera</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;Nature_model_resnet101.h5&quot;</span><span class="p">)</span>
+<span class="n">segment_camera</span><span class="o">.</span><span class="n">process_camera</span><span class="p">(</span><span class="n">capture</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">show_frames</span><span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="n">frame_name</span><span class="o">=</span> <span class="s2">&quot;frame&quot;</span><span class="p">,</span> <span class="n">check_fps</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You will replace the process_video funtion with process_camera function.In the function, we replaced the video’s filepath to capture i.e we are processing a stream of frames captured by the camera instead of a video file. We added extra parameters for the purpose of showing the camera frames:</p>
+<p><strong>show_frames:</strong> this parameter handles the showing of segmented camera’s frames.</p>
+<p><strong>frame_name:</strong> this is the name given to the shown camera’s frame.</p>
+<p><strong>check_fps:</strong> You may want to check the number of frames processed, just set the parameter check_fps is true. It will print out the number of frames processed per second.</p>
+<p><strong>Process opencv’s frames</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">custom_segmentation</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+<span class="n">segment_frame</span> <span class="o">=</span> <span class="n">custom_segmentation</span><span class="p">()</span>
+<span class="n">segment_frame</span><span class="o">.</span><span class="n">inferConfig</span><span class="p">(</span><span class="n">network_backbone</span><span class="o">=</span><span class="s2">&quot;resnet101&quot;</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">class_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;BG&quot;</span><span class="p">,</span> <span class="s2">&quot;butterfly&quot;</span><span class="p">,</span> <span class="s2">&quot;squirrel&quot;</span><span class="p">])</span>
+<span class="n">segment_frame</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;Nature_model_resnet101.h5&quot;</span><span class="p">)</span>
+
+<span class="n">capture</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+ <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+   <span class="n">ret</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">capture</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+   <span class="n">segment_frame</span><span class="o">.</span><span class="n">segmentFrame</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+   <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s2">&quot;frame&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span>
+   <span class="k">if</span>  <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xff</span> <span class="o">==</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">):</span>
+      <span class="k">break</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Ayoola Olafenwa
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

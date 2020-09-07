@@ -1,13 +1,13 @@
 from setuptools import setup,find_packages
 
 setup(name= "pixellib",
-      version='0.2.1',
-      description='PixelLib is a library for performing semantic and instance segmentation of images and videos using few lines of code.',
+      version='0.3.0',
+      description='PixelLib is a library used for easy implementation of semantic and instance segmentation of objects in images and videos with few lines of code.PixelLib makes it possible to train a custom segmentation model using few lines of code ',
       url="https://github.com/ayoolaolafenwa/PixelLib",
       author='Ayoola Olafenwa',
       license='MIT',
       packages= find_packages(),
-      install_requires=['pillow','scikit-image','opencv-python'],
+      install_requires=['pillow','scikit-image','opencv-python','matplotlib','labelme2coco'],
       zip_safe=False,
       classifiers=[
         "Programming Language :: Python :: 3",
