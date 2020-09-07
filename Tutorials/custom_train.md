@@ -163,6 +163,7 @@ This is the training log it shows the network backbone used for training mask-rc
 Network Backbones:
 There are two network backbones for training mask-rcnn
 **1. Resnet101**
+
 **2. Resnet50** 
 
 Google colab: Google Colab provides a single 12GB NVIDIA Tesla K80 GPU that can be used up to 12 hours continuously.
@@ -266,6 +267,6 @@ mask_rcnn_models\mask_rcnn_model_058.h5 evaluation using iou_threshold 0.5 is 0.
 **Note:** Change the network_backbone to resnet50 if you are evaluating a resnet50 model.
 
 
-Visit [Google Colaboratory](https://colab.research.google.com/drive/1mvTeW-n0aP-QQ23ygS6pStMUMjoQtyEv?usp=sharing) set up for training a custom dataset.
+Visit [Google Colab's notebook](https://colab.research.google.com/drive/1mvTeW-n0aP-QQ23ygS6pStMUMjoQtyEv?usp=sharing) set up for training a custom dataset.
 
 Learn how how to perform inference with your custom model by reading this [tutorial](custom_inference.md)
