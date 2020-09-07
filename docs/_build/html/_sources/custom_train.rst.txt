@@ -286,7 +286,7 @@ Output log
 **Note:** Change the network_backbone to resnet50 if you are evaluating a resnet50 model.
 
 
-Visit `Google Colab's notebook <https://colab.research.google.com/drive/1mvTeW-n0aP-QQ23ygS6pStMUMjoQtyEv?authuser=1#scrollTo=WQv2mkZXt6Ym>`_ set up for training a custom dataset
+Visit `Google Colab's notebook <https://colab.research.google.com/drive/1LIhBcxF6TUQUQCMEXCRBuF4a7ycUmjuw?usp=sharing>`_ set up for training a custom dataset
 
 Learn how how to perform inference with your custom model by reading this `tutorial <https://pixellib.readthedocs.io/en/latest/custom_inference.html>`_
 
