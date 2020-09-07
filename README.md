@@ -13,19 +13,19 @@ Pixellib is a library for performing segmentation of objects in images and video
 
 Install PixelLib and its dependencies
 
-# Install Tensorflow:
+**Install Tensorflow**:
 
 Install latest version of tensorflow(Tensorflow 2.0+) with:
 
-**pip3 install tensorflow**
+*pip3 install tensorflow*
 
 If you have have a pc enabled GPU, Install tensorflow--gpu's version that is compatible with the cuda's version on your pc:
 
-**pip3 install tensorflow--gpu**
+*pip3 install tensorflow--gpu*
 
 
-## Install Pixellib with:
-**pip3 install pixellib**
+**Install Pixellib with**:
+*pip3 install pixellib*
 
 **Visit PixelLib's official documentation on** [readthedocs](https://pixellib.readthedocs.io/en/latest/)
 
@@ -75,15 +75,14 @@ Learn how to implement state of the art instance segmentation of objects with Ma
 ## [Instance Segmentation of Videos With PixelLib Using Mask-RCNN COCO Model](Tutorials/video_instance.md)
 Implement state of the art instance segmentation of objects in video's feeds with Mask-RCNN model using 5 Lines of Code.
 
+![alt_train](instance_mask/squirrel_seg.jpg)
+
 ## [Custom Instance Segmentation Training](Tutorials/custom_train.md)
 Perform instance segmentation on objects with your custom model with 7 Lines of Code.
 
-![alt_train](instance_mask/squirrel_seg.jpg)
-
-
+![alt_infer(instance_mask/but_vid.png)](https://www.youtube.com/watch?v=bWQGxaZIPOo)
 ## [Instance Segmentation of objects in images and videos With A Custom Model](Tutorials/custom_train.md)
 
-![alt_infer](instance_mask/but_vid.png)
 Perform inference on objects with your custom model.
 
 ![alt_test1](Images/ade_cover.jpg)
