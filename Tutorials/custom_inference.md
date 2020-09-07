@@ -1,7 +1,7 @@
 # Inference with a custom model
 
 We have trained and evaluated the model, the next step is to see the performance of the model on unknown images. 
-We are going to test the model on the classes we have trained it on.
+We are going to test the model on the classes we have trained it on. If you are yet to download the nature's model trained on Nature dataset download it from [here](https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.0.0/Nature_model_resnet101.h5)
 
 *sample1.jpg*
 

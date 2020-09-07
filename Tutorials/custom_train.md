@@ -7,7 +7,7 @@ Implement custom training on your own dataset using PixelLib's Library. In just 
 Our goal is to create a model that can perform instance segmentation and object detection on butterflies and squirrels.
 Collect images for the objects you want to detect and annotate your dataset for custom training. Labelme is the tool employed to perform polygon annotation of objects. Create a root directory or folder and within it create train and test folder. Separate the images required for training (a minimum of 300) and test.Put the images you want to use for training in the train folder and put the images you want to use for testing in the test folder. You will annotate both images in the train and test folder. Download [Nature's dataset](https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.0.0/Nature.zip) used as a sample dataset in this article, unzip it to extract the images' folder. This dataset will serve as a guide for you to know how to organize your images.Ensure that the format of the directory of your own dataset directory is not different from it. Nature is a dataset with two categories butterfly and squirrel. There is 300 images for each class for training and 100 images for each class for testing i.e 600 images for training and 200 images for validation. Nature is a dataset with 800 images. 
 
-## Labelme annotation tool is employed to perform polygon annotation of objects, read the tutorial here on how to annotate objects with Labelme. 
+## Labelme annotation tool is employed to perform polygon annotation of objects, read this article on [medium](https://medium.com/@olafenwaayoola/image-annotation-with-labelme-81687ac2d077) on how to annotate objects with Labelme. 
 
 ``` 
 Nature >>train>>>>>>>>>>>> image1.jpg
@@ -204,7 +204,7 @@ It shows that we are using *resnet50* for training.
  
 # Model Evaluation
 
-When we are done with training we should evaluate models with lowest validation losses. Model evaluation is used to access the performance of the trained model on the test dataset. Download the trained model from [here](https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.0.0/Nature_model_resnet101.h5). 
+When we are done with training we should evaluate models with lowest validation losses. Model evaluation is used to access the performance of the trained model on the test dataset.The model trained on Nature dataset and the dataset are available on the [release](https://github.com/ayoolaolafenwa/PixelLib/releases) of this github's repository. Download the trained model from [here](https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.0.0/Nature_model_resnet101.h5). 
 
 ```python
   
