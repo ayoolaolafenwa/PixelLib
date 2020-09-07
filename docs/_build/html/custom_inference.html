@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Inference with a custom model &mdash; PixelLib 0.3.0 documentation</title>
+  <title>Inference With A Custom Model &mdash; PixelLib 0.3.0 documentation</title>
   
 
   
@@ -34,7 +34,8 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Custom Training With PixelLib" href="custom_train.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -79,7 +80,7 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="image_ade20k.html"><strong>Semantic segmentation of images with PixelLib using Ade20k model</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="video_ade20k.html"><strong>Semantic segmentation of videos with PixelLib using Ade20k model</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="video_ade20k.html#segmentation-of-live-camera-with-ade20k-model"><strong>Segmentation of live camera with Ade20k model</strong></a></li>
@@ -89,6 +90,8 @@
 <li class="toctree-l1"><a class="reference internal" href="Image_instance.html"><strong>Instance segmentation of images with PixelLib</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="video_instance.html"><strong>Instance segmentation of videos with PixelLib</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="video_instance.html#instance-segmentation-of-live-camera-with-mask-r-cnn"><strong>Instance Segmentation of Live Camera with Mask R-cnn.</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_train.html"><strong>Custom Training With PixelLib</strong></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><strong>Inference With A Custom Model</strong></a></li>
 </ul>
 
             
@@ -134,7 +137,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li><strong>Inference with a custom model</strong></li>
+      <li><strong>Inference With A Custom Model</strong></li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -154,7 +157,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="inference-with-a-custom-model">
-<span id="custom-inference"></span><h1><strong>Inference with a custom model</strong><a class="headerlink" href="#inference-with-a-custom-model" title="Permalink to this headline">¶</a></h1>
+<span id="custom-inference"></span><h1><strong>Inference With A Custom Model</strong><a class="headerlink" href="#inference-with-a-custom-model" title="Permalink to this headline">¶</a></h1>
 <p>We have trained and evaluated the model, the next step is to see the performance of the model on unknown images.
 We are going to test the model on the classes we have trained it on. If you have not download the trained model, download it from
 <a class="reference external" href="https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.0.0/Nature_model_resnet101.h5">here</a>.</p>
@@ -165,7 +168,7 @@ We are going to test the model on the classes we have trained it on. If you have
 
 <span class="n">segment_image</span> <span class="o">=</span> <span class="n">custom_segmentation</span><span class="p">()</span>
 <span class="n">segment_image</span><span class="o">.</span><span class="n">inferConfig</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">class_names</span><span class="o">=</span> <span class="p">[</span><span class="s2">&quot;BG&quot;</span><span class="p">,</span> <span class="s2">&quot;butterfly&quot;</span><span class="p">,</span> <span class="s2">&quot;squirrel&quot;</span><span class="p">])</span>
-<span class="n">segment_image</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_model/Nature_model_resnet101.h5&quot;</span><span class="p">)</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_models/Nature_model_resnet101.h5&quot;</span><span class="p">)</span>
 <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">(</span><span class="s2">&quot;sample1.jpg&quot;</span><span class="p">,</span> <span class="n">show_bboxes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;sample_out.jpg&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -294,6 +297,13 @@ https://www.youtube.com/watch?v=VUnI9hefAQQ&t=2s
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="custom_train.html" class="btn btn-neutral float-left" title="Custom Training With PixelLib" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

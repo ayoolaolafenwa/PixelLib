@@ -89,6 +89,8 @@ Instances of the same object are segmented with different color maps.
 
 .. image:: photos/cover.jpg
 
+:ref:`custom_train`
+
 
 **Inference With A Custom Model Trained With PixelLib**
 
@@ -98,6 +100,8 @@ Instances of the same object are segmented with different color maps.
         <iframe src="https://www.youtube.com/embed/bWQGxaZIPOo" ,  frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
     https://www.youtube.com/watch?v=bWQGxaZIPOo
     </div>
+
+:ref:`custom_inference`
 
 
 

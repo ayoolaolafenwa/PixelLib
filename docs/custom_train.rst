@@ -288,5 +288,5 @@ Output log
 
 Visit Google Colaboratory set up for training a custom dataset
 
-Learn how how to perform inference with your custom model by reading `this <https://pixellib.readthedocs.io/en/latest/custom_inference.html>_`
+Learn how how to perform inference with your custom model by reading this `tutorial <https://pixellib.readthedocs.io/en/latest/custom_inference.html>`_
 
