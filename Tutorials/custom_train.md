@@ -169,7 +169,7 @@ Google colab: Google Colab provides a single 12GB NVIDIA Tesla K80 GPU that can 
 
 **Using Resnet101:** Training Mask-RCNN consumes alot of memory. On google colab using resnet101 as network backbone you will be able to train with a batchsize of 4. The default network backbone is resnet101. Resnet101 is used as a default backbone because it appears to reach a lower validation loss during training faster than resnet50. It also works better for a dataset with multiple classes and much more images.
 
-**Using Resnet50:** The advantage with resnet50 is that it consumes lesser memory, you can use a batch_size of 8 on google colab.
+**Using Resnet50:** The advantage with resnet50 is that it consumes lesser memory, you can use a batch_size of 6 or 8 on google colab depending on how colab randomly allocates gpu. 
 The modified code supporting resnet50 will be like this.
 
 
@@ -181,14 +181,14 @@ Full code
    from pixellib.custom_train import instance_custom_training
 
    train_maskrcnn = instance_custom_training()
-   train_maskrcnn.modelConfig(network_backbone = "resnet50", num_classes= 2, batch_size = 8)
+   train_maskrcnn.modelConfig(network_backbone = "resnet50", num_classes= 2, batch_size = 6)
    train_maskrcnn.load_pretrained_model("mask_rcnn_coco.h5")
    train_maskrcnn.load_dataset("Nature")
    train_maskrcnn.train_model(num_epochs = 300, augmentation=True, path_trained_models = "mask_rcnn_models")
 ```
 
 
-The main differences from the original code is that in the model configuration function we set network_backbone to be *resnet50* and changed the batch size to 8.
+The main differences from the original code is that in the model configuration function we set network_backbone to be *resnet50* and changed the batch size to 6.
 
 
 The only difference in the training log is this:

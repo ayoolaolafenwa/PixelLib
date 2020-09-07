@@ -277,20 +277,20 @@ There are two network backbones for training mask-rcnn</p>
 <p><strong>2. Resnet50</strong></p>
 <p><strong>Google colab:</strong> Google Colab provides a single 12GB NVIDIA Tesla K80 GPU that can be used up to 12 hours continuously.</p>
 <p><strong>Using Resnet101:</strong> Training Mask-RCNN consumes alot of memory. On google colab using resnet101 as network backbone you will be able to train with a batchsize of 4. The default network backbone is resnet101. Resnet101 is used as a default backbone because it appears to reach a lower validation loss during training faster than resnet50. It also works better for a dataset with multiple classes and much more images.</p>
-<p><strong>Using Resnet50:</strong> The advantage with resnet50 is that it consumes lesser memory, you can use a batch_size of 8 on google colab.
+<p><strong>Using Resnet50:</strong> The advantage with resnet50 is that it consumes lesser memory, you can use a batch_size of 6 0r 8 on google colab depending on how colab randomly allocates gpu.
 The modified code supporting resnet50 will be like this.</p>
 <p>Full code</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.custom_train</span> <span class="kn">import</span> <span class="n">instance_custom_training</span>
 
 <span class="n">train_maskrcnn</span> <span class="o">=</span> <span class="n">instance_custom_training</span><span class="p">()</span>
-<span class="n">train_maskrcnn</span><span class="o">.</span><span class="n">modelConfig</span><span class="p">(</span><span class="n">network_backbone</span> <span class="o">=</span> <span class="s2">&quot;resnet50&quot;</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">train_maskrcnn</span><span class="o">.</span><span class="n">modelConfig</span><span class="p">(</span><span class="n">network_backbone</span> <span class="o">=</span> <span class="s2">&quot;resnet50&quot;</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">6</span><span class="p">)</span>
 <span class="n">train_maskrcnn</span><span class="o">.</span><span class="n">load_pretrained_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_coco.h5&quot;</span><span class="p">)</span>
 <span class="n">train_maskrcnn</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;Nature&quot;</span><span class="p">)</span>
 <span class="n">train_maskrcnn</span><span class="o">.</span><span class="n">train_model</span><span class="p">(</span><span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">300</span><span class="p">,</span> <span class="n">augmentation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">path_trained_models</span> <span class="o">=</span> <span class="s2">&quot;mask_rcnn_models&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The main differences from the original code is that in the model configuration function we set network_backbone to be <em>resnet50</em> and changed the batch size to 8.</p>
+<p>The main differences from the original code is that in the model configuration function we set network_backbone to be <em>resnet50</em> and changed the batch size to 6.</p>
 <p>The only difference in the training log is this:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Using</span> <span class="n">resnet50</span> <span class="k">as</span> <span class="n">network</span> <span class="n">backbone</span> <span class="n">For</span> <span class="n">Mask</span> <span class="n">R</span><span class="o">-</span><span class="n">CNN</span> <span class="n">model</span>
 </pre></div>
@@ -346,7 +346,7 @@ Download the trained model from <a class="reference external" href="https://gith
 </pre></div>
 </div>
 <p><strong>Note:</strong> Change the network_backbone to resnet50 if you are evaluating a resnet50 model.</p>
-<p>Visit Google Colaboratory set up for training a custom dataset</p>
+<p>Visit <a class="reference external" href="https://colab.research.google.com/drive/1mvTeW-n0aP-QQ23ygS6pStMUMjoQtyEv?authuser=1#scrollTo=WQv2mkZXt6Ym">Google Colaboratory</a> set up for training a custom dataset</p>
 <p>Learn how how to perform inference with your custom model by reading this <a class="reference external" href="https://pixellib.readthedocs.io/en/latest/custom_inference.html">tutorial</a></p>
 </div>
 
