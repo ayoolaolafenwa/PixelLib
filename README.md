@@ -43,11 +43,11 @@ There are two types of Deeplabv3+ models available for performing **semantic seg
 **The latest version of PixelLib supports custom training of object segmentation models using pretrained coco model.**
 
 
-* [Instance Segmentation of Images With PixelLib Using Mask-RCNN COCO Model](##Instance Segmentation of Images With PixelLib Using Mask-RCNN COCO Model)
+* [Instance Segmentation of Images With PixelLib Using Mask-RCNN COCO Model](#Instance-Segmentation-of-Images-With-PixelLib-Using-Mask-RCNN-COCO-Model)
 
 * [Instance Segmentation of Videos With PixelLib Using Mask-RCNN COCO Model](##Instance Segmentation of Videos With PixelLib Using Mask-RCNN COCO Model)
 
-* [Custom Instance Segmentation Training](##Custom Instance Segmentation Training)
+* [Custom Instance Segmentation Training] (##Custom Instance Segmentation Training)
 
 
 **Note** Deeplab and mask r-ccn models are available  in the [release](https://github.com/ayoolaolafenwa/PixelLib/releases) of this repository.
@@ -74,7 +74,7 @@ Perform instance segmentation on objects with your custom model with 7 Lines of 
 ## [Instance Segmentation of objects in images and videos With Custom Model](Tutorials/custom_train.md)
 
 ![alt_infer](instance_mask/but_vid.png)
-
+Perform inference on objects with your custom model.
 
 ![alt_test1](Images/ade_cover.jpg)
 ## [Semantic Segmentation of Images With PixelLib Using Ade20k model](Tutorials/image_ade20k.md)
