@@ -22,6 +22,11 @@ Install  the latest version of tensorflow(Tensorflow 2.0+) with:
 
   pip3 install tensorflow
 
+Install imgaug with:
+
+.. code-block:: python
+
+  pip3 install imgaug
 
 Install PixelLib with:
 

@@ -24,9 +24,11 @@ If you have have a pc enabled GPU, Install tensorflow--gpu's version that is com
 
 *pip3 install tensorflow--gpu*
 
+**Install imgaug with**:
+*pip3 install imgaug*
 
 **Install Pixellib with**:
-*pip3 install pixellib*
+*pip3 install pixellib --upgrade*
 
 **Visit PixelLib's official documentation on** [readthedocs](https://pixellib.readthedocs.io/en/latest/)
 
