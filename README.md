@@ -161,6 +161,7 @@ Implement state of the art semantic segmentation of 20 unique objects in video's
 
 2. PixelLib is integerated in drone's cameras to perform instance segmentation of live video's feeds https://elbruno.com/2020/05/21/coding4fun-how-to-control-your-drone-with-20-lines-of-code-20-n/?utm_source=twitter&utm_medium=social&utm_campaign=tweepsmap-Default
 
+3. PixelLib is used to find similar contents in images for image recommendation https://github.com/lukoucky/image_recommendation
 
 
 ## References
