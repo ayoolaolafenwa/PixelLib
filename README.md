@@ -47,6 +47,8 @@ There are two types of Deeplabv3+ models available for performing **semantic seg
 
 **The latest version of PixelLib supports custom training of object segmentation models using pretrained coco model.**
 
+**Note:** PixelLib supports annotation with Labelme. If you make use of another annotation tool it will not be compatible with the library. Read this [tutorial](https://medium.com/@olafenwaayoola/image-annotation-with-labelme-81687ac2d077) on image annotation with Labelme.
+
 
 * [Instance Segmentation of Images With PixelLib Using Mask-RCNN COCO Model](#Instance-Segmentation-of-Images-With-PixelLib-Using-Mask-RCNN-COCO-Model)
 
