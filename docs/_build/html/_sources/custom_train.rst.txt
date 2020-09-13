@@ -20,7 +20,7 @@ Ensure that the format of the directory of your own dataset directory is not dif
 Read this article on `medium <https://medium.com/@olafenwaayoola/image-annotation-with-labelme-81687ac2d077>`_ and learn how to annotate objects with *Labelme*. 
 
 **Note:**
-Use labelme for annotation of objects. If use a different annotation tool it will not be compatible with the library.
+Use labelme for annotation of objects. If you use a different annotation tool it will not be compatible with the library.
 
 .. code-block:: python
    
