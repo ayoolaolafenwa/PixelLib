@@ -1,0 +1,8 @@
+numpy 
+scipy
+opencv-python
+scikit-image
+tensorflow(2.0 and above)
+imgaug
+matplotlib
+labelme2coco
