@@ -7,7 +7,7 @@ setup(name= "pixellib",
       author='Ayoola Olafenwa',
       license='MIT',
       packages= find_packages(),
-      install_requires=['pillow','scikit-image','opencv-python','matplotlib','labelme2coco'],
+      install_requires=['pillow','scikit-image','opencv-python','matplotlib','imgaug', 'labelme2coco'],
       zip_safe=False,
       classifiers=[
         "Programming Language :: Python :: 3",

@@ -1,4 +1,5 @@
 numpy 
+pillow
 scipy
 opencv-python
 scikit-image

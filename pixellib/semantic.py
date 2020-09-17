@@ -25,10 +25,16 @@ class semantic_segmentation():
     trained_image_width=512
     mean_subtraction_value=127.5
     image = np.array(Image.open(image_path))     
-    image_overlay = image.copy()
+   
 
     # resize to max dimension of images from training dataset
-    w, h, _ = image.shape
+    w, h, n = image.shape
+
+    if n > 3:
+      image = cv2.cvtColor(image, cv2.COLOR_BGRA2RGB)
+    
+    image_overlay = image.copy()
+
     ratio = float(trained_image_width) / np.max([w, h])
     resized_image = np.array(Image.fromarray(image.astype('uint8')).resize((int(ratio * h), int(ratio * w))))
     resized_image = (resized_image / mean_subtraction_value) -1
@@ -86,10 +92,15 @@ class semantic_segmentation():
     trained_image_width=512
     mean_subtraction_value=127.5
     image = np.array(Image.open(image_path))     
+    
+    # resize to max dimension of images from training dataset
+    w, h, n = image.shape
+
+    if n > 3:
+      image = cv2.cvtColor(image, cv2.COLOR_BGRA2RGB)
+    
     image_overlay = image.copy()
 
-    # resize to max dimension of images from training dataset
-    w, h, _ = image.shape
     ratio = float(trained_image_width) / np.max([w, h])
     resized_image = np.array(Image.fromarray(image.astype('uint8')).resize((int(ratio * h), int(ratio * w))))
     resized_image = (resized_image / mean_subtraction_value) -1
