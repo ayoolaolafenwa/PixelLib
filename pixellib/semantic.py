@@ -847,6 +847,22 @@ def create_pascal_label_colormap():
   return colormap
 
 
+def obtain_segmentation(image, nc = 21):
+    colors = create_pascal_label_colormap()
+    r = np.zeros_like(image).astype(np.uint8)
+    g = np.zeros_like(image).astype(np.uint8)
+    b = np.zeros_like(image).astype(np.uint8)
+    
+    for a in range(0,nc):
+        index = image == a
+        r[index] = colors[a, 0]
+        g[index] = colors[a, 1]
+        b[index] = colors[a, 2]
+        rgb = np.stack([r,g,b], axis = 2)  
+
+    return rgb  
+
+
 def labelP_to_color_image(label):
   """Adds color defined by the dataset colormap to the label.
 
