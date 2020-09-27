@@ -3,8 +3,7 @@
 
 [![Downloads](https://pepy.tech/badge/pixellib)](https://pepy.tech/project/pixellib)  [![Downloads](https://pepy.tech/badge/pixellib/month)](https://pepy.tech/project/pixellib/month)  [![Downloads](https://pepy.tech/badge/pixellib/week)](https://pepy.tech/project/pixellib/week)
 
-## Update: 
-The latest version of PixelLib now supports background editing in images and videos in just five lines of code.
+## Update: **The latest version of PixelLib now supports background editing in images and videos in just five lines of code.**
 
 
 Pixellib is a library for performing segmentation of objects in images and videos. It supports the two major types of image segmentation: 
@@ -59,7 +58,7 @@ The following features are supported for background editing,
 
 
 
-You can implement both semantic and instance segmentation with few lines of code.
+## Implement both semantic and instance segmentation with few lines of code.
 
 There are two types of Deeplabv3+ models available for performing **semantic segmentation** with PixelLib:
 
