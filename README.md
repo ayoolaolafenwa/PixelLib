@@ -54,7 +54,7 @@ The following features are supported for background editing,
 
 
 ## [Implement background editing in videos with five lines of code](Tutorials/change_video_bg.md).
-![alt_bg1](Images/wh.png)
+[![alt_bg1](Images/wh.png)](https://www.youtube.com/watch?v=EoG00wQ4MYc)
 
 
 
