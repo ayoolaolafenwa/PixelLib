@@ -141,7 +141,7 @@ Implement background editing in images and videos using five lines of code. Thes
 
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 6
    :caption: Contents:
    
    image_ade20k.rst
