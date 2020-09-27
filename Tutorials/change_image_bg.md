@@ -62,7 +62,7 @@ It takes the following parameter:
 
 **Output Image**
 
-![alt3](Images/p1_img.jpg)
+![alt3](Images/img.jpg)
 
 Wow! We have successfully changed the background of our image.
 
@@ -89,55 +89,9 @@ The function *color_bg* takes the parameter *colors* and we provided the RGB val
 
 **Colored Image**
 
-![alt4](Images/p1_white.jpg)
+![alt4](Images/colored.jpg)
 
 *Note*: You can assign any color to the background of your image, just provide the RGB value of the color.
-
-## Blur the background of an image
-
-![alt_sam2](Images/p2.jpg)
-
-You can also apply the effect of bluring the background of your image. You can also varry the degree of the burriness of the background.
-
-``` python
-change_bg.blur_bg("sample.jpg", low = True, output_image_name="blur_img.jpg")
-```
-We called the function *blur_bg* to blur the background of the image and we set the degree of blurriness to low. 
-
-**blur_low**
-
-![alt5](Images/low.jpg)
-
-
-``` python
-change_bg.blur_bg("sample.jpg", moderate = True, output_image_name="blur_img.jpg")
-```
-We want to moderately blur the background of the image, we set *moderate* to *true*.
-
-**blur_moderate**
-
-![alt6](Images/moderate.jpg)
-
-
-``` python
-change_bg.blur_bg("sample.jpg", extreme = True, output_image_name="blur_img.jpg")
-```
-We deeply blurred the image, we set *extreme* to *true*.
-
-**blur_extreme**
-
-![alt7](Images/extreme.jpg)
-
-
-*Full code*
-```python
-import pixellib
-from pixellib.tune_bg import alter_bg
-
-change_bg = alter_bg()
-change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
-change_bg.blur_bg("sample.jpg", moderate = True, output_image_name="blur_img.jpg")
-```
 
 
 ## Grayscale the background of an image
@@ -160,6 +114,55 @@ It is still the same code except we called the function *gray_bg* to grayscale t
 **Output Image**
 
 ![alt7](Images/gray.jpg)
+
+## Blur the background of an image
+
+**sample2.jpg**
+![alt_sam2](Images/p2.jpg)
+
+You can also apply the effect of bluring the background of your image. You can also varry the degree of the burriness of the background.
+
+``` python
+change_bg.blur_bg("sample2.jpg", low = True, output_image_name="blur_img.jpg")
+```
+We called the function *blur_bg* to blur the background of the image and we set the degree of blurriness to low. 
+
+**blur_low**
+
+![alt5](Images/low.jpg)
+
+
+``` python
+change_bg.blur_bg("sample2.jpg", moderate = True, output_image_name="blur_img.jpg")
+```
+We want to moderately blur the background of the image, we set *moderate* to *true*.
+
+**blur_moderate**
+
+![alt6](Images/moderate.jpg)
+
+
+``` python
+change_bg.blur_bg("sample2.jpg", extreme = True, output_image_name="blur_img.jpg")
+```
+We deeply blurred the image, we set *extreme* to *true*.
+
+**blur_extreme**
+
+![alt7](Images/extreme.jpg)
+
+
+*Full code*
+```python
+import pixellib
+from pixellib.tune_bg import alter_bg
+
+change_bg = alter_bg()
+change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
+change_bg.blur_bg("sample2.jpg", moderate = True, output_image_name="blur_img.jpg")
+```
+
+
 
 ## Obtain output arrays
 
