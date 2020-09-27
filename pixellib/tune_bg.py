@@ -246,13 +246,13 @@ class alter_bg():
     ori_img = cv2.imread(image_path)
 
     if low == True:
-        blur_img = cv2.GaussianBlur(ori_img, (9,9), 0)
+        blur_img = cv2.blur(ori_img, (21,21), 0)
 
     if moderate == True:
-        blur_img = cv2.GaussianBlur(ori_img, (21,21), 0)
+        blur_img = cv2.blur(ori_img, (39,39), 0)
 
     if extreme == True:
-        blur_img = cv2.GaussianBlur(ori_img, (51,51), 0)
+        blur_img = cv2.blur(ori_img, (81,81), 0)
 
     out = np.where(seg_image[1], ori_img, blur_img)
     
@@ -273,13 +273,13 @@ class alter_bg():
     
 
     if low == True:
-        blur_frame = cv2.GaussianBlur(frame, (9,9), 0)
+        blur_frame = cv2.blur(frame, (21,21), 0)
 
     if moderate == True:
-        blur_frame = cv2.GaussianBlur(frame, (21,21), 0)
+        blur_frame = cv2.blur(frame, (39,39), 0)
 
     if extreme == True:
-        blur_frame = cv2.GaussianBlur(frame, (51,51), 0)
+        blur_frame = cv2.blur(frame, (81,81), 0)
 
     result = np.where(seg_frame[1], frame, blur_frame)
 
@@ -308,13 +308,13 @@ class alter_bg():
     
 
             if low == True:
-                blur_frame = cv2.GaussianBlur(frame, (9,9), 0)
+                blur_frame = cv2.blur(frame, (21,21), 0)
 
             if moderate == True:
-                blur_frame = cv2.GaussianBlur(frame, (21,21), 0)
+                blur_frame = cv2.blur(frame, (39,39), 0)
 
             if extreme == True:
-                blur_frame = cv2.GaussianBlur(frame, (51,51), 0)
+                blur_frame = cv2.blur(frame, (81,81), 0)
 
             out = np.where(seg_frame[1], frame, blur_frame)
             
@@ -360,13 +360,13 @@ class alter_bg():
     
 
             if low == True:
-                blur_frame = cv2.GaussianBlur(frame, (9,9), 0)
+                blur_frame = cv2.blur(frame, (21,21), 0)
 
             if moderate == True:
-                blur_frame = cv2.GaussianBlur(frame, (21,21), 0)
+                blur_frame = cv2.blur(frame, (39,39), 0)
 
             if extreme == True:
-                blur_frame = cv2.GaussianBlur(frame, (51,51), 0)
+                blur_frame = cv2.blur(frame, (81,81), 0)
 
             out = np.where(seg_frame[1], frame, blur_frame)  
             output = cv2.resize(out, (width,height), interpolation=cv2.INTER_AREA)

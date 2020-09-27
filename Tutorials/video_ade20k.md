@@ -40,7 +40,7 @@ We called the function to load the xception model trained on ade20k.
   segment_video.process_video_ade20k("video_path", frames_per_second= 15, output_video_name="path_to_output_video")  
 ```
 
-This is the line of code that performs segmentation on an image and the segmentation is done in the ade20k's color format. This function takes in two parameters:
+This is the line of code that performs segmentation on the video and the segmentation is done in the ade20k's color format. This function takes in two parameters:
 
 **video_path:** the path to the video file we want to perform segmentation on.
 

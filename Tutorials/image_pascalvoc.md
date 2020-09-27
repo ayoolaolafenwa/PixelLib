@@ -87,7 +87,7 @@ from pixellib.semantic import semantic_segmentation
 import time
 
 segment_image = semantic_segmentation()
-segment_image.load_pascalvoc_model("pascal.h5")
+segment_image.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
 
 start = time.time()
 segment_image.segmentAsPascalvoc("sample1.jpg", output_image_name= "image_new.jpg")
@@ -119,7 +119,7 @@ segmap, output = segment_image.segmentAsPascalvoc()
   import cv2
 
   segment_image = semantic_segmentation()
-  segment_image.load_pascalvoc_model("pascal.h5")
+  segment_image.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
   segmap, output = segment_image.segmentAsPascalvoc("sample1.jpg")
   cv2.imwrite("img.jpg", output)
   print(output.shape)
@@ -138,7 +138,7 @@ segmap, output = segment_image.segmentAsPascalvoc()
   import cv2
 
   segment_image = semantic_segmentation()
-  segment_image.load_pascalvoc_model("pascal.h5")
+  segment_image.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
   segmap, segoverlay = segment_image.segmentAsPascalvoc("sample1.jpg", overlay= True)
   cv2.imwrite("img.jpg", segoverlay)
   print(segoverlay.shape)
