@@ -62,7 +62,7 @@ It takes the following parameter:
 
 **Output Image**
 
-![alt3](Images/p1_img)
+![alt3](Images/p1_img.jpg)
 
 Wow! We have successfully changed the background of our image.
 

@@ -104,7 +104,7 @@ It is still the same code except we called the function *color_video* to give th
 
 **Output Video**
 
-![[alt_vid3](Images/wh.png)]()
+[![alt_vid3](Images/wh.png)](https://www.youtube.com/watch?v=EoG00wQ4MYc)
 
 ## Color the Background of Camera's Feeds
 
@@ -148,7 +148,7 @@ We are still using the same code but called a different function *gray_video* to
 
 **Output Video**
 
-![[alt_vid4](Images/gr.png)](https://www.youtube.com/watch?v=NUa2L6skk0I)
+[![alt_vid4](Images/gr.png)](https://www.youtube.com/watch?v=NUa2L6skk0I)
 
 
 ## Grayscale the Background of Camera's Feeds
