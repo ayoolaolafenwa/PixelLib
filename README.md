@@ -3,6 +3,8 @@
 
 [![Downloads](https://pepy.tech/badge/pixellib)](https://pepy.tech/project/pixellib)  [![Downloads](https://pepy.tech/badge/pixellib/month)](https://pepy.tech/project/pixellib/month)  [![Downloads](https://pepy.tech/badge/pixellib/week)](https://pepy.tech/project/pixellib/week)
 
+## Update: 
+The latest version of PixelLib now supports background editing in images and videos in just five lines of code.
 
 
 Pixellib is a library for performing segmentation of objects in images and videos. It supports the two major types of image segmentation: 
@@ -33,6 +35,27 @@ If you have have a pc enabled GPU, Install tensorflow--gpu's version that is com
 *pip3 install pixellib --upgrade*
 
 **Visit PixelLib's official documentation on** [readthedocs](https://pixellib.readthedocs.io/en/latest/)
+
+
+## Perform background editing in images and videos:
+The following features are supported for background editing,
+
+**1.Change image background with  picture**
+
+**2.Assign a distinct color to the background of an image and a video**
+
+**3.Blur the background of an image and a video**
+
+**4.Grayscale the background of an image and a video**
+
+# Read this tutorial on background editing.
+
+## [Implement background editing in images with five lines of code](Tutorials/change_image_bg.md).
+![alt_bg1](Images/bg_cover.jpg)
+
+
+## [Implement background editing in videos with five lines of code](Tutorials/change_video_bg.md).
+![alt_bg1](Images/wh.png)
 
 
 
