@@ -33,15 +33,25 @@ change_bg.blur_video("sample_video.mp4", moderate = True, frames_per_second=15, 
 
 **Line 1-4**: We imported pixellib and from pixellib we imported in the class *alter_bg*. Instance of the class is created and we finally loaded the deeplabv3+ model. Download deeplabv3+ pascalvoc model from [here](https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.1/deeplabv3_xception_tf_dim_ordering_tf_kernels.h5)
 
+There are three parameters that control the degree in which the background is blurred.
+
+*low* When it is set to true the background is blurred slightly.
+
+*moderate* When it is set to true the background is moderately blurred.
+
+*extreme* When it is set to true the background is deeply blurred.
+
 ```python
 change_bg.blur_video("sample_video.mp4", moderate = True, frames_per_second=15, output_video_name="blur_video.mp4")
 ```
 
-This is the line of code that blurs the video. This function takes in four parameters:
+This is the line of code that blurs the video's background. This function takes in four parameters:
 
 **video_path:** the path to the video file we want to blur.
 
-**frames_per_second:** this is parameter to set the number of frames per second for the output video file. In this case it is set to 15 i.e the saved video file will have 15 frames per second.
+**moderate:** it is set to true and the background of the video would be moderatly blurred.
+
+**frames_per_second:** this is the parameter to set the number of frames per second for the output video file. In this case it is set to 15 i.e the saved video file will have 15 frames per second.
 
 **output_video_name:** the saved video. The output video will be saved in your current working directory.
 
@@ -125,7 +135,7 @@ change_bg.color_camera(capture, frames_per_second=15,colors = (255, 255, 255), s
 output_video_name="output_video.mp4")
 ```
 
-It is similar to the code we used to blur camera frames. The only difference is that we called the function *color_camera*. We performed the same routine, replaced the video filepath to capture and added the same parameters. 
+It is similar to the code we used to blur camera's frames. The only difference is that we called the function *color_camera*. We performed the same routine, replaced the video filepath to capture and added the same parameters. 
 
 
 ## Grayscale Video Background
@@ -164,6 +174,6 @@ change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5
 change_bg.gray_camera(capture, frames_per_second=15, show_frames = True, frame_name = "Ayo", check_fps = True,
 output_video_name="output_video.mp4")
 ```
-It is similar to the code we used to color camera frames. The only difference is that we called the function *gray_camera*. We performed the same routine, replaced the video filepath to capture and added the same parameters. 
+It is similar to the code we used to color camera's frames. The only difference is that we called the function *gray_camera*. We performed the same routine, replaced the video filepath to capture and added the same parameters. 
 
 

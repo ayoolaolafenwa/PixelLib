@@ -1,7 +1,9 @@
 # Image Tuning
 
 Image tuning is the change in the background of an image through image segmentation. The key role of image segmentation is to remove the objects segmented from the image and place it in the new background created. This is done by producing a mask for the image and combining it with the modified background. Deeplabv3+ model trained on pascalvoc dataset is used. The model supports 20 common object catefories which means you can change the background of these objects as you desired. The objects are
-[person,bus,car,aeroplane, bicycle, ,motorbike,bird, boat, bottle,  cat, chair, cow, dinningtable, dog, horse pottedplant, sheep, sofa, train, tv]
+
+```person,bus,car,aeroplane, bicycle, ,motorbike,bird, boat, bottle,  cat, chair, cow, dinningtable, dog, horse pottedplant, sheep, sofa, train, tv
+```
 
 Image Tuning features supported are:
 
@@ -9,9 +11,10 @@ Image Tuning features supported are:
 
 * [Assign a distinct color to the background of an image](#Assign-a-distinct-color-to-the-background-of-an-image)
 
+* [Grayscale the background of an image](#Grayscale-the-background-of-an-image)
+
 * [Blur the background of an image](#Blur-the-background-of-an-image)
 
-* [Grayscale the background of an image](#Grayscale-the-background-of-an-image)
 
 
 ## Change the background of an image with a picture
@@ -24,7 +27,7 @@ Image Tuning features supported are:
 
 ![alt2](Images/flowers.jpg)
 
-We intend to change the background of our sample image with this flower image. We can do this easily with just five lines of code.
+We intend to change the background of our sample image with this image. We can do this easily with just five lines of code.
 
 ``` python
 import pixellib
@@ -77,21 +80,22 @@ from pixellib.tune_bg import alter_bg
 
 change_bg = alter_bg()
 change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
-change_bg.color_bg("sample.jpg", colors = (255, 255, 255), output_image_name="colored_bg.jpg")
+change_bg.color_bg("sample.jpg", colors = (0,0,255), output_image_name="colored_bg.jpg")
 ```
 
 It is very similar to the code used above for changing the background of an image with a picture. The only diiference is that we replaced the function *change_bg_img* to *color_bg* the function that will handle color change.
 
 ``` python
-change_bg.color_bg("sample.jpg", colors = (255, 255, 255), output_image_name="colored_bg.jpg")
+change_bg.color_bg("sample.jpg", colors = (0, 0, 255), output_image_name="colored_bg.jpg")
 ```
-The function *color_bg* takes the parameter *colors* and we provided the RGB value of the color we want to use. We want the image to have a white background and the color's RGB value is set to white which is (255, 255, 255).  
+The function *color_bg* takes the parameter *colors* and we provided the RGB value of the color we want to use. We want the image to have a white background and the color's RGB value is set to blue which is *(0, 0, 255)*.  
 
 **Colored Image**
 
-![alt4](Images/colored.jpg)
+![alt4](Images/blue.jpg)
 
-*Note*: You can assign any color to the background of your image, just provide the RGB value of the color.
+## Note:
+**You can assign any color to the background of your image, just provide the RGB value of the color.**
 
 
 ## Grayscale the background of an image
@@ -118,16 +122,27 @@ It is still the same code except we called the function *gray_bg* to grayscale t
 ## Blur the background of an image
 
 **sample2.jpg**
+
+
 ![alt_sam2](Images/p2.jpg)
 
-You can also apply the effect of bluring the background of your image. You can also varry the degree of the burriness of the background.
+You can also apply the effect of bluring the background of your image. You can varry how blur the background will be.
 
 ``` python
 change_bg.blur_bg("sample2.jpg", low = True, output_image_name="blur_img.jpg")
 ```
-We called the function *blur_bg* to blur the background of the image and we set the degree of blurriness to low. 
+We called the function *blur_bg* to blur the background of the image and set the blurred effect to be low. There are three parameters that control the degree in which the background is blurred.
+
+*low* When it is set to true the background is blurred slightly.
+
+*moderate* When it is set to true the background is moderately blurred.
+
+*extreme* When it is set to true the background is deeply blurred.
 
 **blur_low**
+
+
+The image is blurred with a low effect.
 
 ![alt5](Images/low.jpg)
 
@@ -139,15 +154,20 @@ We want to moderately blur the background of the image, we set *moderate* to *tr
 
 **blur_moderate**
 
+The image is blurred with a moderate effect.
+
 ![alt6](Images/moderate.jpg)
 
 
 ``` python
 change_bg.blur_bg("sample2.jpg", extreme = True, output_image_name="blur_img.jpg")
 ```
-We deeply blurred the image, we set *extreme* to *true*.
+We want to deeply blurred the background of the image and  we set *extreme* to *true*.
 
 **blur_extreme**
+
+
+The image is blurred with a deep effect.
 
 ![alt7](Images/extreme.jpg)
 
@@ -186,10 +206,11 @@ cv2.imwrite("img.jpg", output)
 ```python
 import pixellib
 from pixellib.tune_bg import alter_bg
+import cv2
 
 change_bg = alter_bg()
 change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
-output = change_bg.color_bg("sample.jpg", colors = (255, 255, 255))
+output = change_bg.color_bg("sample.jpg", colors = (0, 0, 255))
 cv2.imwrite("img.jpg", output)
 ```
 
@@ -198,6 +219,7 @@ cv2.imwrite("img.jpg", output)
 ``` python
 import pixellib
 from pixellib.tune_bg import alter_bg
+import cv2
 
 change_bg = alter_bg()
 change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
@@ -210,6 +232,7 @@ cv2.imwrite("img.jpg", output)
 ``` python
 import pixellib
 from pixellib.tune_bg import alter_bg
+import cv2
 
 change_bg = alter_bg()
 change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
@@ -224,6 +247,7 @@ cv2.imwrite("img.jpg", output)
 ```python
 import pixellib
 from pixellib.tune_bg import alter_bg
+import cv2
 
 change_bg = alter_bg()
 change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
@@ -242,6 +266,7 @@ while True:
 ```python
 import pixellib
 from pixellib.tune_bg import alter_bg
+import cv2
 
 change_bg = alter_bg()
 change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
@@ -260,6 +285,7 @@ while True:
 ```python
 import pixellib
 from pixellib.tune_bg import alter_bg
+import cv2
 
 change_bg = alter_bg()
 change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
@@ -273,7 +299,7 @@ while True:
         break
 ```
 
-Read the [tutorial](change_video_bg.md) on blurring, coloring and graysaling background of videos and camera's feed.
+Read the [tutorial](change_video_bg.md) on blurring, coloring and grayscaling background of videos and camera's feeds.
 
 
 
