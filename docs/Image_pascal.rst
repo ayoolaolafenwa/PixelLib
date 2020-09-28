@@ -51,9 +51,9 @@ This is the line of code that performs segmentation on an image and the segmenta
 
 **Sample1.jpg**  
 
-.. image:: photos/sample1.jpg
+.. image:: photos/test.jpg
 
-Image's source: Pinterest
+
 
 .. code-block:: python
 
@@ -64,7 +64,7 @@ Image's source: Pinterest
   segment_image.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5") 
   segment_image.segmentAsPascalvoc("sample1.jpg", output_image_name = "image_new.jpg")
 
-.. image:: photos/result.jpg  
+.. image:: photos/test2.jpg  
 
 
 Your saved image with all the objects present segmented.
@@ -77,7 +77,7 @@ You can obtain an image with segmentation overlay on the objects with a modified
 
 We added an extra parameter **overlay** and set it to **true**, we produced an image with segmentation overlay.
 
-.. image:: photos/overlay.jpg
+.. image:: photos/test3.jpg
 
 * You can check the inference time required for performing segmentation by modifying the code below..
 
@@ -88,7 +88,7 @@ We added an extra parameter **overlay** and set it to **true**, we produced an i
   import time
 
   segment_image = semantic_segmentation()
-  segment_image.load_pascalvoc_model("pascal.h5")
+  segment_image.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
 
   start = time.time()
   segment_image.segmentAsPascalvoc("sample1.jpg", output_image_name= "image_new.jpg")
@@ -119,7 +119,7 @@ It took 8.19 seconds to run semantic segmentation on the image.
   import cv2
 
   segment_image = semantic_segmentation()
-  segment_image.load_pascalvoc_model("pascal.h5")
+  segment_image.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
   output, segmap = segment_image.segmentAsPascalvoc("sample1.jpg")
   cv2.imwrite("img.jpg", output)
   print(output.shape)
@@ -138,7 +138,7 @@ It took 8.19 seconds to run semantic segmentation on the image.
   import cv2
 
   segment_image = semantic_segmentation()
-  segment_image.load_pascalvoc_model("pascal.h5")
+  segment_image.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
   segmap, segoverlay = segment_image.segmentAsPascalvoc("sample1.jpg", overlay= True)
   cv2.imwrite("img.jpg", segoverlay)
   print(segoverlay.shape)
