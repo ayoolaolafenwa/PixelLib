@@ -35,11 +35,11 @@ change_bg.blur_video("sample_video.mp4", moderate = True, frames_per_second=15, 
 
 There are three parameters that control the degree in which the background is blurred.
 
-*low* When it is set to true the background is blurred slightly.
+*low:* When it is set to true the background is blurred slightly.
 
-*moderate* When it is set to true the background is moderately blurred.
+*moderate:* When it is set to true the background is moderately blurred.
 
-*extreme* When it is set to true the background is deeply blurred.
+*extreme:* When it is set to true the background is deeply blurred.
 
 ```python
 change_bg.blur_video("sample_video.mp4", moderate = True, frames_per_second=15, output_video_name="blur_video.mp4")

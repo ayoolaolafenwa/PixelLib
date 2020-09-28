@@ -263,7 +263,7 @@ You can obtain the output arrays of your changed image....
 
 **Process frames directly with Image Tuning...**
 
-**Blur frames**
+*Blur frames*
 
 
 .. code-block:: python
@@ -284,7 +284,7 @@ You can obtain the output arrays of your changed image....
         break
 
 
-**Color frames**
+*Color frames*
 
 
 .. code-block:: python
@@ -305,7 +305,7 @@ You can obtain the output arrays of your changed image....
         break
 
 
-**Grayscale frames**
+*Grayscale frames*
 
 
 .. code-block:: python
@@ -326,6 +326,8 @@ You can obtain the output arrays of your changed image....
         break
 
 
+
+Read the `tutorial <https://pixellib.readthedocs.io/en/latest/change_video_bg.html>`_ on blurring, coloring and grayscaling background of videos and camera's feeds.
 
 
 

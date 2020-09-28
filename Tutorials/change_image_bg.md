@@ -135,11 +135,11 @@ change_bg.blur_bg("sample2.jpg", low = True, output_image_name="blur_img.jpg")
 ```
 We called the function *blur_bg* to blur the background of the image and set the blurred effect to be low. There are three parameters that control the degree in which the background is blurred.
 
-*low* When it is set to true the background is blurred slightly.
+*low:* When it is set to true the background is blurred slightly.
 
-*moderate* When it is set to true the background is moderately blurred.
+*moderate:* When it is set to true the background is moderately blurred.
 
-*extreme* When it is set to true the background is deeply blurred.
+*extreme:* When it is set to true the background is deeply blurred.
 
 **blur_low**
 

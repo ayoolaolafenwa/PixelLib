@@ -34,7 +34,9 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Change the Background of A Video" href="change_video_bg.html" />
+    <link rel="prev" title="Inference With A Custom Model" href="custom_inference.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -79,7 +81,7 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="image_ade20k.html"><strong>Semantic segmentation of images with PixelLib using Ade20k model</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="video_ade20k.html"><strong>Semantic segmentation of videos with PixelLib using Ade20k model</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="video_ade20k.html#segmentation-of-live-camera-with-ade20k-model"><strong>Segmentation of live camera with Ade20k model</strong></a></li>
@@ -91,6 +93,8 @@
 <li class="toctree-l1"><a class="reference internal" href="video_instance.html#instance-segmentation-of-live-camera-with-mask-r-cnn"><strong>Instance Segmentation of Live Camera with Mask R-cnn.</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_train.html"><strong>Custom Training With PixelLib</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_inference.html"><strong>Inference With A Custom Model</strong></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Image Tuning With PixelLib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change_video_bg.html">Change the Background of A Video</a></li>
 </ul>
 
             
@@ -318,7 +322,7 @@
 </pre></div>
 </div>
 <p><strong>Process frames directly with Image Tuning…</strong></p>
-<p><strong>Blur frames</strong></p>
+<p><em>Blur frames</em></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
@@ -335,7 +339,7 @@
      <span class="k">break</span>
 </pre></div>
 </div>
-<p><strong>Color frames</strong></p>
+<p><em>Color frames</em></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
@@ -352,7 +356,7 @@
      <span class="k">break</span>
 </pre></div>
 </div>
-<p><strong>Grayscale frames</strong></p>
+<p><em>Grayscale frames</em></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
@@ -369,6 +373,7 @@
      <span class="k">break</span>
 </pre></div>
 </div>
+<p>Read the <a class="reference external" href="https://pixellib.readthedocs.io/en/latest/change_video_bg.html">tutorial</a> on blurring, coloring and grayscaling background of videos and camera’s feeds.</p>
 </div>
 
 
@@ -376,6 +381,15 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="change_video_bg.html" class="btn btn-neutral float-right" title="Change the Background of A Video" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="custom_inference.html" class="btn btn-neutral float-left" title="Inference With A Custom Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
