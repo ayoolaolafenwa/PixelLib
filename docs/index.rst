@@ -144,6 +144,8 @@ Implement background editing in images and videos using five lines of code. Thes
    :maxdepth: 6
    :caption: Contents:
    
+   change_image_bg.rst
+   change_video_bg.rst
    image_ade20k.rst
    video_ade20k.rst
    Image_pascal.rst
@@ -152,8 +154,7 @@ Implement background editing in images and videos using five lines of code. Thes
    video_instance.rst
    custom_train.rst
    custom_inference.rst
-   change_image_bg.rst
-   change_video_bg.rst
+   
    
    
 
