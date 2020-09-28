@@ -110,7 +110,33 @@ Instances of the same object are segmented with different color maps.
 :ref:`custom_inference`
 
 
+Implement background editing in images and videos using five lines of code. These are the features supported for background editing.
 
+**Change the background of an image with a picture**
+
+**Assign a distinct color to the background of an image**
+
+**Grayscale the background of an image**
+
+**Blur the background of an image**
+
+
+**Change the background of an Image**
+
+.. image:: photos/bg_cover.jpg
+
+:ref:`image_bg`
+
+
+**Change the background of a Video**
+
+.. raw:: html
+
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src= "https://www.youtube.com/embed/EoG00wQ4MYc", frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+
+:ref:`video_bg`
 
 
 
@@ -126,6 +152,8 @@ Instances of the same object are segmented with different color maps.
    video_instance.rst
    custom_train.rst
    custom_inference.rst
+   change_image_bg.rst
+   change_video_bg.rst
    
    
 
