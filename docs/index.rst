@@ -110,7 +110,7 @@ Instances of the same object are segmented with different color maps.
 :ref:`custom_inference`
 
 
-Implement background editing in images and videos using five lines of code. These are the features supported for background editing.
+**Implement background editing in images and videos using five lines of code. These are the features supported for background editing.**
 
 **Change the background of an image with a picture**
 
