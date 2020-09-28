@@ -152,8 +152,6 @@ Implement background editing in images and videos using five lines of code. Thes
    video_instance.rst
    custom_train.rst
    custom_inference.rst
-   change_image_bg.rst
-   change_video_bg.rst
    
    
 
