@@ -187,7 +187,7 @@ The image is blurred with a deep effect.
 
 .. image:: photos/extreme.jpg
 
-*Full code*
+**Full code**
 
 .. code-block:: python
    
@@ -324,7 +324,6 @@ You can obtain the output arrays of your changed image....
     cv2.imshow("frame", output)
     if  cv2.waitKey(25) & 0xff == ord('q'):
         break
-
 
 
 Read the `tutorial <https://pixellib.readthedocs.io/en/latest/change_video_bg.html>`_ on blurring, coloring and grayscaling background of videos and camera's feeds.
