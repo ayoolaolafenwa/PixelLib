@@ -828,7 +828,7 @@ class semantic_segmentation():
 
 
   
-
+##Create Pascalvoc colormap format ##
     
 def create_pascal_label_colormap():
   """Creates a label colormap used in PASCAL VOC segmentation benchmark.
@@ -847,6 +847,8 @@ def create_pascal_label_colormap():
   return colormap
 
 
+#Obtain the results of segmentation#
+
 def obtain_segmentation(image, nc = 21):
     colors = create_pascal_label_colormap()
     r = np.zeros_like(image).astype(np.uint8)
@@ -862,6 +864,7 @@ def obtain_segmentation(image, nc = 21):
 
     return rgb  
 
+# Assign colors to objects #
 
 def labelP_to_color_image(label):
   """Adds color defined by the dataset colormap to the label.
@@ -890,6 +893,7 @@ def labelP_to_color_image(label):
 
 
 
+##Create Ade20k colormap format ##
 
 def create_ade20k_label_colormap():
   """Creates a label colormap used in ADE20K segmentation benchmark.
@@ -1049,6 +1053,8 @@ def create_ade20k_label_colormap():
       [102, 255, 0],
       [92, 0, 255],
   ])
+
+#Assign colors to objects#  
 def labelAde20k_to_color_image(label):
   """Adds color defined by the dataset colormap to the label.
 
