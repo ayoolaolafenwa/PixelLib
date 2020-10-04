@@ -128,7 +128,7 @@ It is still the same code except we called the function *gray_bg* to grayscale t
 
 ![alt_sam2](Images/p2.jpg)
 
-You can also apply the effect of bluring the background of your image. You can varry how blur the background will be.
+You can also apply the effect of bluring the background of your image. You can control how blur the background will be.
 
 ``` python
 change_bg.blur_bg("sample2.jpg", low = True, output_image_name="blur_img.jpg")
