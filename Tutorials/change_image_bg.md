@@ -85,12 +85,12 @@ change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5
 change_bg.color_bg("sample.jpg", colors = (0,0,255), output_image_name="colored_bg.jpg")
 ```
 
-It is very similar to the code used above for changing the background of an image with a picture. The only diiference is that we replaced the function *change_bg_img* to *color_bg* the function that will handle color change.
+It is very similar to the code used above for changing the background of an image with a picture. The only difference is that we replaced the function *change_bg_img* to *color_bg* the function that will handle color change.
 
 ``` python
 change_bg.color_bg("sample.jpg", colors = (0, 0, 255), output_image_name="colored_bg.jpg")
 ```
-The function *color_bg* takes the parameter *colors* and we provided the RGB value of the color we want to use. We want the image to have a white background and the color's RGB value is set to blue which is *(0, 0, 255)*.  
+The function *color_bg* takes the parameter *colors* and we provided the RGB value of the color we want to use. We want the image to have a blue background and the color's RGB value is set to blue which is *(0, 0, 255)*.  
 
 **Colored Image**
 
