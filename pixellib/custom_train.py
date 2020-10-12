@@ -26,7 +26,7 @@ from pixellib.config import Config
 from PIL import Image, ImageDraw
 import json
 import labelme2coco
-from pixellib.config import Config
+from pixellib.config import config
 from pixellib.mask_rcnn import log
 import colorsys
 
