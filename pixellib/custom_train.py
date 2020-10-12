@@ -43,7 +43,7 @@ class instance_custom_training:
         if network_backbone == "resnet101":
             print("Using resnet101 as network backbone For Mask R-CNN model")
         else:
-            print("Using resnet50 as network backbone For Mask R-CNN model")
+             print("Using resnet50 as network backbone For Mask R-CNN model")
 
     def load_pretrained_model(self, model_path):
         #load the weights for COCO
