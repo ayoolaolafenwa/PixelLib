@@ -1,8 +1,6 @@
-![alt_test1](instance_mask/cover.jpg)
-# PixelLib 
+<img src="https://i.ibb.co/Jqq205p/pixcelib-logo.png" style="text-align:center;" alt="pixellib-logo" width="500"/>
 
-[![Downloads](https://pepy.tech/badge/pixellib)](https://pepy.tech/project/pixellib)  [![Downloads](https://pepy.tech/badge/pixellib/month)](https://pepy.tech/project/pixellib/month)  [![Downloads](https://pepy.tech/badge/pixellib/week)](https://pepy.tech/project/pixellib/week)
-
+___
 ## Update: **The latest version of PixelLib now supports background editing in images and videos in just five lines of code.**
 
 
