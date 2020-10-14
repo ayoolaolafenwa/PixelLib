@@ -1,8 +1,8 @@
-<img src="https://i.ibb.co/Jqq205p/pixcelib-logo.png" style="text-align:center;" alt="pixellib-logo" width="500"/>
-
-___
+<div align="center">
+<img src="https://i.ibb.co/Jqq205p/pixcelib-logo.png" alt="drawing" width="400"/>
+</div>
+  
 ## Update: **The latest version of PixelLib now supports background editing in images and videos in just five lines of code.**
-
 
 Pixellib is a library for performing segmentation of objects in images and videos. It supports the two major types of image segmentation: 
 
