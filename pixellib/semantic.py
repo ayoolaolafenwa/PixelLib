@@ -848,9 +848,33 @@ def create_pascal_label_colormap():
 
 
 #Obtain the results of segmentation#
+def label_pascal():
+    return np.asarray([
+    [0, 0, 0],
+    [128, 0, 0], 
+    [0, 128, 0], 
+    [255, 255, 255], 
+    [0, 0, 128], 
+    [128, 0, 128],
+    [0, 128, 128], 
+    [128, 128, 128], 
+    [64, 0, 0], 
+    [192, 0, 0], 
+    [64, 128, 0],
+    [192, 128, 0], 
+    [64, 0, 128], 
+    [192, 0, 128], 
+    [64, 128, 128], 
+    [255, 255, 255],
+    [0, 64, 0], 
+    [128, 64, 0], 
+    [0, 192, 0], 
+    [128, 192, 0], 
+    [0, 64, 128],
+])  
 
 def obtain_segmentation(image, nc = 21):
-    colors = create_pascal_label_colormap()
+    colors = label_pascal()
     r = np.zeros_like(image).astype(np.uint8)
     g = np.zeros_like(image).astype(np.uint8)
     b = np.zeros_like(image).astype(np.uint8)
