@@ -19,7 +19,7 @@
 Blur the background of a video with five lines of code.
 
 **sample_video**
-[![alt_vid1](Images/save_vid3.jpg)](https://www.youtube.com/watch?v=8fkthbwqmB0)
+[![alt_vid1](Images/blur_cover.png)](https://www.youtube.com/watch?v=duTiKf76ZU8)
 
 
 ```python
@@ -103,18 +103,18 @@ from pixellib.tune_bg import alter_bg
 
 change_bg = alter_bg()
 change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
-change_bg.color_video("sample_video.mp4", colors =  (255, 255, 255), frames_per_second=15, output_video_name="output_video.mp4")
+change_bg.color_video("sample_video.mp4", colors =  (0, 128, 0), frames_per_second=15, output_video_name="output_video.mp4")
 ```
 
 ```python
-change_bg.color_video("sample_video.mp4", colors =  (255, 255, 255), frames_per_second=15, output_video_name="output_video.mp4")
+change_bg.color_video("sample_video.mp4", colors =  (0, 128, 0), frames_per_second=15, output_video_name="output_video.mp4")
 ```
 
-It is still the same code except we called the function *color_video* to give the video's background a distinct color. The function *color_bg* takes the parameter *colors* and we provided the RGB value of the color we want to use. We want the image to have a white background and the color's RGB value is set to white which is (255, 255, 255).    
+It is still the same code except we called the function *color_video* to give the video's background a distinct color. The function *color_bg* takes the parameter *colors* and we provided the RGB value of the color we want to use. We want the image to have a green background and the color's RGB value is set to green which is (0, 128, 0).    
 
 **Output Video**
 
-[![alt_vid3](Images/wh.png)](https://www.youtube.com/watch?v=EoG00wQ4MYc)
+[![alt_vid3](Images/green_git.png)](https://www.youtube.com/watch?v=aA4g7qccczg)
 
 ## Color the Background of Camera's Feeds
 
@@ -158,7 +158,7 @@ We are still using the same code but called a different function *gray_video* to
 
 **Output Video**
 
-[![alt_vid4](Images/gr.png)](https://www.youtube.com/watch?v=NUa2L6skk0I)
+[![alt_vid4](Images/gray_cover.png)](https://www.youtube.com/watch?v=W94S4ST201Q)
 
 
 ## Grayscale the Background of Camera's Feeds
