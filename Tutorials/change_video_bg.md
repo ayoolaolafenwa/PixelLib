@@ -19,7 +19,7 @@
 Blur the background of a video with five lines of code.
 
 **sample_video**
-[![alt_vid1](Images/blur_cover.png)](https://www.youtube.com/watch?v=duTiKf76ZU8)
+[![alt_vid1](Images/save_vid3.jpg)](https://www.youtube.com/watch?v=8fkthbwqmB0)
 
 
 ```python
