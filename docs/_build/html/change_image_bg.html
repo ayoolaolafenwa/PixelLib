@@ -215,11 +215,11 @@
 <span class="n">change_bg</span><span class="o">.</span><span class="n">color_bg</span><span class="p">(</span><span class="s2">&quot;sample.jpg&quot;</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">),</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;colored_bg.jpg&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>It is very similar to the code used above for changing the background of an image with a picture. The only diiference is that we replaced the function <em>change_bg_img</em> to <em>color_bg</em> the function that will handle color change.</p>
+<p>It is very similar to the code used above for changing the background of an image with a picture. The only difference is that we replaced the function <em>change_bg_img</em> to <em>color_bg</em> the function that will handle color change.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">color_bg</span><span class="p">(</span><span class="s2">&quot;sample.jpg&quot;</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;colored_bg.jpg&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The function <em>color_bg</em> takes the parameter <em>colors</em> and we provided the RGB value of the color we want to use. We want the image to have a white background and the color’s RGB value is set to blue which is <em>(0, 0, 255)</em>.</p>
+<p>The function <em>color_bg</em> takes the parameter <em>colors</em> and we provided the RGB value of the color we want to use. We want the image to have a blue background and the color’s RGB value is set to blue which is <em>(0, 0, 255)</em>.</p>
 <p><em>Colored Image</em></p>
 <img alt="_images/blue.jpg" src="_images/blue.jpg" />
 <p><strong>Note:</strong> You can assign any color to the background of your image, just provide the RGB value of the color.</p>
@@ -241,7 +241,7 @@
 <p><strong>Blur the background of an image</strong></p>
 <p><strong>sample2.jpg</strong></p>
 <img alt="_images/p2.jpg" src="_images/p2.jpg" />
-<p>You can also apply the effect of bluring the background of your image. You can varry how blur the background will be.</p>
+<p>You can also apply the effect of bluring the background of your image. You can control how blur the background will be.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">blur_bg</span><span class="p">(</span><span class="s2">&quot;sample2.jpg&quot;</span><span class="p">,</span> <span class="n">low</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;blur_img.jpg&quot;</span><span class="p">)</span>
 </pre></div>
 </div>

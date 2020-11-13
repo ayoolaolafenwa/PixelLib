@@ -93,13 +93,13 @@ You can choose to assign any distinct color to the background of your image. Thi
    change_bg.color_bg("sample.jpg", colors = (0,0,255), output_image_name="colored_bg.jpg")
 
 
-It is very similar to the code used above for changing the background of an image with a picture. The only diiference is that we replaced the function *change_bg_img* to *color_bg* the function that will handle color change.
+It is very similar to the code used above for changing the background of an image with a picture. The only difference is that we replaced the function *change_bg_img* to *color_bg* the function that will handle color change.
 
 .. code-block:: python
    
    change_bg.color_bg("sample.jpg", colors = (0, 0, 255), output_image_name="colored_bg.jpg")
 
-The function *color_bg* takes the parameter *colors* and we provided the RGB value of the color we want to use. We want the image to have a white background and the color's RGB value is set to blue which is *(0, 0, 255)*.  
+The function *color_bg* takes the parameter *colors* and we provided the RGB value of the color we want to use. We want the image to have a blue background and the color's RGB value is set to blue which is *(0, 0, 255)*.  
 
 *Colored Image*
 
@@ -139,7 +139,7 @@ It is still the same code except we called the function *gray_bg* to grayscale t
 
 .. image:: photos/p2.jpg
 
-You can also apply the effect of bluring the background of your image. You can varry how blur the background will be.
+You can also apply the effect of bluring the background of your image. You can control how blur the background will be.
 
 .. code-block:: python
    

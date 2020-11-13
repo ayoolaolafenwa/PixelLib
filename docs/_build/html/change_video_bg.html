@@ -34,7 +34,8 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Image Tuning With PixelLib" href="change_image_bg.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -79,7 +80,7 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="image_ade20k.html"><strong>Semantic segmentation of images with PixelLib using Ade20k model</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="video_ade20k.html"><strong>Semantic segmentation of videos with PixelLib using Ade20k model</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="video_ade20k.html#segmentation-of-live-camera-with-ade20k-model"><strong>Segmentation of live camera with Ade20k model</strong></a></li>
@@ -91,6 +92,8 @@
 <li class="toctree-l1"><a class="reference internal" href="video_instance.html#instance-segmentation-of-live-camera-with-mask-r-cnn"><strong>Instance Segmentation of Live Camera with Mask R-cnn.</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_train.html"><strong>Custom Training With PixelLib</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_inference.html"><strong>Inference With A Custom Model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="change_image_bg.html">Image Tuning With PixelLib</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Change the Background of A Video</a></li>
 </ul>
 
             
@@ -182,7 +185,7 @@
 <p><em>output_video_name:</em> the saved video. The output video will be saved in your current working directory.</p>
 <p><em>Output Video</em></p>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
-    <iframe src="https://www.youtube.com/embed/fzHJwckJTc4" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    <iframe src="https://www.youtube.com/embed/duTiKf76ZU8", frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div><p><strong>Blur the Background of Camera’s Feeds</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
@@ -223,7 +226,7 @@
 <p>It is still the same code except we called the function <em>color_video</em> to give the video’s background a distinct color. The function <em>color_bg</em> takes the parameter <em>colors</em> and we provided the RGB value of the color we want to use. We want the image to have a white background and the color’s RGB value is set to white which is (255, 255, 255).</p>
 <p><strong>Output Video</strong></p>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
-    <iframe src= "https://www.youtube.com/embed/EoG00wQ4MYc", frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    <iframe src="https://www.youtube.com/embed/yrKV-lLuZCo", frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div><p><strong>Color the Background of Camera’s Feeds</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
@@ -256,7 +259,7 @@
 <p>We are still using the same code but called a different function <em>gray_video</em> to grayscale the background of the video.</p>
 <p><strong>Output Video</strong></p>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
-    <iframe src= "https://www.youtube.com/embed/NUa2L6skk0I", frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    <iframe src= "https://www.youtube.com/embed/W94S4ST201Q", frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div><p><strong>Grayscale the Background of Camera’s Feeds</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
@@ -277,6 +280,13 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="change_image_bg.html" class="btn btn-neutral float-left" title="Image Tuning With PixelLib" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
