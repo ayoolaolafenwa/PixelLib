@@ -26,7 +26,7 @@ from pixellib.config import Config
 from PIL import Image, ImageDraw
 import json
 import labelme2coco
-from pixellib.config import config
+from pixellib.config import Config
 from pixellib.mask_rcnn import log
 import colorsys
 
@@ -36,10 +36,11 @@ class instance_custom_training:
         self.model_dir = os.getcwd()
 
         
-    def modelConfig(self,network_backbone = "resnet101",  num_classes =  1,  class_names = ["BG"], batch_size = 1, image_max_dim = 512, image_min_dim = 512, image_resize_mode ="square", gpu_count = 1):
+    def modelConfig(self,network_backbone = "resnet101",  num_classes =  1,  class_names = ["BG"], batch_size = 1,  image_max_dim = 512, image_min_dim = 512, image_resize_mode ="square", gpu_count = 1):
         self.config = Config(BACKBONE = network_backbone, NUM_CLASSES = 1 +  num_classes,  class_names = class_names, 
-        IMAGES_PER_GPU = batch_size, IMAGE_MAX_DIM = image_max_dim, IMAGE_MIN_DIM = image_min_dim, IMAGE_RESIZE_MODE = image_resize_mode,
+       IMAGES_PER_GPU = batch_size, IMAGE_MAX_DIM = image_max_dim, IMAGE_MIN_DIM = image_min_dim, IMAGE_RESIZE_MODE = image_resize_mode,
         GPU_COUNT = gpu_count)
+
         if network_backbone == "resnet101":
             print("Using resnet101 as network backbone For Mask R-CNN model")
         else:
@@ -47,7 +48,7 @@ class instance_custom_training:
 
     def load_pretrained_model(self, model_path):
         #load the weights for COCO
-        self.model = modellib.MaskRCNN(mode="training", model_dir = self.model_dir, config=self.config)
+        self.model = modellib.MaskRCNN(mode="training", model_dir = self.model_dir, config = self.config)
         self.model.load_weights(model_path, by_name=True, exclude=["mrcnn_class_logits", "mrcnn_bbox_fc",  "mrcnn_bbox", 
         "mrcnn_mask"])
     

@@ -251,6 +251,131 @@ class alter_bg():
     return result
 
 
+  def change_frame_bg(self, frame,b_image_path,  verbose = None, detect = None):
+    if verbose is not None:
+      print("processing frame......")
+
+    seg_frame = self.segmentAsPascalvoc(frame)
+    
+    if detect is not None:
+      target_class = self.target_obj(detect)
+      seg_frame[1][seg_frame[1] != target_class] = 0
+      
+    
+    bg_img = cv2.imread(b_image_path)
+    w, h, _ = frame.shape
+    bg_img = cv2.resize(bg_img, (h,w))
+
+    result = np.where(seg_frame[1], frame, bg_img)
+    
+
+    return result  
+
+  
+
+  ## CREATE A VIRTUAL BACKGROUND FOR A VIDEO USING AN IMAGE ##
+
+  def change_video_bg(self, video_path, b_image_path, frames_per_second = None,output_video_name = None, detect = None):
+    capture = cv2.VideoCapture(video_path)
+    width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
+    height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    if frames_per_second is not None:
+      save_video = cv2.VideoWriter(output_video_name, cv2.VideoWriter_fourcc(*'DIVX'),frames_per_second, (width, height))
+    
+    counter = 0
+    start = time.time() 
+    
+    while True:
+        counter += 1
+        ret, frame = capture.read()
+        if ret:
+            
+            seg_frame = self.segmentAsPascalvoc(frame, process_frame=True)
+            print("No. of frames:", counter)
+            if detect is not None:
+              target_class = self.target_obj(detect)
+              seg_frame[1][seg_frame[1] != target_class] = 0
+            w, h, _ = seg_frame[1].shape  
+            img = cv2.imread(b_image_path)
+            img = cv2.resize(img, (h,w))
+            out = np.where(seg_frame[1], frame, img)
+            
+
+            output = cv2.resize(out, (width,height), interpolation=cv2.INTER_AREA)
+            if output_video_name is not None:
+                save_video.write(output)
+
+        else:
+          break
+
+    capture.release()
+
+    end = time.time()
+    print(f"Processed {counter} frames in {end-start:.1f} seconds")
+      
+    if frames_per_second is not None:
+        save_video.release()
+
+    return  output  
+
+
+
+  ## CREATE A VIRTUAL BACKGROUND FOR A CAMERA FEED USING AN IMAGE ##
+
+  def change_camera_bg(self, cam, b_image_path, frames_per_second = None, check_fps = False,show_frames = False, 
+  frame_name = None, verbose = None, output_video_name = None, detect = None):
+    capture = cam
+    width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
+    height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    if frames_per_second is not None:
+      save_video = cv2.VideoWriter(output_video_name, cv2.VideoWriter_fourcc(*'DIVX'),frames_per_second, (width, height))
+    counter = 0
+    start = time.time() 
+     
+    while True:
+        counter += 1
+        ret, frame = capture.read()
+        if ret:
+          seg_frame = self.segmentAsPascalvoc(frame, process_frame=True)
+          print("No. of frames:", counter)
+          if detect is not None:
+            target_class = self.target_obj(detect)
+            seg_frame[1][seg_frame[1] != target_class] = 0
+
+          w, h, _ = seg_frame[1].shape  
+          img = cv2.imread(b_image_path)
+          img = cv2.resize(img, (h,w))
+          out = np.where(seg_frame[1], frame, img)
+            
+          output = cv2.resize(out, (width,height), interpolation=cv2.INTER_AREA)
+          if show_frames == True:
+            if frame_name is not None:
+              cv2.imshow(frame_name, output)
+              if cv2.waitKey(25) & 0xFF == ord('q'):
+                break 
+          if output_video_name is not None:
+            save_video.write(output)
+
+        else:
+
+          break
+
+    if check_fps == True:
+        out = capture.get(cv2.CAP_PROP_FPS)
+        print(f"{out} frames per seconds") 
+
+    capture.release()
+
+    end = time.time()
+    if verbose is not None:
+      print(f"Processed {counter} frames in {end-start:.1f} seconds")
+      
+    if frames_per_second is not None:
+      save_video.release()
+
+    return  output
+
+
   ##### GIVE THE BACKGROUND OF AN IMAGE A DISTINCT COLOR ######
     
   def color_bg(self, image_path, colors, output_image_name = None, verbose = None, detect = None):
@@ -412,6 +537,9 @@ class alter_bg():
       save_video.release()
 
     return  output
+
+  
+  
 
 
   ##### BLUR THE BACKGROUND OF AN IMAGE #####

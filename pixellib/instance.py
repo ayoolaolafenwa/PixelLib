@@ -12,27 +12,29 @@ import time
 class configuration(Config):
     NAME = "configuration"
 
-coco_config = configuration(BACKBONE = "resnet101",  NUM_CLASSES =  81,  class_names = ["BG"], IMAGES_PER_GPU = 1, IMAGE_MAX_DIM = 1024, IMAGE_MIN_DIM = 800, IMAGE_RESIZE_MODE ="square", GPU_COUNT = 1) 
+coco_config = configuration(BACKBONE = "resnet101",  NUM_CLASSES =  81,  class_names = ["BG"], IMAGES_PER_GPU = 1, IMAGE_MAX_DIM = 1024, IMAGE_MIN_DIM = 800,
+IMAGE_RESIZE_MODE ="square",  GPU_COUNT = 1) 
 
 
 class instance_segmentation():
     def __init__(self):
         self.model_dir = os.getcwd()
 
+    
 
     def load_model(self, model_path):
         self.model = MaskRCNN(mode = "inference", model_dir = self.model_dir, config = coco_config)
         self.model.load_weights(model_path, by_name= True)
 
 
-    def segmentImage(self, image_path, show_bboxes = False, output_image_name = None, verbose = None):
+    def segmentImage(self, image_path, show_bboxes = False,  output_image_name = None, verbose = None):
         
         image = cv2.imread(image_path)
         new_img = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         # Run detection
         if verbose is not None:
             print("Processing image...")
-        results = self.model.detect([new_img])
+        results = self.model.detect([new_img])    
 
         coco_config.class_names = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
                'bus', 'train', 'truck', 'boat', 'traffic light',
