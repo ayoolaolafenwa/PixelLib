@@ -251,6 +251,24 @@ class alter_bg():
     return result
 
 
+
+  #### ALTER FRAME BACKGROUND WITH A NEW PICTURE ###
+  def change_frame_img(self, frame, b_image_path, verbose = None):
+    if verbose is not None:
+      print("processing frame......")
+ 
+    seg_frame = self.segmentAsPascalvoc(frame, process_frame=True)
+    
+    bg_img = cv2.imread(b_image_path)
+    w, h, _ = frame.shape
+    bg_img = cv2.resize(bg_img, (h,w))
+ 
+    result = np.where(seg_frame[1], frame, bg_img)
+ 
+    return result
+
+
+
   ##### GIVE THE BACKGROUND OF AN IMAGE A DISTINCT COLOR ######
     
   def color_bg(self, image_path, colors, output_image_name = None, verbose = None, detect = None):
