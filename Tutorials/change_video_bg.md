@@ -133,6 +133,9 @@ change_bg.change_video_bg("sample_video.mp4", "bg.jpg", frames_per_second = 10, 
 
 It is still the same code except we called the function *change_video_bg* to create a virtual background for the video. The function takes in the path of the image we want to use as background for the video. 
 
+**Output Video**
+
+[![video2](Images/video2.png)](https://www.youtube.com/watch?v=699Hyi6oZFs)
 
 
 ## Create a Virtual Background for Camera's Feeds
@@ -156,9 +159,6 @@ change_bg.change_camera_bg(cap, "bg.jpg", frames_per_second = 10, show_frames=Tr
 It is similar to the code we used to blur camera's frames. The only difference is that we called the function *change_bg.change_camera_bg*. We performed the same routine, replaced the video filepath to capture and added the same parameters. 
 
 
-**Output Video**
-
-[![video2](Images/video2.png)](https://www.youtube.com/watch?v=699Hyi6oZFs)
 
 
 ## Color Video Background
