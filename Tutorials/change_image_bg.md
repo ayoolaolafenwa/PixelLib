@@ -36,8 +36,8 @@ import pixellib
 from pixellib.tune_bg import alter_bg
 
 
-change_bg = alter_bg()
-change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
+change_bg = alter_bg(model_type = "pb")
+change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
 change_bg.change_bg_img(f_image_path = "sample.jpg",b_image_path = "background.jpg", output_image_name="new_img.jpg")
 ```
 
@@ -46,10 +46,10 @@ change_bg.change_bg_img(f_image_path = "sample.jpg",b_image_path = "background.j
 import pixellib
 from pixellib.tune_bg import alter_bg
 
-change_bg = alter_bg()
-change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
+change_bg = alter_bg(model_type = "pb")
+change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
 ```
-**Line 1-4**: We imported pixellib and from pixellib we imported in the class *alter_bg*. Instance of the class is created and we finally loaded the deeplabv3+ model. Download deeplabv3+ pascalvoc model from [here](https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.1/deeplabv3_xception_tf_dim_ordering_tf_kernels.h5)
+**Line 1-4**: We imported pixellib and from pixellib we imported in the class *alter_bg*. Instance of the class is created and within the class we added a parameter model_type and set it to **pb**. we finally loaded the deeplabv3+ model. PixelLib supports two deeplabv3+ models, keras and tensorflow model. The keras model is extracted from the tensorflow model's checkpoint. The tensorflow model performs better than the keras model extracted from its checkpoint. We will make use of tensorflow model. Download the model from [here](https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.1/xception_pascalvoc.pb).
 
 
 ``` python
@@ -72,6 +72,61 @@ It takes the following parameter:
 Wow! We have successfully changed the background of our image.
 
 
+## Detection of target object
+
+In some applications you may not want to detect all the objects in an image or video, you may just want to target a particular object. By default the model detects all the objects it supports in an image or video. It is possible to filter other objects' detections and detect a target object in an image or video. 
+
+
+**sample2.jpg**
+
+![sam](Images/image.jpg)
+
+``` python
+change_bg.change_bg_img(f_image_path = "sample2.jpg",b_image_path = "background.jpg", output_image_name="new_img.jpg")
+```
+
+**Output Image**
+
+![sam](Images/image_img.jpg)
+
+It successfully change the image's background, but our goal is to change the background of the person in this image. We are not comfortable with the other objects showing, this is because car is one the objects supported by the model. Therefore there is need to modify the code to detect a target object.
+
+``` python
+import pixellib
+from pixellib.tune_bg import alter_bg
+
+change_bg = alter_bg(model_type = "pb")
+change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
+change_bg.change_bg_img(f_image_path = "sample2.jpg",b_image_path = "background.jpg", output_image_name="new_img.jpg", detect = "person")
+```
+
+It is still the same code except we introduced an extra parameter detect in the  function.
+
+```python
+change_bg.change_bg_img(f_image_path = "sample2.jpg",b_image_path = "background.jpg", output_image_name="new_img.jpg", detect = "person")
+```
+
+The parameter detect is set to *person*.
+
+
+
+**Output Image**
+
+![sam2](Images/image_person.jpg)
+
+
+This is the new image with only our target object shown. 
+If we intend to show only the cars present in this image. We just have to change the value of the parameter person to *car*.
+
+```python
+change_bg.change_bg_img(f_image_path = "sample2.jpg",b_image_path = "background.jpg", output_image_name="new_img.jpg", detect = "car")
+```
+
+**Output Image**
+
+![sam3](Images/img_car.jpg)
+
+
 ## Assign a distinct color to the background of an image
 
 You can choose to assign any distinct color to the background of your image. This is also possible with five lines of code.
@@ -80,21 +135,21 @@ You can choose to assign any distinct color to the background of your image. Thi
 import pixellib
 from pixellib.tune_bg import alter_bg
 
-change_bg = alter_bg()
-change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
-change_bg.color_bg("sample.jpg", colors = (0,0,255), output_image_name="colored_bg.jpg")
+change_bg = alter_bg(model_type = "pb")
+change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
+change_bg.color_bg("sample2.jpg", colors = (0,0,255), output_image_name="colored_bg.jpg", detect = "person")
 ```
 
 It is very similar to the code used above for changing the background of an image with a picture. The only difference is that we replaced the function *change_bg_img* to *color_bg* the function that will handle color change.
 
 ``` python
-change_bg.color_bg("sample.jpg", colors = (0, 0, 255), output_image_name="colored_bg.jpg")
+change_bg.color_bg("sample2.jpg", colors = (0, 0, 255), output_image_name="colored_bg.jpg", detect = "person")
 ```
 The function *color_bg* takes the parameter *colors* and we provided the RGB value of the color we want to use. We want the image to have a blue background and the color's RGB value is set to blue which is *(0, 0, 255)*.  
 
 **Colored Image**
 
-![alt4](Images/blue.jpg)
+![alt4](Images/image_blue.jpg)
 
 ## Note:
 **You can assign any color to the background of your image, just provide the RGB value of the color.**
@@ -106,24 +161,24 @@ The function *color_bg* takes the parameter *colors* and we provided the RGB val
 import pixellib
 from pixellib.tune_bg import alter_bg
 
-change_bg = alter_bg()
-change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
-change_bg.gray_bg("sample.jpg",output_image_name="gray_img.jpg")
+change_bg = alter_bg(model_type = "pb")
+change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
+change_bg.gray_bg("sample2.jpg",output_image_name="gray_img.jpg", detect = "person")
 ```
 
 ``` python
-change_bg.gray_bg("sample.jpg",output_image_name="gray_img.jpg")
+change_bg.gray_bg("sample.jpg",output_image_name="gray_img.jpg", detect = "person")
 ```
 
 It is still the same code except we called the function *gray_bg* to grayscale the background of the image.
 
 **Output Image**
 
-![alt7](Images/gray.jpg)
+![alt7](Images/image_gray.jpg)
 
 ## Blur the background of an image
 
-**sample2.jpg**
+**sample3.jpg**
 
 
 ![alt_sam2](Images/p2.jpg)
@@ -179,10 +234,30 @@ The image is blurred with a deep effect.
 import pixellib
 from pixellib.tune_bg import alter_bg
 
-change_bg = alter_bg()
-change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
+change_bg = alter_bg(model_type = "pb")
+change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
 change_bg.blur_bg("sample2.jpg", moderate = True, output_image_name="blur_img.jpg")
 ```
+
+## Blur a target object in an image
+
+```python
+change_bg.blur_bg("sample2.jpg", extreme = True, output_image_name="blur_img.jpg", detect = "person")
+```
+
+![sam3](Images/blur_person.jpg)
+Our target object is a person.
+
+
+```python
+change_bg.blur_bg("sample2.jpg", extreme = True, output_image_name="blur_img.jpg", detect = "car")
+```
+
+![sam3](Images/image_car.jpg)
+Our target object is a car.
+
+
+
 
 
 
@@ -197,8 +272,8 @@ import pixellib
 from pixellib.tune_bg import alter_bg
 import cv2
 
-change_bg = alter_bg()
-change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
+change_bg = alter_bg(model_type = "pb")
+change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
 output = change_bg.change_bg_img(f_image_path = "sample.jpg",b_image_path = "background.jpg")
 cv2.imwrite("img.jpg", output)
 ```
@@ -210,8 +285,8 @@ import pixellib
 from pixellib.tune_bg import alter_bg
 import cv2
 
-change_bg = alter_bg()
-change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
+change_bg = alter_bg(model_type = "pb")
+change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
 output = change_bg.color_bg("sample.jpg", colors = (0, 0, 255))
 cv2.imwrite("img.jpg", output)
 ```
@@ -223,8 +298,8 @@ import pixellib
 from pixellib.tune_bg import alter_bg
 import cv2
 
-change_bg = alter_bg()
-change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
+change_bg = alter_bg(model_type = "pb")
+change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
 output = change_bg.blur_bg("sample.jpg", moderate = True)
 cv2.imwrite("img.jpg", output)
 ```
@@ -236,8 +311,8 @@ import pixellib
 from pixellib.tune_bg import alter_bg
 import cv2
 
-change_bg = alter_bg()
-change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
+change_bg = alter_bg(model_type = "pb")
+change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
 output = change_bg.gray_bg("sample.jpg")
 cv2.imwrite("img.jpg", output)
 ```
@@ -251,8 +326,8 @@ import pixellib
 from pixellib.tune_bg import alter_bg
 import cv2
 
-change_bg = alter_bg()
-change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
+change_bg = alter_bg(model_type = "pb")
+change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
 
 capture = cv2.VideoCapture(0)
 while True:
@@ -270,8 +345,8 @@ import pixellib
 from pixellib.tune_bg import alter_bg
 import cv2
 
-change_bg = alter_bg()
-change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
+change_bg = alter_bg(model_type = "pb")
+change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
 
 capture = cv2.VideoCapture(0)
 while True:
@@ -289,8 +364,8 @@ import pixellib
 from pixellib.tune_bg import alter_bg
 import cv2
 
-change_bg = alter_bg()
-change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
+change_bg = alter_bg(model_type = "pb")
+change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
 
 capture = cv2.VideoCapture(0)
 while True:

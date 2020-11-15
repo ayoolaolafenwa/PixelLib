@@ -337,7 +337,8 @@ class alter_bg():
         ret, frame = capture.read()
         if ret:
           seg_frame = self.segmentAsPascalvoc(frame, process_frame=True)
-          print("No. of frames:", counter)
+          if verbose is not None:
+            print("No. of frames:", counter)
           if detect is not None:
             target_class = self.target_obj(detect)
             seg_frame[1][seg_frame[1] != target_class] = 0
