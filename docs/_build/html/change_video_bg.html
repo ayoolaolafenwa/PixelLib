@@ -164,26 +164,25 @@
 <p>Blur the background of a video with five lines of code.</p>
 <p><strong>sample_video</strong></p>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
-    <iframe src="https://www.youtube.com/embed/8fkthbwqmB0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
-</div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
-<span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
+    <iframe src="https://www.youtube.com/embed/8fkthbwqmB0", frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 
-<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">()</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">blur_video</span><span class="p">(</span><span class="s2">&quot;sample_video.mp4&quot;</span><span class="p">,</span> <span class="n">moderate</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;blur_video.mp4&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><em>Line 1-4</em>: We imported pixellib and from pixellib we imported in the class <em>alter_bg</em>. Instance of the class is created and we finally loaded the deeplabv3+ model. Download deeplabv3+ pascalvoc model from <a class="reference external" href="https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.1/deeplabv3_xception_tf_dim_ordering_tf_kernels.h5">here</a></p>
+</div><p><strong>Line 1-4</strong>: We imported pixellib and from pixellib we imported in the class <em>alter_bg</em>. Instance of the class is created and and within the class we added a parameter model_type and set it to <strong>pb</strong>. we finally loaded the deeplabv3+ model. PixelLib supports two deeplabv3+ models, keras and tensorflow model. The keras model is extracted from the tensorflow model’s checkpoint. The tensorflow model performs better than the keras model extracted from its checkpoint. We will make use of tensorflow model. Download the model from <a class="reference external" href="https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.1/xception_pascalvoc.pb">here</a>.</p>
 <p>There are three parameters that control the degree in which the background is blurred.</p>
 <p><em>low:</em> When it is set to true the background is blurred slightly.</p>
 <p><em>moderate:</em> When it is set to true the background is moderately blurred.</p>
 <p><em>extreme:</em> When it is set to true the background is deeply blurred.</p>
+<p><strong>Detection of target object</strong></p>
+<p>In some applications you may not want to detect all the objects in a video, you may just want to target a particular object. By default the model detects all the objects it supports in an image or video. It is possible to filter other objects’ detections and detect a target object in an image or video.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">blur_video</span><span class="p">(</span><span class="s2">&quot;sample_video.mp4&quot;</span><span class="p">,</span> <span class="n">extreme</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;blur_video.mp4&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>This is the line of code that blurs the video’s background. This function takes in four parameters:</p>
-<p><em>video_path:</em> the path to the video file we want to blur.</p>
-<p><em>moderate:</em> it is set to true and the background of the video would be moderatly blurred.</p>
-<p><em>frames_per_second:</em> this is the parameter to set the number of frames per second for the output video file. In this case it is set to 15 i.e the saved video file will have 15 frames per second.</p>
-<p><em>output_video_name:</em> the saved video. The output video will be saved in your current working directory.</p>
-<p><em>Output Video</em></p>
+<p><strong>video_path:</strong> the path to the video file we want to blur.</p>
+<p><strong>moderate:</strong> it is set to true and the background of the video would be moderatly blurred.</p>
+<p><strong>frames_per_second:</strong> this is the parameter to set the number of frames per second for the output video file. In this case it is set to 10 i.e the saved video file will have 10 frames per second.</p>
+<p><strong>output_video_name:</strong> the saved video. The output video will be saved in your current working directory.</p>
+<p><strong>detect (optional):</strong> this is the parameter that detects a particular object and filters out other detectons. It is set to detect <em>person</em> in the video.</p>
+<p><strong>Output Video</strong></p>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
     <iframe src="https://www.youtube.com/embed/duTiKf76ZU8", frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div><p><strong>Blur the Background of Camera’s Feeds</strong></p>
@@ -191,12 +190,11 @@
 <span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
 
-
 <span class="n">capture</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">()</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">blur_camera</span><span class="p">(</span><span class="n">capture</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">moderate</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">show_frames</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">frame_name</span> <span class="o">=</span> <span class="s2">&quot;frame&quot;</span><span class="p">,</span> <span class="n">check_fps</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">(</span><span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;xception_pascalvoc.pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">blur_camera</span><span class="p">(</span><span class="n">capture</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">extreme</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">show_frames</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">frame_name</span> <span class="o">=</span> <span class="s2">&quot;frame&quot;</span><span class="p">,</span> <span class="n">check_fps</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>
@@ -204,56 +202,106 @@
 </pre></div>
 </div>
 <p>We imported cv2 and included the code to capture camera frames.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">blur_camera</span><span class="p">(</span><span class="n">capture</span><span class="p">,</span> <span class="n">moderate</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">show_frames</span><span class="o">=</span> <span class="kc">True</span><span class="p">,</span><span class="n">frame_name</span><span class="o">=</span> <span class="s2">&quot;frame&quot;</span><span class="p">,</span> <span class="n">check_fps</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">blur_camera</span><span class="p">(</span><span class="n">capture</span><span class="p">,</span> <span class="n">moderate</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">show_frames</span><span class="o">=</span> <span class="kc">True</span><span class="p">,</span><span class="n">frame_name</span><span class="o">=</span> <span class="s2">&quot;frame&quot;</span><span class="p">,</span> <span class="n">check_fps</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>In the code for blurring camera’s frames, we replaced the video filepath to capture i.e we are going to process a stream of camera frames instead of a video file.We added extra parameters for the purpose of showing the camera frames:</p>
-<p><em>show_frames:</em> this parameter handles showing of segmented camera frames and press q to exist.
-<em>frame_name:</em> this is the name given to the shown camera’s frame.</p>
-<p><em>check_fps:</em> You may want to check the number of fames processed, just set the parameter check_fps is true.It will print out the number of frames per seconds. In this case it is 30 frames per second.</p>
+<p><strong>show_frames:</strong> this parameter handles showing of segmented camera frames and press q to exist.
+<strong>frame_name:</strong> this is the name given to the shown camera’s frame.</p>
+<p><strong>check_fps:</strong> You may want to check the number of fames processed, just set the parameter check_fps is true.It will print out the number of frames per seconds. In this case it is 30 frames per second.</p>
+<p><strong>Output Video</strong></p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+    <iframe src="https://www.youtube.com/embed/zBSD0us1oWQ", frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div><p>A sample video of camera’s feeds with my background blurred.</p>
+<p><strong>Create a Virtual Background for a Video</strong></p>
+<p>You can make use of any image to create a virtual background for a video.</p>
+<p><strong>sample video</strong></p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+    <iframe src="https://www.youtube.com/embed/lsox_IZLj7U", frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div><p><strong>Image to serve as background for a video</strong></p>
+<img alt="_images/space.jpg" src="_images/space.jpg" />
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
+
+<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">(</span><span class="n">model_type</span><span class="o">=</span><span class="s2">&quot;pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;xception_pascalvoc.pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">change_video_bg</span><span class="p">(</span><span class="s2">&quot;sample_video.mp4&quot;</span><span class="p">,</span> <span class="s2">&quot;bg.jpg&quot;</span><span class="p">,</span> <span class="n">frames_per_second</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">change_video_bg</span><span class="p">(</span><span class="s2">&quot;sample_video.mp4&quot;</span><span class="p">,</span> <span class="s2">&quot;bg.jpg&quot;</span><span class="p">,</span> <span class="n">frames_per_second</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is still the same code except we called the function <em>change_video_bg</em> to create a virtual background for the video. The function takes in the path of the image we want to use as background for the video.</p>
+<p><strong>Output Video</strong></p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+    <iframe src="https://www.youtube.com/embed/699Hyi6oZFs", frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div><p><strong>Create a Virtual Background for Camera’s Feeds</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+<span class="n">cap</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">(</span><span class="n">model_type</span><span class="o">=</span><span class="s2">&quot;pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;xception_pascalvoc.pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">change_camera_bg</span><span class="p">(</span><span class="n">cap</span><span class="p">,</span> <span class="s2">&quot;bg.jpg&quot;</span><span class="p">,</span> <span class="n">frames_per_second</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">show_frames</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frame_name</span><span class="o">=</span><span class="s2">&quot;frame&quot;</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">change_camera_bg</span><span class="p">(</span><span class="n">cap</span><span class="p">,</span> <span class="s2">&quot;bg.jpg&quot;</span><span class="p">,</span> <span class="n">frames_per_second</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">show_frames</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frame_name</span><span class="o">=</span><span class="s2">&quot;frame&quot;</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is similar to the code we used to blur camera’s frames. The only difference is that we called the function <em>change_bg.change_camera_bg</em>. We performed the same routine, replaced the video filepath to capture and added the same parameters.</p>
+<p><strong>Output Video</strong></p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+    <iframe src="https://www.youtube.com/embed/K3GIdfYyv_g", frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div><p>PixelLib successfully created a virtual effect on my background.</p>
 <p><strong>Color Video Background</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
 
-<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">()</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">color_video</span><span class="p">(</span><span class="s2">&quot;sample_video.mp4&quot;</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span>  <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">(</span><span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;xception_pascalvoc.pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">color_video</span><span class="p">(</span><span class="s2">&quot;sample_video.mp4&quot;</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span>  <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">color_video</span><span class="p">(</span><span class="s2">&quot;sample_video.mp4&quot;</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span>  <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">color_video</span><span class="p">(</span><span class="s2">&quot;sample_video.mp4&quot;</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span>  <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>It is still the same code except we called the function <em>color_video</em> to give the video’s background a distinct color. The function <em>color_bg</em> takes the parameter <em>colors</em> and we provided the RGB value of the color we want to use. We want the image to have a white background and the color’s RGB value is set to white which is (255, 255, 255).</p>
+<p>It is still the same code except we called the function <em>color_video</em> to give the video’s background a distinct color. The function <em>color_bg</em> takes the parameter <em>colors</em> and we provided the RGB value of the color we want to use. We want the image to have a green background and the color’s RGB value is set to green which is (0, 128, 0).</p>
 <p><strong>Output Video</strong></p>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
-    <iframe src="https://www.youtube.com/embed/yrKV-lLuZCo", frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    <iframe src="https://www.youtube.com/embed/aA4g7qccczg", frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div><p><strong>Color the Background of Camera’s Feeds</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
 
 <span class="n">capture</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">()</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">color_camera</span><span class="p">(</span><span class="n">capture</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">colors</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">show_frames</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">frame_name</span> <span class="o">=</span> <span class="s2">&quot;frame&quot;</span><span class="p">,</span> <span class="n">check_fps</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">(</span><span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;xception_pascalvoc.pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">color_camera</span><span class="p">(</span><span class="n">capture</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">colors</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">show_frames</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">frame_name</span> <span class="o">=</span> <span class="s2">&quot;frame&quot;</span><span class="p">,</span> <span class="n">check_fps</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">color_camera</span><span class="p">(</span><span class="n">capture</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">colors</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">show_frames</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">frame_name</span> <span class="o">=</span> <span class="s2">&quot;frame&quot;</span><span class="p">,</span> <span class="n">check_fps</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">color_camera</span><span class="p">(</span><span class="n">capture</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">colors</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">show_frames</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">frame_name</span> <span class="o">=</span> <span class="s2">&quot;frame&quot;</span><span class="p">,</span> <span class="n">check_fps</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>It is similar to the code we used to blur camera’s frames. The only difference is that we called the function <em>color_camera</em>. We performed the same routine, replaced the video filepath to capture and added the same parameters.</p>
+<p><strong>Output Video</strong></p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+    <iframe src= "https://www.youtube.com/embed/8TvTNHOMZV0", frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div><p>A sample video of camera’s feeds with my background colored green.</p>
 <p><strong>Grayscale Video Background</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
 
-<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">()</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">gray_video</span><span class="p">(</span><span class="s2">&quot;sample_video.mp4&quot;</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">(</span><span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;xception_pascalvoc.pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">gray_video</span><span class="p">(</span><span class="s2">&quot;sample_video.mp4&quot;</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">gray_video</span><span class="p">(</span><span class="s2">&quot;sample_video.mp4&quot;</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">gray_video</span><span class="p">(</span><span class="s2">&quot;sample_video.mp4&quot;</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We are still using the same code but called a different function <em>gray_video</em> to grayscale the background of the video.</p>
@@ -266,10 +314,10 @@
 <span class="kn">import</span> <span class="nn">cv2</span>
 
 <span class="n">capture</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">()</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">gray_camera</span><span class="p">(</span><span class="n">capture</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">show_frames</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">frame_name</span> <span class="o">=</span> <span class="s2">&quot;Ayo&quot;</span><span class="p">,</span> <span class="n">check_fps</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">(</span><span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;xception_pascalvoc.pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">gray_camera</span><span class="p">(</span><span class="n">capture</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">show_frames</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">frame_name</span> <span class="o">=</span> <span class="s2">&quot;frame&quot;</span><span class="p">,</span> <span class="n">check_fps</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>It is similar to the code we used to color camera’s frames. The only difference is that we called the function <em>gray_camera</em>. We performed the same routine, replaced the video filepath to capture and added the same parameters.</p>

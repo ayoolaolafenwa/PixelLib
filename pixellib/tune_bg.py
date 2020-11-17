@@ -255,7 +255,7 @@ class alter_bg():
     if verbose is not None:
       print("processing frame......")
 
-    seg_frame = self.segmentAsPascalvoc(frame)
+    seg_frame = self.segmentAsPascalvoc(frame, process_frame= True)
     
     if detect is not None:
       target_class = self.target_obj(detect)

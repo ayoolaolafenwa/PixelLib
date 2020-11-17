@@ -244,17 +244,22 @@ change_bg.blur_bg("sample2.jpg", moderate = True, output_image_name="blur_img.jp
 ```python
 change_bg.blur_bg("sample2.jpg", extreme = True, output_image_name="blur_img.jpg", detect = "person")
 ```
+Our target object is a person.
 
 ![sam3](Images/blur_person.jpg)
-Our target object is a person.
+
+
 
 
 ```python
 change_bg.blur_bg("sample2.jpg", extreme = True, output_image_name="blur_img.jpg", detect = "car")
 ```
 
-![sam3](Images/image_car.jpg)
 Our target object is a car.
+
+![sam3](Images/image_car.jpg)
+
+
 
 
 
@@ -274,7 +279,7 @@ import cv2
 
 change_bg = alter_bg(model_type = "pb")
 change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
-output = change_bg.change_bg_img(f_image_path = "sample.jpg",b_image_path = "background.jpg")
+output = change_bg.change_bg_img(f_image_path = "sample.jpg",b_image_path = "background.jpg", detect = "person")
 cv2.imwrite("img.jpg", output)
 ```
 
@@ -287,7 +292,7 @@ import cv2
 
 change_bg = alter_bg(model_type = "pb")
 change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
-output = change_bg.color_bg("sample.jpg", colors = (0, 0, 255))
+output = change_bg.color_bg("sample.jpg", colors = (0, 0, 255), detect = "person")
 cv2.imwrite("img.jpg", output)
 ```
 
@@ -300,7 +305,7 @@ import cv2
 
 change_bg = alter_bg(model_type = "pb")
 change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
-output = change_bg.blur_bg("sample.jpg", moderate = True)
+output = change_bg.blur_bg("sample.jpg", moderate = True, detect = "person")
 cv2.imwrite("img.jpg", output)
 ```
 
@@ -313,11 +318,30 @@ import cv2
 
 change_bg = alter_bg(model_type = "pb")
 change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
-output = change_bg.gray_bg("sample.jpg")
+output = change_bg.gray_bg("sample.jpg", detect = "person")
 cv2.imwrite("img.jpg", output)
 ```
 
 ## Process frames directly with Image Tuning...
+
+**Create a virtual background for frames**
+
+```python
+import pixellib
+from pixellib.tune_bg import alter_bg
+import cv2
+
+change_bg = alter_bg(model_type = "pb")
+change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
+
+capture = cv2.VideoCapture(0)
+while True:
+    ret, frame = capture.read()
+    output = change_bg.change_frame_bg(frame, "flowers.jpg", detect = "person")
+    cv2.imshow("frame", output)
+    if  cv2.waitKey(25) & 0xff == ord('q'):
+        break
+```
 
 **Blur frames**
 
@@ -332,7 +356,7 @@ change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
 capture = cv2.VideoCapture(0)
 while True:
     ret, frame = capture.read()
-    output = change_bg.blur_frame(frame, extreme = True)
+    output = change_bg.blur_frame(frame, extreme = True, detect = "person")
     cv2.imshow("frame", output)
     if  cv2.waitKey(25) & 0xff == ord('q'):
         break
@@ -351,7 +375,7 @@ change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
 capture = cv2.VideoCapture(0)
 while True:
     ret, frame = capture.read()
-    output = change_bg.color_frame(frame, colors = (255, 255, 255))
+    output = change_bg.color_frame(frame, colors = (255, 255, 255), detect = "person")
     cv2.imshow("frame", output)
     if  cv2.waitKey(25) & 0xff == ord('q'):
         break
@@ -365,7 +389,7 @@ from pixellib.tune_bg import alter_bg
 import cv2
 
 change_bg = alter_bg(model_type = "pb")
-change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
+change_bg.load_pascalvoc_model("xception_pascalvoc.pb", detect = "person")
 
 capture = cv2.VideoCapture(0)
 while True:

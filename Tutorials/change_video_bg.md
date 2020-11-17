@@ -105,6 +105,14 @@ In the code for blurring camera's frames, we replaced the video filepath to capt
 
 **check_fps:** You may want to check the number of fames processed, just set the parameter check_fps is true.It will print out the number of frames per seconds. In this case it is 30 frames per second.
 
+**Output Video**
+
+[![sam1](Images/cam_blur.png)](https://www.youtube.com/watch?v=zBSD0us1oWQ)
+
+
+A sample video of camera's feeds with my background blurred.
+
+
 
 ## Create a Virtual Background for a Video
 
@@ -133,6 +141,9 @@ change_bg.change_video_bg("sample_video.mp4", "bg.jpg", frames_per_second = 10, 
 
 It is still the same code except we called the function *change_video_bg* to create a virtual background for the video. The function takes in the path of the image we want to use as background for the video. 
 
+**Output Video**
+
+[![video2](Images/video2.png)](https://www.youtube.com/watch?v=699Hyi6oZFs)
 
 
 ## Create a Virtual Background for Camera's Feeds
@@ -155,11 +166,12 @@ change_bg.change_camera_bg(cap, "bg.jpg", frames_per_second = 10, show_frames=Tr
 
 It is similar to the code we used to blur camera's frames. The only difference is that we called the function *change_bg.change_camera_bg*. We performed the same routine, replaced the video filepath to capture and added the same parameters. 
 
-
 **Output Video**
 
-[![video2](Images/video2.png)](https://www.youtube.com/watch?v=699Hyi6oZFs)
+[![sam2](Images/vir.png)](https://www.youtube.com/watch?v=K3GIdfYyv_g)
 
+
+PixelLib successfully created a virtual effect on my background. 
 
 ## Color Video Background
 
@@ -204,6 +216,12 @@ output_video_name="output_video.mp4", detect = "person")
 
 It is similar to the code we used to blur camera's frames. The only difference is that we called the function *color_camera*. We performed the same routine, replaced the video filepath to capture and added the same parameters. 
 
+**Output Video**
+
+[![sam3](Images/green.png)](https://www.youtube.com/watch?v=8TvTNHOMZV0)
+
+A sample video of camera's feeds with my background colored green.
+
 
 ## Grayscale Video Background
 
@@ -238,7 +256,7 @@ import cv2
 capture = cv2.VideoCapture(0)
 change_bg = alter_bg(model_type = "pb")
 change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
-change_bg.gray_camera(capture, frames_per_second=10, show_frames = True, frame_name = "Ayo", check_fps = True,
+change_bg.gray_camera(capture, frames_per_second=10, show_frames = True, frame_name = "frame", check_fps = True,
 output_video_name="output_video.mp4", detect = "person")
 ```
 It is similar to the code we used to color camera's frames. The only difference is that we called the function *gray_camera*. We performed the same routine, replaced the video filepath to capture and added the same parameters. 

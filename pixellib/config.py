@@ -129,7 +129,7 @@ class Config(object):
 
     # Minimum probability value to accept a detected instance
     # ROIs below this threshold are skipped
-    DETECTION_MIN_CONFIDENCE = 0.7
+    #DETECTION_MIN_CONFIDENCE = 0.7
 
     # Non-maximum suppression threshold for detection
     DETECTION_NMS_THRESHOLD = 0.3
@@ -170,13 +170,14 @@ class Config(object):
     # Gradient norm clipping
     GRADIENT_CLIP_NORM = 5.0
 
-    def __init__(self, BACKBONE,  NUM_CLASSES , class_names, IMAGES_PER_GPU, IMAGE_MAX_DIM, IMAGE_MIN_DIM, IMAGE_RESIZE_MODE,GPU_COUNT):
+    def __init__(self, BACKBONE,  NUM_CLASSES , class_names, IMAGES_PER_GPU, IMAGE_MAX_DIM, IMAGE_MIN_DIM, DETECTION_MIN_CONFIDENCE, IMAGE_RESIZE_MODE,GPU_COUNT):
         self.GPU_COUNT = GPU_COUNT
         self.IMAGES_PER_GPU = IMAGES_PER_GPU
         self.NUM_CLASSES = NUM_CLASSES
         self.class_names = class_names
         self.IMAGE_MAX_DIM = IMAGE_MAX_DIM
         self.IMAGE_MIN_DIM = IMAGE_MIN_DIM
+        self.DETECTION_MIN_CONFIDENCE = DETECTION_MIN_CONFIDENCE
         
         # Backbone network architecture
         # Supported values are: resnet50, resnet101.

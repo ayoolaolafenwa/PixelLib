@@ -12,15 +12,29 @@ import time
 class configuration(Config):
     NAME = "configuration"
 
-coco_config = configuration(BACKBONE = "resnet101",  NUM_CLASSES =  81,  class_names = ["BG"], IMAGES_PER_GPU = 1, IMAGE_MAX_DIM = 1024, IMAGE_MIN_DIM = 800,
-IMAGE_RESIZE_MODE ="square",  GPU_COUNT = 1) 
+coco_config = configuration(BACKBONE = "resnet101",  NUM_CLASSES =  81,  class_names = ["BG"], IMAGES_PER_GPU = 1, 
+DETECTION_MIN_CONFIDENCE = 0.7,IMAGE_MAX_DIM = 1024, IMAGE_MIN_DIM = 800,IMAGE_RESIZE_MODE ="square",  GPU_COUNT = 1) 
 
 
 class instance_segmentation():
-    def __init__(self):
-        self.model_dir = os.getcwd()
+    def __init__(self, detection_speed = None):
+        if detection_speed == "average":
+            coco_config.IMAGE_MAX_DIM = 512
+            coco_config.IMAGE_MIN_DIM = 512
+            coco_config.DETECTION_MIN_CONFIDENCE = 0.45
 
-    
+        elif detection_speed == "fast":
+            coco_config.IMAGE_MAX_DIM = 384
+            coco_config.IMAGE_MIN_DIM = 384
+            coco_config.DETECTION_MIN_CONFIDENCE = 0.25
+
+        elif detection_speed == "rapid":
+            coco_config.IMAGE_MAX_DIM = 256
+            coco_config.IMAGE_MIN_DIM = 256
+            coco_config.DETECTION_MIN_CONFIDENCE = 0.20   
+            
+
+        self.model_dir = os.getcwd()
 
     def load_model(self, model_path):
         self.model = MaskRCNN(mode = "inference", model_dir = self.model_dir, config = coco_config)
@@ -334,10 +348,11 @@ class custom_segmentation:
     def __init__(self):
        self.model_dir = os.getcwd()
 
-    def inferConfig(self,name = None, network_backbone = "resnet101",  num_classes =  1,  class_names = ["BG"], batch_size = 1, image_max_dim = 512, image_min_dim = 512, image_resize_mode ="square", gpu_count = 1):
+    def inferConfig(self,name = None, network_backbone = "resnet101",  num_classes =  1,  class_names = ["BG"], batch_size = 1, detection_threshold = 0.7, 
+    image_max_dim = 512, image_min_dim = 512, image_resize_mode ="square", gpu_count = 1):
         self.config = Config(BACKBONE = network_backbone, NUM_CLASSES = 1 +  num_classes,  class_names = class_names, 
-        IMAGES_PER_GPU = batch_size, IMAGE_MAX_DIM = image_max_dim, IMAGE_MIN_DIM = image_min_dim, IMAGE_RESIZE_MODE = image_resize_mode,
-        GPU_COUNT = gpu_count)
+        IMAGES_PER_GPU = batch_size, IMAGE_MAX_DIM = image_max_dim, IMAGE_MIN_DIM = image_min_dim, DETECTION_MIN_CONFIDENCE = detection_threshold,
+        IMAGE_RESIZE_MODE = image_resize_mode,GPU_COUNT = gpu_count)
         
     def load_model(self, model_path):
         #load the weights for COCO

@@ -172,28 +172,26 @@
 <p><em>Grayscale the background of an image</em></p>
 <p><em>Blur the background of an image</em></p>
 <p><strong>Change the background of an image with a picture</strong></p>
-<p><em>sample.jpg</em></p>
+<p><strong>sample.jpg</strong></p>
 <img alt="_images/p1.jpg" src="_images/p1.jpg" />
 <p><strong>background.jpg</strong></p>
 <img alt="_images/flowers.jpg" src="_images/flowers.jpg" />
 <p>We intend to change the background of our sample image with this image. We can do this easily with just five lines of code.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
-
-
-<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">()</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">(</span><span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;xception_pascalvoc.pb&quot;</span><span class="p">)</span>
 <span class="n">change_bg</span><span class="o">.</span><span class="n">change_bg_img</span><span class="p">(</span><span class="n">f_image_path</span> <span class="o">=</span> <span class="s2">&quot;sample.jpg&quot;</span><span class="p">,</span><span class="n">b_image_path</span> <span class="o">=</span> <span class="s2">&quot;background.jpg&quot;</span><span class="p">,</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;new_img.jpg&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
 
-<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">()</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">(</span><span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;xception_pascalvoc.pb&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><em>Line 1-4</em>: We imported pixellib and from pixellib we imported in the class <em>alter_bg</em>. Instance of the class is created and we finally loaded the deeplabv3+ model. Download deeplabv3+ pascalvoc model from <a class="reference external" href="https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.1/deeplabv3_xception_tf_dim_ordering_tf_kernels.h5">here</a></p>
+<p><strong>Line 1-4</strong>: We imported pixellib and from pixellib we imported in the class <em>alter_bg</em>. Instance of the class is created and within the class we added a parameter model_type and set it to <strong>pb</strong>. we finally loaded the deeplabv3+ model. PixelLib supports two deeplabv3+ models, keras and tensorflow model. The keras model is extracted from the tensorflow model’s checkpoint. The tensorflow model performs better than the keras model extracted from its checkpoint. We will make use of tensorflow model. Download the model from <a class="reference external" href="https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.1/xception_pascalvoc.pb">here</a>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">change_bg_img</span><span class="p">(</span><span class="n">f_image_path</span> <span class="o">=</span> <span class="s2">&quot;sample.jpg&quot;</span><span class="p">,</span><span class="n">b_image_path</span> <span class="o">=</span> <span class="s2">&quot;background.jpg&quot;</span><span class="p">,</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;new_img.jpg&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -205,41 +203,74 @@
 <p><strong>Output Image</strong></p>
 <img alt="_images/img.jpg" src="_images/img.jpg" />
 <p>Wow! We have successfully changed the background of our image.</p>
-<p>** Assign a distinct color to the background of an image **</p>
+<p><strong>Detection of target object</strong></p>
+<p>In some applications you may not want to detect all the objects in an image or video, you may just want to target a particular object. By default the model detects all the objects it supports in an image or video. It is possible to filter other objects’ detections and detect a target object in an image or video.</p>
+<p><strong>sample2.jpg</strong></p>
+<img alt="_images/image.jpg" src="_images/image.jpg" />
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">change_bg_img</span><span class="p">(</span><span class="n">f_image_path</span> <span class="o">=</span> <span class="s2">&quot;sample2.jpg&quot;</span><span class="p">,</span><span class="n">b_image_path</span> <span class="o">=</span> <span class="s2">&quot;background.jpg&quot;</span><span class="p">,</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;new_img.jpg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output Image</strong></p>
+<img alt="_images/image_img.jpg" src="_images/image_img.jpg" />
+<p>It successfully change the image’s background, but our goal is to change the background of the person in this image. We are not comfortable with the other objects showing, this is because car is one the objects supported by the model. Therefore there is need to modify the code to detect a target object.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
+
+<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">(</span><span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;xception_pascalvoc.pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">change_bg_img</span><span class="p">(</span><span class="n">f_image_path</span> <span class="o">=</span> <span class="s2">&quot;sample2.jpg&quot;</span><span class="p">,</span><span class="n">b_image_path</span> <span class="o">=</span> <span class="s2">&quot;background.jpg&quot;</span><span class="p">,</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;new_img.jpg&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is still the same code except we introduced an extra parameter detect in the  function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">change_bg_img</span><span class="p">(</span><span class="n">f_image_path</span> <span class="o">=</span> <span class="s2">&quot;sample2.jpg&quot;</span><span class="p">,</span><span class="n">b_image_path</span> <span class="o">=</span> <span class="s2">&quot;background.jpg&quot;</span><span class="p">,</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;new_img.jpg&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The parameter detect is set to <em>person</em>.</p>
+<p><strong>Output Image</strong></p>
+<img alt="_images/image_person.jpg" src="_images/image_person.jpg" />
+<p>This is the new image with only our target object shown.
+If we intend to show only the cars present in this image. We just have to change the value of the parameter person to <em>car</em>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">change_bg_img</span><span class="p">(</span><span class="n">f_image_path</span> <span class="o">=</span> <span class="s2">&quot;sample2.jpg&quot;</span><span class="p">,</span><span class="n">b_image_path</span> <span class="o">=</span> <span class="s2">&quot;background.jpg&quot;</span><span class="p">,</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;new_img.jpg&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;car&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output Image</strong></p>
+<img alt="_images/img_car.jpg" src="_images/img_car.jpg" />
+<p><em>Assign a distinct color to the background of an image</em></p>
 <p>You can choose to assign any distinct color to the background of your image. This is also possible with five lines of code.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
 
-<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">()</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">color_bg</span><span class="p">(</span><span class="s2">&quot;sample.jpg&quot;</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">),</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;colored_bg.jpg&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">(</span><span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;xception_pascalvoc.pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">color_bg</span><span class="p">(</span><span class="s2">&quot;sample2.jpg&quot;</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">),</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;colored_bg.jpg&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>It is very similar to the code used above for changing the background of an image with a picture. The only difference is that we replaced the function <em>change_bg_img</em> to <em>color_bg</em> the function that will handle color change.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">color_bg</span><span class="p">(</span><span class="s2">&quot;sample.jpg&quot;</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;colored_bg.jpg&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">color_bg</span><span class="p">(</span><span class="s2">&quot;sample2.jpg&quot;</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;colored_bg.jpg&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The function <em>color_bg</em> takes the parameter <em>colors</em> and we provided the RGB value of the color we want to use. We want the image to have a blue background and the color’s RGB value is set to blue which is <em>(0, 0, 255)</em>.</p>
-<p><em>Colored Image</em></p>
-<img alt="_images/blue.jpg" src="_images/blue.jpg" />
-<p><strong>Note:</strong> You can assign any color to the background of your image, just provide the RGB value of the color.</p>
+<p><strong>Colored Image</strong></p>
+<img alt="_images/image_blue.jpg" src="_images/image_blue.jpg" />
+<p><strong>Note:</strong>
+You can assign any color to the background of your image, just provide the RGB value of the color.</p>
 <p><strong>Grayscale the background of an image</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
 
-<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">()</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">gray_bg</span><span class="p">(</span><span class="s2">&quot;sample.jpg&quot;</span><span class="p">,</span><span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;gray_img.jpg&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">(</span><span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;xception_pascalvoc.pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">gray_bg</span><span class="p">(</span><span class="s2">&quot;sample2.jpg&quot;</span><span class="p">,</span><span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;gray_img.jpg&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">gray_bg</span><span class="p">(</span><span class="s2">&quot;sample.jpg&quot;</span><span class="p">,</span><span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;gray_img.jpg&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">gray_bg</span><span class="p">(</span><span class="s2">&quot;sample.jpg&quot;</span><span class="p">,</span><span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;gray_img.jpg&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>It is still the same code except we called the function <em>gray_bg</em> to grayscale the background of the image.</p>
 <p><strong>Output Image</strong></p>
-<img alt="_images/gray.jpg" src="_images/gray.jpg" />
+<img alt="_images/image_gray.jpg" src="_images/image_gray.jpg" />
 <p><strong>Blur the background of an image</strong></p>
-<p><strong>sample2.jpg</strong></p>
+<p><strong>sample3.jpg</strong></p>
 <img alt="_images/p2.jpg" src="_images/p2.jpg" />
 <p>You can also apply the effect of bluring the background of your image. You can control how blur the background will be.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">blur_bg</span><span class="p">(</span><span class="s2">&quot;sample2.jpg&quot;</span><span class="p">,</span> <span class="n">low</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;blur_img.jpg&quot;</span><span class="p">)</span>
@@ -270,11 +301,22 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
 
-<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">()</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">(</span><span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;xception_pascalvoc.pb&quot;</span><span class="p">)</span>
 <span class="n">change_bg</span><span class="o">.</span><span class="n">blur_bg</span><span class="p">(</span><span class="s2">&quot;sample2.jpg&quot;</span><span class="p">,</span> <span class="n">moderate</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;blur_img.jpg&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><strong>Blur a target object in an image</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">blur_bg</span><span class="p">(</span><span class="s2">&quot;sample2.jpg&quot;</span><span class="p">,</span> <span class="n">extreme</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;blur_img.jpg&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Our target object is a person.</p>
+<img alt="_images/blur_person.jpg" src="_images/blur_person.jpg" />
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">change_bg</span><span class="o">.</span><span class="n">blur_bg</span><span class="p">(</span><span class="s2">&quot;sample2.jpg&quot;</span><span class="p">,</span> <span class="n">extreme</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;blur_img.jpg&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;car&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Our target object is a car.</p>
+<img alt="_images/image_car.jpg" src="_images/image_car.jpg" />
 <p><strong>Obtain output arrays</strong></p>
 <p>You can obtain the output arrays of your changed image….</p>
 <p><em>Obtain output array of the changed image array</em></p>
@@ -282,9 +324,9 @@
 <span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
 
-<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">()</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
-<span class="n">output</span> <span class="o">=</span> <span class="n">change_bg</span><span class="o">.</span><span class="n">change_bg_img</span><span class="p">(</span><span class="n">f_image_path</span> <span class="o">=</span> <span class="s2">&quot;sample.jpg&quot;</span><span class="p">,</span><span class="n">b_image_path</span> <span class="o">=</span> <span class="s2">&quot;background.jpg&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">(</span><span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;xception_pascalvoc.pb&quot;</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">change_bg</span><span class="o">.</span><span class="n">change_bg_img</span><span class="p">(</span><span class="n">f_image_path</span> <span class="o">=</span> <span class="s2">&quot;sample.jpg&quot;</span><span class="p">,</span><span class="n">b_image_path</span> <span class="o">=</span> <span class="s2">&quot;background.jpg&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
 <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s2">&quot;img.jpg&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -293,9 +335,9 @@
 <span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
 
-<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">()</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
-<span class="n">output</span> <span class="o">=</span> <span class="n">change_bg</span><span class="o">.</span><span class="n">color_bg</span><span class="p">(</span><span class="s2">&quot;sample.jpg&quot;</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>
+<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">(</span><span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;xception_pascalvoc.pb&quot;</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">change_bg</span><span class="o">.</span><span class="n">color_bg</span><span class="p">(</span><span class="s2">&quot;sample.jpg&quot;</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
 <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s2">&quot;img.jpg&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -304,9 +346,9 @@
 <span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
 
-<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">()</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
-<span class="n">output</span> <span class="o">=</span> <span class="n">change_bg</span><span class="o">.</span><span class="n">blur_bg</span><span class="p">(</span><span class="s2">&quot;sample.jpg&quot;</span><span class="p">,</span> <span class="n">moderate</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">(</span><span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;xception_pascalvoc.pb&quot;</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">change_bg</span><span class="o">.</span><span class="n">blur_bg</span><span class="p">(</span><span class="s2">&quot;sample.jpg&quot;</span><span class="p">,</span> <span class="n">moderate</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
 <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s2">&quot;img.jpg&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -315,25 +357,42 @@
 <span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
 
-<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">()</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
-<span class="n">output</span> <span class="o">=</span> <span class="n">change_bg</span><span class="o">.</span><span class="n">gray_bg</span><span class="p">(</span><span class="s2">&quot;sample.jpg&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">(</span><span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;xception_pascalvoc.pb&quot;</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">change_bg</span><span class="o">.</span><span class="n">gray_bg</span><span class="p">(</span><span class="s2">&quot;sample.jpg&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
 <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s2">&quot;img.jpg&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Process frames directly with Image Tuning…</strong></p>
+<p><em>Process frames directly with Image Tuning…</em></p>
+<p><em>Create a virtual background for frames</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">(</span><span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;xception_pascalvoc.pb&quot;</span><span class="p">)</span>
+
+<span class="n">capture</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+ <span class="n">ret</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">capture</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+ <span class="n">output</span> <span class="o">=</span> <span class="n">change_bg</span><span class="o">.</span><span class="n">change_frame_bg</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="s2">&quot;flowers.jpg&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
+ <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s2">&quot;frame&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+ <span class="k">if</span>  <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xff</span> <span class="o">==</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">):</span>
+     <span class="k">break</span>
+</pre></div>
+</div>
 <p><em>Blur frames</em></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
 
-<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">()</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">(</span><span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;xception_pascalvoc.pb&quot;</span><span class="p">)</span>
 
 <span class="n">capture</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
  <span class="n">ret</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">capture</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
- <span class="n">output</span> <span class="o">=</span> <span class="n">change_bg</span><span class="o">.</span><span class="n">blur_frame</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">extreme</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+ <span class="n">output</span> <span class="o">=</span> <span class="n">change_bg</span><span class="o">.</span><span class="n">blur_frame</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">extreme</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
  <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s2">&quot;frame&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
  <span class="k">if</span>  <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xff</span> <span class="o">==</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">):</span>
      <span class="k">break</span>
@@ -344,16 +403,16 @@
 <span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
 
-<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">()</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">(</span><span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;xception_pascalvoc.pb&quot;</span><span class="p">)</span>
 
 <span class="n">capture</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
- <span class="n">ret</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">capture</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
- <span class="n">output</span> <span class="o">=</span> <span class="n">change_bg</span><span class="o">.</span><span class="n">color_frame</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>
- <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s2">&quot;frame&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
- <span class="k">if</span>  <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xff</span> <span class="o">==</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">):</span>
-     <span class="k">break</span>
+<span class="n">ret</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">capture</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">change_bg</span><span class="o">.</span><span class="n">color_frame</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s2">&quot;frame&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+<span class="k">if</span>  <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xff</span> <span class="o">==</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">):</span>
+    <span class="k">break</span>
 </pre></div>
 </div>
 <p><em>Grayscale frames</em></p>
@@ -361,8 +420,8 @@
 <span class="kn">from</span> <span class="nn">pixellib.tune_bg</span> <span class="kn">import</span> <span class="n">alter_bg</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
 
-<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">()</span>
-<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span> <span class="o">=</span> <span class="n">alter_bg</span><span class="p">(</span><span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;pb&quot;</span><span class="p">)</span>
+<span class="n">change_bg</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;xception_pascalvoc.pb&quot;</span><span class="p">,</span> <span class="n">detect</span> <span class="o">=</span> <span class="s2">&quot;person&quot;</span><span class="p">)</span>
 
 <span class="n">capture</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
