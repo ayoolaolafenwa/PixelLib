@@ -169,7 +169,7 @@ It is similar to the code we used to blur camera's frames. The only difference i
 <<<<<<< HEAD
 **Output Video**
 
-[![sam2](Images/vir.png)](https://www.youtube.com/watch?v=K3GIdfYyv_g)
+[![sam2](Images/vir_bg.png)](https://www.youtube.com/watch?v=K3GIdfYyv_g)
 =======
 >>>>>>> 7a48700c595bf5423df62842af987253839cea9a
 
