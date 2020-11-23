@@ -18,20 +18,20 @@ Install PixelLib and its dependencies
 
 Install latest version of tensorflow(Tensorflow 2.0+) with:
 
-*pip3 install tensorflow*
+`pip3 install tensorflow`
 
 If you have have a pc enabled GPU, Install tensorflow--gpu's version that is compatible with the cuda's version on your pc:
 
 
-*pip3 install tensorflow--gpu*
+`pip3 install tensorflow--gpu`
 
 **Install imgaug with**:
 
-*pip3 install imgaug*
+`pip3 install imgaug`
 
 **Install Pixellib with**:
 
-*pip3 install pixellib --upgrade*
+`pip3 install pixellib --upgrade`
 
 **Visit PixelLib's official documentation on** [readthedocs](https://pixellib.readthedocs.io/en/latest/)
 
