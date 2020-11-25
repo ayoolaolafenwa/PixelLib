@@ -78,31 +78,6 @@ We added an extra parameter **overlay** and set it to **true**, we produced an i
 ![alt_test3](Images/test3.jpg)
 
 
-* You can check the inference time required for performing segmentation by modifying the code below..
-
-```python
-  
-import pixellib
-from pixellib.semantic import semantic_segmentation
-import time
-
-segment_image = semantic_segmentation()
-segment_image.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
-
-start = time.time()
-segment_image.segmentAsPascalvoc("sample1.jpg", output_image_name= "image_new.jpg")
-
-end = time.time()
-print(f"Inference Time: {end-start:.2f}seconds")
-
-``` 
-```
-  Inference Time: 7.71seconds
-``` 
-
-
-It took 7.71 seconds to run semantic segmentation on the image.
-
 **Specialised uses of PixelLib may require you to return the array of the segmentation's output.**
 
 * Obtain the array of the segmentation's output by using this code, 

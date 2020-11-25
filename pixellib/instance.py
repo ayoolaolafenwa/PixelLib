@@ -17,18 +17,18 @@ DETECTION_MIN_CONFIDENCE = 0.7,IMAGE_MAX_DIM = 1024, IMAGE_MIN_DIM = 800,IMAGE_R
 
 
 class instance_segmentation():
-    def __init__(self, detection_speed = None):
-        if detection_speed == "average":
+    def __init__(self, infer_speed = None):
+        if infer_speed == "average":
             coco_config.IMAGE_MAX_DIM = 512
             coco_config.IMAGE_MIN_DIM = 512
             coco_config.DETECTION_MIN_CONFIDENCE = 0.45
 
-        elif detection_speed == "fast":
+        elif infer_speed == "fast":
             coco_config.IMAGE_MAX_DIM = 384
             coco_config.IMAGE_MIN_DIM = 384
             coco_config.DETECTION_MIN_CONFIDENCE = 0.25
 
-        elif detection_speed == "rapid":
+        elif infer_speed == "rapid":
             coco_config.IMAGE_MAX_DIM = 256
             coco_config.IMAGE_MIN_DIM = 256
             coco_config.DETECTION_MIN_CONFIDENCE = 0.20   

@@ -88,28 +88,7 @@ We added an extra parameter **overlay** and set it to **true**, we produced an i
 
 .. image:: photos/bedad1.jpg
 
-* You can check the inference time required for performing segmentation by modifying the code below..
 
-.. code-block:: python
-  
-  import pixellib
-  from pixellib.semantic import semantic_segmentation
-  import time
-
-  segment_image = semantic_segmentation()
-  segment_image.load_ade20k_model("deeplabv3_xception65_ade20k.h5")
-
-  start = time.time()
-  segment_image.segmentAsAde20k("sample2.jpg", output_image_name= "image_new.jpg")
-
-  end = time.time()
-  print(f"Inference Time: {end-start:.2f}seconds")
-
-.. code-block:: python
-
-  Inference Time: 7.52seconds
-
-It took 7.52 seconds to run semantic segmentation on the image.
 
 **Specialised uses of PixelLib may require you to return the array of the segmentation's output.**
 
