@@ -68,7 +68,7 @@ change_bg.blur_bg("sample.jpg", extreme = True, detect = "person", output_image_
 
 ![alt_bg1](Images/blur_person.jpg)
 
-**[Tutorial on Background Editing in Images](Tutorials/change_image_bg.md)**
+### [Tutorial on Background Editing in Images](Tutorials/change_image_bg.md)
 
 
 ```python
