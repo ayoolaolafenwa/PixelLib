@@ -79,7 +79,9 @@ You get a saved image with both segmentation masks and bounding boxes.
 PixelLib now supports the ability to adjust the speed of detection according to a user's needs. The inference speed with a minimal reduction in the accuracy of detection. There are three main parameters that control the speed of detection.
 
 **average**
+
 **fast**
+
 **rapid**
 
 By default the detection speed is about 1 second for a processing a single image using Nvidia GeForce 1650.
