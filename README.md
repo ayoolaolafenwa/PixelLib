@@ -146,7 +146,7 @@ PixelLib supports the implementation of instance segmentation  of objects in ima
 
 [![img3](Images/vid_ins.jpg)](https://www.youtube.com/watch?v=bGPO1bCZLAo)
 
-**[Tutorial on Instance Segmentation of Videos](Tutorials/video_instance.md)**
+**[Tutorial on Instance Segmentation of Videos](Tutorials/video_instance.md)** <br/> <br/>
 
 
 # Custom Training with 7 Lines of Code
