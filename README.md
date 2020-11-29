@@ -56,6 +56,9 @@ change_bg.blur_bg("sample.jpg", extreme = True, detect = "person", output_image_
 
 ![alt_bg1](Images/blur_person.jpg)
 
+**[Tutorial on Background Editing in Images](Tutorials/change_image_bg.md)**
+
+
 ### The following features are supported for background editing,
 
 **1.Create a virtual background for an image and a video**
@@ -67,7 +70,6 @@ change_bg.blur_bg("sample.jpg", extreme = True, detect = "person", output_image_
 **4.Grayscale the background of an image and a video**
 
 
-**[Tutorial on Background Editing in Images](Tutorials/change_image_bg.md)**
 
 
 
