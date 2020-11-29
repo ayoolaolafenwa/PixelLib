@@ -39,7 +39,7 @@ pip3 install pixellib --upgrade
 **Visit PixelLib's official documentation on** [readthedocs](https://pixellib.readthedocs.io/en/latest/)
 
 
-## Background Editing in Images and Videos with 5 Lines of Code:
+# Background Editing in Images and Videos with 5 Lines of Code:
 PixelLib uses object segmentation to perform excellent foreground and background separation. It makes possible to alter the background of any image and video using just five lines of code.
 
 ![alt_bg1](Images/image.jpg)
@@ -67,7 +67,7 @@ change_bg.blur_bg("sample.jpg", extreme = True, detect = "person", output_image_
 **4.Grayscale the background of an image and a video**
 
 
-## [Background Editing in Images](Tutorials/change_image_bg.md)
+## [Tutorial on Background Editing in Images](Tutorials/change_image_bg.md)
 
 
 
@@ -82,7 +82,7 @@ change_bg.change_video_bg("sample_video.mp4", "bg.jpg", frames_per_second = 10, 
 
 [![video2](Images/video2.png)](https://www.youtube.com/watch?v=699Hyi6oZFs)
 
-## [Background Editing in Videos](Tutorials/change_video_bg.md)
+**[Tutorial on Background Editing in Videos](Tutorials/change_video_bg.md)**
 
 
 
@@ -114,7 +114,7 @@ There are two types of Deeplabv3+ models available for performing **semantic seg
 
 **Note** Deeplab and mask r-ccn models are available  in the [release](https://github.com/ayoolaolafenwa/PixelLib/releases) of this repository.
 
-## Instance Segmentation of objects in Images and Videos with 5 Lines of Code
+# Instance Segmentation of objects in Images and Videos with 5 Lines of Code
 PixelLib supports the implementation of instance segmentation  of objects in images and videos with Mask-RCNN using 5 Lines of Code.
 
 
@@ -132,7 +132,7 @@ PixelLib supports the implementation of instance segmentation  of objects in ima
 
 ![img1](Images/ins.jpg)
 
-## [Instance Segmentation of Images](Tutorials/image_instance.md)
+**[Tutorial on Instance Segmentation of Images](Tutorials/image_instance.md)**
 
 ```python
 
@@ -149,7 +149,7 @@ PixelLib supports the implementation of instance segmentation  of objects in ima
 ## [Instance Segmentation of Videos](Tutorials/video_instance.md)
 
 
-## Custom Training with 7 Lines of Code
+# Custom Training with 7 Lines of Code
 PixelLib supports the ability to train a custom segmentation model using just seven lines of code.
 
 ```python
@@ -168,7 +168,7 @@ PixelLib supports the ability to train a custom segmentation model using just se
 
 **This is a result from a model trained with PixelLib.**
 
-## [Custom Instance Segmentation Training](Tutorials/custom_train.md)
+**[Tutorial on Custom Instance Segmentation Training](Tutorials/custom_train.md)**
 
 
 Perform inference on objects in images and videos with your custom model.
@@ -187,11 +187,11 @@ Perform inference on objects in images and videos with your custom model.
 
 [![alt_infer](Images/but_vid.png)](https://www.youtube.com/watch?v=bWQGxaZIPOo)
 
-## [Instance Segmentation of objects in images and videos With A Custom Model](Tutorials/custom_inference.md)
+**[Tutorial on Instance Segmentation of objects in images and videos With A Custom Model](Tutorials/custom_inference.md)**
 
 
 
-## Semantic Segmentation of 150 Classes of Objects in images and videos with 5 Lines of Code
+# Semantic Segmentation of 150 Classes of Objects in images and videos with 5 Lines of Code
 PixelLib makes it possible to perform state of the art semantic segmentation of 150 classes of objects with Ade20k model using 5 Lines of Code. Perform indoor and outdoor segmentation of scenes with PixelLib by using Ade20k model.
 
 ![img4](Images/two5.jpg)
@@ -207,7 +207,7 @@ PixelLib makes it possible to perform state of the art semantic segmentation of 
 ```
 ![img5](Images/a5.jpg)
 
-## [Semantic Segmentation of 150 Classes of Objects in Images ](Tutorials/image_ade20k.md)
+**[Tutorial on Semantic Segmentation of 150 Classes of Objects in Images ](Tutorials/image_ade20k.md)**
 
 ```python
 
@@ -222,7 +222,7 @@ PixelLib makes it possible to perform state of the art semantic segmentation of 
 [![alt_vid2](Images/new_vid2.jpg)](https://www.youtube.com/watch?v=hxczTe9U8jY)
 
 
-## [Semantic Segmentation of 150 Classes of Objects Videos](Tutorials/video_ade20k.md) <br /> <br />
+**[Tutorial on Semantic Segmentation of 150 Classes of Objects Videos](Tutorials/video_ade20k.md)** <br /> <br />
 
 
 ## Semantic Segmentation of 20 Common Objects with 5 Lines of Code
