@@ -85,7 +85,9 @@ PixelLib now supports the ability to adjust the speed of detection according to 
 3 **rapid**
 
 By default the detection speed is about 1 second for a processing a single image using Nvidia GeForce 1650.
+
 **Using Average Detection   Mode**
+
 ```python
 
   import pixellib
