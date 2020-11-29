@@ -42,6 +42,18 @@ pip3 install pixellib --upgrade
 # Background Editing in Images and Videos with 5 Lines of Code:
 PixelLib uses object segmentation to perform excellent foreground and background separation. It makes possible to alter the background of any image and video using just five lines of code.
 
+#### The following features are supported for background editing,
+
+**1.Create a virtual background for an image and a video**
+
+**2.Assign a distinct color to the background of an image and a video**
+
+**3.Blur the background of an image and a video**
+
+**4.Grayscale the background of an image and a video**
+
+
+
 ![alt_bg1](Images/image.jpg)
 
 
@@ -57,20 +69,6 @@ change_bg.blur_bg("sample.jpg", extreme = True, detect = "person", output_image_
 ![alt_bg1](Images/blur_person.jpg)
 
 **[Tutorial on Background Editing in Images](Tutorials/change_image_bg.md)**
-
-
-### The following features are supported for background editing,
-
-**1.Create a virtual background for an image and a video**
-
-**2.Assign a distinct color to the background of an image and a video**
-
-**3.Blur the background of an image and a video**
-
-**4.Grayscale the background of an image and a video**
-
-
-
 
 
 ```python
