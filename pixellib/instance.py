@@ -8,6 +8,8 @@ from pixellib.mask_rcnn import MaskRCNN
 from pixellib.config import Config
 import colorsys
 import time
+from datetime import datetime
+
 
 class configuration(Config):
     NAME = "configuration"
@@ -218,13 +220,14 @@ class instance_segmentation():
 
     def process_camera(self, cam, show_bboxes = False,  output_video_name = None, frames_per_second = None, show_frames = None, frame_name = None, verbose = None, check_fps = False):
         capture = cam
-        width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
-        height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
-        codec = cv2.VideoWriter_fourcc(*'DIVX')
-        if frames_per_second is not None:
-            save_video = cv2.VideoWriter(output_video_name, codec, frames_per_second, (width, height))
+        if output_video_name is not None:
+          width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
+          height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
+          save_video = cv2.VideoWriter(output_video_name, cv2.VideoWriter_fourcc(*'DIVX'), frames_per_second, (width, height))
+        
         counter = 0
-        start = time.time()     
+          
+        start = datetime.now()       
 
         coco_config.class_names = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
                'bus', 'train', 'truck', 'boat', 'traffic light',
@@ -244,17 +247,17 @@ class instance_segmentation():
            
         if show_bboxes == False:
             while True:
-                counter +=1
+                
                 ret, frame = capture.read()
                 if ret:
                     # Run detection
                     results = self.model.detect([frame])
-                    if verbose is not None:
-                        print("No. of frames:", counter)
+                    
                     r = results[0]   
                     #apply segmentation mask
                     output = display_instances(frame, r['rois'], r['masks'], r['class_ids'], coco_config.class_names)
-                    output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
+                    counter +=1
+                   
 
                     if show_frames == True:
                         if frame_name is not None:
@@ -263,23 +266,29 @@ class instance_segmentation():
                             if cv2.waitKey(25) & 0xFF == ord('q'):
                                 break  
 
+                    
+
                     if output_video_name is not None:
+                        output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
                         save_video.write(output)
                    
-                else:
+                elif counter == 30:
                     break  
                  
-            end = time.time()
-            if verbose is not None: 
-                print(f"Processed {counter} frames in {end-start:.1f} seconds")  
             
+            end = datetime.now()
             if check_fps == True:
-                out = capture.get(cv2.CAP_PROP_FPS)
-                print(f"{out} frames per second")   
+                timetaken = (end-start).total_seconds()
+                
+                out = counter / timetaken
+                print(f"{out:.3f} frames per second")   
+
+            if verbose is not None: 
+                print(f"Processed {counter} frames in {timetaken:.1f} seconds")     
            
             capture.release()
 
-            if frames_per_second is not None:
+            if output_video_name is not None:
                 save_video.release()  
 
              
@@ -288,18 +297,17 @@ class instance_segmentation():
 
         else:
             while True:
-                counter +=1
+               
                 ret, frame = capture.read()
                 if ret:
                     # Run detection
                     results = self.model.detect([frame])
-                    if verbose is not None:
-                        print("No. of frames:", counter)
+                    
                     r = results[0]   
                     #apply segmentation mask with bounding boxes
                     output = display_box_instances(frame, r['rois'], r['masks'], r['class_ids'], coco_config.class_names, r['scores'])
-                    output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
-
+                    
+                    counter +=1
                     if show_frames == True:
                         if frame_name is not None:
                             cv2.imshow(frame_name, output)
@@ -307,27 +315,30 @@ class instance_segmentation():
                             if cv2.waitKey(25) & 0xFF == ord('q'):
                                 break  
         
+                    
                     if output_video_name is not None:
+                        output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
                         save_video.write(output)
-                else:
-                    break
-            end = time.time()
-            if verbose is not None:
-                print(f"Processed {counter} frames in {end-start:.1f} seconds") 
 
+                elif counter == 30:
+                    break
+
+            end = datetime.now()
             if check_fps == True:
-                out = capture.get(cv2.CAP_PROP_FPS)
-                print(f"{out} frames per second")   
-        
+                timetaken = (end-start).total_seconds()
+                fps = counter / timetaken
+                print(f"{fps:.3f} frames per second") 
+
+            if verbose is not None:
+                print(f"Processed {counter} frames in {timetaken:.1f} seconds") 
+                    
+                 
             capture.release()
 
-            if frames_per_second is not None:
+            if output_video_name is not None:
                 save_video.release() 
 
             return r, output          
-
-
-
 
 
 
@@ -485,30 +496,34 @@ class custom_segmentation:
             if frames_per_second is not None:
                 save_video.release()
                  
-            return r, output         
+            return r, output   
+            
+                  
     def process_camera(self, cam, show_bboxes = False,  output_video_name = None, frames_per_second = None, show_frames = None, frame_name = None, verbose = None, check_fps = False):
         capture = cam
-        width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
-        height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
-        codec = cv2.VideoWriter_fourcc(*'DIVX')
-        if frames_per_second is not None:
+        
+        if output_video_name is not None:
+            width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
+            height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
+            codec = cv2.VideoWriter_fourcc(*'DIVX')
             save_video = cv2.VideoWriter(output_video_name, codec, frames_per_second, (width, height))
+
         counter = 0
-        start = time.time()     
+        start = datetime.now()     
 
         if show_bboxes == False:
             while True:
-                counter +=1
+                
                 ret, frame = capture.read()
                 if ret:
                     # Run detection
                     results = self.model.detect([frame])
-                    if verbose is not None:
-                       print("No. of frames:", counter)
+                    
                     r = results[0]   
                     #apply segmentation mask
                     output = display_instances(frame, r['rois'], r['masks'], r['class_ids'], self.config.class_names)
-                    output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
+                    counter +=1
+                    
 
                     if show_frames == True:
                         if frame_name is not None:
@@ -518,22 +533,27 @@ class custom_segmentation:
                                 break  
 
                     if output_video_name is not None:
+                        output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
                         save_video.write(output)
                    
-                else:
+                elif counter == 30:
                     break  
                  
-            end = time.time() 
-            if verbose is not None:
-                print(f"Processed {counter} frames in {end-start:.1f} seconds")  
+            end = datetime.now() 
+            
             
             if check_fps == True:
-                out = capture.get(cv2.CAP_PROP_FPS)
-                print(f"{out} frames per second")   
+                timetaken = (end-start).total_seconds()
+                fps = counter/timetaken
+                print(f"{fps} frames per seconds")   
+
+            if verbose is not None:
+                print(f"Processed {counter} frames in {timetaken:.1f} seconds") 
+                        
            
             capture.release()
 
-            if frames_per_second is not None:
+            if output_video_name is not None:
                 save_video.release()  
 
              
@@ -542,18 +562,17 @@ class custom_segmentation:
 
         else:
             while True:
-                counter +=1
+                
                 ret, frame = capture.read()
                 if ret:
                     # Run detection
                     results = self.model.detect([frame])
-                    if verbose is not None:
-                        print("No. of frames:", counter)
+                    
                     r = results[0]   
                     #apply segmentation mask with bounding boxes
                     output = display_box_instances(frame, r['rois'], r['masks'], r['class_ids'], self.config.class_names, r['scores'])
-                    output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
-
+                    
+                    counter +=1
                     if show_frames == True:
                         if frame_name is not None:
                             cv2.imshow(frame_name, output)
@@ -562,20 +581,26 @@ class custom_segmentation:
                                 break  
         
                     if output_video_name is not None:
+                        output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
                         save_video.write(output)
-                else:
+
+                elif counter == 30:
                     break
-            end = time.time()
-            if verbose is not None:
-                print(f"Processed {counter} frames in {end-start:.1f} seconds") 
+
+            end = datetime.now()
+            
 
             if check_fps == True:
-                out = capture.get(cv2.CAP_PROP_FPS)
-                print(f"{out} frames per seconds")   
+                timetaken = (end-start).total_seconds()
+                fps = counter/timetaken
+                print(f"{fps} frames per seconds")
+
+            if verbose is not None:
+                print(f"Processed {counter} frames in {timetaken:.1f} seconds")     
         
             capture.release()
 
-            if frames_per_second is not None:
+            if output_video_name is not None:
                 save_video.release() 
 
             return r, output          
@@ -620,10 +645,8 @@ def display_instances(image, boxes, masks, class_ids,  class_name):
     n_instances = boxes.shape[0]
     colors = random_colors(n_instances)
 
-    if not n_instances:
-        print('NO INSTANCES TO DISPLAY')
-    else:
-        assert boxes.shape[0] == masks.shape[-1] == class_ids.shape[0]
+    
+    assert boxes.shape[0] == masks.shape[-1] == class_ids.shape[0]
 
     for i, color in enumerate(colors):
         mask = masks[:, :, i]

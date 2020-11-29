@@ -18,28 +18,47 @@ Install PixelLib and its dependencies
 
 Install latest version of tensorflow(Tensorflow 2.0+) with:
 
-*pip3 install tensorflow*
+```
+pip3 install tensorflow
+```
 
 If you have have a pc enabled GPU, Install tensorflow--gpu's version that is compatible with the cuda's version on your pc:
 
 
-*pip3 install tensorflow--gpu*
+```
+pip3 install tensorflow--gpu
+```
 
-**Install imgaug with**:
-
-*pip3 install imgaug*
 
 **Install Pixellib with**:
 
-*pip3 install pixellib --upgrade*
+```
+pip3 install pixellib --upgrade
+```
 
 **Visit PixelLib's official documentation on** [readthedocs](https://pixellib.readthedocs.io/en/latest/)
 
 
-## Perform background editing in images and videos:
-The following features are supported for background editing,
+## Background Editing in Images and Videos with 5 Lines of Code:
+PixelLib uses object segmentation to perform excellent foreground and background separation. It makes possible to alter the background of any image and video using just five lines of code.
 
-**1.Change image background with  picture**
+![alt_bg1](Images/image.jpg)
+
+
+```python
+import pixellib
+from pixellib.tune_bg import alter_bg
+
+change_bg = alter_bg(model_type = "pb")
+change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
+change_bg.blur_bg("sample.jpg", extreme = True, detect = "person", output_image_name="blur_img.jpg")
+```
+
+![alt_bg1](Images/blur_person.jpg)
+
+## The following features are supported for background editing,
+
+**1.Create a virtual background for an image and a video**
 
 **2.Assign a distinct color to the background of an image and a video**
 
@@ -47,14 +66,23 @@ The following features are supported for background editing,
 
 **4.Grayscale the background of an image and a video**
 
-# Read this tutorial on background editing.
 
-## [Implement background editing in images with five lines of code](Tutorials/change_image_bg.md).
-![alt_bg1](Images/bg_cover.jpg)
+## [Background Editing in Images](Tutorials/change_image_bg.md)
 
 
-## [Implement background editing in videos with five lines of code](Tutorials/change_video_bg.md).
-[![alt_bg1](Images/green_git.png)](https://www.youtube.com/watch?v=aA4g7qccczg)
+
+```python
+import pixellib
+from pixellib.tune_bg import alter_bg
+
+change_bg = alter_bg(model_type="pb")
+change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
+change_bg.change_video_bg("sample_video.mp4", "bg.jpg", frames_per_second = 10, output_video_name="output_video.mp4", detect = "person")
+```
+
+[![video2](Images/video2.png)](https://www.youtube.com/watch?v=699Hyi6oZFs)
+
+## [Background Editing in Videos](Tutorials/change_video_bg.md)
 
 
 
@@ -92,88 +120,146 @@ There are two types of Deeplabv3+ models available for performing **semantic seg
 
 **Note** Deeplab and mask r-ccn models are available  in the [release](https://github.com/ayoolaolafenwa/PixelLib/releases) of this repository.
 
+## Instance Segmentation of objects in Images and Videos with 5 Lines of Code
+PixelLib supports the implementation of instance segmentation  of objects in images and videos with Mask-RCNN using 5 Lines of Code.
 
 
+![img1](Images/cycle.jpg)
 
-## [Instance Segmentation of Images With PixelLib Using Mask-RCNN COCO Model](Tutorials/image_instance.md)
-Learn how to implement state of the art instance segmentation of objects with Mask-RCNN with PixelLib using 5 Lines of Code.
+```python
 
-![alt_test1](instance_mask/result2.jpg)
+  import pixellib
+  from pixellib.instance import instance_segmentation
+
+  segment_image = instance_segmentation()
+  segment_image.load_model("mask_rcnn_coco.h5") 
+  segment_image.segmentImage("sample.jpg", show_bboxes = True, output_image_name = "image_new.jpg")
+```
+
+![img1](Images/ins.jpg)
+
+## [Instance Segmentation of Images](Tutorials/image_instance.md)
+
+```python
+
+  import pixellib
+  from pixellib.instance import instance_segmentation
+
+  segment_video = instance_segmentation()
+  segment_video.load_model("mask_rcnn_coco.h5")
+  segment_video.process_video("sample_video2.mp4", show_bboxes = True, frames_per_second= 15, output_video_name="output_video.mp4")
+```
+
+[![img3](Images/vid_ins.jpg)](https://www.youtube.com/watch?v=bGPO1bCZLAo)
+
+## [Instance Segmentation of Videos](Tutorials/video_instance.md)
 
 
+## Custom Training with 7 Lines of Code
+PixelLib supports the ability to train a custom segmentation model using just seven lines of code.
 
+```python
 
+   import pixellib
+   from pixellib.custom_train import instance_custom_training
 
-
-
-## [Instance Segmentation of Videos With PixelLib Using Mask-RCNN COCO Model](Tutorials/video_instance.md)
-Implement state of the art instance segmentation of objects in video's feeds with Mask-RCNN model using 5 Lines of Code.
-
-[![alt_vid3](Images/vid_ins.jpg)](https://www.youtube.com/watch?v=bGPO1bCZLAo)
-
-
-
-
-
-
-
-## [Custom Instance Segmentation Training](Tutorials/custom_train.md)
-Perform instance segmentation on objects with your custom model with 7 Lines of Code.
+   train_maskrcnn = instance_custom_training()
+   train_maskrcnn.modelConfig(network_backbone = "resnet101", num_classes= 2, batch_size = 4)
+   train_maskrcnn.load_pretrained_model("mask_rcnn_coco.h5")
+   train_maskrcnn.load_dataset("Nature")
+   train_maskrcnn.train_model(num_epochs = 300, augmentation=True,  path_trained_models = "mask_rcnn_models")
+```
 
 ![alt_train](instance_mask/squirrel_seg.jpg)
 
+**This is a result from a model trained with PixelLib.**
+
+## [Custom Instance Segmentation Training](Tutorials/custom_train.md)
 
 
+Perform inference on objects in images and videos with your custom model.
 
 
+```python
+  
+  import pixellib
+  from pixellib.instance import custom_segmentation
 
-
-## [Instance Segmentation of objects in images and videos With A Custom Model](Tutorials/custom_inference.md)
-
-Perform inference on objects with your custom model.
+  test_video = custom_segmentation()
+  test_video.inferConfig(num_classes=  2, class_names=["BG", "butterfly", "squirrel"])
+  test_video.load_model("Nature_model_resnet101")
+  test_video.process_video("sample_video1.mp4", show_bboxes = True,  output_video_name="video_out.mp4", frames_per_second=15)
+```
 
 [![alt_infer](Images/but_vid.png)](https://www.youtube.com/watch?v=bWQGxaZIPOo)
 
+## [Instance Segmentation of objects in images and videos With A Custom Model](Tutorials/custom_inference.md)
 
 
 
+## Semantic Segmentation of 150 Classes of Objects in images and videos with 5 Lines of Code
+PixelLib makes it possible to perform state of the art semantic segmentation of 150 classes of objects with Ade20k model using 5 Lines of Code. Perform indoor and outdoor segmentation of scenes with PixelLib by using Ade20k model.
+
+![img4](Images/two5.jpg)
+
+```python
+
+  import pixellib
+  from pixellib.semantic import semantic_segmentation
+
+  segment_image = semantic_segmentation()
+  segment_image.load_ade20k_model("deeplabv3_xception65_ade20k.h5")
+  segment_image.segmentAsAde20k("sample.jpg", overlay = True, output_image_name="image_new.jpg")
+```
+![img5](Images/a5.jpg)
+
+## [Semantic Segmentation of 150 Classes of Objects in Images ](Tutorials/image_ade20k.md)
+
+```python
+
+  import pixellib
+  from pixellib.semantic import semantic_segmentation
+
+  segment_video = semantic_segmentation()
+  segment_video.load_ade20k_model("deeplabv3_xception65_ade20k.h5")
+  segment_video.process_video_ade20k("sample_video.mp4", overlay = True, frames_per_second= 15, output_video_name="output_video.mp4")  
+```
+
+[![alt_vid2](Images/new_vid2.jpg)](https://www.youtube.com/watch?v=hxczTe9U8jY)
 
 
-
-## [Semantic Segmentation of Images With PixelLib Using Ade20k model](Tutorials/image_ade20k.md)
-Learn how to perform state of the art semantic segmentation of 150 classes of objects with Ade20k model using 5 Lines of Code. Perform indoor and outdoor segmentation of scenes with PixelLib by using Ade20k model.
-
-![alt_test1](Images/ade_cover.jpg)
+## [Semantic Segmentation of 150 Classes of Objects Videos](Tutorials/video_ade20k.md) <br />
 
 
+## Semantic Segmentation of 20 Common Objects with 5 Lines of Code
+PixelLib supports the semantic segmentation of 20 unique objects.
 
+![img6](Images/download2.jpg)
 
+```python
 
+import pixellib
+from pixellib.semantic import semantic_segmentation
 
-## [Semantic Segmentation of Videos With PixelLib Using Ade20k model](Tutorials/video_ade20k.md)
-Implement state of the art semantic segmentation of 150 classes objects in video's feeds using Ade20k model with PixelLib using 5 Lines of Code.
+segment_image = semantic_segmentation()
+segment_image.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5") 
+segment_image.segmentAsPascalvoc("sample.jpg", output_image_name = "image_new.jpg")
+```
 
-[![alt_vid1](Images/new_vid2.jpg)](https://www.youtube.com/watch?v=hxczTe9U8jY)
+![img6](Images/pascal.jpg)
 
+## [Semantic Segmentation of objects in Images With PixelLib Using Pascalvoc model](Tutorials/image_pascalvoc.md)
 
+```python
 
+  import pixellib
+  from pixellib.semantic import semantic_segmentation
 
+  segment_video = semantic_segmentation()
+  segment_video.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
+  segment_video.process_video_pascalvoc("sample_video1.mp4",  overlay = True, frames_per_second= 15, output_video_name="output_video.mp4")
+```  
 
-
-
-## [Semantic Segmentation of Images With PixelLib Using Pascalvoc model](Tutorials/image_pascalvoc.md)
-Learn how to perform state of the art semantic segmentation of 20 common objects with Pascalvoc model using 5 Lines of Code. Perform segmentation of unique objects with PixelLib by using Pascalvoc model.
-
-![alt_test3](Images/pascal.jpg)
-
-
-
-
-
-
-
-## [Semantic Segmentation of Videos With PixelLib Using Pascalvoc model](Tutorials/video_pascalvoc.md)
-Implement state of the art semantic segmentation of 20 unique objects in video's feeds using Pascalvoc model with PixelLib using 5 Lines of Code.
 
 [![alt_vid2](Images/pascal_voc.png)](https://www.youtube.com/watch?v=l9WMqT2znJE)
 

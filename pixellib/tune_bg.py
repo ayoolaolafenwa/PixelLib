@@ -5,6 +5,7 @@ from .deeplab import Deeplab_xcep_pascal
 from .semantic import obtain_segmentation
 import cv2
 import time
+from datetime import datetime
 
 
 class alter_bg():
@@ -325,53 +326,58 @@ class alter_bg():
   def change_camera_bg(self, cam, b_image_path, frames_per_second = None, check_fps = False,show_frames = False, 
   frame_name = None, verbose = None, output_video_name = None, detect = None):
     capture = cam
-    width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
-    height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    if frames_per_second is not None:
+    
+    if output_video_name is not None:
+      width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
+      height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
       save_video = cv2.VideoWriter(output_video_name, cv2.VideoWriter_fourcc(*'DIVX'),frames_per_second, (width, height))
+
     counter = 0
-    start = time.time() 
+    start = datetime.now() 
      
     while True:
-        counter += 1
-        ret, frame = capture.read()
-        if ret:
-          seg_frame = self.segmentAsPascalvoc(frame, process_frame=True)
-          if verbose is not None:
-            print("No. of frames:", counter)
-          if detect is not None:
-            target_class = self.target_obj(detect)
-            seg_frame[1][seg_frame[1] != target_class] = 0
+      ret, frame = capture.read()
+      if ret:
+        seg_frame = self.segmentAsPascalvoc(frame, process_frame=True)
+        
+        if detect is not None:
+          target_class = self.target_obj(detect)
+          seg_frame[1][seg_frame[1] != target_class] = 0
 
-          w, h, _ = seg_frame[1].shape  
-          img = cv2.imread(b_image_path)
-          img = cv2.resize(img, (h,w))
-          out = np.where(seg_frame[1], frame, img)
-            
-          output = cv2.resize(out, (width,height), interpolation=cv2.INTER_AREA)
-          if show_frames == True:
-            if frame_name is not None:
-              cv2.imshow(frame_name, output)
-              if cv2.waitKey(25) & 0xFF == ord('q'):
-                break 
-          if output_video_name is not None:
-            save_video.write(output)
+        w, h, _ = seg_frame[1].shape  
+        img = cv2.imread(b_image_path)
+        img = cv2.resize(img, (h,w))
+        output = np.where(seg_frame[1], frame, img)
+        counter += 1    
+        
+        if show_frames == True:
+          if frame_name is not None:
+            cv2.imshow(frame_name, output)
+            if cv2.waitKey(25) & 0xFF == ord('q'):
+              break 
 
-        else:
+        if output_video_name is not None:
+          output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
+          save_video.write(output)
 
-          break
+      elif counter == 30:
+
+        break
+
+    end = datetime.now()
 
     if check_fps == True:
-        out = capture.get(cv2.CAP_PROP_FPS)
-        print(f"{out} frames per seconds") 
+      timetaken = (end-start).total_seconds()
+      fps = counter/timetaken
+      print(f"{fps} frames per seconds") 
+
 
     capture.release()
 
-    end = time.time()
     if verbose is not None:
-      print(f"Processed {counter} frames in {end-start:.1f} seconds")
+      print(f"Processed {counter} frames in {timetaken:.1f} seconds")
       
-    if frames_per_second is not None:
+    if output_video_name is not None:
       save_video.release()
 
     return  output
@@ -485,56 +491,60 @@ class alter_bg():
   def color_camera(self, cam, colors, frames_per_second = None, check_fps = False,show_frames = False, 
   frame_name = None, verbose = None, output_video_name = None, detect = None):
     capture = cam
-    width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
-    height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    if frames_per_second is not None:
+    
+    if output_video_name is not None:
+      width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
+      height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
       save_video = cv2.VideoWriter(output_video_name, cv2.VideoWriter_fourcc(*'DIVX'),frames_per_second, (width, height))
     counter = 0
-    start = time.time() 
+    start = datetime.now() 
      
     while True:
+      
+      ret, frame = capture.read()
+      if ret:
+        seg_frame = self.segmentAsPascalvoc(frame, process_frame=True)
+
+        if detect is not None:
+          target_class = self.target_obj(detect)
+          seg_frame[1][seg_frame[1] != target_class] = 0
+
+          
+        obtain_frame = cv2.subtract(seg_frame[1], frame)
+        out = cv2.subtract(seg_frame[1], obtain_frame)
+
+        out[np.where((out == [0, 0, 0]).all(axis = 2))] = [colors]
+        out = cv2.cvtColor(out, cv2.COLOR_BGR2RGB)
+        output = np.where(seg_frame[1], frame, out)
         counter += 1
-        ret, frame = capture.read()
-        if ret:
-          seg_frame = self.segmentAsPascalvoc(frame, process_frame=True)
-          if detect is not None:
-            target_class = self.target_obj(detect)
-            seg_frame[1][seg_frame[1] != target_class] = 0
-
-          if verbose is not None:
-            print("No.of frames:", counter)
-          obtain_frame = cv2.subtract(seg_frame[1], frame)
-          out = cv2.subtract(seg_frame[1], obtain_frame)
-
-          out[np.where((out == [0, 0, 0]).all(axis = 2))] = [colors]
-          out = cv2.cvtColor(out, cv2.COLOR_BGR2RGB)
-          out = np.where(seg_frame[1], frame, out)
-
             
-          output = cv2.resize(out, (width,height), interpolation=cv2.INTER_AREA)
-          if show_frames == True:
-            if frame_name is not None:
-              cv2.imshow(frame_name, output)
-              if cv2.waitKey(25) & 0xFF == ord('q'):
-                break 
-          if output_video_name is not None:
-            save_video.write(output)
+        
+        if show_frames == True:
+          if frame_name is not None:
+            cv2.imshow(frame_name, output)
+            if cv2.waitKey(25) & 0xFF == ord('q'):
+              break 
 
-        else:
+        if output_video_name is not None:
+          output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
+          save_video.write(output)
 
-          break
+      elif counter == 30:
 
+        break
+    end = datetime.now()
     if check_fps == True:
-        out = capture.get(cv2.CAP_PROP_FPS)
-        print(f"{out} frames per seconds") 
+      timetaken = (end-start).total_seconds()
+      fps = counter/timetaken
+      print(f"{fps} frames per seconds") 
+
 
     capture.release()
 
-    end = time.time()
     if verbose is not None:
-      print(f"Processed {counter} frames in {end-start:.1f} seconds")
+      print(f"Processed {counter} frames in {timetaken:.1f} seconds")
       
-    if frames_per_second is not None:
+    if output_video_name is not None:
       save_video.release()
 
     return  output
@@ -659,61 +669,66 @@ class alter_bg():
   def blur_camera(self, cam, low = False, moderate = False, extreme = False, frames_per_second = None,
    check_fps = False,show_frames = False, frame_name = None, verbose = None, output_video_name = None, detect = None):
     capture = cam
-    width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
-    height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    if frames_per_second is not None:
+
+    if output_video_name is not None:
+      width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
+      height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
       save_video = cv2.VideoWriter(output_video_name, cv2.VideoWriter_fourcc(*'DIVX'),frames_per_second, (width, height))
+      
     counter = 0
-    start = time.time() 
+    start = datetime.now() 
      
     while True:
-        counter += 1
-        ret, frame = capture.read()
-        if ret:
+        
+      ret, frame = capture.read()
+      if ret:
 
-            seg_frame = self.segmentAsPascalvoc(frame, process_frame=True)
-            if detect is not None:
-              target_class = self.target_obj(detect)
-              seg_frame[1][seg_frame[1] != target_class] = 0
-            if verbose is not None:
-               print("No.of frames:", counter)
+        seg_frame = self.segmentAsPascalvoc(frame, process_frame=True)
+        if detect is not None:
+          target_class = self.target_obj(detect)
+          seg_frame[1][seg_frame[1] != target_class] = 0
+            
     
+        if low == True:
+          blur_frame = cv2.blur(frame, (21,21), 0)
 
-            if low == True:
-                blur_frame = cv2.blur(frame, (21,21), 0)
+        if moderate == True:
+          blur_frame = cv2.blur(frame, (39,39), 0)
 
-            if moderate == True:
-                blur_frame = cv2.blur(frame, (39,39), 0)
+        if extreme == True:
+          blur_frame = cv2.blur(frame, (81,81), 0)
 
-            if extreme == True:
-                blur_frame = cv2.blur(frame, (81,81), 0)
+        output = np.where(seg_frame[1], frame, blur_frame)  
+        counter += 1
+          
+        if show_frames == True:
+          if frame_name is not None:
+            cv2.imshow(frame_name, output)
+            if cv2.waitKey(25) & 0xFF == ord('q'):
+              break 
 
-            out = np.where(seg_frame[1], frame, blur_frame)  
-            output = cv2.resize(out, (width,height), interpolation=cv2.INTER_AREA)
+        if output_video_name is not None:
+          output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
+          save_video.write(output)
 
-            if show_frames == True:
-                if frame_name is not None:
-                    cv2.imshow(frame_name, output)
-                    if cv2.waitKey(25) & 0xFF == ord('q'):
-                        break 
-            if output_video_name is not None:
-                save_video.write(output)
 
-        else:
+      elif couter == 30:
+        break
 
-          break
+    end = datetime.now()   
     if check_fps == True:
-        out = capture.get(cv2.CAP_PROP_FPS)
-        print(f"{out} frames per seconds") 
+      timetaken = (end-start).total_seconds()
+      fps = counter/timetaken
+      print(f"{fps} frames per seconds") 
 
     capture.release()
 
-    end = time.time()
+    
     if verbose is not None:
-      print(f"Processed {counter} frames in {end-start:.1f} seconds")
+      print(f"Processed {counter} frames in {timetaken:.1f} seconds")
       
-    if frames_per_second is not None:
-        save_video.release()
+    if output_video_name is not None:
+      save_video.release()
 
     return  output
 
@@ -810,54 +825,58 @@ class alter_bg():
   frame_name = None, verbose = None, output_video_name = None, detect = None):
 
     capture = cam
-    width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
-    height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    if frames_per_second is not None:
+    
+    if output_video_name is not None:
+      width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
+      height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
       save_video = cv2.VideoWriter(output_video_name, cv2.VideoWriter_fourcc(*'DIVX'),frames_per_second, (width, height))
     counter = 0
-    start = time.time() 
+    start = datetime.now() 
      
     while True:
+      
+      ret, frame = capture.read()
+      if ret:
+        seg_frame = self.segmentAsPascalvoc(frame, process_frame=True)
+        if detect is not None:
+          target_class = self.target_obj(detect)
+          seg_frame[1][seg_frame[1] != target_class] = 0
+
+        gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        gray_frame = cv2.cvtColor(gray_frame, cv2.COLOR_GRAY2BGR)
+        output = np.where(seg_frame[1], frame, gray_frame)
         counter += 1
-        ret, frame = capture.read()
-        if ret:
-          seg_frame = self.segmentAsPascalvoc(frame, process_frame=True)
-          if detect is not None:
-            target_class = self.target_obj(detect)
-            seg_frame[1][seg_frame[1] != target_class] = 0
-
-          if verbose is not None:
-            print("No. of frames:", counter)
-
-          gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-          gray_frame = cv2.cvtColor(gray_frame, cv2.COLOR_GRAY2BGR)
-          out = np.where(seg_frame[1], frame, gray_frame)
-
           
-          output = cv2.resize(out, (width,height), interpolation=cv2.INTER_AREA)
-          if show_frames == True:
-            if frame_name is not None:
-              cv2.imshow(frame_name, output)
-              if cv2.waitKey(25) & 0xFF == ord('q'):
-                break 
-          if output_video_name is not None:
-            save_video.write(output)
+        
+        if show_frames == True:
+          if frame_name is not None:
+            cv2.imshow(frame_name, output)
+            if cv2.waitKey(25) & 0xFF == ord('q'):
+              break 
 
-        else:
+        if output_video_name is not None:
+          output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
+          save_video.write(output)
 
-          break
+      elif counter == 30:
+
+        break
+
+    end = datetime.now()
     if check_fps == True:
-        out = capture.get(cv2.CAP_PROP_FPS)
-        print(f"{out} frames per seconds") 
+      timetaken = (end-start).total_seconds()
+      fps = counter/timetaken
+      print(f"{fps} frames per seconds") 
+      
 
     capture.release()
 
-    end = time.time()
+    
     if verbose is not None:
-      print(f"Processed {counter} frames in {end-start:.1f} seconds")
+      print(f"Processed {counter} frames in {timetaken:.1f} seconds")
       
-    if frames_per_second is not None:
-        save_video.release()
+    if output_video_name is not None:
+      save_video.release()
 
     return  output
     

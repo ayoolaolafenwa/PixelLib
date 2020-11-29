@@ -5,26 +5,31 @@ from .deeplab import Deeplab_xcep_pascal
 from .deeplab import Deeplab_xcep_ade20k
 import cv2
 import time
+from datetime import datetime
 
 
 class semantic_segmentation():
-
   def __init__(self):
-
     self.model = Deeplab_xcep_pascal()
 
     self.model2 = Deeplab_xcep_ade20k()
       
   def load_pascalvoc_model(self, model_path):
     self.model.load_weights(model_path)
-  
+    
   def load_ade20k_model(self, model_path):
     self.model2.load_weights(model_path)   
 
-  def segmentAsPascalvoc(self, image_path, output_image_name=None,overlay=False, verbose = None):            
+
+####### SEMANTIC SEGMENTATION WITH PASCALVOC MODEL ######    
+
+  def segmentAsPascalvoc(self, image_path, output_image_name=None,overlay=False, process_frame = True, verbose = None):            
     trained_image_width=512
     mean_subtraction_value=127.5
-    image = np.array(Image.open(image_path))     
+    if process_frame == True:
+      image = image_path
+    else:  
+      image = np.array(Image.open(image_path))     
    
 
     # resize to max dimension of images from training dataset
@@ -87,11 +92,189 @@ class semantic_segmentation():
 
         return raw_labels, new_img 
 
+  
+  def segmentFrameAsPascalvoc(self, frame, output_frame_name=None,overlay=False, verbose = None):  
+    if overlay == True:
+      raw_labels, frame_overlay  = self.segmentAsPascalvoc(frame, overlay=True, process_frame= True)
+      
+      if output_frame_name is not None:
+        cv2.imwrite(output_frame_name, frame_overlay)
+
+      return raw_labels, frame_overlay 
+
+    else:
+      raw_labels, new_frame  = self.segmentAsPascalvoc(frame, process_frame= True)
+      
+      if output_frame_name is not None:
+        cv2.imwrite(output_frame_name, new_frame)
+
+      return raw_labels, new_frame 
+
+
+  def process_video_pascalvoc(self, video_path, overlay = False, frames_per_second = None, output_video_name = None):
+    capture = cv2.VideoCapture(video_path)
+    width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
+    height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    if output_video_name is not None:
+      save_video = cv2.VideoWriter(output_video_name, cv2.VideoWriter_fourcc(*'DIVX'),frames_per_second, (width, height))
+    
+    counter = 0
+    start = time.time() 
+
+    if overlay == True:
+      while True:
+        counter += 1
         
-  def segmentAsAde20k(self, image_path, output_image_name=None,overlay=False, verbose = None):            
+        ret, frame = capture.read()
+        
+        if ret:
+          raw_labels, frame_overlay  = self.segmentAsPascalvoc(frame, overlay=True, process_frame= True)
+          print("No. of frames:", counter)
+          output = cv2.resize(frame_overlay, (width,height), interpolation=cv2.INTER_AREA)
+          if output_video_name is not None:
+            save_video.write(output)
+        else:
+          break   
+ 
+      end = time.time()
+      print(f"Processed {counter} frames in {end-start:.1f} seconds")
+      capture.release()
+      if output_video_name is not None:
+        save_video.release()
+      return  raw_labels, output
+
+    else:
+      while True:
+        
+        counter += 1
+        ret, frame = capture.read()
+        
+        if ret:
+          raw_labels, new_frame  = self.segmentAsPascalvoc(frame, process_frame= True)  
+          print("No. of frames:", counter)
+          output = cv2.resize(new_frame, (width,height), interpolation=cv2.INTER_AREA)
+          if output_video_name is not None:
+            save_video.write(output)
+
+        else:
+          break
+
+      capture.release()
+
+      end = time.time()
+      print(f"Processed {counter} frames in {end-start:.1f} seconds")
+      
+      if frames_per_second is not None:
+        save_video.release()
+
+      return  raw_labels,  output
+
+
+
+
+  def process_camera_pascalvoc(self, cam, overlay = False,  check_fps = False, frames_per_second = None, output_video_name = None, show_frames = False, frame_name = None, verbose = None):
+    capture = cam
+    
+    if output_video_name is not None:
+      width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
+      height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
+      save_video = cv2.VideoWriter(output_video_name, cv2.VideoWriter_fourcc(*'DIVX'), frames_per_second, (width, height))
+    
+    counter = 0
+    start = datetime.now() 
+    
+
+    if overlay == True:
+      while True:
+        
+        ret, frame = capture.read()
+        if ret:
+          raw_labels, frame_overlay  = self.segmentAsPascalvoc(frame, overlay=True, process_frame= True)
+          counter += 1
+          if show_frames == True:
+            if frame_name is not None:
+              cv2.imshow(frame_name, frame_overlay)
+              if cv2.waitKey(25) & 0xFF == ord('q'):
+                break 
+
+          if output_video_name is not None:
+            output = cv2.resize(frame_overlay, (width,height), interpolation=cv2.INTER_AREA)
+            save_video.write(output)
+
+        elif counter == 30:
+          break 
+      
+      end = datetime.now()
+
+      if check_fps == True:
+        timetaken = (end-start).total_seconds()
+        fps = counter/timetaken
+        print(f"{fps} frames per seconds") 
+        
+      capture.release()
+
+      if verbose is not None:
+        print(f"Processed {counter} frames in {timetaken:.1f} seconds")
+      
+      if output_video_name is not None:
+        save_video.release()
+
+      return  raw_labels, frame_overlay
+
+    else:
+      while True:
+        ret, frame = capture.read()
+        if ret:
+          raw_labels, new_frame  = self.segmentAsPascalvoc(frame, process_frame= True)
+          counter += 1
+          
+          if show_frames == True:
+            if frame_name is not None:
+              cv2.imshow(frame_name, new_frame)
+              if cv2.waitKey(25) & 0xFF == ord('q'):
+                break 
+
+          if output_video_name is not None:
+            output = cv2.resize(new_frame, (width,height), interpolation=cv2.INTER_AREA)
+            save_video.write(output)
+
+        elif counter == 30:
+          break
+      end = datetime.now()
+      if check_fps == True:
+        timetaken = (end-start).total_seconds()
+        fps = counter/timetaken
+        print(f"{fps} frames per seconds") 
+
+      capture.release()  
+        
+      
+      if verbose is not None:
+        print(f"Processed {counter} frames in {timetaken:.1f} seconds")
+     
+
+      if output_video_name is not None:
+        save_video.release()
+
+      return raw_labels, new_frame
+
+
+
+
+
+
+
+
+################# SEMANTIC SEGMENTATION WITH ADE20K MODEL ##########################
+  
+
+  def segmentAsAde20k(self, image_path, output_image_name=None,overlay=False, process_frame = False, verbose = None):            
     trained_image_width=512
     mean_subtraction_value=127.5
-    image = np.array(Image.open(image_path))     
+    if process_frame == True:
+      image = image_path
+    else:  
+      image = np.array(Image.open(image_path))     
     
     # resize to max dimension of images from training dataset
     w, h, n = image.shape
@@ -152,229 +335,68 @@ class semantic_segmentation():
 
         return raw_labels, new_img 
 
-  def segmentFrameAsPascalvoc(self, frame, output_image_name=None,overlay=False, verbose = None):            
-    trained_frame_width=512
-    mean_subtraction_value=127.5
-       
-    frame_overlay = frame.copy()
 
-    # resize to max dimension of images from training dataset
-    w, h, _ = frame.shape
-    ratio = float(trained_frame_width) / np.max([w, h])
-    resized_frame = np.array(Image.fromarray(frame.astype('uint8')).resize((int(ratio * h), int(ratio * w))))
-    resized_frame = (resized_frame / mean_subtraction_value) -1
-
-
-    # pad array to square image to match training images
-    pad_x = int(trained_frame_width - resized_frame.shape[0])
-    pad_y = int(trained_frame_width - resized_frame.shape[1])
-    resized_frame = np.pad(resized_frame, ((0, pad_x), (0, pad_y), (0, 0)), mode='constant')
-
-    if verbose is not None:
-      print("Processing frame....")
-
-    #run prediction
-    res = self.model.predict(np.expand_dims(resized_frame, 0))
-    
-    labels = np.argmax(res.squeeze(), -1)
-    # remove padding and resize back to original image
-    if pad_x > 0:
-        labels = labels[:-pad_x]
-    if pad_y > 0:
-        labels = labels[:, :-pad_y]
-        
-    raw_labels = labels    
-    #Apply segmentation color map
-    labels = labelP_to_color_image(labels)   
-    labels = np.array(Image.fromarray(labels.astype('uint8')).resize((h, w)))
-    
-    
-    new_frame = cv2.cvtColor(labels, cv2.COLOR_RGB2BGR)
-
+  def segmentFrameAsAde20k(self, frame, output_frame_name=None,overlay=False, verbose = None):  
     if overlay == True:
-        alpha = 0.7
-        cv2.addWeighted(new_frame, alpha, frame_overlay, 1 - alpha,0, frame_overlay)
+      raw_labels, frame_overlay  = self.segmentAsAde20k(frame, overlay=True, process_frame= True)
+      
+      if output_frame_name is not None:
+        cv2.imwrite(output_frame_name, frame_overlay)
 
-        if output_image_name is not None:
-          cv2.imwrite(output_image_name, frame_overlay)
-          print("Processed Image saved successfully in your current working directory.")
+      return raw_labels, frame_overlay 
 
-        return  raw_labels, frame_overlay
+    else:
+      raw_labels, new_frame  = self.segmentAsAde20k(frame, process_frame= True)
+      
+      if output_frame_name is not None:
+        cv2.imwrite(output_frame_name, new_frame)
 
-        
-    else:  
-        if output_image_name is not None:
-  
-          cv2.imwrite(output_image_name, new_frame)
-
-          print("Processed Image saved successfuly in your current working directory.")
-
-        return raw_labels, new_frame
-
-
-
-  def segmentFrameAsAde20k(self, frame, output_image_name=None,overlay=False, verbose = None):            
-    trained_frame_width=512
-    mean_subtraction_value=127.5     
-    frame_overlay = frame.copy()
-
-    # resize to max dimension of images from training dataset
-    w, h, _ = frame.shape
-    ratio = float(trained_frame_width) / np.max([w, h])
-    resized_frame = np.array(Image.fromarray(frame.astype('uint8')).resize((int(ratio * h), int(ratio * w))))
-    resized_frame = (resized_frame / mean_subtraction_value) -1
-
-
-    # pad array to square image to match training images
-    pad_x = int(trained_frame_width - resized_frame.shape[0])
-    pad_y = int(trained_frame_width - resized_frame.shape[1])
-    resized_frame = np.pad(resized_frame, ((0, pad_x), (0, pad_y), (0, 0)), mode='constant')
-
-    if verbose is not None:
-      print("Processing frame....")
-
-    #run prediction
-    res = self.model2.predict(np.expand_dims(resized_frame, 0))
-    
-    labels = np.argmax(res.squeeze(), -1)
-    # remove padding and resize back to original image
-    if pad_x > 0:
-        labels = labels[:-pad_x]
-    if pad_y > 0:
-        labels = labels[:, :-pad_y]
-
-    raw_labels = labels    
-    #Apply segmentation color map
-    labels = labelAde20k_to_color_image(labels)   
-    labels = np.array(Image.fromarray(labels.astype('uint8')).resize((h, w)))
-    
-    
-    new_frame = cv2.cvtColor(labels, cv2.COLOR_RGB2BGR)
-
-    if overlay == True:
-        alpha = 0.7
-        cv2.addWeighted(new_frame, alpha, frame_overlay, 1 - alpha,0, frame_overlay)
-
-        if output_image_name is not None:
-          cv2.imwrite(output_image_name, frame_overlay)
-          print("Processed Image saved successfully in your current working directory.")
-
-        return raw_labels, frame_overlay  
-
-        
-    else:  
-        if output_image_name is not None:
-  
-          cv2.imwrite(output_image_name, new_frame)
-
-          print("Processed Image saved successfuly in your current working directory.")
-
-        return raw_labels, new_frame      
-
-
+      return raw_labels, new_frame 
 
 
   
-  def process_video_pascalvoc(self, video_path, overlay = False, frames_per_second = None, output_video_name = None):
+  def process_video_ade20k(self, video_path, overlay = False, frames_per_second = None, output_video_name = None):
     capture = cv2.VideoCapture(video_path)
     width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    if frames_per_second is not None:
+    if output_video_name is not None:
       save_video = cv2.VideoWriter(output_video_name, cv2.VideoWriter_fourcc(*'DIVX'),frames_per_second, (width, height))
     
     counter = 0
     start = time.time() 
 
-
     if overlay == True:
       while True:
         counter += 1
+        
         ret, frame = capture.read()
+        
         if ret:
-          frame_copy = frame.copy()
-          trained_frame_width = 512
-          mean_subtraction_value = 127.5
-
-          # resize to max dimension of images from training dataset
-          w, h, _ = frame.shape
-          ratio = float(trained_frame_width) / np.max([w, h])
-          resized_frame = np.array(Image.fromarray(frame.astype('uint8')).resize((int(ratio * h), int(ratio * w))))
-          resized_frame = (resized_frame / mean_subtraction_value) -1
-
-
-          # pad array to square image to match training images
-          pad_x = int(trained_frame_width - resized_frame.shape[0])
-          pad_y = int(trained_frame_width - resized_frame.shape[1])
-          resized_frame = np.pad(resized_frame, ((0, pad_x), (0, pad_y), (0, 0)), mode='constant')
-
-          pred = self.model.predict(np.expand_dims(resized_frame, axis = 0))
-          
-          print("No.of frames:", counter)
-            
-          labels = np.argmax(pred.squeeze(), -1)
-
-          if pad_x > 0:
-            labels = labels[:-pad_x]
-          if pad_y > 0:
-            labels = labels[:, :-pad_y]
-
-          raw_labels = labels  
-          segmap = labelP_to_color_image(labels)
-          labels = np.array(Image.fromarray(segmap.astype('uint8')).resize((h, w)))
-          new_segmap = cv2.cvtColor(labels, cv2.COLOR_BGR2RGB)
-            
-          alpha = 0.7
-          cv2.addWeighted(new_segmap, alpha, frame_copy, 1-alpha,0, frame_copy)
-          output = cv2.resize(frame_copy, (width,height), interpolation=cv2.INTER_AREA)
+          raw_labels, frame_overlay  = self.segmentAsAde20k(frame, overlay=True, process_frame= True)
+          print("No. of frames:", counter)
+          output = cv2.resize(frame_overlay, (width,height), interpolation=cv2.INTER_AREA)
           if output_video_name is not None:
             save_video.write(output)
         else:
           break   
-
-    
+ 
       end = time.time()
       print(f"Processed {counter} frames in {end-start:.1f} seconds")
       capture.release()
-      if frames_per_second is not None:
+      if output_video_name is not None:
         save_video.release()
       return  raw_labels, output
 
     else:
       while True:
+        
         counter += 1
         ret, frame = capture.read()
+        
         if ret:
-          trained_frame_width = 512
-          mean_subtraction_value = 127.5
-
-          # resize to max dimension of images from training dataset
-          w, h, _ = frame.shape
-          ratio = float(trained_frame_width) / np.max([w, h])
-          resized_frame = np.array(Image.fromarray(frame.astype('uint8')).resize((int(ratio * h), int(ratio * w))))
-          resized_frame = (resized_frame / mean_subtraction_value) -1
-
-
-          # pad array to square image to match training images
-          pad_x = int(trained_frame_width - resized_frame.shape[0])
-          pad_y = int(trained_frame_width - resized_frame.shape[1])
-          resized_frame = np.pad(resized_frame, ((0, pad_x), (0, pad_y), (0, 0)), mode='constant')
-
-          pred = self.model.predict(np.expand_dims(resized_frame, axis = 0))
-          print("No.of frames:", counter)
-            
-          labels = np.argmax(pred.squeeze(), -1)
-
-          if pad_x > 0:
-            labels = labels[:-pad_x]
-          if pad_y > 0:
-            labels = labels[:, :-pad_y]
-
-          raw_labels = labels  
-          segmap = labelP_to_color_image(labels)
-          labels = np.array(Image.fromarray(segmap.astype('uint8')).resize((h, w)))
-          new_segmap = cv2.cvtColor(labels, cv2.COLOR_BGR2RGB)
-            
-          output = cv2.resize(new_segmap, (width,height), interpolation=cv2.INTER_AREA)
+          raw_labels, new_frame  = self.segmentAsAde20k(frame, process_frame= True)  
+          print("No. of frames:", counter)
+          output = cv2.resize(new_frame, (width,height), interpolation=cv2.INTER_AREA)
           if output_video_name is not None:
             save_video.write(output)
 
@@ -393,439 +415,93 @@ class semantic_segmentation():
 
   
 
-  def process_camera_pascalvoc(self, cam, overlay = False,  check_fps = False, frames_per_second = None, output_video_name = None, show_frames = False, frame_name = None, verbose = None):
+  def process_camera_ade20k(self, cam, overlay = False,  check_fps = False, frames_per_second = None, output_video_name = None, show_frames = False, frame_name = None, verbose = None):
     capture = cam
-    width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
-    height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    if frames_per_second is not None:
+    
+    if output_video_name is not None:
+      width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
+      height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
       save_video = cv2.VideoWriter(output_video_name, cv2.VideoWriter_fourcc(*'DIVX'), frames_per_second, (width, height))
     
     counter = 0
-    start = time.time() 
+    start = datetime.now() 
     
 
     if overlay == True:
       while True:
-        counter += 1
+        
         ret, frame = capture.read()
         if ret:
-          frame_copy = frame.copy()
-          trained_frame_width = 512
-          mean_subtraction_value = 127.5
-
-          # resize to max dimension of images from training dataset
-          w, h, _ = frame.shape
-          ratio = float(trained_frame_width) / np.max([w, h])
-          resized_frame = np.array(Image.fromarray(frame.astype('uint8')).resize((int(ratio * h), int(ratio * w))))
-          resized_frame = (resized_frame / mean_subtraction_value) -1
-
-
-          # pad array to square image to match training images
-          pad_x = int(trained_frame_width - resized_frame.shape[0])
-          pad_y = int(trained_frame_width - resized_frame.shape[1])
-          resized_frame = np.pad(resized_frame, ((0, pad_x), (0, pad_y), (0, 0)), mode='constant')
-
-          pred = self.model.predict(np.expand_dims(resized_frame, axis = 0))
-          if verbose is not None:
-            print("No.of frames:", counter)
-            
-          labels = np.argmax(pred.squeeze(), -1)
-
-          if pad_x > 0:
-            labels = labels[:-pad_x]
-          if pad_y > 0:
-            labels = labels[:, :-pad_y]
-
-          raw_labels = labels  
-          segmap = labelP_to_color_image(labels)
-          labels = np.array(Image.fromarray(segmap.astype('uint8')).resize((h, w)))
-          new_segmap = cv2.cvtColor(labels, cv2.COLOR_BGR2RGB)
-            
-          alpha = 0.7
-          cv2.addWeighted(new_segmap, alpha, frame_copy, 1-alpha,0, frame_copy)
-          output = cv2.resize(frame_copy, (width,height), interpolation=cv2.INTER_AREA)
-
+          raw_labels, frame_overlay  = self.segmentAsAde20k(frame, overlay=True, process_frame= True)
+          counter += 1
           if show_frames == True:
             if frame_name is not None:
-              cv2.imshow(frame_name, output)
+              cv2.imshow(frame_name, frame_overlay)
               if cv2.waitKey(25) & 0xFF == ord('q'):
                 break 
 
           if output_video_name is not None:
+            output = cv2.resize(frame_overlay, (width,height), interpolation=cv2.INTER_AREA)
             save_video.write(output)
 
-         
-
-        else:
+        elif counter == 30:
           break 
+      
+      end = datetime.now()
 
       if check_fps == True:
-        out = capture.get(cv2.CAP_PROP_FPS)
-        print(f"{out} frames per seconds")
-
+        timetaken = (end-start).total_seconds()
+        fps = counter/timetaken
+        print(f"{fps} frames per seconds") 
+        
       capture.release()
 
-      end = time.time()
       if verbose is not None:
-        print(f"Processed {counter} frames in {end-start:.1f} seconds")
+        print(f"Processed {counter} frames in {timetaken:.1f} seconds")
       
-      if frames_per_second is not None:
+      if output_video_name is not None:
         save_video.release()
 
-      return  raw_labels, output
+      return  raw_labels, frame_overlay
 
     else:
       while True:
-        counter += 1
         ret, frame = capture.read()
         if ret:
-          trained_frame_width = 512
-          mean_subtraction_value = 127.5
-
-          # resize to max dimension of images from training dataset
-          w, h, _ = frame.shape
-          ratio = float(trained_frame_width) / np.max([w, h])
-          resized_frame = np.array(Image.fromarray(frame.astype('uint8')).resize((int(ratio * h), int(ratio * w))))
-          resized_frame = (resized_frame / mean_subtraction_value) -1
-
-
-          # pad array to square image to match training images
-          pad_x = int(trained_frame_width - resized_frame.shape[0])
-          pad_y = int(trained_frame_width - resized_frame.shape[1])
-          resized_frame = np.pad(resized_frame, ((0, pad_x), (0, pad_y), (0, 0)), mode='constant')
-
-          pred = self.model.predict(np.expand_dims(resized_frame, axis = 0))
-          if verbose is not None:
-            print("No.of frames:", counter)
-            
-          labels = np.argmax(pred.squeeze(), -1)
-
-          if pad_x > 0:
-            labels = labels[:-pad_x]
-          if pad_y > 0:
-            labels = labels[:, :-pad_y]
-
-          raw_labels = labels  
-          segmap = labelP_to_color_image(labels)
-          labels = np.array(Image.fromarray(segmap.astype('uint8')).resize((h, w)))
-          new_segmap = cv2.cvtColor(labels, cv2.COLOR_BGR2RGB)
-            
-
-          output = cv2.resize(new_segmap, (width,height), interpolation=cv2.INTER_AREA)
-
+          raw_labels, new_frame  = self.segmentAsAde20k(frame, process_frame= True)
+          counter += 1
+          
           if show_frames == True:
             if frame_name is not None:
-              cv2.imshow(frame_name, output)
+              cv2.imshow(frame_name, new_frame)
               if cv2.waitKey(25) & 0xFF == ord('q'):
                 break 
 
           if output_video_name is not None:
+            output = cv2.resize(new_frame, (width,height), interpolation=cv2.INTER_AREA)
             save_video.write(output)
 
-        else:
+        elif counter == 30:
           break
-      
+      end = datetime.now()
       if check_fps == True:
-        out = capture.get(cv2.CAP_PROP_FPS)
-        print("Frame per seconds:", out)
+        timetaken = (end-start).total_seconds()
+        fps = counter/timetaken
+        print(f"{fps} frames per seconds") 
 
       capture.release()  
         
-      end = time.time()
+      
       if verbose is not None:
-        print(f"Processed {counter} frames in {end-start:.1f} seconds")
+        print(f"Processed {counter} frames in {timetaken:.1f} seconds")
      
 
-      if frames_per_second is not None:
+      if output_video_name is not None:
         save_video.release()
 
-      return raw_labels, output 
+      return raw_labels, new_frame
 
   
-
-
-  def process_video_ade20k(self, video_path, overlay = False, frames_per_second = None, output_video_name = None):
-    capture = cv2.VideoCapture(video_path)
-    width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
-    height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    if frames_per_second is not None:
-      save_video = cv2.VideoWriter(output_video_name, cv2.VideoWriter_fourcc(*'DIVX'), frames_per_second, (width, height))
-    
-    counter = 0
-    start = time.time() 
-    
-
-    if overlay == True:
-      while True:
-        counter += 1
-        ret, frame = capture.read()
-        if ret:
-          frame_copy = frame.copy()
-          trained_frame_width = 512
-          mean_subtraction_value = 127.5
-
-          # resize to max dimension of images from training dataset
-          w, h, _ = frame.shape
-          ratio = float(trained_frame_width) / np.max([w, h])
-          resized_frame = np.array(Image.fromarray(frame.astype('uint8')).resize((int(ratio * h), int(ratio * w))))
-          resized_frame = (resized_frame / mean_subtraction_value) -1
-
-
-          # pad array to square image to match training images
-          pad_x = int(trained_frame_width - resized_frame.shape[0])
-          pad_y = int(trained_frame_width - resized_frame.shape[1])
-          resized_frame = np.pad(resized_frame, ((0, pad_x), (0, pad_y), (0, 0)), mode='constant')
-
-          pred = self.model2.predict(np.expand_dims(resized_frame, axis = 0))
-          print("No.of frames:", counter)
-            
-          labels = np.argmax(pred.squeeze(), -1)
-
-          if pad_x > 0:
-            labels = labels[:-pad_x]
-          if pad_y > 0:
-            labels = labels[:, :-pad_y]
-            
-          raw_labels = labels  
-          segmap = labelAde20k_to_color_image(labels)
-          labels = np.array(Image.fromarray(segmap.astype('uint8')).resize((h, w)))
-          new_segmap = cv2.cvtColor(labels, cv2.COLOR_BGR2RGB)
-            
-          alpha = 0.7
-          cv2.addWeighted(new_segmap, alpha, frame_copy, 1-alpha,0, frame_copy)
-          output = cv2.resize(frame_copy, (width,height), interpolation=cv2.INTER_AREA)
-
-          if output_video_name is not None:
-            save_video.write(output)
-
-        else:
-          break  
-             
-      capture.release()
-
-      end = time.time()
-      print(f"Processed {counter} frames in {end-start:.1f} seconds")
-
-      
-      if frames_per_second is not None:
-        save_video.release()
-
-      return raw_labels, output
-
-    else:
-      while True:
-        counter += 1
-        ret, frame = capture.read()
-        if ret:
-          frame_copy = frame.copy()
-          trained_frame_width = 512
-          mean_subtraction_value = 127.5
-
-          # resize to max dimension of images from training dataset
-          w, h, _ = frame.shape
-          ratio = float(trained_frame_width) / np.max([w, h])
-          resized_frame = np.array(Image.fromarray(frame.astype('uint8')).resize((int(ratio * h), int(ratio * w))))
-          resized_frame = (resized_frame / mean_subtraction_value) -1
-
-
-          # pad array to square image to match training images
-          pad_x = int(trained_frame_width - resized_frame.shape[0])
-          pad_y = int(trained_frame_width - resized_frame.shape[1])
-          resized_frame = np.pad(resized_frame, ((0, pad_x), (0, pad_y), (0, 0)), mode='constant')
-
-          pred = self.model2.predict(np.expand_dims(resized_frame, axis = 0))
-          print("No.of frames:", counter)
-            
-          labels = np.argmax(pred.squeeze(), -1)
-
-          if pad_x > 0:
-            labels = labels[:-pad_x]
-          if pad_y > 0:
-            labels = labels[:, :-pad_y]
-
-
-          raw_labels = labels  
-          segmap = labelAde20k_to_color_image(labels)
-          labels = np.array(Image.fromarray(segmap.astype('uint8')).resize((h, w)))
-          new_segmap = cv2.cvtColor(labels, cv2.COLOR_BGR2RGB)
-            
-          output = cv2.resize(new_segmap, (width,height), interpolation=cv2.INTER_AREA)
-
-          if output_video_name is not None:
-            save_video.write(output)
-
-
-
-        else:
-          break
-
-
-      capture.release()  
-
-      end = time.time()
-      print(f"Processed {counter} frames in {end-start:.1f} seconds")
-
-      
-      if frames_per_second is not None:
-        save_video.release()
-
-      return raw_labels,  output    
-
-
-  
-
-
-
-
-  def process_camera_ade20k(self, cam, overlay = False,  check_fps = False, frames_per_second = None, output_video_name = None, show_frames = False, frame_name = None, verbose = None):
-    capture = cam
-    width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
-    height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    if frames_per_second is not None:
-      save_video = cv2.VideoWriter(output_video_name, cv2.VideoWriter_fourcc(*'DIVX'), frames_per_second, (width, height))
-    
-    counter = 0
-    start = time.time() 
-    
-
-    if overlay == True:
-      while True:
-        counter += 1
-        ret, frame = capture.read()
-        if ret:
-          frame_copy = frame.copy()
-          trained_frame_width = 512
-          mean_subtraction_value = 127.5
-
-          # resize to max dimension of images from training dataset
-          w, h, _ = frame.shape
-          ratio = float(trained_frame_width) / np.max([w, h])
-          resized_frame = np.array(Image.fromarray(frame.astype('uint8')).resize((int(ratio * h), int(ratio * w))))
-          resized_frame = (resized_frame / mean_subtraction_value) -1
-
-
-          # pad array to square image to match training images
-          pad_x = int(trained_frame_width - resized_frame.shape[0])
-          pad_y = int(trained_frame_width - resized_frame.shape[1])
-          resized_frame = np.pad(resized_frame, ((0, pad_x), (0, pad_y), (0, 0)), mode='constant')
-
-          pred = self.model2.predict(np.expand_dims(resized_frame, axis = 0))
-          if verbose is not None:
-            print("No.of frames:", counter)
-            
-          labels = np.argmax(pred.squeeze(), -1)
-
-          if pad_x > 0:
-            labels = labels[:-pad_x]
-          if pad_y > 0:
-            labels = labels[:, :-pad_y]
-
-          raw_labels = labels  
-          segmap = labelAde20k_to_color_image(labels)
-          labels = np.array(Image.fromarray(segmap.astype('uint8')).resize((h, w)))
-          new_segmap = cv2.cvtColor(labels, cv2.COLOR_BGR2RGB)
-            
-          alpha = 0.7
-          cv2.addWeighted(new_segmap, alpha, frame_copy, 1-alpha,0, frame_copy)
-          output = cv2.resize(frame_copy, (width,height), interpolation=cv2.INTER_AREA)
-
-          if show_frames == True:
-            if frame_name is not None:
-              cv2.imshow(frame_name, output)
-              if cv2.waitKey(25) & 0xFF == ord('q'):
-                break 
-
-          if output_video_name is not None:
-            save_video.write(output)
-
-        else:
-          break 
-
-      if check_fps == True:
-        out = capture.get(cv2.CAP_PROP_FPS)
-        print(f"{out} frames per seconds")    
-             
-      capture.release()
-
-      end = time.time()
-      if verbose is not None:
-        print(f"Processed {counter} frames in {end-start:.1f} seconds")
-
-      
-      if frames_per_second is not None:
-        save_video.release()
-
-      return raw_labels, output
-
-    else:
-      while True:
-        counter += 1
-        ret, frame = capture.read()
-        if ret:
-          frame_copy = frame.copy()
-          trained_frame_width = 512
-          mean_subtraction_value = 127.5
-
-          # resize to max dimension of images from training dataset
-          w, h, _ = frame.shape
-          ratio = float(trained_frame_width) / np.max([w, h])
-          resized_frame = np.array(Image.fromarray(frame.astype('uint8')).resize((int(ratio * h), int(ratio * w))))
-          resized_frame = (resized_frame / mean_subtraction_value) -1
-
-
-          # pad array to square image to match training images
-          pad_x = int(trained_frame_width - resized_frame.shape[0])
-          pad_y = int(trained_frame_width - resized_frame.shape[1])
-          resized_frame = np.pad(resized_frame, ((0, pad_x), (0, pad_y), (0, 0)), mode='constant')
-
-          pred = self.model2.predict(np.expand_dims(resized_frame, axis = 0))
-          if verbose is not None:
-            print("No.of frames:", counter)
-            
-          labels = np.argmax(pred.squeeze(), -1)
-
-          if pad_x > 0:
-            labels = labels[:-pad_x]
-          if pad_y > 0:
-            labels = labels[:, :-pad_y]
-
-          raw_labels = labels  
-          segmap = labelAde20k_to_color_image(labels)
-          labels = np.array(Image.fromarray(segmap.astype('uint8')).resize((h, w)))
-          new_segmap = cv2.cvtColor(labels, cv2.COLOR_BGR2RGB)
-            
-          output = cv2.resize(new_segmap, (width,height), interpolation=cv2.INTER_AREA)
-
-          if show_frames == True:
-            if frame_name is not None:
-              cv2.imshow(frame_name, output)
-              if cv2.waitKey(25) & 0xFF == ord('q'):
-                break 
-
-          if output_video_name is not None:
-            save_video.write(output)
-
-
-
-        else:
-          break
-
-      if check_fps == True:
-        out = capture.get(cv2.CAP_PROP_FPS)
-        print("Frame per seconds:", out)   
-
-      capture.release()  
-
-      end = time.time()
-      if verbose is not None:
-        print(f"Processed {counter} frames in {end-start:.1f} seconds")
-
-      
-      if frames_per_second is not None:
-          save_video.release()
-
-      return raw_labels,  output    
-
 
   
 ##Create Pascalvoc colormap format ##

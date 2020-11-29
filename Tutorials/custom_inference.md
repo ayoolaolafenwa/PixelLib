@@ -150,7 +150,7 @@ You can perform live camera segmentation with your custom model making use of th
   segment_camera.inferConfig(num_classes=2, class_names=["BG", "butterfly", "squirrel"])
   segment_camera.load_model("Nature_model_resnet101.h5")
   segment_camera.process_camera(capture, frames_per_second= 10, output_video_name="output_video.mp4", show_frames= True,
-  frame_name= "frame", check_fps = True)
+  frame_name= "frame")
 ```
 
 You will replace the process_video funtion with process_camera function.In the function, we replaced the video's filepath to capture i.e we are processing a stream of frames captured by the camera instead of a video file. We added extra parameters for the purpose of showing the camera frames:
@@ -159,7 +159,6 @@ You will replace the process_video funtion with process_camera function.In the f
 
 **frame_name:** this is the name given to the shown camera's frame.
 
-**check_fps:** You may want to check the number of frames processed, just set the parameter check_fps is true. It will print out the number of frames processed per second.
 
 
 # Process opencv's frames 

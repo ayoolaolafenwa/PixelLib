@@ -82,7 +82,7 @@ import cv2
 capture = cv2.VideoCapture(0)
 change_bg = alter_bg(model_type = "pb")
 change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
-change_bg.blur_camera(capture, frames_per_second=10,extreme = True, show_frames = True, frame_name = "frame", check_fps = True,
+change_bg.blur_camera(capture, frames_per_second=10,extreme = True, show_frames = True, frame_name = "frame", 
 output_video_name="output_video.mp4", detect = "person")
 ```
 
@@ -95,7 +95,7 @@ We imported cv2 and included the code to capture camera frames.
 
 ```python
 
-  change_bg.blur_camera(capture, moderate = True, frames_per_second= 10, output_video_name="output_video.mp4", show_frames= True,frame_name= "frame", check_fps = True, detect = "person")  
+  change_bg.blur_camera(capture, extreme = True, frames_per_second= 10, output_video_name="output_video.mp4", show_frames= True,frame_name= "frame",  detect = "person")  
 ```
 
 In the code for blurring camera's frames, we replaced the video filepath to capture i.e we are going to process a stream of camera frames instead of a video file.We added extra parameters for the purpose of showing the camera frames:
@@ -103,7 +103,7 @@ In the code for blurring camera's frames, we replaced the video filepath to capt
 **show_frames:** this parameter handles showing of segmented camera frames and press q to exist.
 **frame_name:** this is the name given to the shown camera's frame.
 
-**check_fps:** You may want to check the number of fames processed, just set the parameter check_fps is true.It will print out the number of frames per seconds. In this case it is 30 frames per second.
+
 
 **Output Video**
 
@@ -206,12 +206,12 @@ import cv2
 capture = cv2.VideoCapture(0)
 change_bg = alter_bg(model_type = "pb")
 change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
-change_bg.color_camera(capture, frames_per_second=10,colors = (0, 128, 0), show_frames = True, frame_name = "frame", check_fps = True,
+change_bg.color_camera(capture, frames_per_second=10,colors = (0, 128, 0), show_frames = True, frame_name = "frame", 
 output_video_name="output_video.mp4", detect = "person")
 ```
 
 ``` python
-change_bg.color_camera(capture, frames_per_second=10,colors = (0, 128, 0), show_frames = True, frame_name = "frame", check_fps = True,
+change_bg.color_camera(capture, frames_per_second=10,colors = (0, 128, 0), show_frames = True, frame_name = "frame", 
 output_video_name="output_video.mp4", detect = "person")
 ```
 
@@ -257,7 +257,7 @@ import cv2
 capture = cv2.VideoCapture(0)
 change_bg = alter_bg(model_type = "pb")
 change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
-change_bg.gray_camera(capture, frames_per_second=10, show_frames = True, frame_name = "frame", check_fps = True,
+change_bg.gray_camera(capture, frames_per_second=10, show_frames = True, frame_name = "frame", 
 output_video_name="output_video.mp4", detect = "person")
 ```
 It is similar to the code we used to color camera's frames. The only difference is that we called the function *gray_camera*. We performed the same routine, replaced the video filepath to capture and added the same parameters. 

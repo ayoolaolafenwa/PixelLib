@@ -82,15 +82,14 @@ We can use the same model to perform semantic segmentation on camera. This can b
 
   segment_video = semantic_segmentation()
   segment_video.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
-  segment_video.process_camera_pascalvoc(capture,  overlay = True, frames_per_second= 10, output_video_name="output_video.mp4", show_frames= True,
-  frame_name= "frame", check_fps = True)
+  segment_video.process_camera_pascalvoc(capture,  overlay = True, frames_per_second= 10, output_video_name="output_video.mp4", show_frames= True,frame_name= "frame")
 ```
 
 We imported cv2 and included the code to capture camera's frames.
 
 ```python
 
-  segment_video.process_camera_pascalvoc(capture,  overlay = True, frames_per_second= 15, output_video_name="output_video.mp4", show_frames= True,frame_name= "video_display", check_fps = True)  
+  segment_video.process_camera_pascalvoc(capture,  overlay = True, frames_per_second= 15, output_video_name="output_video.mp4", show_frames= True,frame_name= "video_display")  
 ```
 
 In the code for performing segmentation, we replaced the video's filepath to capture i.e we are going to process a stream camera's frames instead of a video file.We added extra parameters for the purpose of showing the camera frames:
@@ -98,7 +97,6 @@ In the code for performing segmentation, we replaced the video's filepath to cap
 **show_frames:** this parameter handles showing of segmented camera frames and press q to exist.
 **frame_name:** this is the name given to the shown camera's frames.
 
-**check_fps:** You may want to check the number of frames processed, just set the parameter check_fps is true.It will print out the number of frames per seconds. In this case it is *30 frames per second*.
 
 
 
