@@ -100,21 +100,15 @@ There are two types of Deeplabv3+ models available for performing **semantic seg
 **Note:** PixelLib supports annotation with Labelme. If you make use of another annotation tool it will not be compatible with the library. Read this [tutorial](https://medium.com/@olafenwaayoola/image-annotation-with-labelme-81687ac2d077) on image annotation with Labelme.
 
 
-* [Instance Segmentation of Images With PixelLib Using Mask-RCNN COCO Model](#Instance-Segmentation-of-Images-With-PixelLib-Using-Mask-RCNN-COCO-Model)
+* [Instance Segmentation of objects in Images and Videos with 5 Lines of Code](#Instance-Segmentation-of-objects-in-Images-and-Videos-with-5-Lines-of-Code)
 
-* [Instance Segmentation of Videos With PixelLib Using Mask-RCNN COCO Model](#Instance-Segmentation-of-Videos-With-PixelLib-Using-Mask-RCNN-COCO-Model)
 
-* [Custom Instance Segmentation Training](#Custom-Instance-Segmentation-Training)
+* [Custom Training with 7 Lines of Code](#Custom-Training-with-7-Lines-of-Code)
 
-* [Instance Segmentation of objects in images and videos With Custom Model](#Instance-Segmentation-of-objects-in-images-and-videos-With-A-Custom-Model)
+* [Semantic Segmentation of 150 Classes of Objects in images and videos with 5 Lines of Code](#Semantic-Segmentation-of-150-Classes-of-Objects-in-images-and-videos-with-5-Lines-of-Code)
 
-* [Semantic Segmentation of Images With PixelLib Using Ade20k model](#Semantic-Segmentation-of-Images-With-PixelLib-Using-Ade20k-model)
+* [Semantic Segmentation of 20 Common Objects with 5 Lines of Code](#Semantic-Segmentation-of-20-Common-Objects-with-5-Lines-of-Code)
 
-* [Semantic Segmentation of Videos With PixelLib Using Ade20k model](#Semantic-Segmentation-of-Videos-With-PixelLib-Using-Ade20k-model)
-
-* [Semantic Segmentation of Images With PixelLib Using Pascalvoc model](#Semantic-Segmentation-of-Images-With-PixelLib-Using-Pascalvoc-model)
-
-* [Semantic Segmentation of Videos With PixelLib Using Pascalvoc model](#Semantic-Segmentation-of-Videos-With-PixelLib-Using-Pascalvoc-model)
 
 
 
@@ -228,7 +222,7 @@ PixelLib makes it possible to perform state of the art semantic segmentation of 
 [![alt_vid2](Images/new_vid2.jpg)](https://www.youtube.com/watch?v=hxczTe9U8jY)
 
 
-## [Semantic Segmentation of 150 Classes of Objects Videos](Tutorials/video_ade20k.md) <br />
+## [Semantic Segmentation of 150 Classes of Objects Videos](Tutorials/video_ade20k.md) <br /> <br />
 
 
 ## Semantic Segmentation of 20 Common Objects with 5 Lines of Code
@@ -259,11 +253,9 @@ segment_image.segmentAsPascalvoc("sample.jpg", output_image_name = "image_new.jp
   segment_video.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
   segment_video.process_video_pascalvoc("sample_video1.mp4",  overlay = True, frames_per_second= 15, output_video_name="output_video.mp4")
 ```  
-
-
 [![alt_vid2](Images/pascal_voc.png)](https://www.youtube.com/watch?v=l9WMqT2znJE)
 
-
+## [Semantic Segmentation of Videos With PixelLib Using Pascalvoc model](Tutorials/video_pascalvoc.md)
 
 
 ## Projects Using PixelLib
