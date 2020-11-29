@@ -50,7 +50,7 @@ PixelLib uses object segmentation to perform excellent foreground and background
 
 **3.Blur the background of an image and a video**
 
-**4.Grayscale the background of an image and a video**
+**4.Grayscale the background of an image and a video** <br/> <br/>
 
 
 
@@ -82,7 +82,7 @@ change_bg.change_video_bg("sample_video.mp4", "bg.jpg", frames_per_second = 10, 
 
 [![video2](Images/video2.png)](https://www.youtube.com/watch?v=699Hyi6oZFs)
 
-**[Tutorial on Background Editing in Videos](Tutorials/change_video_bg.md)**
+**[Tutorial on Background Editing in Videos](Tutorials/change_video_bg.md)** <br/> <br/>
 
 
 
