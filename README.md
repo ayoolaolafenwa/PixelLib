@@ -56,7 +56,7 @@ change_bg.blur_bg("sample.jpg", extreme = True, detect = "person", output_image_
 
 ![alt_bg1](Images/blur_person.jpg)
 
-## The following features are supported for background editing,
+### The following features are supported for background editing,
 
 **1.Create a virtual background for an image and a video**
 
@@ -67,7 +67,7 @@ change_bg.blur_bg("sample.jpg", extreme = True, detect = "person", output_image_
 **4.Grayscale the background of an image and a video**
 
 
-## [Tutorial on Background Editing in Images](Tutorials/change_image_bg.md)
+**[Tutorial on Background Editing in Images](Tutorials/change_image_bg.md)**
 
 
 
@@ -146,7 +146,7 @@ PixelLib supports the implementation of instance segmentation  of objects in ima
 
 [![img3](Images/vid_ins.jpg)](https://www.youtube.com/watch?v=bGPO1bCZLAo)
 
-## [Instance Segmentation of Videos](Tutorials/video_instance.md)
+**[Tutorial on Instance Segmentation of Videos](Tutorials/video_instance.md)**
 
 
 # Custom Training with 7 Lines of Code
@@ -225,7 +225,7 @@ PixelLib makes it possible to perform state of the art semantic segmentation of 
 **[Tutorial on Semantic Segmentation of 150 Classes of Objects Videos](Tutorials/video_ade20k.md)** <br /> <br />
 
 
-## Semantic Segmentation of 20 Common Objects with 5 Lines of Code
+# Semantic Segmentation of 20 Common Objects with 5 Lines of Code
 PixelLib supports the semantic segmentation of 20 unique objects.
 
 ![img6](Images/download2.jpg)
@@ -242,7 +242,7 @@ segment_image.segmentAsPascalvoc("sample.jpg", output_image_name = "image_new.jp
 
 ![img6](Images/pascal.jpg)
 
-## [Semantic Segmentation of objects in Images With PixelLib Using Pascalvoc model](Tutorials/image_pascalvoc.md)
+**[Tutorial on Semantic Segmentation of objects in Images With PixelLib Using Pascalvoc model](Tutorials/image_pascalvoc.md)**
 
 ```python
 
@@ -255,7 +255,7 @@ segment_image.segmentAsPascalvoc("sample.jpg", output_image_name = "image_new.jp
 ```  
 [![alt_vid2](Images/pascal_voc.png)](https://www.youtube.com/watch?v=l9WMqT2znJE)
 
-## [Semantic Segmentation of Videos With PixelLib Using Pascalvoc model](Tutorials/video_pascalvoc.md)
+**[Tutorial on Semantic Segmentation of Videos With PixelLib Using Pascalvoc model](Tutorials/video_pascalvoc.md)**
 
 
 ## Projects Using PixelLib
