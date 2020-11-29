@@ -107,7 +107,7 @@ There are two types of Deeplabv3+ models available for performing **semantic seg
 
 * [Semantic Segmentation of 150 Classes of Objects in images and videos with 5 Lines of Code](#Semantic-Segmentation-of-150-Classes-of-Objects-in-images-and-videos-with-5-Lines-of-Code)
 
-* [Semantic Segmentation of 20 Common Objects with 5 Lines of Code](#Semantic-Segmentation-of-20-Common-Objects-with-5-Lines-of-Code)
+* [Semantic Segmentation of 20 Common Objects with 5 Lines of Code](#Semantic-Segmentation-of-20-Common-Objects-with-5-Lines-of-Code) <br/> <br/>
 
 
 
@@ -187,7 +187,7 @@ Perform inference on objects in images and videos with your custom model.
 
 [![alt_infer](Images/but_vid.png)](https://www.youtube.com/watch?v=bWQGxaZIPOo)
 
-**[Tutorial on Instance Segmentation of objects in images and videos With A Custom Model](Tutorials/custom_inference.md)**
+**[Tutorial on Instance Segmentation of objects in images and videos With A Custom Model](Tutorials/custom_inference.md)** <br/> <br/>
 
 
 
@@ -255,7 +255,7 @@ segment_image.segmentAsPascalvoc("sample.jpg", output_image_name = "image_new.jp
 ```  
 [![alt_vid2](Images/pascal_voc.png)](https://www.youtube.com/watch?v=l9WMqT2znJE)
 
-**[Tutorial on Semantic Segmentation of Videos With PixelLib Using Pascalvoc model](Tutorials/video_pascalvoc.md)**
+**[Tutorial on Semantic Segmentation of objects in Videos With PixelLib Using Pascalvoc model](Tutorials/video_pascalvoc.md)** <br/> <br/>
 
 
 ## Projects Using PixelLib
