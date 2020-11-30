@@ -86,14 +86,14 @@ PixelLib now supports the ability to adjust the speed of detection according to 
 
 By default the detection speed is about 1 second for a processing a single image using Nvidia GeForce 1650.
 
-<<<<<<< HEAD
+
 !["n1"](Images/speed_sample.jpg) <br/> <br/>
 
 **Using Average Detection Mode**
-=======
+
 **Using Average Detection   Mode**
 
->>>>>>> 1f5dec361654dd467de6c1c9ef1765d5521af4e5
+
 ```python
 
   import pixellib
@@ -120,7 +120,7 @@ We obtained beautiful results with the *average detection speed mode*. <br/> <br
   segment_image.load_model("mask_rcnn_coco.h5") 
   segment_image.segmentImage("sample.jpg", show_bboxes = True, output_image_name = "new.jpg")
 ```
-In the code above we replaced the **infer_speed**  value to **fast** and the speed of detection is about *0.35* seconds for processing a single image.
+In the code above we replaced the **infer_speed**  value to **fast** and the speed of detection is about *0.35* seconds for processing a single image. <br/>
 
 **Output Image**
 !["n3"](Images/fast.jpg) <br/> <br/>
@@ -139,7 +139,7 @@ Our results are still wonderful with *fast detection speed mode*. <br/> <br/>
   segment_image.segmentImage("sample.jpg", show_bboxes = True, output_image_name = "new.jpg")
 ```
 In the code above we replaced the **infer_speed**  value to **rapid** the fastest the detection mode. The speed of detection  becomes 
-*0.25* seconds for processing a single image.
+*0.25* seconds for processing a single image. <br/>
 
 
 **Output Image**
