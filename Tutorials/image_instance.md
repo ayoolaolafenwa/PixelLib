@@ -105,7 +105,9 @@ By default the detection speed is about 1 second for a processing a single image
 ```
 In the modified code above within the class *instance_segmentation* we introduced a new parameter **infer_speed** which determines the speed of detection and it was set to **average**. The average value reduces the detection to half of its original speed, the detection speed would become *0.5* seconds for processing a single image.
 
-**Output Image**
+**Output Image** <br/>
+
+
 !["n2"](Images/average.jpg) <br/> <br/>
 
 We obtained beautiful results with the *average detection speed mode*. <br/> <br/>
@@ -122,7 +124,9 @@ We obtained beautiful results with the *average detection speed mode*. <br/> <br
 ```
 In the code above we replaced the **infer_speed**  value to **fast** and the speed of detection is about *0.35* seconds for processing a single image. <br/>
 
-**Output Image**
+**Output Image** <br/>
+
+
 !["n3"](Images/fast.jpg) <br/> <br/>
 
 Our results are still wonderful with *fast detection speed mode*. <br/> <br/>
@@ -142,7 +146,9 @@ In the code above we replaced the **infer_speed**  value to **rapid** the fastes
 *0.25* seconds for processing a single image. <br/>
 
 
-**Output Image**
+**Output Image** <br/>
+
+
 !["n4"](Images/rapid.jpg) <br/> <br/>
 
 The *rapid detection speed mode* produces good results with the fastest inference speed. <br/> <br/>
