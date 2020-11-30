@@ -141,7 +141,7 @@ Our results are still wonderful with *fast detection speed mode*. <br/> <br/>
   segment_image.load_model("mask_rcnn_coco.h5") 
   segment_image.segmentImage("sample.jpg", show_bboxes = True, output_image_name = "new.jpg")
 ```
-In the code above we replaced the **infer_speed**  value to **rapid** the fastest the detection mode. The speed of detection  becomes 
+In the code above we replaced the **infer_speed**  value to **rapid** which is the fastest detection mode. The speed of detection  becomes 
 *0.25* seconds for processing a single image. <br/>
 
 
