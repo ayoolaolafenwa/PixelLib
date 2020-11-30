@@ -89,9 +89,8 @@ By default the detection speed is about 1 second for a processing a single image
 
 !["n1"](Images/speed_sample.jpg) <br/> <br/>
 
-**Using Average Detection Mode**
 
-**Using Average Detection   Mode**
+**average detection mode**
 
 
 ```python
@@ -110,9 +109,9 @@ In the modified code above within the class *instance_segmentation* we introduce
 
 !["n2"](Images/average.jpg) <br/> <br/>
 
-We obtained beautiful results with the *average detection speed mode*. <br/> <br/>
+We obtained beautiful results with *average detection speed mode*. <br/> <br/>
 
-**Using fast Detection  Mode**
+**fast detection  mode**
 ```python
 
   import pixellib
@@ -132,7 +131,7 @@ In the code above we replaced the **infer_speed**  value to **fast** and the spe
 Our results are still wonderful with *fast detection speed mode*. <br/> <br/>
 
 
-**Using rapid Detection Mode**
+**rapid detection mode**
 ```python
 
   import pixellib
