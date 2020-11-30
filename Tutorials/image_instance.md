@@ -84,8 +84,7 @@ PixelLib now supports the ability to adjust the speed of detection according to 
 
 3 **rapid**
 
-By default the detection speed is about 1 second for a processing a single image using Nvidia GeForce 1650.
-
+By default the detection speed is about 1 second for a processing a single image.
 
 !["n1"](Images/speed_sample.jpg) <br/> <br/>
 
@@ -152,6 +151,7 @@ In the code above we replaced the **infer_speed**  value to **rapid** which is t
 
 The *rapid detection speed mode* produces good results with the fastest inference speed. <br/> <br/>
 
+**Note** These inference reports are obtained using Nvidia GeForce 1650. <br/> <br/>
 
 **Specialised uses of PixelLib may require you to return the array of the segmentation's output.**
 
