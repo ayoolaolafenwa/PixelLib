@@ -212,6 +212,55 @@
 <p>We added an extra parameter <strong>show_bboxes</strong> and set it to <strong>true</strong>, the segmentation masks are produced with bounding boxes.</p>
 <img alt="_images/maskboxes.jpg" src="_images/maskboxes.jpg" />
 <p>You get a saved image with both segmentation masks and bounding boxes.</p>
+<p><strong>Speed Adjustments for Faster Inference</strong></p>
+<p>PixelLib now supports the ability to adjust the speed of detection according to a user’s needs. The inference speed with a minimal reduction in the accuracy of detection. There are three main parameters that control the speed of detection.</p>
+<p>1 <strong>average</strong></p>
+<p>2 <strong>fast</strong></p>
+<p>3 <strong>rapid</strong></p>
+<p>By default the detection speed is about 1 second for a processing a single image.</p>
+<img alt="_images/speed_sample.jpg" src="_images/speed_sample.jpg" />
+<p><strong>average detection mode</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">instance_segmentation</span>
+
+<span class="n">segment_image</span> <span class="o">=</span> <span class="n">instance_segmentation</span><span class="p">(</span><span class="n">infer_speed</span> <span class="o">=</span> <span class="s2">&quot;average&quot;</span> <span class="p">)</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_coco.h5&quot;</span><span class="p">)</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">(</span><span class="s2">&quot;sample.jpg&quot;</span><span class="p">,</span> <span class="n">show_bboxes</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">output_image_name</span> <span class="o">=</span> <span class="s2">&quot;new.jpg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the modified code above within the class <em>instance_segmentation</em> we introduced a new parameter <strong>infer_speed</strong> which determines the speed of detection and it was set to <strong>average</strong>. The average value reduces the detection to half of its original speed, the detection speed would become <em>0.5</em> seconds for processing a single image.</p>
+<p><strong>Output Image</strong></p>
+<img alt="_images/average.jpg" src="_images/average.jpg" />
+<p>We obtained beautiful results with <em>average detection speed mode</em>.</p>
+<p><strong>fast detection  mode</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">instance_segmentation</span>
+
+<span class="n">segment_image</span> <span class="o">=</span> <span class="n">instance_segmentation</span><span class="p">(</span><span class="n">infer_speed</span> <span class="o">=</span> <span class="s2">&quot;fast&quot;</span> <span class="p">)</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_coco.h5&quot;</span><span class="p">)</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">(</span><span class="s2">&quot;sample.jpg&quot;</span><span class="p">,</span> <span class="n">show_bboxes</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">output_image_name</span> <span class="o">=</span> <span class="s2">&quot;new.jpg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the code above we replaced the <strong>infer_speed</strong>  value to <strong>fast</strong> and the speed of detection is about <em>0.35</em> seconds for processing a single image.</p>
+<p><strong>Output Image</strong></p>
+<img alt="_images/fast.jpg" src="_images/fast.jpg" />
+<p>Our results are still wonderful with <em>fast detection speed mode</em>.</p>
+<p><strong>rapid detection mode</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">instance_segmentation</span>
+
+<span class="n">segment_image</span> <span class="o">=</span> <span class="n">instance_segmentation</span><span class="p">(</span><span class="n">infer_speed</span> <span class="o">=</span> <span class="s2">&quot;rapid&quot;</span> <span class="p">)</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_coco.h5&quot;</span><span class="p">)</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">(</span><span class="s2">&quot;sample.jpg&quot;</span><span class="p">,</span> <span class="n">show_bboxes</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">output_image_name</span> <span class="o">=</span> <span class="s2">&quot;new.jpg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the code above we replaced the <strong>infer_speed</strong>  value to <strong>rapid</strong> which is the fastest detection mode. The speed of detection  becomes
+<em>0.25</em> seconds for processing a single image.</p>
+<p><strong>Output Image</strong></p>
+<img alt="_images/rapid.jpg" src="_images/rapid.jpg" />
+<p>The <em>rapid detection speed mode</em> produces good results with the fastest inference speed.</p>
+<p><strong>Note</strong>
+These inference reports are obtained using Nvidia GeForce 1650.</p>
 <p><strong>Specialised uses of PixelLib may require you to return the array of the segmentation’s output.</strong></p>
 <p><em>Obtain the following arrays</em>:</p>
 <p>-Detected Objects’ arrays</p>

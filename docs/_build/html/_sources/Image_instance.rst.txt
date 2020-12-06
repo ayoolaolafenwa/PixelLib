@@ -84,6 +84,87 @@ We added an extra parameter **show_bboxes** and set it to **true**, the segmenta
 
 You get a saved image with both segmentation masks and bounding boxes.
 
+**Speed Adjustments for Faster Inference**
+
+PixelLib now supports the ability to adjust the speed of detection according to a user's needs. The inference speed with a minimal reduction in the accuracy of detection. There are three main parameters that control the speed of detection.
+
+1 **average**
+
+2 **fast**
+
+3 **rapid**
+
+By default the detection speed is about 1 second for a processing a single image.
+
+
+.. image:: photos/speed_sample.jpg
+
+
+**average detection mode**
+
+.. code-block:: python
+
+  import pixellib
+  from pixellib.instance import instance_segmentation
+
+  segment_image = instance_segmentation(infer_speed = "average" )
+  segment_image.load_model("mask_rcnn_coco.h5") 
+  segment_image.segmentImage("sample.jpg", show_bboxes = True, output_image_name = "new.jpg")
+
+In the modified code above within the class *instance_segmentation* we introduced a new parameter **infer_speed** which determines the speed of detection and it was set to **average**. The average value reduces the detection to half of its original speed, the detection speed would become *0.5* seconds for processing a single image.
+
+**Output Image** 
+
+
+.. image:: photos/average.jpg
+
+We obtained beautiful results with *average detection speed mode*. 
+
+**fast detection  mode**
+
+.. code-block:: python
+
+  import pixellib
+  from pixellib.instance import instance_segmentation
+
+  segment_image = instance_segmentation(infer_speed = "fast" )
+  segment_image.load_model("mask_rcnn_coco.h5") 
+  segment_image.segmentImage("sample.jpg", show_bboxes = True, output_image_name = "new.jpg")
+
+In the code above we replaced the **infer_speed**  value to **fast** and the speed of detection is about *0.35* seconds for processing a single image. 
+
+**Output Image** 
+
+
+.. image:: photos/fast.jpg
+
+Our results are still wonderful with *fast detection speed mode*.
+
+
+**rapid detection mode**
+
+.. code-block:: python
+
+  import pixellib
+  from pixellib.instance import instance_segmentation
+
+  segment_image = instance_segmentation(infer_speed = "rapid" )
+  segment_image.load_model("mask_rcnn_coco.h5") 
+  segment_image.segmentImage("sample.jpg", show_bboxes = True, output_image_name = "new.jpg")
+
+In the code above we replaced the **infer_speed**  value to **rapid** which is the fastest detection mode. The speed of detection  becomes 
+*0.25* seconds for processing a single image. 
+
+
+**Output Image** 
+
+.. image:: photos/rapid.jpg
+
+The *rapid detection speed mode* produces good results with the fastest inference speed. 
+
+**Note**
+These inference reports are obtained using Nvidia GeForce 1650. 
+
 
 
 **Specialised uses of PixelLib may require you to return the array of the segmentation's output.**

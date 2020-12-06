@@ -252,6 +252,59 @@ https://www.youtube.com/watch?v=_NsELe67UxM
     <iframe src="https://www.youtube.com/embed/HD1m-g7cOKw" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div><p>A demo showing the output of pixelLib’s instance segmentation of camera’s feeds using Mask-RCNN.
 <em>Good work! It was able to successfully detect me and my phone.</em></p>
+<p><strong>Speed Adjustments for Faster Inference</strong></p>
+<p>PixelLib now supports the ability to adjust the speed of detection according to a user’s needs. The inference speed with a minimal reduction in the accuracy of detection. There are three main parameters that control the speed of detection.</p>
+<p>1 <strong>average</strong></p>
+<p>2 <strong>fast</strong></p>
+<p>3 <strong>rapid</strong></p>
+<p>By default the detection speed is about 1 second for a processing a single image using Nvidia GeForce 1650.</p>
+<p><strong>Using Average Detection Mode</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">instance_segmentation</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+
+<span class="n">capture</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">segment_video</span> <span class="o">=</span> <span class="n">instance_segmentation</span><span class="p">(</span><span class="n">infer_speed</span> <span class="o">=</span> <span class="s2">&quot;average&quot;</span><span class="p">)</span>
+<span class="n">segment_video</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_coco.h5&quot;</span><span class="p">)</span>
+<span class="n">segment_video</span><span class="o">.</span><span class="n">process_camera</span><span class="p">(</span><span class="n">capture</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">show_frames</span><span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="n">frame_name</span><span class="o">=</span> <span class="s2">&quot;frame&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the modified code above within the class <em>instance_segmentation</em> we introduced a new parameter <strong>infer_speed</strong> which determines the speed of detection and it was set to <strong>average</strong>. The average value reduces the detection to half of its original speed, the detection speed would become <em>0.5</em> seconds for processing a single image.</p>
+<p><strong>Using fast Detection  Mode</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">instance_segmentation</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+
+<span class="n">capture</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">segment_video</span> <span class="o">=</span> <span class="n">instance_segmentation</span><span class="p">(</span><span class="n">infer_speed</span> <span class="o">=</span> <span class="s2">&quot;fast&quot;</span><span class="p">)</span>
+<span class="n">segment_video</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_coco.h5&quot;</span><span class="p">)</span>
+<span class="n">segment_video</span><span class="o">.</span><span class="n">process_camera</span><span class="p">(</span><span class="n">capture</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">show_frames</span><span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="n">frame_name</span><span class="o">=</span> <span class="s2">&quot;frame&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the code above we replaced the <strong>infer_speed</strong>  value to <strong>fast</strong> and the speed of detection is about <em>0.35</em> seconds for processing a single image.</p>
+<p><strong>Using rapid Detection Mode</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">instance_segmentation</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+
+<span class="n">capture</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">segment_video</span> <span class="o">=</span> <span class="n">instance_segmentation</span><span class="p">(</span><span class="n">infer_speed</span> <span class="o">=</span> <span class="s2">&quot;rapid&quot;</span><span class="p">)</span>
+<span class="n">segment_video</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_coco.h5&quot;</span><span class="p">)</span>
+<span class="n">segment_video</span><span class="o">.</span><span class="n">process_camera</span><span class="p">(</span><span class="n">capture</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">show_frames</span><span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="n">frame_name</span><span class="o">=</span> <span class="s2">&quot;frame&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the code above we replaced the <strong>infer_speed</strong>  value to <strong>rapid</strong> the fastest the detection mode. The speed of detection  becomes
+<em>0.25</em> seconds for processing a single image.
+The rapid detection speed mode achieves 4fps.</p>
 </div>
 
 
