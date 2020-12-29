@@ -9,6 +9,8 @@ from pixellib.config import Config
 import colorsys
 import time
 from datetime import datetime
+import imantics
+from imantics import Polygons, Mask
 
 
 class configuration(Config):
@@ -43,9 +45,13 @@ class instance_segmentation():
         self.model.load_weights(model_path, by_name= True)
 
 
-    def segmentImage(self, image_path, show_bboxes = False,  output_image_name = None, verbose = None):
-        
-        image = cv2.imread(image_path)
+    def segmentImage(self, image_path, show_bboxes = False,process_frame = False, mask_points_values = False,  output_image_name = None, verbose = None):
+        if process_frame ==False:
+            image = cv2.imread(image_path)
+
+        else:
+            image = image_path
+
         new_img = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         # Run detection
         if verbose is not None:
@@ -69,92 +75,127 @@ class instance_segmentation():
                'teddy bear', 'hair drier', 'toothbrush']
         r = results[0]       
         if show_bboxes == False:
+            ## By default displays the boolean pixel values of the masks 
+            if mask_points_values == False:
+              #apply segmentation mask
+              output = display_instances(image, r['rois'], r['masks'], r['class_ids'], coco_config.class_names)
+
+              if output_image_name is not None:
+               cv2.imwrite(output_image_name, output)
+               print("Processed image saved successfully in your current working directory.") 
+
+              return r, output
             
-            #apply segmentation mask
-            output = display_instances(image, r['rois'], r['masks'], r['class_ids'], coco_config.class_names)
-            
-            if output_image_name is not None:
+            ##Displays the polygon points' values of the masks
+            elif mask_points_values == True:
+               mask = r['masks']
+               contain_val = []
+               for a in range(mask.shape[2]):
+                m = mask[:,:,a]
+                mask_values = Mask(m).polygons()
+                val = mask_values.points
+                contain_val.append(val)
+
+
+               output = display_instances(image, r['rois'], mask, r['class_ids'], coco_config.class_names) 
+                
+               if output_image_name is not None:
                 cv2.imwrite(output_image_name, output)
-                print("Processed image saved successfully in your current working directory.")
-            return r, output
+                print("Processed image saved successfully in your current working directory.") 
+
+               r['masks'] = contain_val  
+              
+               return r, output
+            
 
         else:
-            #apply segmentation mask with bounding boxes
-            output = display_box_instances(image, r['rois'], r['masks'], r['class_ids'], coco_config.class_names, r['scores'])
+            ## By default displays the boolean pixel values of the masks 
+            if mask_points_values == False:
+              #apply segmentation mask with bounding boxes
+              output = display_box_instances(image, r['rois'], r['masks'], r['class_ids'], coco_config.class_names, r['scores'])
+            
+              if output_image_name is not None:
+               cv2.imwrite(output_image_name, output)
+               print("Processed Image saved successfully in your current working directory.")
 
-            if output_image_name is not None:
+              return r, output
+
+
+            ##Displays the polygon points' values of the masks
+            elif mask_points_values == True:
+               mask = r['masks']
+               contain_val = []
+               for a in range(mask.shape[2]):
+                m = mask[:,:,a]
+                mask_values = Mask(m).polygons()
+                val = mask_values.points
+                contain_val.append(val)
+
+
+               output = display_box_instances(image, r['rois'], mask, r['class_ids'], coco_config.class_names, r['scores']) 
+                
+               if output_image_name is not None:
                 cv2.imwrite(output_image_name, output)
-                print("Processed Image saved successfully in your current working directory.")
-            return r, output
+                print("Processed image saved successfully in your current working directory.") 
 
-    
+               r['masks'] = contain_val  
+              
+               return r, output
 
 
 
-    def segmentFrame(self, frame, show_bboxes = False, output_image_name = None, verbose = None):
-
-        new_img = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
-        if verbose is not None:
-            print("Processing frame...")
-        # Run detection
-        results = self.model.detect([new_img])
-
-        coco_config.class_names = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
-               'bus', 'train', 'truck', 'boat', 'traffic light',
-               'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird',
-               'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear',
-               'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie',
-               'suitcase', 'frisbee', 'skis', 'snowboard', 'sports ball',
-               'kite', 'baseball bat', 'baseball glove', 'skateboard',
-               'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup',
-               'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple',
-               'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza',
-               'donut', 'cake', 'chair', 'couch', 'potted plant', 'bed',
-               'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote',
-               'keyboard', 'cell phone', 'microwave', 'oven', 'toaster',
-               'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors',
-               'teddy bear', 'hair drier', 'toothbrush']
-        r = results[0]       
+    def segmentFrame(self, frame, show_bboxes = False, mask_points_values = False, output_image_name = None, verbose = None):
         if show_bboxes == False:
+            ## By default displays the boolean pixel vlaues of the mask 
+            if mask_points_values == False:
+             #apply segmentation mask
+             segmask, output = self.segmentImage(frame, show_bboxes=False,process_frame=True, mask_points_values=mask_points_values, output_image_name=output_image_name)
             
-            #apply segmentation mask
-            output = display_instances(frame, r['rois'], r['masks'], r['class_ids'], coco_config.class_names)
-            
-            if output_image_name is not None:
-                cv2.imwrite(output_image_name, output)
-                print("Processed image saved successfully in your current working directory.")
-            return r, output
+             if output_image_name is not None:
+              cv2.imwrite(output_image_name, output)
+              print("Processed image saved successfully in your current working directory.")
 
+             return segmask, output
+            
+            elif mask_points_values == True:
+               segmask, output = self.segmentImage(frame, show_bboxes=False,process_frame=True, mask_points_values=mask_points_values, output_image_name=output_image_name)
+
+               if output_image_name is not None:
+                cv2.imwrite(output_image_name, output)
+                print("Processed image saved successfully in your current working directory.") 
+              
+               return segmask, output
         else:
             #apply segmentation mask with bounding boxes
-            output = display_box_instances(frame, r['rois'], r['masks'], r['class_ids'], coco_config.class_names, r['scores'])
+            ## By default displays the boolean pixel vlaues of the mask 
+            if mask_points_values == False:
+             #apply segmentation mask
+             segmask, output = self.segmentImage(frame, show_bboxes=True,process_frame=True, mask_points_values=mask_points_values, output_image_name=output_image_name)
+            
+             if output_image_name is not None:
+              cv2.imwrite(output_image_name, output)
+              print("Processed image saved successfully in your current working directory.")
 
-            if output_image_name is not None:
+             return segmask, output
+            
+            ##Displays the polygon points' values of the masks
+            elif mask_points_values == True:
+               segmask, output = self.segmentImage(frame, show_bboxes=True,process_frame=True, mask_points_values=mask_points_values, output_image_name=output_image_name)
+
+               if output_image_name is not None:
                 cv2.imwrite(output_image_name, output)
-                print("Processed Image saved successfully in your current working directory.")
-            return r, output
-        
+                print("Processed image saved successfully in your current working directory.") 
+              
+               return segmask, output
+            
+            
 
-    def process_video(self, video_path, show_bboxes = False,  output_video_name = None, frames_per_second = None):
+    def process_video(self, video_path, show_bboxes = False, mask_points_values = False, output_video_name = None, frames_per_second = None):
         capture = cv2.VideoCapture(video_path)
         width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
         height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
         codec = cv2.VideoWriter_fourcc(*'DIVX')
-        coco_config.class_names = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
-               'bus', 'train', 'truck', 'boat', 'traffic light',
-               'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird',
-               'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear',
-               'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie',
-               'suitcase', 'frisbee', 'skis', 'snowboard', 'sports ball',
-               'kite', 'baseball bat', 'baseball glove', 'skateboard',
-               'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup',
-               'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple',
-               'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza',
-               'donut', 'cake', 'chair', 'couch', 'potted plant', 'bed',
-               'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote',
-               'keyboard', 'cell phone', 'microwave', 'oven', 'toaster',
-               'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors',
-               'teddy bear', 'hair drier', 'toothbrush']
+        
         if frames_per_second is not None:
             save_video = cv2.VideoWriter(output_video_name, codec, frames_per_second, (width, height))
         counter = 0
@@ -165,17 +206,34 @@ class instance_segmentation():
                 counter +=1
                 ret, frame = capture.read()
                 if ret:
-                    # Run detection
-                    results = self.model.detect([frame])
-                    print("No. of frames:", counter)
-                    r = results[0]   
+                    
+                    
                     #apply segmentation mask
-                    output = display_instances(frame, r['rois'], r['masks'], r['class_ids'], coco_config.class_names)
-                    output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
+                    
+                    if mask_points_values == False:
+                        segmask, output = self.segmentImage(frame, show_bboxes=False,process_frame=True, mask_points_values=mask_points_values)
+                        print("No. of frames:", counter)
+                    
+                        
+                        output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
 
-                    if output_video_name is not None:
-                        save_video.write(output)
-                   
+                        if output_video_name is not None:
+                          save_video.write(output)
+
+                        
+
+                    elif mask_points_values == True:
+                        segmask, output = self.segmentImage(frame, show_bboxes=False,process_frame=True, mask_points_values=mask_points_values)
+                        print("No. of frames:", counter)
+                       
+                        
+                        output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
+
+                        if output_video_name is not None:
+                          save_video.write(output)
+
+                        
+
                 else:
                     break 
                   
@@ -185,24 +243,43 @@ class instance_segmentation():
            
             capture.release()
             if frames_per_second is not None:
-                save_video.release()    
-            return r, output   
+                save_video.release()   
 
+            return segmask, output     
+ 
         else:
             while True:
                 counter +=1
                 ret, frame = capture.read()
                 if ret:
                     # Run detection
-                    results = self.model.detect([frame])
-                    print("No. of frames:", counter)
-                    r = results[0]   
+                    
+                    
+                       
                     #apply segmentation mask with bounding boxes
-                    output = display_box_instances(frame, r['rois'], r['masks'], r['class_ids'], coco_config.class_names, r['scores'])
-                    output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
-        
-                    if output_video_name is not None:
-                        save_video.write(output)
+                    if mask_points_values == False:
+                        segmask, output = self.segmentImage(frame, show_bboxes=True,process_frame=True, mask_points_values=mask_points_values)
+                        print("No. of frames:", counter)  
+                        
+                        output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
+
+                        if output_video_name is not None:
+                          save_video.write(output)
+
+                        
+
+                    elif mask_points_values == True:
+                        segmask, output = self.segmentImage(frame, show_bboxes=True,process_frame=True, mask_points_values=mask_points_values)
+                        print("No. of frames:", counter)
+                    
+                        
+                        output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
+
+                        if output_video_name is not None:
+                          save_video.write(output)
+
+                          
+                      
                 else:
                     break
             
@@ -215,10 +292,10 @@ class instance_segmentation():
             if frames_per_second is not None:
                 save_video.release()
                  
-            return r, output         
+            return segmask, output     
+ 
 
-
-    def process_camera(self, cam, show_bboxes = False,  output_video_name = None, frames_per_second = None, show_frames = None, frame_name = None, verbose = None, check_fps = False):
+    def process_camera(self, cam, show_bboxes = False, mask_points_values = False, output_video_name = None, frames_per_second = None, show_frames = None, frame_name = None, verbose = None, check_fps = False):
         capture = cam
         if output_video_name is not None:
           width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -229,48 +306,49 @@ class instance_segmentation():
           
         start = datetime.now()       
 
-        coco_config.class_names = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
-               'bus', 'train', 'truck', 'boat', 'traffic light',
-               'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird',
-               'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear',
-               'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie',
-               'suitcase', 'frisbee', 'skis', 'snowboard', 'sports ball',
-               'kite', 'baseball bat', 'baseball glove', 'skateboard',
-               'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup',
-               'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple',
-               'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza',
-               'donut', 'cake', 'chair', 'couch', 'potted plant', 'bed',
-               'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote',
-               'keyboard', 'cell phone', 'microwave', 'oven', 'toaster',
-               'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors',
-               'teddy bear', 'hair drier', 'toothbrush']
+        
            
         if show_bboxes == False:
             while True:
                 
                 ret, frame = capture.read()
                 if ret:
-                    # Run detection
-                    results = self.model.detect([frame])
-                    
-                    r = results[0]   
-                    #apply segmentation mask
-                    output = display_instances(frame, r['rois'], r['masks'], r['class_ids'], coco_config.class_names)
-                    counter +=1
-                   
+                    if mask_points_values == False:
+                        segmask, output = self.segmentImage(frame, show_bboxes=False,process_frame=True, mask_points_values=mask_points_values)
 
-                    if show_frames == True:
-                        if frame_name is not None:
-                            cv2.imshow(frame_name, output)
+                        
+                        output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
+
+                        if show_frames == True:
+                            if frame_name is not None:
+                              cv2.imshow(frame_name, output)
                             
-                            if cv2.waitKey(25) & 0xFF == ord('q'):
+                              if cv2.waitKey(25) & 0xFF == ord('q'):
                                 break  
 
-                    
+                        if output_video_name is not None:
+                          save_video.write(output)
 
-                    if output_video_name is not None:
+                        
+
+                    elif mask_points_values == True:
+                        segmask, output = self.segmentImage(frame, show_bboxes=False,process_frame=True, mask_points_values=mask_points_values)
+
+                        
                         output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
-                        save_video.write(output)
+                        if show_frames == True:
+                            if frame_name is not None:
+                              cv2.imshow(frame_name, output)
+                            
+                              if cv2.waitKey(25) & 0xFF == ord('q'):
+                                break  
+
+                        if output_video_name is not None:
+                          output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
+                          save_video.write(output)
+
+                           
+
                    
                 elif counter == 30:
                     break  
@@ -291,34 +369,47 @@ class instance_segmentation():
             if output_video_name is not None:
                 save_video.release()  
 
-             
-
-            return r, output     
+            return segmask, output   
 
         else:
             while True:
                
                 ret, frame = capture.read()
                 if ret:
-                    # Run detection
-                    results = self.model.detect([frame])
-                    
-                    r = results[0]   
-                    #apply segmentation mask with bounding boxes
-                    output = display_box_instances(frame, r['rois'], r['masks'], r['class_ids'], coco_config.class_names, r['scores'])
-                    
-                    counter +=1
-                    if show_frames == True:
-                        if frame_name is not None:
-                            cv2.imshow(frame_name, output)
+                    if mask_points_values == False:
+                        segmask, output = self.segmentImage(frame, show_bboxes=True,process_frame=True, mask_points_values=mask_points_values)
 
-                            if cv2.waitKey(25) & 0xFF == ord('q'):
-                                break  
-        
-                    
-                    if output_video_name is not None:
+                        
                         output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
-                        save_video.write(output)
+                        if show_frames == True:
+                            if frame_name is not None:
+                              cv2.imshow(frame_name, output)
+                            
+                              if cv2.waitKey(25) & 0xFF == ord('q'):
+                                break  
+
+                        if output_video_name is not None:
+                          save_video.write(output)
+
+                        
+
+                    elif mask_points_values == True:
+                        segmask, output = self.segmentImage(frame, show_bboxes=True,process_frame=True, mask_points_values=mask_points_values)
+
+                        
+                        output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
+                        if show_frames == True:
+                            if frame_name is not None:
+                              cv2.imshow(frame_name, output)
+                            
+                              if cv2.waitKey(25) & 0xFF == ord('q'):
+                                break  
+
+                        if output_video_name is not None:
+                          output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
+                          save_video.write(output)
+
+                        
 
                 elif counter == 30:
                     break
@@ -338,8 +429,7 @@ class instance_segmentation():
             if output_video_name is not None:
                 save_video.release() 
 
-            return r, output          
-
+            return segmask, output   
 
 
 
@@ -370,8 +460,13 @@ class custom_segmentation:
         self.model = MaskRCNN(mode="inference", model_dir = self.model_dir, config=self.config)
         self.model.load_weights(model_path, by_name=True)
     
-    def segmentImage(self, image_path, show_bboxes = False, output_image_name = None, verbose = None):
-        image = cv2.imread(image_path)
+    def segmentImage(self, image_path, show_bboxes = False,mask_points_values = False, process_frame = False, output_image_name = None, verbose = None):
+        if process_frame ==False:
+            image = cv2.imread(image_path)
+
+        else:
+            image = image_path
+
         new_img = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         # Run detection
         if verbose is not None:
@@ -382,56 +477,121 @@ class custom_segmentation:
     
         r = results[0]       
         if show_bboxes == False:
+            #By default it returns the boolean pixel values of the mask
+            if mask_points_values == False:
+                #apply segmentation mask
+                output = display_instances(image, r['rois'], r['masks'], r['class_ids'],self.config.class_names)
             
-            #apply segmentation mask
-            output = display_instances(image, r['rois'], r['masks'], r['class_ids'],self.config.class_names)
-            
-            if output_image_name is not None:
+                if output_image_name is not None:
+                 cv2.imwrite(output_image_name, output)
+                 print("Processed image saved successfully in your current working directory.")
+
+                return r, output
+
+            ##Return the polygon points' values of the masks
+            elif mask_points_values == True:
+               mask = r['masks']
+               contain_val = []
+               for a in range(mask.shape[2]):
+                m = mask[:,:,a]
+                mask_values = Mask(m).polygons()
+                val = mask_values.points
+                contain_val.append(val)
+
+
+               output = display_instances(image, r['rois'], mask, r['class_ids'], self.config.class_names) 
+                
+               if output_image_name is not None:
                 cv2.imwrite(output_image_name, output)
-                print("Processed image saved successfully in your current working directory.")
-            return r, output
+                print("Processed image saved successfully in your current working directory.") 
+
+               r['masks'] = contain_val  
+              
+               return r, output
+            
+
+
 
         else:
             #apply segmentation mask with bounding boxes
-            output = display_box_instances(image, r['rois'], r['masks'], r['class_ids'], self.config.class_names, r['scores'])
+            #By default it returns the boolean values of the mask
+            if mask_points_values == False:
+              output = display_box_instances(image, r['rois'], r['masks'], r['class_ids'], self.config.class_names, r['scores'])
 
-            if output_image_name is not None:
+              if output_image_name is not None:
+               cv2.imwrite(output_image_name, output)
+               print("Processed Image saved successfully in your current working directory.")
+    
+              return r, output   
+            
+            ##Return the polygon points' values of the masks
+            elif mask_points_values == True:
+               mask = r['masks']
+               contain_val = []
+               for a in range(mask.shape[2]):
+                m = mask[:,:,a]
+                mask_values = Mask(m).polygons()
+                val = mask_values.points
+                contain_val.append(val)
+
+
+               output = display_box_instances(image, r['rois'], mask, r['class_ids'], self.config.class_names, r['scores']) 
+                
+               if output_image_name is not None:
                 cv2.imwrite(output_image_name, output)
-                print("Processed Image saved successfully in your current working directory.")
-    
-            return r, output   
+                print("Processed image saved successfully in your current working directory.") 
+
+               r['masks'] = contain_val  
+              
+               return r, output
+            
+ 
 
 
-    def segmentFrame(self, frame, show_bboxes = False, output_image_name = None, verbose= None):
-
-        new_img = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
-        if verbose is not None:
-            print("Processing frame...")
-        # Run detection
-        results = self.model.detect([new_img])
-
-        r = results[0]  
-    
+    def segmentFrame(self, frame, show_bboxes = False, mask_points_values = False, output_image_name = None, verbose= None):
         if show_bboxes == False:
+            if mask_points_values == False:
+                #apply segmentation mask
+
+                segmask, output = self.segmentImage(frame, show_bboxes=False, process_frame=True, mask_points_values=mask_points_values)
             
-            #apply segmentation mask
-            output = display_instances(frame, r['rois'], r['masks'], r['class_ids'], self.config.class_names)
+                if output_image_name is not None:
+                 cv2.imwrite(output_image_name, output)
+                 print("Processed image saved successfully in your current working directory.")
+
+                return segmask, output
+
+            elif mask_points_values == True:
+                segmask, output = self.segmentImage(frame, show_bboxes=False, process_frame=True, mask_points_values=mask_points_values)
             
-            if output_image_name is not None:
-                cv2.imwrite(output_image_name, output)
-                print("Processed image saved successfully in your current working directory.")
-            return r, output
+                if output_image_name is not None:
+                 cv2.imwrite(output_image_name, output)
+                 print("Processed image saved successfully in your current working directory.")
+
+                return segmask, output    
 
         else:
-            #apply segmentation mask with bounding boxes
-            output = display_box_instances(frame, r['rois'], r['masks'], r['class_ids'], self.config.class_names, r['scores'])
+            if mask_points_values == False:
+                #apply segmentation mask with bounding boxes
+                segmask, output = self.segmentImage(frame, show_bboxes=True, process_frame=True, mask_points_values=mask_points_values)
+              
+                if output_image_name is not None:
+                 cv2.imwrite(output_image_name, output)
+                 print("Processed Image saved successfully in your current working directory.")
 
-            if output_image_name is not None:
-                cv2.imwrite(output_image_name, output)
-                print("Processed Image saved successfully in your current working directory.")
-            return r, output
+                return segmask, output
+
+            elif mask_points_values == True:
+                segmask, output = self.segmentImage(frame, show_bboxes=True, process_frame=True, mask_points_values=mask_points_values)
+            
+                if output_image_name is not None:
+                 cv2.imwrite(output_image_name, output)
+                 print("Processed image saved successfully in your current working directory.")
+
+                return segmask, output   
+
         
-    def process_video(self, video_path, show_bboxes = False,  output_video_name = None, frames_per_second = None):
+    def process_video(self, video_path, show_bboxes = False, mask_points_values = False, output_video_name = None, frames_per_second = None):
         capture = cv2.VideoCapture(video_path)
         width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
         height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -446,16 +606,29 @@ class custom_segmentation:
                 counter +=1
                 ret, frame = capture.read()
                 if ret:
-                    # Run detection
-                    results = self.model.detect([frame], verbose=0)
-                    print("No. of frames:", counter)
-                    r = results[0]   
                     #apply segmentation mask
-                    output = display_instances(frame, r['rois'], r['masks'], r['class_ids'], self.config.class_names)
-                    output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
+                    
+                    if mask_points_values == False:
+                        segmask, output = self.segmentImage(frame, show_bboxes=False,process_frame=True, mask_points_values=mask_points_values)
+                        print("No. of frames:", counter)
+                    
+                        
+                        output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
 
-                    if output_video_name is not None:
-                        save_video.write(output)
+                        if output_video_name is not None:
+                          save_video.write(output)
+
+                        
+
+                    elif mask_points_values == True:
+                        segmask, output = self.segmentImage(frame, show_bboxes=False,process_frame=True, mask_points_values=mask_points_values)
+                        print("No. of frames:", counter)
+                       
+                        
+                        output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
+
+                        if output_video_name is not None:
+                          save_video.write(output)
                    
                 else:
                     break 
@@ -467,23 +640,36 @@ class custom_segmentation:
             capture.release()
             if frames_per_second is not None:
                 save_video.release()    
-            return r, output   
+            return segmask, output   
 
         else:
             while True:
                 counter +=1
                 ret, frame = capture.read()
                 if ret:
-                    # Run detection
-                    results = self.model.detect([frame], verbose=0)
-                    print("No. of frames:", counter)
-                    r = results[0]   
-                    #apply segmentation mask with bounding boxes
-                    output = display_box_instances(frame, r['rois'], r['masks'], r['class_ids'], self.config.class_names, r['scores'])
-                    output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
-        
-                    if output_video_name is not None:
-                        save_video.write(output)
+                    #apply segmentation mask
+                    
+                    if mask_points_values == False:
+                        segmask, output = self.segmentImage(frame, show_bboxes=True,process_frame=True, mask_points_values=mask_points_values)
+                        print("No. of frames:", counter)
+                    
+                        
+                        output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
+
+                        if output_video_name is not None:
+                          save_video.write(output)
+
+                        
+
+                    elif mask_points_values == True:
+                        segmask, output = self.segmentImage(frame, show_bboxes=True,process_frame=True, mask_points_values=mask_points_values)
+                        print("No. of frames:", counter)
+                       
+                        
+                        output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
+
+                        if output_video_name is not None:
+                          save_video.write(output)
                 else:
                     break
             
@@ -496,10 +682,10 @@ class custom_segmentation:
             if frames_per_second is not None:
                 save_video.release()
                  
-            return r, output   
+            return segmask, output   
             
                   
-    def process_camera(self, cam, show_bboxes = False,  output_video_name = None, frames_per_second = None, show_frames = None, frame_name = None, verbose = None, check_fps = False):
+    def process_camera(self, cam, show_bboxes = False,  mask_points_values = False, output_video_name = None, frames_per_second = None, show_frames = None, frame_name = None, verbose = None, check_fps = False):
         capture = cam
         
         if output_video_name is not None:
@@ -516,25 +702,37 @@ class custom_segmentation:
                 
                 ret, frame = capture.read()
                 if ret:
-                    # Run detection
-                    results = self.model.detect([frame])
-                    
-                    r = results[0]   
-                    #apply segmentation mask
-                    output = display_instances(frame, r['rois'], r['masks'], r['class_ids'], self.config.class_names)
-                    counter +=1
-                    
+                    if mask_points_values == False:
+                        segmask, output = self.segmentImage(frame, show_bboxes=False,process_frame=True, mask_points_values=mask_points_values)
 
-                    if show_frames == True:
-                        if frame_name is not None:
-                            cv2.imshow(frame_name, output)
+                        
+                        output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
+
+                        if show_frames == True:
+                            if frame_name is not None:
+                              cv2.imshow(frame_name, output)
                             
-                            if cv2.waitKey(25) & 0xFF == ord('q'):
+                              if cv2.waitKey(25) & 0xFF == ord('q'):
                                 break  
 
-                    if output_video_name is not None:
+                        if output_video_name is not None:
+                          save_video.write(output)
+
+                    elif mask_points_values == True:
+                        segmask, output = self.segmentImage(frame, show_bboxes=False,process_frame=True, mask_points_values=mask_points_values)
+
+                        
                         output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
-                        save_video.write(output)
+                        if show_frames == True:
+                            if frame_name is not None:
+                              cv2.imshow(frame_name, output)
+                            
+                              if cv2.waitKey(25) & 0xFF == ord('q'):
+                                break  
+
+                        if output_video_name is not None:
+                          output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
+                          save_video.write(output)    
                    
                 elif counter == 30:
                     break  
@@ -558,31 +756,46 @@ class custom_segmentation:
 
              
 
-            return r, output     
+            return segmask, output     
 
         else:
             while True:
                 
                 ret, frame = capture.read()
                 if ret:
-                    # Run detection
-                    results = self.model.detect([frame])
-                    
-                    r = results[0]   
-                    #apply segmentation mask with bounding boxes
-                    output = display_box_instances(frame, r['rois'], r['masks'], r['class_ids'], self.config.class_names, r['scores'])
-                    
-                    counter +=1
-                    if show_frames == True:
-                        if frame_name is not None:
-                            cv2.imshow(frame_name, output)
+                    if mask_points_values == False:
+                        segmask, output = self.segmentImage(frame, show_bboxes=True,process_frame=True, mask_points_values=mask_points_values)
 
-                            if cv2.waitKey(25) & 0xFF == ord('q'):
-                                break  
-        
-                    if output_video_name is not None:
+                        
                         output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
-                        save_video.write(output)
+
+                        if show_frames == True:
+                            if frame_name is not None:
+                              cv2.imshow(frame_name, output)
+                            
+                              if cv2.waitKey(25) & 0xFF == ord('q'):
+                                break  
+
+                        if output_video_name is not None:
+                          save_video.write(output)
+                    
+
+                    elif mask_points_values == True:
+                        segmask, output = self.segmentImage(frame, show_bboxes=True,process_frame=True, mask_points_values=mask_points_values)
+
+                        
+                        output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
+                        if show_frames == True:
+                            if frame_name is not None:
+                              cv2.imshow(frame_name, output)
+                            
+                              if cv2.waitKey(25) & 0xFF == ord('q'):
+                                break  
+
+                        if output_video_name is not None:
+                          output = cv2.resize(output, (width,height), interpolation=cv2.INTER_AREA)
+                          save_video.write(output)    
+
 
                 elif counter == 30:
                     break
@@ -603,7 +816,7 @@ class custom_segmentation:
             if output_video_name is not None:
                 save_video.release() 
 
-            return r, output          
+            return segmask, output          
 
 
 
