@@ -265,6 +265,8 @@ segment_image.segmentAsPascalvoc("sample.jpg", output_image_name = "image_new.jp
 
 3. PixelLib is used to find similar contents in images for image recommendation https://github.com/lukoucky/image_recommendation
 
+4. R2P2: It is a medical Lab that uses PixelLib in some of its projects for rendering medical services. https://r2p2.tech/#equipe
+
 
 ## References
 1. Bonlime, Keras implementation of Deeplab v3+ with pretrained weights  https://github.com/bonlime/keras-deeplab-v3-plus
