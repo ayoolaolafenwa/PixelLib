@@ -110,7 +110,7 @@ There are two types of Deeplabv3+ models available for performing **semantic seg
 
 * [Semantic Segmentation of 20 Common Objects with 5 Lines of Code](#Semantic-Segmentation-of-20-Common-Objects-with-5-Lines-of-Code) <br/> <br/>
 
-
+* [Projects Using PixelLib](#Projects-Using-PixelLib)
 
 
 **Note** Deeplab and mask r-ccn models are available  in the [release](https://github.com/ayoolaolafenwa/PixelLib/releases) of this repository.
@@ -260,13 +260,18 @@ segment_image.segmentAsPascalvoc("sample.jpg", output_image_name = "image_new.jp
 
 
 ## Projects Using PixelLib
-1. A segmentation api integrated with PixelLib to perform Semantic and Instance Segmentation of images on ios https://github.com/omarmhaimdat/segmentation_api
+1. R2P2 medical Lab uses PixelLib to analyse medical images in Neonatal (New Born) Intensive Unit Care. https://r2p2.tech/#equipe
+![img7](Images/neonatal.png) <br/> <br/>
 
 2. PixelLib is integerated in drone's cameras to perform instance segmentation of live video's feeds https://elbruno.com/2020/05/21/coding4fun-how-to-control-your-drone-with-20-lines-of-code-20-n/?utm_source=twitter&utm_medium=social&utm_campaign=tweepsmap-Default
+![img9](Images/demo.gif) <br/> <br/>
 
-3. PixelLib is used to find similar contents in images for image recommendation https://github.com/lukoucky/image_recommendation
+3. A segmentation api integrated with PixelLib to perform Semantic and Instance Segmentation of images on ios https://github.com/omarmhaimdat/segmentation_api
+![img10](Images/api.png) <br/> <br/>
 
-4. R2P2: It is a medical Lab that uses PixelLib in some of its projects for rendering medical services. https://r2p2.tech/#equipe
+4. PixelLib is used to perform image segmentation to find similar contents in images for image recommendation https://github.com/lukoucky/image_recommendation
+![img11](Images/similar.png) <br/> <br/>
+
 
 
 ## References
