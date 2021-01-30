@@ -108,9 +108,12 @@ There are two types of Deeplabv3+ models available for performing **semantic seg
 
 * [Semantic Segmentation of 150 Classes of Objects in images and videos with 5 Lines of Code](#Semantic-Segmentation-of-150-Classes-of-Objects-in-images-and-videos-with-5-Lines-of-Code)
 
-* [Semantic Segmentation of 20 Common Objects with 5 Lines of Code](#Semantic-Segmentation-of-20-Common-Objects-with-5-Lines-of-Code) <br/> <br/>
-
+* [Semantic Segmentation of 20 Common Objects with 5 Lines of Code](#Semantic-Segmentation-of-20-Common-Objects-with-5-Lines-of-Code)
+ 
 * [Projects Using PixelLib](#Projects-Using-PixelLib)
+
+<br/> <br/>
+
 
 
 **Note** Deeplab and mask r-ccn models are available  in the [release](https://github.com/ayoolaolafenwa/PixelLib/releases) of this repository.
@@ -260,7 +263,7 @@ segment_image.segmentAsPascalvoc("sample.jpg", output_image_name = "image_new.jp
 
 
 ## Projects Using PixelLib
-1. R2P2 medical Lab uses PixelLib to analyse medical images in Neonatal (New Born) Intensive Unit Care. https://r2p2.tech/#equipe
+1. R2P2 medical Lab uses PixelLib to analyse medical images in Neonatal (New Born) Intensive Care Unit. https://r2p2.tech/#equipe
 ![img7](Images/neonatal.png) <br/> <br/>
 
 2. PixelLib is integerated in drone's cameras to perform instance segmentation of live video's feeds https://elbruno.com/2020/05/21/coding4fun-how-to-control-your-drone-with-20-lines-of-code-20-n/?utm_source=twitter&utm_medium=social&utm_campaign=tweepsmap-Default
