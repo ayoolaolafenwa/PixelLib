@@ -108,11 +108,8 @@ There are two types of Deeplabv3+ models available for performing **semantic seg
 
 * [Semantic Segmentation of 150 Classes of Objects in images and videos with 5 Lines of Code](#Semantic-Segmentation-of-150-Classes-of-Objects-in-images-and-videos-with-5-Lines-of-Code)
 
-* [Semantic Segmentation of 20 Common Objects with 5 Lines of Code](#Semantic-Segmentation-of-20-Common-Objects-with-5-Lines-of-Code)
- 
-* [Projects Using PixelLib](#Projects-Using-PixelLib)
-
-<br/> <br/>
+* [Semantic Segmentation of 20 Common Objects with 5 Lines of Code](#Semantic-Segmentation-of-20-Common-Objects-with-5-Lines-of-Code) 
+* [Projects Using PixelLib](#Projects-Using-PixelLib)<br/> <br/>
 
 
 
