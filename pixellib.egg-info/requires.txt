@@ -1,7 +1,0 @@
-pillow
-scikit-image
-opencv-python
-matplotlib
-imgaug
-labelme2coco
-imantics
