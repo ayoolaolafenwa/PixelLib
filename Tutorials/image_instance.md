@@ -75,6 +75,59 @@ We added an extra parameter **show_bboxes** and set it to **true**, the segmenta
 
 You get a saved image with both segmentation masks and bounding boxes.
 
+
+## Extraction of Segmented Objects 
+
+PixelLib now makes it possible to extract each of the segmented objects in an image and save each of the object extracted as a separate image. This is the modified code below;
+
+``` python
+
+import pixellib
+from pixellib.instance import instance_segmentation
+
+seg = instance_segmentation()
+seg.load_model("mask_rcnn_coco.h5")
+seg.segmentImage("sample2.jpg", show_bboxes=True, output_image_name="output.jpg",
+extract_segmented_objects= True, save_extracted_objects=True) 
+```
+We introduced new parameters in the *segmentImage* which are:
+
+**extract_segmented_objects** This parameter handles the extraction of each of the segmented object in the image. <br>
+**save_extracted_objects** This parameter saves each of the extracted object as a separate image.Each of the object extracted in the image would be save with the name *segmented_object* with the corresponding index number such as *segmented_object_1*.  
+
+
+These are some of the objects extracted from the image above. 
+![alt1](Images/extract1.jpg  "extract1") ![alt2](extract2.jpg "extract2")  ![alt3](Images/extract3.jpg  "extract3")
+
+
+
+## Detection of Specific Classes
+
+The pre-trained coco model used detects 80 classes of objects. PixelLib has made it possible to filter out unused detections and detect the classes you want.
+
+**Code to detect target classee**
+``` python
+ import pixellib
+ from pixellib.instance import instance_segmentation
+
+ seg = instance_segmentation()
+ seg.load_model("mask_rcnn_coco.h5")
+ target_classes = seg.select_target_classes(person=True)
+ seg.segmentImage("sample2.jpg", segment_target_classes= target_classes, show_bboxes=True,  output_image_name="a.jpg") 
+```
+
+``` python
+target_classes = seg.select_target_classes(person=True)
+seg.segmentImage("sample2.jpg", segment_target_classes= target_classes, show_bboxes=True,  output_image_name="a.jpg") 
+```
+We introduced a new function *select_target_classes* that determines the target class to be detected. In this case we want to detect only *person* in the image. In the function *segmentImage* we added a new parameter *segment_target_classes* to filter unused detections and detect only the target class.
+
+![alt5](Images/filter.jpg)
+
+Beautiful Result! We were able to filter other detections and detect only the people in the image.
+
+
+
 ## Speed Adjustments for Faster Inference
 PixelLib now supports the ability to adjust the speed of detection according to a user's needs. The inference speed with a minimal reduction in the accuracy of detection. There are three main parameters that control the speed of detection.
 
@@ -167,11 +220,11 @@ The *rapid detection speed mode* produces good results with the fastest inferenc
 
 By using this code
 
-```python
+``` python
 
   segmask, output = segment_image.segmentImage()
-```
 
+```
 
 
 * You can test the code for obtaining arrays and print out the shape of the output by modifying the instance segmentation code below.
@@ -196,6 +249,8 @@ Obtain arrays of segmentation with bounding boxes by including the parameter **s
   segmask, output = segment_image.segmentImage(show_bboxes = True)
 
 ```
+
+
 * Full code
 
 ```python
@@ -211,6 +266,19 @@ Obtain arrays of segmentation with bounding boxes by including the parameter **s
   print(output.shape)
 
 ``` 
+
+**Note:**
+Access mask's values  using **segmask['masks']**, bounding box coordinates using **segmask['rois']**, class ids using 
+**segmask['class_ids']**.  
+
+``` python
+segmask, output = segment_image.segmentImage(show_bboxes = True, extract_segmented_objects= True )
+```
+Access the value of the extracted and croped segmented object using **segmask['extracted_objects']**
+
+
+
+
 
 
 # Process opencv's frames 

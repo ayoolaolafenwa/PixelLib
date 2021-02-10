@@ -6,6 +6,8 @@ from .deeplab import Deeplab_xcep_ade20k
 import cv2
 import time
 from datetime import datetime
+import imantics
+from imantics import Polygons, Mask
 
 
 class semantic_segmentation():
@@ -23,7 +25,8 @@ class semantic_segmentation():
     self.model = Deeplab_xcep_pascal()
 
     self.model2 = Deeplab_xcep_ade20k()
-      
+
+    
   def load_pascalvoc_model(self, model_path):
     if model_file == "pb":
       self.graph = tf.Graph()
@@ -51,7 +54,7 @@ class semantic_segmentation():
 ####### SEMANTIC SEGMENTATION WITH PASCALVOC MODEL ######    
 
   def segmentAsPascalvoc(self, image_path, process_frame = False, output_image_name=None,overlay=False,  verbose = None): 
-
+    
     if model_file == "pb":
 
       if process_frame == True:
@@ -77,11 +80,22 @@ class semantic_segmentation():
      
       seg_image = batch_seg_map[0]
       raw_labels = seg_image
+      
+      """Access  the unique class ids of the masks """
+      unique_labels = np.unique(raw_labels)
+      
+      raw_labels = np.array(Image.fromarray(raw_labels.astype('uint8')).resize((h, w)))
+      
+      
+      """ Convert the indexed masks to boolean masks """
+      raw_labels = np.ma.make_mask(raw_labels)
+      segvalues = {"class_ids":unique_labels,  "masks":raw_labels}  
+        
       #Apply segmentation color map
       labels = labelP_to_color_image(seg_image)   
       labels = np.array(Image.fromarray(labels.astype('uint8')).resize((h, w)))
       new_img = cv2.cvtColor(labels, cv2.COLOR_RGB2BGR)
-
+      
       if overlay == True:
         alpha = 0.7
         cv2.addWeighted(new_img, alpha, image_overlay, 1 - alpha,0, image_overlay)
@@ -90,7 +104,7 @@ class semantic_segmentation():
           cv2.imwrite(output_image_name, image_overlay)
           print("Processed Image saved successfully in your current working directory.")
 
-        return raw_labels, image_overlay
+        return segvalues, image_overlay
 
         
       else:  
@@ -100,7 +114,7 @@ class semantic_segmentation():
 
           print("Processed Image saved successfuly in your current working directory.")
 
-        return raw_labels, new_img 
+        return segvalues, new_img 
 
       
     else:
@@ -146,13 +160,27 @@ class semantic_segmentation():
         labels = labels[:, :-pad_y]
 
       raw_labels = labels
+      
+      """ Access the unique class ids of the masks"""
+      unique_labels = np.unique(raw_labels)
+      
+      raw_labels = np.array(Image.fromarray(raw_labels.astype('uint8')).resize((h, w)))
+
+
+
+      """ Convert the indexed masks to boolean  """
+      raw_labels = np.ma.make_mask(raw_labels)
+
+      segvalues = {"class_ids":unique_labels,  "masks":raw_labels}   
+
         
       #Apply segmentation color map
       labels = labelP_to_color_image(labels)   
       labels = np.array(Image.fromarray(labels.astype('uint8')).resize((h, w)))
-    
-    
+      
+      
       new_img = cv2.cvtColor(labels, cv2.COLOR_RGB2BGR)
+      
 
       if overlay == True:
         alpha = 0.7
@@ -162,7 +190,7 @@ class semantic_segmentation():
           cv2.imwrite(output_image_name, image_overlay)
           print("Processed Image saved successfully in your current working directory.")
 
-        return raw_labels, image_overlay
+        return segvalues, image_overlay
 
         
       else:  
@@ -172,7 +200,7 @@ class semantic_segmentation():
 
           print("Processed Image saved successfuly in your current working directory.")
 
-        return raw_labels, new_img 
+        return segvalues, new_img 
 
   
   def segmentFrameAsPascalvoc(self, frame, output_frame_name=None,overlay=False, verbose = None):  
@@ -348,7 +376,8 @@ class semantic_segmentation():
 
 
 ################# SEMANTIC SEGMENTATION WITH ADE20K MODEL ##########################
-  
+
+
 
   def segmentAsAde20k(self, image_path, output_image_name=None,overlay=False, process_frame = False, verbose = None):            
     trained_image_width=512
@@ -382,21 +411,30 @@ class semantic_segmentation():
     res = self.model2.predict(np.expand_dims(resized_image, 0))
     
     labels = np.argmax(res.squeeze(), -1)
+    
     # remove padding and resize back to original image
     if pad_x > 0:
-        labels = labels[:-pad_x]
+      labels = labels[:-pad_x]
     if pad_y > 0:
-        labels = labels[:, :-pad_y]
+      labels = labels[:, :-pad_y]
 
-    raw_labels = labels    
-        
+    raw_labels = labels  
+    
+    """ Access the unique class ids of the masks """
+    unique_labels = np.unique(raw_labels)
+    raw_labels = np.array(Image.fromarray(raw_labels.astype('uint8')).resize((h, w)))
+    
+    
+    """ Convert indexed masks to boolean """
+    raw_labels = np.ma.make_mask(raw_labels)
+    segvalues = {"class_ids":unique_labels,  "masks":raw_labels}   
+   
     #Apply segmentation color map
     labels = labelAde20k_to_color_image(labels)   
     labels = np.array(Image.fromarray(labels.astype('uint8')).resize((h, w)))
-    
-    
     new_img = cv2.cvtColor(labels, cv2.COLOR_RGB2BGR)
-
+    
+    
     if overlay == True:
         alpha = 0.7
         cv2.addWeighted(new_img, alpha, image_overlay, 1 - alpha,0, image_overlay)
@@ -405,7 +443,7 @@ class semantic_segmentation():
           cv2.imwrite(output_image_name, image_overlay)
           print("Processed Image saved successfully in your current working directory.")
 
-        return raw_labels, image_overlay 
+        return segvalues, image_overlay 
 
         
     else:  
@@ -415,7 +453,7 @@ class semantic_segmentation():
 
           print("Processed Image saved successfuly in your current working directory.")
 
-        return raw_labels, new_img 
+        return segvalues, new_img 
 
 
   def segmentFrameAsAde20k(self, frame, output_frame_name=None,overlay=False, verbose = None):  
@@ -861,4 +899,82 @@ def labelAde20k_to_color_image(label):
     raise ValueError('label value too large.')
 
   return colormap[label]   
+
+def labelAde20k_to_color_image(label):
+  """Adds color defined by the dataset colormap to the label.
+
+  Args:
+    label: A 2D array with integer type, storing the segmentation label.
+
+  Returns:
+    result: A 2D array with floating type. The element of the array
+      is the color indexed by the corresponding element in the input label
+      to the PASCAL color map.
+
+  Raises:
+    ValueError: If label is not of rank 2 or its value is larger than color
+      map maximum entry.
+  """
+  if label.ndim != 2:
+    raise ValueError('Expect 2-D input label')
+
+  colormap = create_ade20k_label_colormap()
+
+  if np.max(label) >= len(colormap):
+    raise ValueError('label value too large.')
+
+  return colormap[label]   
+
+def labelAde20k_to_color_image(label):
+  """Adds color defined by the dataset colormap to the label.
+
+  Args:
+    label: A 2D array with integer type, storing the segmentation label.
+
+  Returns:
+    result: A 2D array with floating type. The element of the array
+      is the color indexed by the corresponding element in the input label
+      to the PASCAL color map.
+
+  Raises:
+    ValueError: If label is not of rank 2 or its value is larger than color
+      map maximum entry.
+  """
+  if label.ndim != 2:
+    raise ValueError('Expect 2-D input label')
+
+  colormap = create_ade20k_label_colormap()
+
+  if np.max(label) >= len(colormap):
+    raise ValueError('label value too large.')
+
+  return colormap[label]   
+
+def labelAde20k_to_color_image(label):
+  """Adds color defined by the dataset colormap to the label.
+
+  Args:
+    label: A 2D array with integer type, storing the segmentation label.
+
+  Returns:
+    result: A 2D array with floating type. The element of the array
+      is the color indexed by the corresponding element in the input label
+      to the PASCAL color map.
+
+  Raises:
+    ValueError: If label is not of rank 2 or its value is larger than color
+      map maximum entry.
+  """
+  if label.ndim != 2:
+    raise ValueError('Expect 2-D input label')
+
+  colormap = create_ade20k_label_colormap()
+
+  if np.max(label) >= len(colormap):
+    raise ValueError('label value too large.')
+
+  return colormap[label]   
+
+
+
 

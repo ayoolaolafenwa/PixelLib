@@ -1,0 +1,13 @@
+Metadata-Version: 1.1
+Name: pixellib
+Version: 0.5.5
+Summary: PixelLib is a library used for easy implementation of semantic and instance segmentation of objects in images and videos with few lines of code.PixelLib makes it possible to train a custom segmentation model using few lines of code.PixelLib supports background editing of images and videos using few lines of code. 
+Home-page: https://github.com/ayoolaolafenwa/PixelLib
+Author: Ayoola Olafenwa
+Author-email: UNKNOWN
+License: MIT
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
