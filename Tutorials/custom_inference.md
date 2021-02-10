@@ -122,9 +122,82 @@ These are the objects extracted from the image above.
  </table>
 
 
+**Specialised uses of PixelLib may require you to return the array of the segmentation's output.**
+
+**Obtain the following arrays**:
+
+-Detected Objects' arrays
+
+-Objects' corresponding class_ids' arrays
+
+-Segmentation masks' arrays
+
+-Output's array
+
+By using this code
+
+``` python
+
+  segmask, output = segment_image.segmentImage()
+
+```
 
 
-Video segmentation with a custom model.
+* You can test the code for obtaining arrays and print out the shape of the output by modifying the instance segmentation code below.
+
+``` python
+
+  import pixellib
+  from pixellib.instance import custom_segmentation
+
+  segment_image = custom_segmentation()
+  segment_image.inferConfig(num_classes= 2, class_names= ["BG", "butterfly", "squirrel"])
+  segment_image.load_model("mask_rcnn_model/Nature_model_resnet101.h5")
+  segmask, output = segment_image.segmentImage("sample2.jpg")
+  cv2.imwrite("img.jpg", output)
+  print(output.shape)
+```
+
+Obtain arrays of segmentation with bounding boxes by including the parameter **show_bboxes**.
+
+```python
+
+  segmask, output = segment_image.segmentImage(show_bboxes = True)
+
+```
+
+
+* Full code
+
+```python
+
+  import pixellib
+  from pixellib.instance import custom_segmentation
+
+  segment_image = custom_segmentation()
+  segment_image.inferConfig(num_classes= 2, class_names= ["BG", "butterfly", "squirrel"])
+  segment_image.load_model("mask_rcnn_model/Nature_model_resnet101.h5")
+  segmask, output = segment_image.segmentImage("sample2.jpg", show_bboxes= True)
+  cv2.imwrite("img.jpg", output)
+  print(output.shape)
+
+``` 
+
+**Note:**
+Access mask's values  using **segmask['masks']**, bounding box coordinates using **segmask['rois']**, class ids using 
+**segmask['class_ids']**.  
+
+``` python
+segmask, output = segment_image.segmentImage(show_bboxes = True, extract_segmented_objects= True )
+```
+Access the value of the extracted and croped segmented object using **segmask['extracted_objects']**
+
+
+
+
+
+
+# Video segmentation with a custom model.
 
 *sample_video1*
 
