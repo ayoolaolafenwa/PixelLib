@@ -110,7 +110,7 @@ These are the objects extracted from the image above.
   </tr>
  </table>
 
-## Detection of Specific Classes
+## Detection of Target Classes
 
 The pre-trained coco model used detects 80 classes of objects. PixelLib has made it possible to filter out unused detections and detect the classes you want.
 

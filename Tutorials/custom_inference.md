@@ -88,6 +88,40 @@ The custom model is loaded and we called the function to segment the image.
 
 *WOW! We have successfully trained a custom model for performing instance segmentation and object detection on butterflies and squirrels.*
 
+## Extraction of Segmented Objects
+
+
+PixelLib now makes it possible to extract each of the segmented objects in an image and save each of the object extracted as a separate image. This is the modified code below;
+
+
+``` python
+
+import pixellib
+from pixellib.instance import custom_segmentation
+
+segment_image = custom_segmentation()
+segment_image.inferConfig(num_classes= 2, class_names= ["BG", "butterfly", "squirrel"])
+segment_image.load_model("mask_rcnn_model/Nature_model_resnet101.h5")
+segment_image.segmentImage("sample2.jpg", show_bboxes=True, output_image_name="output.jpg",
+extract_segmented_objects= True, save_extracted_objects=True) 
+```
+We introduced new parameters in the *segmentImage* which are:
+
+**extract_segmented_objects** This parameter handles the extraction of each of the segmented object in the image. <br>
+**save_extracted_objects** This parameter saves each of the extracted object as a separate image.Each of the object extracted in the image would be save with the name *segmented_object* with the corresponding index number such as *segmented_object_1*.  
+
+
+These are the objects extracted from the image above. 
+
+<table>
+  <tr>
+    <td><img src="Images/s1.jpg"></td>
+    <td><img src="Images/s2.jpg"></td>
+    <td><img src="Images/s3.jpg" ></td>
+  </tr>
+ </table>
+
+
 
 
 Video segmentation with a custom model.
