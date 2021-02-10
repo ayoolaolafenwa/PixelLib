@@ -76,9 +76,13 @@ We added an extra parameter **show_bboxes** and set it to **true**, the segmenta
 You get a saved image with both segmentation masks and bounding boxes.
 
 
-## Extraction of Segmented Objects 
+## Extraction of Segmented Objects
+
 
 PixelLib now makes it possible to extract each of the segmented objects in an image and save each of the object extracted as a separate image. This is the modified code below;
+
+![ext1](Images/image.jpg) 
+
 
 ``` python
 
@@ -96,10 +100,15 @@ We introduced new parameters in the *segmentImage* which are:
 **save_extracted_objects** This parameter saves each of the extracted object as a separate image.Each of the object extracted in the image would be save with the name *segmented_object* with the corresponding index number such as *segmented_object_1*.  
 
 
-These are some of the objects extracted from the image above. 
-![alt1](Images/extract1.jpg  "extract1") ![alt2](extract2.jpg "extract2")  ![alt3](Images/extract3.jpg  "extract3")
+These are the objects extracted from the image above. 
 
-
+<table>
+  <tr>
+    <td><img src="Images/e1.jpg"></td>
+    <td><img src="Images/e2.jpg"></td>
+    <td><img src="Images/e3.jpg" ></td>
+  </tr>
+ </table>
 
 ## Detection of Specific Classes
 
