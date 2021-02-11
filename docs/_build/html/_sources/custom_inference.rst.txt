@@ -97,6 +97,115 @@ The custom model is loaded and we called the function to segment the image.
 
 
 
+**Extraction of Segmented Objects**
+
+
+PixelLib now makes it possible to extract each of the segmented objects in an image and save each of the object extracted as a separate image. This is the modified code below;
+
+
+.. code-block:: python
+
+  import pixellib
+  from pixellib.instance import custom_segmentation
+
+  segment_image = custom_segmentation()
+  segment_image.inferConfig(num_classes= 2, class_names= ["BG", "butterfly", "squirrel"])
+  segment_image.load_model("mask_rcnn_model/Nature_model_resnet101.h5")
+  segment_image.segmentImage("sample2.jpg", show_bboxes=True, output_image_name="output.jpg",
+  extract_segmented_objects= True, save_extracted_objects=True) 
+
+We introduced new parameters in the *segmentImage* function which are:
+
+*extract_segmented_objects:* This parameter handles the extraction of each of the segmented object in the image. 
+
+*save_extracted_objects:* This parameter saves each of the extracted object as a separate image.Each of the object extracted in the image would be save with the name *segmented_object* with the corresponding index number such as *segmented_object_1*.  
+
+
+These are the objects extracted from the image above. 
+
+.. image:: photos/s1.jpg
+.. image:: photos/s2.jpg
+.. image:: photos/s3.jpg
+
+
+
+
+**Specialised uses of PixelLib may require you to return the array of the segmentation's output.**
+
+**Obtain the following arrays**:
+
+-Detected Objects' arrays
+
+-Objects' corresponding class_ids' arrays
+
+-Segmentation masks' arrays
+
+-Output's array
+
+By using this code
+
+.. code-block:: python
+
+  segmask, output = segment_image.segmentImage()
+
+
+
+* You can test the code for obtaining arrays and print out the shape of the output by modifying the instance segmentation code below.
+
+.. code-block:: python
+
+  import pixellib
+  from pixellib.instance import custom_segmentation
+
+  segment_image = custom_segmentation()
+  segment_image.inferConfig(num_classes= 2, class_names= ["BG", "butterfly", "squirrel"])
+  segment_image.load_model("mask_rcnn_model/Nature_model_resnet101.h5")
+  segmask, output = segment_image.segmentImage("sample2.jpg")
+  cv2.imwrite("img.jpg", output)
+  print(output.shape)
+
+
+Obtain arrays of segmentation with bounding boxes by including the parameter *show_bboxes*.
+
+.. code-block:: python
+
+  segmask, output = segment_image.segmentImage(show_bboxes = True)
+
+
+
+
+* Full code
+
+.. code-block:: python
+
+  import pixellib
+  from pixellib.instance import custom_segmentation
+
+  segment_image = custom_segmentation()
+  segment_image.inferConfig(num_classes= 2, class_names= ["BG", "butterfly", "squirrel"])
+  segment_image.load_model("mask_rcnn_model/Nature_model_resnet101.h5")
+  segmask, output = segment_image.segmentImage("sample2.jpg", show_bboxes= True)
+  cv2.imwrite("img.jpg", output)
+  print(output.shape)
+
+
+
+**Note:**
+
+Access mask's values  using *segmask['masks']*, bounding box coordinates using *segmask['rois']*, class ids using 
+*segmask['class_ids']*.  
+
+.. code-block:: python
+  
+  segmask, output = segment_image.segmentImage(show_bboxes = True, extract_segmented_objects= True )
+
+Access the value of the extracted and croped segmented object using *segmask['extracted_objects']*
+
+
+
+
+
+
 Video segmentation with a custom model.
 
 **sample_video1**

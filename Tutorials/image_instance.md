@@ -94,10 +94,10 @@ seg.load_model("mask_rcnn_coco.h5")
 seg.segmentImage("sample2.jpg", show_bboxes=True, output_image_name="output.jpg",
 extract_segmented_objects= True, save_extracted_objects=True) 
 ```
-We introduced new parameters in the *segmentImage* which are:
+We introduced new parameters in the *segmentImage* function which are:
 
-**extract_segmented_objects** This parameter handles the extraction of each of the segmented object in the image. <br>
-**save_extracted_objects** This parameter saves each of the extracted object as a separate image.Each of the object extracted in the image would be save with the name *segmented_object* with the corresponding index number such as *segmented_object_1*.  
+**extract_segmented_objects:** This parameter handles the extraction of each of the segmented object in the image. <br>
+**save_extracted_objects:** This parameter saves each of the extracted object as a separate image.Each of the object extracted in the image would be save with the name *segmented_object* with the corresponding index number such as *segmented_object_1*.  
 
 
 These are the objects extracted from the image above. 
@@ -114,7 +114,7 @@ These are the objects extracted from the image above.
 
 The pre-trained coco model used detects 80 classes of objects. PixelLib has made it possible to filter out unused detections and detect the classes you want.
 
-**Code to detect target classee**
+**Code to detect target classes**
 ``` python
  import pixellib
  from pixellib.instance import instance_segmentation

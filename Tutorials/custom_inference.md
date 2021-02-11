@@ -105,10 +105,10 @@ segment_image.load_model("mask_rcnn_model/Nature_model_resnet101.h5")
 segment_image.segmentImage("sample2.jpg", show_bboxes=True, output_image_name="output.jpg",
 extract_segmented_objects= True, save_extracted_objects=True) 
 ```
-We introduced new parameters in the *segmentImage* which are:
+We introduced new parameters in the *segmentImage* function which are:
 
-**extract_segmented_objects** This parameter handles the extraction of each of the segmented object in the image. <br>
-**save_extracted_objects** This parameter saves each of the extracted object as a separate image.Each of the object extracted in the image would be save with the name *segmented_object* with the corresponding index number such as *segmented_object_1*.  
+**extract_segmented_objects:** This parameter handles the extraction of each of the segmented object in the image. <br>
+**save_extracted_objects:** This parameter saves each of the extracted object as a separate image.Each of the object extracted in the image would be save with the name *segmented_object* with the corresponding index number such as *segmented_object_1*.  
 
 
 These are the objects extracted from the image above. 

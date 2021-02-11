@@ -225,6 +225,74 @@ We are going to test the model on the classes we have trained it on. If you have
 </div>
 <img alt="_images/squirrel_seg.jpg" src="_images/squirrel_seg.jpg" />
 <p><em>WOW! We have successfully trained a custom model for performing instance segmentation and object detection on butterflies and squirrels.</em></p>
+<p><strong>Extraction of Segmented Objects</strong></p>
+<p>PixelLib now makes it possible to extract each of the segmented objects in an image and save each of the object extracted as a separate image. This is the modified code below;</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">custom_segmentation</span>
+
+<span class="n">segment_image</span> <span class="o">=</span> <span class="n">custom_segmentation</span><span class="p">()</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">inferConfig</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">class_names</span><span class="o">=</span> <span class="p">[</span><span class="s2">&quot;BG&quot;</span><span class="p">,</span> <span class="s2">&quot;butterfly&quot;</span><span class="p">,</span> <span class="s2">&quot;squirrel&quot;</span><span class="p">])</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_model/Nature_model_resnet101.h5&quot;</span><span class="p">)</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">(</span><span class="s2">&quot;sample2.jpg&quot;</span><span class="p">,</span> <span class="n">show_bboxes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;output.jpg&quot;</span><span class="p">,</span>
+<span class="n">extract_segmented_objects</span><span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">save_extracted_objects</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We introduced new parameters in the <em>segmentImage</em> function which are:</p>
+<p><em>extract_segmented_objects:</em> This parameter handles the extraction of each of the segmented object in the image.</p>
+<p><em>save_extracted_objects:</em> This parameter saves each of the extracted object as a separate image.Each of the object extracted in the image would be save with the name <em>segmented_object</em> with the corresponding index number such as <em>segmented_object_1</em>.</p>
+<p>These are the objects extracted from the image above.</p>
+<img alt="_images/s1.jpg" src="_images/s1.jpg" />
+<img alt="_images/s2.jpg" src="_images/s2.jpg" />
+<img alt="_images/s3.jpg" src="_images/s3.jpg" />
+<p><strong>Specialised uses of PixelLib may require you to return the array of the segmentation’s output.</strong></p>
+<p><strong>Obtain the following arrays</strong>:</p>
+<p>-Detected Objects’ arrays</p>
+<p>-Objects’ corresponding class_ids’ arrays</p>
+<p>-Segmentation masks’ arrays</p>
+<p>-Output’s array</p>
+<p>By using this code</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">segmask</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>You can test the code for obtaining arrays and print out the shape of the output by modifying the instance segmentation code below.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">custom_segmentation</span>
+
+<span class="n">segment_image</span> <span class="o">=</span> <span class="n">custom_segmentation</span><span class="p">()</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">inferConfig</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">class_names</span><span class="o">=</span> <span class="p">[</span><span class="s2">&quot;BG&quot;</span><span class="p">,</span> <span class="s2">&quot;butterfly&quot;</span><span class="p">,</span> <span class="s2">&quot;squirrel&quot;</span><span class="p">])</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_model/Nature_model_resnet101.h5&quot;</span><span class="p">)</span>
+<span class="n">segmask</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">(</span><span class="s2">&quot;sample2.jpg&quot;</span><span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s2">&quot;img.jpg&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Obtain arrays of segmentation with bounding boxes by including the parameter <em>show_bboxes</em>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">segmask</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">(</span><span class="n">show_bboxes</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Full code</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">custom_segmentation</span>
+
+<span class="n">segment_image</span> <span class="o">=</span> <span class="n">custom_segmentation</span><span class="p">()</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">inferConfig</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">class_names</span><span class="o">=</span> <span class="p">[</span><span class="s2">&quot;BG&quot;</span><span class="p">,</span> <span class="s2">&quot;butterfly&quot;</span><span class="p">,</span> <span class="s2">&quot;squirrel&quot;</span><span class="p">])</span>
+<span class="n">segment_image</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_model/Nature_model_resnet101.h5&quot;</span><span class="p">)</span>
+<span class="n">segmask</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">(</span><span class="s2">&quot;sample2.jpg&quot;</span><span class="p">,</span> <span class="n">show_bboxes</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s2">&quot;img.jpg&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong></p>
+<p>Access mask’s values  using <em>segmask[‘masks’]</em>, bounding box coordinates using <em>segmask[‘rois’]</em>, class ids using
+<em>segmask[‘class_ids’]</em>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">segmask</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">(</span><span class="n">show_bboxes</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">extract_segmented_objects</span><span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Access the value of the extracted and croped segmented object using <em>segmask[‘extracted_objects’]</em></p>
 <p>Video segmentation with a custom model.</p>
 <p><strong>sample_video1</strong></p>
 <p>We want to perform segmentation on the butterflies in this video.</p>

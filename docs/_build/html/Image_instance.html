@@ -212,6 +212,44 @@
 <p>We added an extra parameter <strong>show_bboxes</strong> and set it to <strong>true</strong>, the segmentation masks are produced with bounding boxes.</p>
 <img alt="_images/maskboxes.jpg" src="_images/maskboxes.jpg" />
 <p>You get a saved image with both segmentation masks and bounding boxes.</p>
+<p><strong>Extraction of Segmented Objects</strong></p>
+<p>PixelLib now makes it possible to extract each of the segmented objects in an image and save each of the object extracted as a separate image. This is the modified code below;</p>
+<img alt="_images/image.jpg" src="_images/image.jpg" />
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">instance_segmentation</span>
+
+<span class="n">seg</span> <span class="o">=</span> <span class="n">instance_segmentation</span><span class="p">()</span>
+<span class="n">seg</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_coco.h5&quot;</span><span class="p">)</span>
+<span class="n">seg</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">(</span><span class="s2">&quot;sample2.jpg&quot;</span><span class="p">,</span> <span class="n">show_bboxes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;output.jpg&quot;</span><span class="p">,</span>
+<span class="n">extract_segmented_objects</span><span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">save_extracted_objects</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We introduced new parameters in the <em>segmentImage</em> function which are:</p>
+<p><em>extract_segmented_objects:</em> This parameter handles the extraction of each of the segmented object in the image.</p>
+<p><em>save_extracted_objects:</em> This parameter saves each of the extracted object as a separate image.Each of the object extracted in the image would be save with the name <em>segmented_object</em> with the corresponding index number such as <em>segmented_object_1</em>.</p>
+<p>These are the objects extracted from the image above.</p>
+<img alt="_images/e1.jpg" src="_images/e1.jpg" />
+<img alt="_images/e2.jpg" src="_images/e2.jpg" />
+<img alt="_images/e3.jpg" src="_images/e3.jpg" />
+<p><strong>Detection of Target Classes</strong></p>
+<p>The pre-trained coco model used detects 80 classes of objects. PixelLib has made it possible to filter out unused detections and detect the classes you want.</p>
+<p><strong>Code to detect target classes</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">instance_segmentation</span>
+
+<span class="n">seg</span> <span class="o">=</span> <span class="n">instance_segmentation</span><span class="p">()</span>
+<span class="n">seg</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_coco.h5&quot;</span><span class="p">)</span>
+<span class="n">target_classes</span> <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">select_target_classes</span><span class="p">(</span><span class="n">person</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">seg</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">(</span><span class="s2">&quot;sample2.jpg&quot;</span><span class="p">,</span> <span class="n">segment_target_classes</span><span class="o">=</span> <span class="n">target_classes</span><span class="p">,</span> <span class="n">show_bboxes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;a.jpg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">target_classes</span> <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">select_target_classes</span><span class="p">(</span><span class="n">person</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">seg</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">(</span><span class="s2">&quot;sample2.jpg&quot;</span><span class="p">,</span> <span class="n">segment_target_classes</span><span class="o">=</span> <span class="n">target_classes</span><span class="p">,</span> <span class="n">show_bboxes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="n">output_image_name</span><span class="o">=</span><span class="s2">&quot;a.jpg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We introduced a new function <em>select_target_classes</em> that determines the target class to be detected. In this case we want to detect only <em>person</em> in the image. In the function <em>segmentImage</em> we added a new parameter <em>segment_target_classes</em> to filter unused detections and detect only the target class.</p>
+<img alt="_images/filter.jpg" src="_images/filter.jpg" />
+<p>Beautiful Result! We were able to filter other detections and detect only the people in the image.</p>
 <p><strong>Speed Adjustments for Faster Inference</strong></p>
 <p>PixelLib now supports the ability to adjust the speed of detection according to a user’s needs. The inference speed with a minimal reduction in the accuracy of detection. There are three main parameters that control the speed of detection.</p>
 <p>1 <strong>average</strong></p>
@@ -302,6 +340,13 @@ These inference reports are obtained using Nvidia GeForce 1650.</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><strong>Note:</strong>
+Access mask’s values  using <em>segmask[‘masks’]</em>, bounding box coordinates using <em>segmask[‘rois’]</em>, class ids using
+<em>segmask[‘class_ids’]</em>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">segmask</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentImage</span><span class="p">(</span><span class="n">show_bboxes</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">extract_segmented_objects</span><span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Access the value of the extracted and croped segmented object using <em>segmask[‘extracted_objects’]</em></p>
 <p><strong>Process opencv’s frames</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">instance_segmentation</span>
