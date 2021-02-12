@@ -87,7 +87,34 @@ We can perform instance segmentation with object detection by setting the parame
 
 [![alt_myvid3](Images/vid_ins.jpg)](https://www.youtube.com/watch?v=bGPO1bCZLAo)
 
+## Detection of Target Classes
 
+The pre-trained coco model used detects 80 classes of objects. PixelLib has made it possible to filter out unused detections and detect the classes you want.
+
+**Code to detect target classes**
+``` python
+ import pixellib
+ from pixellib.instance import instance_segmentation
+
+ seg = instance_segmentation()
+ seg.load_model("mask_rcnn_coco.h5")
+ target_classes = seg.select_target_classes(car=True)
+ seg.process_video("sample.mp4", show_bboxes=True, segment_target_classes=target_classes, frames_per_second= 5, output_video_name="output.mp4")
+ 
+```
+
+``` python
+ target_classes = seg.select_target_classes(car=True)
+ seg.process_video("sample.mp4", show_bboxes=True, segment_target_classes=target_classes, frames_per_second= 5, output_video_name="output.mp4")
+```
+We introduced a new function *select_target_classes* that determines the target class to be detected. In this case we want to detect only *car* in the video. In the function *process_video* we added a new parameter *segment_target_classes* to filter unused detections and detect only the target class.
+
+**Output video**
+
+
+[![filter](Images/fil.png)](https://www.youtube.com/watch?v=i9VX4r-dboM)
+
+Beautiful Result! We were able to filter other detections and detect only the car in the video.
 
 
 
@@ -135,6 +162,30 @@ A demo by me showing the output of pixelLib's instance segmentation on camera's 
 
 [![alt_myvid3](Images/cam_ins.png)](https://www.youtube.com/watch?v=HD1m-g7cOKw)
 
+
+## Detection of Target Classes in Live Camera Feeds
+
+This is the modified code below to filter unused detections and detect a tar class in a live camera feed.
+
+```python
+
+  
+  import pixellib
+  from pixellib.instance import instance_segmentation
+  import cv2
+
+
+  capture = cv2.VideoCapture(0)
+
+  segment_video = instance_segmentation()
+  segment_video.load_model("mask_rcnn_coco.h5")
+  target_classes = segment_video.select_target_classes(person=True, car = True)
+  segment_video.process_camera(capture, segment_target_classes=target_classes,  frames_per_second= 10, output_video_name="output_video.mp4", show_frames= True,frame_name= "frame")
+```
+
+
+
+
 ## Speed Adjustments for Faster Inference
 PixelLib now supports the ability to adjust the speed of detection according to a user's needs. The inference speed with a minimal reduction in the accuracy of detection. There are three main parameters that control the speed of detection.
 
@@ -143,7 +194,7 @@ PixelLib now supports the ability to adjust the speed of detection according to 
 **rapid**
 
 By default the detection speed is about 1 second for a processing a single image using Nvidia GeForce 1650.
-**Using Average Detection   Mode**
+**Using Average Detection Mode**
 ```python
   import pixellib
   from pixellib.instance import instance_segmentation

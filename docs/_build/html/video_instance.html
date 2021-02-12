@@ -220,7 +220,29 @@ https://www.youtube.com/watch?v=_NsELe67UxM
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
     <iframe src="https://www.youtube.com/embed/bGPO1bCZLAo" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 
-</div></div>
+</div><p><strong>Detection of Target Classes</strong></p>
+<p>The pre-trained coco model used detects 80 classes of objects. PixelLib has made it possible to filter out unused detections and detect the classes you want.</p>
+<p><strong>Code to detect target classes</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">instance_segmentation</span>
+
+<span class="n">seg</span> <span class="o">=</span> <span class="n">instance_segmentation</span><span class="p">()</span>
+<span class="n">seg</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_coco.h5&quot;</span><span class="p">)</span>
+<span class="n">target_classes</span> <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">select_target_classes</span><span class="p">(</span><span class="n">car</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">seg</span><span class="o">.</span><span class="n">process_video</span><span class="p">(</span><span class="s2">&quot;sample.mp4&quot;</span><span class="p">,</span> <span class="n">show_bboxes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">segment_target_classes</span><span class="o">=</span><span class="n">target_classes</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output.mp4&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">target_classes</span> <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">select_target_classes</span><span class="p">(</span><span class="n">car</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">seg</span><span class="o">.</span><span class="n">process_video</span><span class="p">(</span><span class="s2">&quot;sample.mp4&quot;</span><span class="p">,</span> <span class="n">show_bboxes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">segment_target_classes</span><span class="o">=</span><span class="n">target_classes</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output.mp4&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We introduced a new function <em>select_target_classes</em> that determines the target class to be detected. In this case we want to detect only <em>car</em> in the video. In the function <em>process_video</em> we added a new parameter <em>segment_target_classes</em> to filter unused detections and detect only the target class.</p>
+<p><strong>Output video</strong></p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+    <iframe src= "https://www.youtube.com/embed/i9VX4r-dboM" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+
+</div><p>Beautiful Result! We were able to filter other detections and detect only the car in the video.</p>
+</div>
 <div class="section" id="instance-segmentation-of-live-camera-with-mask-r-cnn">
 <h1><strong>Instance Segmentation of Live Camera with Mask R-cnn.</strong><a class="headerlink" href="#instance-segmentation-of-live-camera-with-mask-r-cnn" title="Permalink to this headline">¶</a></h1>
 <p>We can use the same model to perform semantic segmentation on camera. This can be done by few modifications to the code used to process video file.</p>
@@ -252,6 +274,21 @@ https://www.youtube.com/watch?v=_NsELe67UxM
     <iframe src="https://www.youtube.com/embed/HD1m-g7cOKw" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div><p>A demo showing the output of pixelLib’s instance segmentation of camera’s feeds using Mask-RCNN.
 <em>Good work! It was able to successfully detect me and my phone.</em></p>
+<p><strong>Detection of Target Classes in Live Camera Feeds</strong></p>
+<p>This is the modified code below to filter unused detections and detect a tar class in a live camera feed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">instance_segmentation</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+
+<span class="n">capture</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">segment_video</span> <span class="o">=</span> <span class="n">instance_segmentation</span><span class="p">()</span>
+<span class="n">segment_video</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_coco.h5&quot;</span><span class="p">)</span>
+<span class="n">target_classes</span> <span class="o">=</span> <span class="n">segment_video</span><span class="o">.</span><span class="n">select_target_classes</span><span class="p">(</span><span class="n">person</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">car</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">segment_video</span><span class="o">.</span><span class="n">process_camera</span><span class="p">(</span><span class="n">capture</span><span class="p">,</span> <span class="n">segment_target_classes</span><span class="o">=</span><span class="n">target_classes</span><span class="p">,</span>  <span class="n">frames_per_second</span><span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">show_frames</span><span class="o">=</span> <span class="kc">True</span><span class="p">,</span><span class="n">frame_name</span><span class="o">=</span> <span class="s2">&quot;frame&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 <p><strong>Speed Adjustments for Faster Inference</strong></p>
 <p>PixelLib now supports the ability to adjust the speed of detection according to a user’s needs. The inference speed with a minimal reduction in the accuracy of detection. There are three main parameters that control the speed of detection.</p>
 <p>1 <strong>average</strong></p>

@@ -106,7 +106,41 @@ We can perform instance segmentation with object detection by setting the parame
     </div>
 
 
+**Detection of Target Classes**
 
+The pre-trained coco model used detects 80 classes of objects. PixelLib has made it possible to filter out unused detections and detect the classes you want.
+
+**Code to detect target classes**
+
+.. code:: python
+ 
+  import pixellib
+  from pixellib.instance import instance_segmentation
+
+  seg = instance_segmentation()
+  seg.load_model("mask_rcnn_coco.h5")
+  target_classes = seg.select_target_classes(car=True)
+  seg.process_video("sample.mp4", show_bboxes=True, segment_target_classes=target_classes, frames_per_second= 5, output_video_name="output.mp4")
+ 
+
+
+.. code-block:: python
+
+  target_classes = seg.select_target_classes(car=True)
+  seg.process_video("sample.mp4", show_bboxes=True, segment_target_classes=target_classes, frames_per_second= 5, output_video_name="output.mp4")
+
+We introduced a new function *select_target_classes* that determines the target class to be detected. In this case we want to detect only *car* in the video. In the function *process_video* we added a new parameter *segment_target_classes* to filter unused detections and detect only the target class.
+
+**Output video**
+
+.. raw:: html
+
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src= "https://www.youtube.com/embed/i9VX4r-dboM" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    
+    </div>
+
+Beautiful Result! We were able to filter other detections and detect only the car in the video.
 
 
 **Instance Segmentation of Live Camera with Mask R-cnn.**
@@ -158,6 +192,27 @@ In the code for performing segmentation, we replaced the video filepath to captu
 
 A demo showing the output of pixelLib’s instance segmentation of camera’s feeds using Mask-RCNN. 
 *Good work! It was able to successfully detect me and my phone.*
+
+
+**Detection of Target Classes in Live Camera Feeds**
+
+This is the modified code below to filter unused detections and detect a tar class in a live camera feed.
+
+.. code-block:: python
+
+  
+  import pixellib
+  from pixellib.instance import instance_segmentation
+  import cv2
+
+
+  capture = cv2.VideoCapture(0)
+
+  segment_video = instance_segmentation()
+  segment_video.load_model("mask_rcnn_coco.h5")
+  target_classes = segment_video.select_target_classes(person=True, car = True)
+  segment_video.process_camera(capture, segment_target_classes=target_classes,  frames_per_second= 10, output_video_name="output_video.mp4", show_frames= True,frame_name= "frame")
+
 
 
 **Speed Adjustments for Faster Inference** 
