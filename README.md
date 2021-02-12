@@ -1,6 +1,6 @@
 # PixelLib 
 
-![mylogo](Images\PixelLibLogo.png)
+![mylogo](Images/PixelLibLogo.png)
 
 [![Downloads](https://pepy.tech/badge/pixellib)](https://pepy.tech/project/pixellib)  [![Downloads](https://pepy.tech/badge/pixellib/month)](https://pepy.tech/project/pixellib/month)  [![Downloads](https://pepy.tech/badge/pixellib/week)](https://pepy.tech/project/pixellib/week)
 
