@@ -215,7 +215,7 @@
 <ul class="simple">
 <li><p>Obtain the array of the segmentation’s output by using this code,</p></li>
 </ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="p">,</span> <span class="n">segmap</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentAsPascalvoc</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">segvalues</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentAsPascalvoc</span><span class="p">()</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -227,15 +227,16 @@
 
 <span class="n">segment_image</span> <span class="o">=</span> <span class="n">semantic_segmentation</span><span class="p">()</span>
 <span class="n">segment_image</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
-<span class="n">output</span><span class="p">,</span> <span class="n">segmap</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentAsPascalvoc</span><span class="p">(</span><span class="s2">&quot;sample1.jpg&quot;</span><span class="p">)</span>
+<span class="n">segvalues</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentAsPascalvoc</span><span class="p">(</span><span class="s2">&quot;sample1.jpg&quot;</span><span class="p">)</span>
 <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s2">&quot;img.jpg&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><strong>Note:</strong> Access the <em>masks</em> of the objects segmented using <strong>segvalues[“masks”]</strong> and their <em>class ids</em> using <strong>segvalues[“class_ids”]</strong>.</p>
 <ul class="simple">
 <li><p>Obtain both the output and the segmentation overlay’s arrays by using this code,</p></li>
 </ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="p">,</span> <span class="n">segoverlay</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentAsPascalvoc</span><span class="p">(</span><span class="n">overlay</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">segvalues</span><span class="p">,</span> <span class="n">segoverlay</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentAsPascalvoc</span><span class="p">(</span><span class="n">overlay</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
@@ -244,7 +245,7 @@
 
 <span class="n">segment_image</span> <span class="o">=</span> <span class="n">semantic_segmentation</span><span class="p">()</span>
 <span class="n">segment_image</span><span class="o">.</span><span class="n">load_pascalvoc_model</span><span class="p">(</span><span class="s2">&quot;deeplabv3_xception_tf_dim_ordering_tf_kernels.h5&quot;</span><span class="p">)</span>
-<span class="n">segmap</span><span class="p">,</span> <span class="n">segoverlay</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentAsPascalvoc</span><span class="p">(</span><span class="s2">&quot;sample1.jpg&quot;</span><span class="p">,</span> <span class="n">overlay</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">segvalues</span><span class="p">,</span> <span class="n">segoverlay</span> <span class="o">=</span> <span class="n">segment_image</span><span class="o">.</span><span class="n">segmentAsPascalvoc</span><span class="p">(</span><span class="s2">&quot;sample1.jpg&quot;</span><span class="p">,</span> <span class="n">overlay</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s2">&quot;img.jpg&quot;</span><span class="p">,</span> <span class="n">segoverlay</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">segoverlay</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>

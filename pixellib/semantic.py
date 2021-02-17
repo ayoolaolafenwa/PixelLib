@@ -436,14 +436,14 @@ class semantic_segmentation():
     
     
     if overlay == True:
-        alpha = 0.7
-        cv2.addWeighted(new_img, alpha, image_overlay, 1 - alpha,0, image_overlay)
+      alpha = 0.7
+      cv2.addWeighted(new_img, alpha, image_overlay, 1 - alpha,0, image_overlay)
 
-        if output_image_name is not None:
-          cv2.imwrite(output_image_name, image_overlay)
-          print("Processed Image saved successfully in your current working directory.")
+      if output_image_name is not None:
+        cv2.imwrite(output_image_name, image_overlay)
+        print("Processed Image saved successfully in your current working directory.")
 
-        return segvalues, image_overlay 
+      return segvalues, image_overlay 
 
         
     else:  

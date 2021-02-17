@@ -96,7 +96,7 @@ We added an extra parameter **overlay** and set it to **true**, we produced an i
 
 .. code-block:: python
 
-  output, segmap = segment_image.segmentAsAde20k()
+  segvalues, output = segment_image.segmentAsAde20k()
 
 * You can test the code for obtaining arrays and print out the shape of the output by modifying the semantic segmentation code below.
 
@@ -108,15 +108,17 @@ We added an extra parameter **overlay** and set it to **true**, we produced an i
 
   segment_image = semantic_segmentation()
   segment_image.load_ade20k_model("deeplabv3_xception65_ade20k.h5")
-  output, segmap = segment_image.segmentAsAde20k("sample2.jpg")
+  segvalues, output = segment_image.segmentAsAde20k("sample2.jpg")
   cv2.imwrite("img.jpg", output)
   print(output.shape)
+
+**Note:** Access the *masks* of the objects segmented using **segvalues["masks"]** and their *class ids* using **segvalues["class_ids"]**.   
 
 * Obtain both the output and the segmentation overlay's arrays by using this code,
 
 .. code-block:: python
 
-  output, segoverlay = segment_image.segmentAsAde20k(overlay = True)
+  segvalues, segoverlay = segment_image.segmentAsAde20k(overlay = True)
 
 
 .. code-block:: python
@@ -127,7 +129,7 @@ We added an extra parameter **overlay** and set it to **true**, we produced an i
 
   segment_image = semantic_segmentation()
   segment_image.load_ade20k_model("deeplabv3_xception65_ade20k.h5")
-  segmap, segoverlay = segment_image.segmentAsAde20k("sample2.jpg", overlay= True)
+  segvalues, segoverlay = segment_image.segmentAsAde20k("sample2.jpg", overlay= True)
   cv2.imwrite("img.jpg", segoverlay)
   print(segoverlay.shape)
 
