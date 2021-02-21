@@ -100,31 +100,30 @@ class instance_custom_training:
 
         
 
-    def train_model(self,num_epochs,path_trained_models,  layers = "all", augmentation = False):
+    def train_model(self, num_epochs, path_trained_models,  layers = "all", augmentation = False):
         if augmentation == False:
-    
-            print('Train %d' % len(self.dataset_train.image_ids), "images")
-            print('Validate %d' % len(self.dataset_test.image_ids), "images")
-            print("No augmentation")
-            self.model.train(self.dataset_train, self.dataset_test,models = path_trained_models,  epochs=num_epochs,layers=layers)
+            print("No Augmentation")
 
         else:
-	    if augmentation == True:
-		    augmentation = imgaug.augmenters.Sometimes(0.5, [
-			    imgaug.augmenters.Fliplr(0.5),
-			    iaa.Flipud(0.5),
-			    imgaug.augmenters.GaussianBlur(sigma=(0.0, 5.0))
-			])
-	    else:
-		augmentation = augmentation
-    
+            if augmentation == True:
+                augmentation = imgaug.augmenters.Sometimes(0.5, [
+			        imgaug.augmenters.Fliplr(0.5),
+			        iaa.Flipud(0.5),
+			        imgaug.augmenters.GaussianBlur(sigma=(0.0, 5.0))
+			        ])
+                print("Applying Default Augmentation on Dataset")
 
-            print('Train %d' % len(self.dataset_train.image_ids), "images")
-            print('Validate %d' % len(self.dataset_test.image_ids), "images")
-            print("Applying augmentation on dataset")
-            self.model.train(self.dataset_train, self.dataset_test,models = path_trained_models, augmentation = augmentation, epochs=num_epochs,layers=layers)
+            else:
+                augmentation = augmentation
+                print("Applying Custom Augmentation on Dataset")   
 
+        print('Train %d' % len(self.dataset_train.image_ids), "images")
+        print('Validate %d' % len(self.dataset_test.image_ids), "images")
 
+        self.model.train(self.dataset_train, self.dataset_test,models = path_trained_models, augmentation = augmentation, 
+        epochs=num_epochs,layers=layers)
+                             
+        
     def evaluate_model(self, model_path, iou_threshold = 0.5):
         self.model = MaskRCNN(mode = "inference", model_dir = os.getcwd(), config = self.config)  
         if os.path.isfile(model_path):
