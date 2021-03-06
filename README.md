@@ -6,7 +6,7 @@
 [![Downloads](https://pepy.tech/badge/pixellib)](https://pepy.tech/project/pixellib)  [![Downloads](https://pepy.tech/badge/pixellib/month)](https://pepy.tech/project/pixellib/month)  [![Downloads](https://pepy.tech/badge/pixellib/week)](https://pepy.tech/project/pixellib/week) 
 
 
-#### Update: The new version of PixelLib makes it possible to  extract segmented objects in images, videos and filter coco model detections to segment a user's target class. Read the [tutorial](https://olafenwaayoola.medium.com/extraction-of-objects-in-images-and-videos-using-5-lines-of-code-6a9e35677a31) on how to perform object extraction in images and videos.<br> Paper, *Simplifying Object Segmentation with PixelLib Library* is available on [paperswithcode](https://paperswithcode.com/paper/simplifying-object-segmentation-with-pixellib) <br>
+### Update: The new version of PixelLib makes it possible to  extract segmented objects in images, videos and filter coco model detections to segment a user's target class. Read the [tutorial](https://olafenwaayoola.medium.com/extraction-of-objects-in-images-and-videos-using-5-lines-of-code-6a9e35677a31) on how to perform object extraction in images and videos.<br> Paper, *Simplifying Object Segmentation with PixelLib Library* is available on [paperswithcode](https://paperswithcode.com/paper/simplifying-object-segmentation-with-pixellib) <br> <br>
 
 
 Pixellib is a library for performing segmentation of objects in images and videos. It supports the two major types of image segmentation: 
