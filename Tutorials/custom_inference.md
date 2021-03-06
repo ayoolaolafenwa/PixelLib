@@ -241,6 +241,28 @@ A sample of another segmented video with our custom model.
 [![alt_vid3](Images/sq_vid.png)](https://www.youtube.com/watch?v=VUnI9hefAQQ&t=2s)
 
 
+## Extraction of Segmented Objects in Videos
+
+```python
+segment_video.process_video("sample.mp4", show_bboxes=True,  extract_segmented_objects=True,save_extracted_objects=True, frames_per_second= 5,  output_video_name="output.mp4")
+```
+
+It still the same code except we  introduced new parameters in the *process_video* which are:
+
+**extract_segmented_objects**: this is the parameter that tells the function to extract the objects segmented in the image. It is set to true.
+
+**save_extracted_objects**: this is an optional parameter for saving the extracted segmented objects.
+
+## Extracted objects from the video
+<table>
+  <tr>
+    <td><img src="Images/b1.jpg"></td>
+    <td><img src="Images/b2.jpg"></td>
+  </tr>
+ </table>
+
+
+
 
 You can perform live camera segmentation with your custom model making use of this code:
 
@@ -266,6 +288,21 @@ You will replace the process_video funtion with process_camera function.In the f
 
 **frame_name:** this is the name given to the shown camera's frame.
 
+
+## Full code for object extraction in camera feeds Using A Custom Model
+
+```python
+import pixellib
+from pixellib.instance import custom_segmentation
+import cv2
+
+capture = cv2.VideoCapture(0)
+segment_frame = custom_segmentation()
+segment_frame.inferConfig(num_classes=2, class_names=['BG', 'butterfly', 'squirrel'])
+segment_frame.load_model("Nature_model_resnet101.h5")
+seg, out = segment_frame.process_camera(capture, show_bboxes=True, show_frames=True, extract_segmented_objects=True,
+save_extracted_objects=True,frame_name="frame", frames_per_second=5, output_video_name="output.mp4")
+```
 
 
 # Process opencv's frames 
