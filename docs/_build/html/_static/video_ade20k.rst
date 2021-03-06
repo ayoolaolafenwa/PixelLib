@@ -1,0 +1,131 @@
+.. _video_ade20k:
+
+**Semantic segmentation of videos with PixelLib using Ade20k model**
+====================================================================
+
+PixelLib is implemented with Deeplabv3+ framework to perform semantic segmentation. Xception model trained on ade20k dataset is used for semantic segmentation.
+
+Download the xception model from `here <https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.3/deeplabv3_xception65_ade20k.h5>`_.
+
+**Code to implement semantic segmentation of a video with ade20k model**:
+
+.. code-block:: python
+
+  import pixellib
+  from pixellib.semantic import semantic_segmentation
+
+  segment_video = semantic_segmentation()
+  segment_video.load_ade20k_model("deeplabv3_xception65_ade20k.h5")
+  segment_video.process_video_ade20k("video_path", frames_per_second= 15, output_video_name="path_to_output_video")  
+
+We shall take a look into each line of code.
+
+
+.. code-block:: python
+
+  import pixellib
+  from pixellib.semantic import semantic_segmentation
+
+  #created an instance of semantic segmentation class
+  segment_image = semantic_segmentation()
+
+The class for performing semantic segmentation is imported from pixellib and we created an instance of the class.
+
+.. code-block:: python
+
+  segment_video.load_ade20k_model("deeplabv3_xception65_ade20k.h5")
+  
+
+We called the function to load the xception model trained on ade20k. 
+
+.. code-block:: python
+
+  segment_video.process_video_ade20k("video_path", frames_per_second= 15, output_video_name="path_to_output_video")  
+
+
+This is the line of code that performs segmentation on an image and the segmentation is done in the ade20k's color format. This function takes in two parameters:
+
+*video_path:* the path to the video file we want to perform segmentation on.
+
+*frames_per_second:* this is parameter to set the number of frames per second for the output video file. In this case it is set to 15 i.e the saved video file will have 15 frames per second.
+
+*output_video_name:* the saved segmented video. The output video will be saved in your current working directory.
+
+**sample_video**  
+
+.. raw:: html
+
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube.com/embed/EivIBccZURA" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    https://www.youtube.com/watch?v=_NsELe67UxM
+    </div>
+
+
+.. code-block:: python
+
+  import pixellib
+  from pixellib.semantic import semantic_segmentation
+
+  segment_video = semantic_segmentation()
+  segment_video.load_ade20k_model("deeplabv3_xception65_ade20k.h5")
+  segment_video.process_video_ade20k("sample_video.mp4", overlay = True, frames_per_second= 15, output_video_name="output_video.mp4")  
+
+  
+
+**Output video**
+
+.. raw:: html
+
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube.com/embed/hxczTe9U8jY" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    https://www.youtube.com/watch?v=_NsELe67UxM
+    </div>
+
+
+
+**Segmentation of live camera with Ade20k model**
+==================================================
+
+We can use the same model to perform semantic segmentation on camera. This can be done by few modifications to the code to process video file.
+
+.. code:: python
+
+  import pixellib
+  from pixellib.semantic import semantic_segmentation
+  import cv2
+
+
+  capture = cv2.VideoCapture(0)
+
+  segment_video = semantic_segmentation()
+  segment_video.load_ade20k_model("deeplabv3_xception65_ade20k.h5")
+  segment_video.process_camera_ade20k(capture, overlay=True, frames_per_second= 15, output_video_name="output_video.mp4", show_frames= True,
+  frame_name= "frame")
+
+.. code:: python
+
+  import cv2
+  capture = cv2.VideoCapture(0)
+
+We imported cv2 and included the code to capture camera frames.
+
+.. code-block:: python
+
+  segment_video.process_camera_ade20k(capture,  overlay = True, frames_per_second= 15, output_video_name="output_video.mp4", show_frames= True,frame_name= "frame")  
+
+
+In the code for performing segmentation, we replaced the video filepath to capture i.e we are going to process a stream camera frames instead of a video file.We added extra parameters for the purpose of showing the camera frames:
+
+*show_frames:* this parameter handles showing of segmented camera frames and press q to exist.
+*frame_name:* this is the name given to the shown camera's frame.
+
+
+
+.. raw:: html
+
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube.com/embed/lOaFJpgCMB4" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+
+A demo showing the output of pixelLib’s semantic segmentation of camera’s feeds using pascal voc model.
+*Good work! It was able to successfully segment me*.

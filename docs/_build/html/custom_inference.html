@@ -90,9 +90,12 @@
 <li class="toctree-l1"><a class="reference internal" href="video_pascal.html#segmentation-of-live-camera-with-pascalvoc-model"><strong>Segmentation of live camera with pascalvoc model</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="Image_instance.html"><strong>Instance segmentation of images with PixelLib</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="video_instance.html"><strong>Instance segmentation of videos with PixelLib</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_instance.html#extraction-of-objects-in-videos"><strong>Extraction of objects in videos</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="video_instance.html#segmentation-of-specific-classes-in-videos"><strong>Segmentation of  Specific Classes in Videos</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="video_instance.html#instance-segmentation-of-live-camera-with-mask-r-cnn"><strong>Instance Segmentation of Live Camera with Mask R-cnn.</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_train.html"><strong>Custom Training With PixelLib</strong></a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#"><strong>Inference With A Custom Model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#extraction-of-segmented-objects-in-videos"><strong>Extraction of Segmented Objects in Videos</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="change_image_bg.html">Image Tuning With PixelLib</a></li>
 <li class="toctree-l1"><a class="reference internal" href="change_video_bg.html">Change the Background of A Video</a></li>
 </ul>
@@ -324,7 +327,19 @@ https://www.youtube.com/watch?v=bWQGxaZIPOo
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
     <iframe src="https://www.youtube.com/embed/VUnI9hefAQQ" ,  frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 https://www.youtube.com/watch?v=VUnI9hefAQQ&t=2s
-</div><p>You can perform live camera segmentation with your custom model making use of this code:</p>
+</div></div>
+<div class="section" id="extraction-of-segmented-objects-in-videos">
+<h1><strong>Extraction of Segmented Objects in Videos</strong><a class="headerlink" href="#extraction-of-segmented-objects-in-videos" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">segment_video</span><span class="o">.</span><span class="n">process_video</span><span class="p">(</span><span class="s2">&quot;sample.mp4&quot;</span><span class="p">,</span> <span class="n">show_bboxes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="n">extract_segmented_objects</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">save_extracted_objects</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span> <span class="mi">5</span><span class="p">,</span>  <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output.mp4&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It still the same code except we  introduced new parameters in the <em>process_video</em> which are:</p>
+<p><strong>extract_segmented_objects</strong>: this is the parameter that tells the function to extract the objects segmented in the image. It is set to true.</p>
+<p><strong>save_extracted_objects</strong>: this is an optional parameter for saving the extracted segmented objects.</p>
+<p><strong>Extracted objects from the video</strong></p>
+<img alt="_images/b1.jpg" src="_images/b1.jpg" />
+<img alt="_images/b2.jpg" src="_images/b2.jpg" />
+<p>You can perform live camera segmentation with your custom model making use of this code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">custom_segmentation</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
@@ -343,6 +358,17 @@ https://www.youtube.com/watch?v=VUnI9hefAQQ&t=2s
 <p><strong>show_frames:</strong> this parameter handles the showing of segmented camera’s frames.</p>
 <p><strong>frame_name:</strong> this is the name given to the shown camera’s frame.</p>
 <p><strong>check_fps:</strong> You may want to check the number of frames processed, just set the parameter check_fps is true. It will print out the number of frames processed per second.</p>
+<p>Full code for object extraction in camera feeds Using A Custom Model</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
+<span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">custom_segmentation</span>
+
+<span class="n">segment_video</span> <span class="o">=</span> <span class="n">custom_segmentation</span><span class="p">()</span>
+<span class="n">segment_video</span><span class="o">.</span><span class="n">inferConfig</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">class_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;BG&#39;</span><span class="p">,</span> <span class="s1">&#39;butterfly&#39;</span><span class="p">,</span> <span class="s1">&#39;squirrel&#39;</span><span class="p">])</span>
+<span class="n">segment_video</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;Nature_model_resnet101.h5&quot;</span><span class="p">)</span>
+<span class="n">segment_video</span><span class="o">.</span><span class="n">process_video</span><span class="p">(</span><span class="s2">&quot;sample.mp4&quot;</span><span class="p">,</span> <span class="n">show_bboxes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">extract_segmented_objects</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_extracted_objects</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="n">frames_per_second</span><span class="o">=</span> <span class="mi">5</span><span class="p">,</span>  <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output.mp4&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 <p><strong>Process opencv’s frames</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">custom_segmentation</span>
