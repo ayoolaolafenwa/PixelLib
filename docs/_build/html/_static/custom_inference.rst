@@ -325,12 +325,14 @@ Full code for object extraction in camera feeds Using A Custom Model
   
   import pixellib
   from pixellib.instance import custom_segmentation
+  import cv2
 
-  segment_video = custom_segmentation()
-  segment_video.inferConfig(num_classes=2, class_names=['BG', 'butterfly', 'squirrel'])
-  segment_video.load_model("Nature_model_resnet101.h5")
-  segment_video.process_video("sample.mp4", show_bboxes=True, extract_segmented_objects=True, save_extracted_objects=True,
-  frames_per_second= 5,  output_video_name="output.mp4")
+  capture = cv2.VideoCapture(0)
+  segment_frame = custom_segmentation()
+  segment_frame.inferConfig(num_classes=2, class_names=['BG', 'butterfly', 'squirrel'])
+  segment_frame.load_model("Nature_model_resnet101.h5")
+  segment_frame.process_camera(capture, show_bboxes=True, show_frames=True, extract_segmented_objects=True,
+  save_extracted_objects=True,frame_name="frame", frames_per_second=5, output_video_name="output.mp4")
 
 
 

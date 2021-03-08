@@ -95,6 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="#instance-segmentation-of-live-camera-with-mask-r-cnn"><strong>Instance Segmentation of Live Camera with Mask R-cnn.</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_train.html"><strong>Custom Training With PixelLib</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="custom_inference.html"><strong>Inference With A Custom Model</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_inference.html#extraction-of-segmented-objects-in-videos"><strong>Extraction of Segmented Objects in Videos</strong></a></li>
 <li class="toctree-l1"><a class="reference internal" href="change_image_bg.html">Image Tuning With PixelLib</a></li>
 <li class="toctree-l1"><a class="reference internal" href="change_video_bg.html">Change the Background of A Video</a></li>
 </ul>
@@ -300,20 +301,23 @@ https://www.youtube.com/watch?v=_NsELe67UxM
 
 <span class="n">segment_video</span> <span class="o">=</span> <span class="n">instance_segmentation</span><span class="p">()</span>
 <span class="n">segment_video</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_coco.h5&quot;</span><span class="p">)</span>
-<span class="n">target_classes</span> <span class="o">=</span> <span class="n">segment_video</span><span class="o">.</span><span class="n">select_target_classes</span><span class="p">(</span><span class="n">person</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">car</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">target_classes</span> <span class="o">=</span> <span class="n">segment_video</span><span class="o">.</span><span class="n">select_target_classes</span><span class="p">(</span><span class="n">person</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">segment_video</span><span class="o">.</span><span class="n">process_camera</span><span class="p">(</span><span class="n">capture</span><span class="p">,</span> <span class="n">segment_target_classes</span><span class="o">=</span><span class="n">target_classes</span><span class="p">,</span>  <span class="n">frames_per_second</span><span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">show_frames</span><span class="o">=</span> <span class="kc">True</span><span class="p">,</span><span class="n">frame_name</span><span class="o">=</span> <span class="s2">&quot;frame&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>Full code for Filtering classes and object Extraction in Camera feeds</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pixellib</span>
 <span class="kn">from</span> <span class="nn">pixellib.instance</span> <span class="kn">import</span> <span class="n">instance_segmentation</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
 
+
+<span class="n">capture</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="n">segment_video</span> <span class="o">=</span> <span class="n">instance_segmentation</span><span class="p">()</span>
 <span class="n">segment_video</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;mask_rcnn_coco.h5&quot;</span><span class="p">)</span>
 <span class="n">target_classes</span> <span class="o">=</span> <span class="n">segment_video</span><span class="o">.</span><span class="n">select_target_classes</span><span class="p">(</span><span class="n">person</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">segment_video</span><span class="o">.</span><span class="n">process_video</span><span class="p">(</span><span class="s2">&quot;sample.mp4&quot;</span><span class="p">,</span> <span class="n">show_bboxes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">segment_target_classes</span><span class="o">=</span> <span class="n">target_classes</span><span class="p">,</span> <span class="n">extract_segmented_objects</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="n">save_extracted_objects</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frames_per_second</span><span class="o">=</span> <span class="mi">5</span><span class="p">,</span>  <span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output.mp4&quot;</span><span class="p">)</span>
+<span class="n">segment_video</span><span class="o">.</span><span class="n">process_camera</span><span class="p">(</span><span class="n">capture</span><span class="p">,</span> <span class="n">segment_target_classes</span><span class="o">=</span><span class="n">target_classes</span><span class="p">,</span>  <span class="n">frames_per_second</span><span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">extract_segmented_objects</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="n">save_extracted_objects</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">output_video_name</span><span class="o">=</span><span class="s2">&quot;output_video.mp4&quot;</span><span class="p">,</span> <span class="n">show_frames</span><span class="o">=</span> <span class="kc">True</span><span class="p">,</span><span class="n">frame_name</span><span class="o">=</span> <span class="s2">&quot;frame&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>Speed Adjustments for Faster Inference</strong></p>

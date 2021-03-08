@@ -265,7 +265,7 @@ This is the modified code below to filter unused detections and detect a target 
 
   segment_video = instance_segmentation()
   segment_video.load_model("mask_rcnn_coco.h5")
-  target_classes = segment_video.select_target_classes(person=True, car = True)
+  target_classes = segment_video.select_target_classes(person=True)
   segment_video.process_camera(capture, segment_target_classes=target_classes,  frames_per_second= 10, output_video_name="output_video.mp4", show_frames= True,frame_name= "frame")
 
 
@@ -275,13 +275,17 @@ This is the modified code below to filter unused detections and detect a target 
 
   import pixellib
   from pixellib.instance import instance_segmentation
+  import cv2
 
+
+  capture = cv2.VideoCapture(0)
 
   segment_video = instance_segmentation()
   segment_video.load_model("mask_rcnn_coco.h5")
   target_classes = segment_video.select_target_classes(person=True)
-  segment_video.process_video("sample.mp4", show_bboxes=True, segment_target_classes= target_classes, extract_segmented_objects=True,
-  save_extracted_objects=True, frames_per_second= 5,  output_video_name="output.mp4")
+  segment_video.process_camera(capture, segment_target_classes=target_classes,  frames_per_second= 10, extract_segmented_objects=True,
+  save_extracted_objects=True,output_video_name="output_video.mp4", show_frames= True,frame_name= "frame")
+
 
 
 
