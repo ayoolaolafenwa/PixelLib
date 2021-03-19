@@ -22,7 +22,7 @@ import tensorflow.keras.utils as KU
 from tensorflow.python.eager import context
 import tensorflow.keras.models as KM
 from tensorflow.keras.callbacks import LearningRateScheduler
-from tensorflow.keras.callbacks import ModelCheckpoint
+from tensorflow.keras.callbacks import ModelCheckpoint, TensorBoard
 import os
 
 from pixellib import utils
@@ -2286,6 +2286,8 @@ class MaskRCNN(object):
         callb = [
             ModelCheckpoint(self.checkpoint_path,save_weights_only=True,save_best_only = True, monitor = "val_loss", verbose = 0), 
             lr_rate ,
+            TensorBoard(log_dir='../models/logs/{}'.format(tensorboard_log_subdir), histogram_freq=0, write_graph=True,
+                write_images=False, update_freq='epoch', profile_batch=2, embeddings_freq=0, embeddings_metadata=None)
      
         ] 
 
