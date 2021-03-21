@@ -97,7 +97,7 @@ class Config(object):
     IMAGE_CHANNEL_COUNT = 3
     
     # Image mean (RGB)
-    MEAN_PIXEL = np.array([123.7, 116.8, 103.9])
+    MEAN_PIXEL = np.array([123.7, 123.7, 123.7])
 
     # Number of ROIs per image to feed to classifier/mask heads
     # The Mask RCNN paper uses 512 but often the RPN doesn't generate
