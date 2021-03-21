@@ -113,7 +113,7 @@ class instance_custom_training:
                     imgaug.augmenters.Fliplr(0.5),
                     iaa.Flipud(0.5),
                     imgaug.augmenters.GaussianBlur(sigma=(0.0, 3.0)),
-                    imgaug.augmenters.Affine(rotate=(-25, 25))
+                    imgaug.augmenters.Affine(rotate=(-40, 40))
                     ])
     
 
