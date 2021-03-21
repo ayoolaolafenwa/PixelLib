@@ -59,7 +59,7 @@ class Config(object):
 
     # Ratios of anchors at each cell (width/height)
     # A value of 1 represents a square anchor, and 0.5 is a wide anchor
-    RPN_ANCHOR_RATIOS = [1] #[0.5, 1, 2]
+    RPN_ANCHOR_RATIOS = [1, 1.1] #[0.5, 1, 2]
 
     # Anchor stride
     # If 1 then anchors are created for each cell in the backbone feature map.
@@ -97,7 +97,7 @@ class Config(object):
     IMAGE_CHANNEL_COUNT = 3
     
     # Image mean (RGB)
-    MEAN_PIXEL = np.array([123.7, 123.7, 123.7])
+    MEAN_PIXEL = np.array([103.9, 103.9, 103.9])
 
     # Number of ROIs per image to feed to classifier/mask heads
     # The Mask RCNN paper uses 512 but often the RPN doesn't generate
