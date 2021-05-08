@@ -151,7 +151,7 @@ PixelLib now supports a custom `imgaug` augmentation pipeline. You can read the 
    train_maskrcnn.train_model(num_epochs = 300, augmentation=augmentation_sequence_pipeline,path_trained_models = "mask_rcnn_models")
 ```
 
-##### Note : The Default Augmentation that PixelLi uses is (when `augmentation` parameter of the `train_maskrcnn.train_model` is set to `True` is):
+##### Note : The Default Augmentation that PixelLib uses is (when `augmentation` parameter of the `train_maskrcnn.train_model` is set to `True` is):
 ```python
    
 augmentation = imgaug.augmenters.Sometimes(0.5, [
