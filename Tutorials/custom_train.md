@@ -133,7 +133,35 @@ Finally, we called the train function for training maskrcnn model. We called *tr
 
 **num_epochs:** The number of epochs required for training the model. It is set to 300.
 
-**augmentation:** Data augmentation is applied on the dataset, this is because we want the model to learn different representations of the objects.
+**augmentation:** 
+
+[Data Augmentation](https://towardsdatascience.com/data-augmentation-for-deep-learning-4fe21d1a4eb9) is applied on the dataset, this is because we want the model to learn different representations of the objects.  
+Often performed when you have a small dataset, you can improve evaluation scores using this technique.  
+PixelLib now supports a custom `imgaug` augmentation pipeline. You can read the [imgaug docs](https://imgaug.readthedocs.io/) & perform augmentations as :
+```python
+   
+   import imgaug as ia
+   import imgaug.augmenters as iaa
+   # Define our augmentation pipeline.
+   augmentation_sequence_pipeline = iaa.Sequential([
+      iaa.Sharpen((0.0, 1.0)),       # sharpen the image
+      # rotate by -45 to 45 degrees (affects segmaps)
+      iaa.Affine(rotate=(-45, 45)),
+      iaa.CLAHE(clip_limit=(1, 10))], random_order=True)
+   train_maskrcnn.train_model(num_epochs = 300, augmentation=augmentation_sequence_pipeline,path_trained_models = "mask_rcnn_models")
+```
+
+##### Note : The Default Augmentation that PixelLib uses is (when `augmentation` parameter of the `train_maskrcnn.train_model` is set to `True` is):
+```python
+   
+augmentation = imgaug.augmenters.Sometimes(0.5, [
+			        imgaug.augmenters.Fliplr(0.5),
+			        iaa.Flipud(0.5),
+			        imgaug.augmenters.GaussianBlur(sigma=(0.0, 5.0))
+			        ])
+```
+If all of this is too intimidating, you can just set `augmentation=True` and you are good to go!
+
 
 **path_trained_models:** This is the path to save the trained models during training. Models with the lowest validation losses are saved.
 
