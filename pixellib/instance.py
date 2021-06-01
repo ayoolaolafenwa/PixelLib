@@ -59,6 +59,9 @@ class instance_segmentation():
         self.model = MaskRCNN(mode = "inference", model_dir = self.model_dir, config = coco_config)
         self.model.load_weights(model_path, by_name= True)
 
+    def set_detection_confidence(self, confidence):
+        coco_config.DETECTION_MIN_CONFIDENCE = confidence
+
     
     def select_target_classes(self,BG = False, person=False, bicycle=False, car=False, motorcycle=False, airplane=False,
                       bus=False, train=False, truck=False, boat=False, traffic_light=False, fire_hydrant=False,
