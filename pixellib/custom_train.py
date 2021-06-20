@@ -148,7 +148,8 @@ class instance_custom_training:
 		        # extract results for first sample
                 r = yhat[0]
 		        # calculate statistics, including AP
-                AP, _, _, _ = compute_ap(gt_bbox, gt_class_id, gt_mask, r["rois"], r["class_ids"], r["scores"], r['masks'])
+                AP, _, _, _ = compute_ap(gt_bbox, gt_class_id, gt_mask, r["rois"], r["class_ids"], r["scores"], r['masks'],
+                iou_threshold=iou_threshold)
 		        # store
                 APs.append(AP)
 	        # calculate the mean AP across all images
