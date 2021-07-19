@@ -68,7 +68,7 @@ This is the line of code that blurs the video's background. This function takes 
 **detect (optional):** this is the parameter that detects a particular object and filters out other detectons. It is set to detect *person* in the video. 
 
 **Output Video**
-[![alt_vid2](Images/mod.png)](https://www.youtube.com/watch?v=fzHJwckJTc4)
+[![alt_vid2](Images/mod.png)](https://youtu.be/duTiKf76ZU8)
 
 
 
