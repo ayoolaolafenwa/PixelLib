@@ -137,7 +137,7 @@ Finally, we called the train function for training maskrcnn model. We called *tr
 
 [Data Augmentation](https://towardsdatascience.com/data-augmentation-for-deep-learning-4fe21d1a4eb9) is applied on the dataset, this is because we want the model to learn different representations of the objects.  
 Often performed when you have a small dataset, you can improve evaluation scores using this technique.  
-PixelLib now supports a custom `imgaug` augmentation pipeline. You can read the [imgaug docs](https://imgaug.readthedocs.io/) & perform augmentations as :
+PixelLib now supports a custom `imgaug` augmentation pipeline. You can read the [imgaug docs](https://imgaug.readthedocs.io/) and perform augmentation as :
 ```python
    
    import imgaug as ia
@@ -151,7 +151,7 @@ PixelLib now supports a custom `imgaug` augmentation pipeline. You can read the 
    train_maskrcnn.train_model(num_epochs = 300, augmentation=augmentation_sequence_pipeline,path_trained_models = "mask_rcnn_models")
 ```
 
-##### Note : The Default Augmentation that PixelLib uses is (when `augmentation` parameter of the `train_maskrcnn.train_model` is set to `True` is):
+**Note** This is the default imgaug augmentation values used by PixelLib when the **augmentation** parameter is set to **True** in the **train_model** function. 
 ```python
    
 augmentation = imgaug.augmenters.Sometimes(0.5, [
@@ -164,7 +164,6 @@ If all of this is too intimidating, you can just set `augmentation=True` and you
 
 
 **path_trained_models:** This is the path to save the trained models during training. Models with the lowest validation losses are saved.
-
 
 
 ```

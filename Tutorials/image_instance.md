@@ -69,11 +69,41 @@ You can implement segmentation with bounding boxes. This can be achieved by modi
   segment_image.segmentImage("sample2.jpg", output_image_name = "image_new.jpg", show_bboxes = True)
 
 ```
-We added an extra parameter **show_bboxes** and set it to **true**, the segmentation masks are produced with bounding boxes.
+We added an extra parameter **show_bboxes** and set it to **True**, the segmentation masks are produced with bounding boxes.
 
 ![alt_test10](Images/result2.jpg)
 
 You get a saved image with both segmentation masks and bounding boxes.
+
+**Better Visualization of Output Segmented Images**
+The default values set for visualizing segmented images are not compatible with all image resolutions. I have made it possible to regulate the parameters that determine the thickness of the bounding boxes, text size and thickness.
+
+**sample image with default parameters**
+
+![a1](Images/1.jpg)
+
+``` python
+import pixellib
+from pixellib.instance import instance_segmentation
+
+ins = instance_segmentation()
+ins.load_model("mask_rcnn_coco.h5")
+ins.segmentImage("sample.jpg", show_bboxes = True, output_image_name = "output.jpg", text_size=4, text_thickness=10,
+box_thickness= 6)
+```
+
+**text_size**: The default text size is 0.6 and it is okay with images with low resolutions. It will be small for images with high resolutions.
+
+**text_thickness**: The default text thickness is 0. I increased it to 4 to match the image resolution.
+
+**box_thickness**: The default box thickness is 2 and I changed it to 10 to match the image resolution.
+
+**Note**: **text_thickness** and **box_thickness** parameters' values must always be in integers and do not express their values in floating point numbers. But **text_size** value can be expressed in both integer and floating point numbers.
+
+**sample image with regulated parameters**
+
+![a2](Images/2.jpg)
+
 
 
 ## Extraction of Segmented Objects
@@ -109,6 +139,77 @@ These are the objects extracted from the image above.
     <td><img src="Images/e3.jpg" ></td>
   </tr>
  </table>
+
+
+## Batch Segmentation of Images
+PixelLib makes it possible to perform prediction on multiple images at once. 
+
+**Code for Batch Prediction**
+``` python
+import pixellib
+from pixellib.instance import instance_segmentation
+
+ins = instance_segmentation()
+ins.load_model("mask_rcnn_coco.h5")
+ins.segmentBatch("input_folder",  show_bboxes=True, output_folder_name = "output_folder")
+```
+
+``` python
+ins.segmentBatch("input_folder",  show_bboxes=True, output_folder_name = "output_folder")
+```
+The code for batch image prediction is very similar to the code used for a single image prediction. We replaced the single image prediction function **segmentImage** with the batch image prediction function **segmentBatch**.  The batch function takes the following parameters;
+
+**input_folder**: this is the folder path of the input images.
+
+**output_folder**: this is the folder path of the output segmented images. 
+  **Note**: An output image in the output folder path is saved with the same name as its input image in the input folder path.
+
+*sample folder structure*
+```
+--input_folder
+    --test1.jpg
+    --test2.jpg
+    --test3.jpg
+
+--output_folder 
+    --test1.jpg
+    --test2.jpg
+    --test3.jpg 
+
+```  
+
+**Code for Extraction of Segmented Objects in Batch Prediction**
+
+``` python
+import pixellib
+from pixellib.instance import instance_segmentation
+
+ins = instance_segmentation()
+ins.load_model("mask_rcnn_coco.h5")
+ins.segmentBatch("input_folder", show_bboxes=True, output_folder_name = "output_folder", extract_segmented_objects=True, save_extracted_objects=True)
+```
+The extracted objects of each image in the input folder will be saved in a separate folder which will have the name 
+**imagename_extracts** e.g if the image name is test1.jpg this means that the extracted objects will be saved in a folder named 
+**test1_extracts**. 
+
+**Note**: The folders for the extracted objects are created within the same input folder of the images.
+*Sample folder structure* 
+```
+--input_folder
+    --test1.jpg
+    --test1_extracts 
+
+    --test2.jpg
+    --test2_extracts 
+
+    --test3.jpg
+    --test3_extracts
+
+--output_folder   
+    --test1.jpg
+    --test2.jpg
+    --test3.jpg
+```
 
 ## Detection of Target Classes
 
