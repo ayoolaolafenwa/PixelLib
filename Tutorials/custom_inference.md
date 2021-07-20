@@ -86,7 +86,8 @@ The custom model is loaded and we called the function to segment the image.
 ![alt_sq_seg](Images/squirrel_seg.jpg)
 
 
-**Better Visualization of Output Segmented Images**
+## Better Visualization of Output Segmented Images
+
 The default values set for visualizing segmented images are not compatible with all image resolutions. I have made it possible to regulate the parameters that determine the thickness of the bounding boxes, text size and thickness.
 
 **sample image with default parameters**

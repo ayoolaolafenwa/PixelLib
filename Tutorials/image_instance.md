@@ -75,7 +75,8 @@ We added an extra parameter **show_bboxes** and set it to **True**, the segmenta
 
 You get a saved image with both segmentation masks and bounding boxes.
 
-**Better Visualization of Output Segmented Images**
+## Better Visualization of Output Segmented Images
+
 The default values set for visualizing segmented images are not compatible with all image resolutions. I have made it possible to regulate the parameters that determine the thickness of the bounding boxes, text size and thickness.
 
 **sample image with default parameters**
