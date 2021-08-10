@@ -420,6 +420,9 @@ class semantic_segmentation():
 
     raw_labels = labels  
     
+    """ Get list of each segmeneted object with their %ratio, masks, class name, class index, and color"""
+    _, objects_masks = ade20k_map_color_mask(raw_labels)
+    
     """ Access the unique class ids of the masks """
     unique_labels = np.unique(raw_labels)
     raw_labels = np.array(Image.fromarray(raw_labels.astype('uint8')).resize((h, w)))
@@ -443,7 +446,7 @@ class semantic_segmentation():
         cv2.imwrite(output_image_name, image_overlay)
         print("Processed Image saved successfully in your current working directory.")
 
-      return segvalues, image_overlay 
+      return segvalues, image_overlay, objects_masks
 
         
     else:  
@@ -453,12 +456,12 @@ class semantic_segmentation():
 
           print("Processed Image saved successfuly in your current working directory.")
 
-        return segvalues, new_img 
+        return segvalues, new_img, objects_masks
 
 
   def segmentFrameAsAde20k(self, frame, output_frame_name=None,overlay=False, verbose = None):  
     if overlay == True:
-      raw_labels, frame_overlay  = self.segmentAsAde20k(frame, overlay=True, process_frame= True)
+      raw_labels, frame_overlay, _  = self.segmentAsAde20k(frame, overlay=True, process_frame= True)
       
       if output_frame_name is not None:
         cv2.imwrite(output_frame_name, frame_overlay)
@@ -466,7 +469,7 @@ class semantic_segmentation():
       return raw_labels, frame_overlay 
 
     else:
-      raw_labels, new_frame  = self.segmentAsAde20k(frame, process_frame= True)
+      raw_labels, new_frame, _  = self.segmentAsAde20k(frame, process_frame= True)
       
       if output_frame_name is not None:
         cv2.imwrite(output_frame_name, new_frame)
@@ -492,7 +495,7 @@ class semantic_segmentation():
         ret, frame = capture.read()
         
         if ret:
-          raw_labels, frame_overlay  = self.segmentAsAde20k(frame, overlay=True, process_frame= True)
+          raw_labels, frame_overlay, _  = self.segmentAsAde20k(frame, overlay=True, process_frame= True)
           print("No. of frames:", counter)
           output = cv2.resize(frame_overlay, (width,height), interpolation=cv2.INTER_AREA)
           if output_video_name is not None:
@@ -514,7 +517,7 @@ class semantic_segmentation():
         ret, frame = capture.read()
         
         if ret:
-          raw_labels, new_frame  = self.segmentAsAde20k(frame, process_frame= True)  
+          raw_labels, new_frame, _  = self.segmentAsAde20k(frame, process_frame= True)  
           print("No. of frames:", counter)
           output = cv2.resize(new_frame, (width,height), interpolation=cv2.INTER_AREA)
           if output_video_name is not None:
@@ -552,7 +555,7 @@ class semantic_segmentation():
         
         ret, frame = capture.read()
         if ret:
-          raw_labels, frame_overlay  = self.segmentAsAde20k(frame, overlay=True, process_frame= True)
+          raw_labels, frame_overlay, _  = self.segmentAsAde20k(frame, overlay=True, process_frame= True)
           counter += 1
           if show_frames == True:
             if frame_name is not None:
@@ -588,7 +591,7 @@ class semantic_segmentation():
       while True:
         ret, frame = capture.read()
         if ret:
-          raw_labels, new_frame  = self.segmentAsAde20k(frame, process_frame= True)
+          raw_labels, new_frame, _  = self.segmentAsAde20k(frame, process_frame= True)
           counter += 1
           
           if show_frames == True:
@@ -711,10 +714,206 @@ def labelP_to_color_image(label):
 
   return colormap[label]   
 
+## Extracting class index, masks, names, % ratios, and classes
+def ade20k_map_color_mask(raw_mask):
+    names = create_ade20k_label_namemap()
+    colors = create_ade20k_label_colormap()
+
+    uniques, counts = np.unique(raw_mask, return_counts=True)
+    
+    class_index = []
+    masks = []
+    ratios = []
+    class_name = []
+    class_color = []
+
+    d_dict = []
+
+    for idx in np.argsort(counts)[::-1]:
+        index_label = uniques[idx]
+        label_mask = raw_mask == index_label
+
+        class_index.append(index_label)
+        masks.append(label_mask)
+        ratios.append(counts[idx]/raw_mask.size *100)
+        class_name.append(names[index_label])
+        class_color.append(colors[index_label])
+
+        d_dict.append({"classes": index_label,
+                        "names": names[index_label], 
+                        "colors": colors[index_label], 
+                        "masks": label_mask, 
+                        "ratios": counts[idx]/raw_mask.size *100})
+    
+    d_segment = {"classes": class_index,
+                 "names": class_name, 
+                 "colors": class_color, 
+                 "masks": label_mask, 
+                 "ratios": ratios}
+
+    return d_segment, d_dict
+
+
+##Create Ade20k namemap format ##
+def create_ade20k_label_namemap():
+  """Creates a label namemap used in ADE20K segmentation benchmark.
+  Returns:
+    A dict of classes names.
+  """
+  return {0: 'no class',
+          1: 'wall',
+          2: 'building',
+          3: 'sky',
+          4: 'floor',
+          5: 'tree',
+          6: 'ceiling',
+          7: 'road',
+          8: 'bed',
+          9: 'windowpane',
+          10: 'grass',
+          11: 'cabinet',
+          12: 'sidewalk',
+          13: 'person',
+          14: 'earth',
+          15: 'door',
+          16: 'table',
+          17: 'mountain',
+          18: 'plant',
+          19: 'curtain',
+          20: 'chair',
+          21: 'car',
+          22: 'water',
+          23: 'painting',
+          24: 'sofa',
+          25: 'shelf',
+          26: 'house',
+          27: 'sea',
+          28: 'mirror',
+          29: 'rug',
+          30: 'field',
+          31: 'armchair',
+          32: 'seat',
+          33: 'fence',
+          34: 'desk',
+          35: 'rock',
+          36: 'wardrobe',
+          37: 'lamp',
+          38: 'bathtub',
+          39: 'railing',
+          40: 'cushion',
+          41: 'base',
+          42: 'box',
+          43: 'column',
+          44: 'signboard',
+          45: 'chest',
+          46: 'counter',
+          47: 'sand',
+          48: 'sink',
+          49: 'skyscraper',
+          50: 'fireplace',
+          51: 'refrigerator',
+          52: 'grandstand',
+          53: 'path',
+          54: 'stairs',
+          55: 'runway',
+          56: 'case',
+          57: 'pool',
+          58: 'pillow',
+          59: 'screen_door',
+          60: 'stairway',
+          61: 'river',
+          62: 'bridge',
+          63: 'bookcase',
+          64: 'blind',
+          65: 'coffee',
+          66: 'toilet',
+          67: 'flower',
+          68: 'book',
+          69: 'hill',
+          70: 'bench',
+          71: 'countertop',
+          72: 'stove',
+          73: 'palm',
+          74: 'kitchen',
+          75: 'computer',
+          76: 'swivel',
+          77: 'boat',
+          78: 'bar',
+          79: 'arcade',
+          80: 'hovel',
+          81: 'bus',
+          82: 'towel',
+          83: 'light',
+          84: 'truck',
+          85: 'tower',
+          86: 'chandelier',
+          87: 'awning',
+          88: 'streetlight',
+          89: 'booth',
+          90: 'television',
+          91: 'airplane',
+          92: 'dirt',
+          93: 'apparel',
+          94: 'pole',
+          95: 'land',
+          96: 'bannister',
+          97: 'escalator',
+          98: 'ottoman',
+          99: 'bottle',
+          100: 'buffet',
+          101: 'poster',
+          102: 'stage',
+          103: 'van',
+          104: 'ship',
+          105: 'fountain',
+          106: 'conveyer',
+          107: 'canopy',
+          108: 'washer',
+          109: 'plaything',
+          110: 'swimming',
+          111: 'stool',
+          112: 'barrel',
+          113: 'basket',
+          114: 'waterfall',
+          115: 'tent',
+          116: 'bag',
+          117: 'minibike',
+          118: 'cradle',
+          119: 'oven',
+          120: 'ball',
+          121: 'food',
+          122: 'step',
+          123: 'tank',
+          124: 'trade',
+          125: 'microwave',
+          126: 'pot',
+          127: 'animal',
+          128: 'bicycle',
+          129: 'lake',
+          130: 'dishwasher',
+          131: 'screen_projection',
+          132: 'blanket',
+          133: 'sculpture',
+          134: 'hood',
+          135: 'sconce',
+          136: 'vase',
+          137: 'traffic',
+          138: 'tray',
+          139: 'ashcan',
+          140: 'fan',
+          141: 'pier',
+          142: 'crt',
+          143: 'plate',
+          144: 'monitor',
+          145: 'bulletin',
+          146: 'shower',
+          147: 'radiator',
+          148: 'glass',
+          149: 'clock',
+          150: 'flag'}
 
 
 ##Create Ade20k colormap format ##
-
 def create_ade20k_label_colormap():
   """Creates a label colormap used in ADE20K segmentation benchmark.
   Returns:
