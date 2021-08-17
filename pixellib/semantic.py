@@ -379,7 +379,8 @@ class semantic_segmentation():
 
 
 
-  def segmentAsAde20k(self, image_path, output_image_name=None,overlay=False, process_frame = False, verbose = None):            
+  def segmentAsAde20k(self, image_path, output_image_name=None,overlay=False, extract_segmented_objects = False,
+  process_frame = False, verbose = None):            
     trained_image_width=512
     mean_subtraction_value=127.5
     if process_frame == True:
@@ -420,24 +421,22 @@ class semantic_segmentation():
 
     raw_labels = labels  
     
-    """ Get list of each segmeneted object with their %ratio, masks, class name, class index, and color"""
-    _, objects_masks = ade20k_map_color_mask(raw_labels)
-    
-    """ Access the unique class ids of the masks """
-    unique_labels = np.unique(raw_labels)
-    raw_labels = np.array(Image.fromarray(raw_labels.astype('uint8')).resize((h, w)))
-    
     
     """ Convert indexed masks to boolean """
-    raw_labels = np.ma.make_mask(raw_labels)
-    segvalues = {"class_ids":unique_labels,  "masks":raw_labels}   
+    #raw_labels = np.ma.make_mask(raw_labels)
+    #segvalues = {"class_ids":unique_labels,  "masks":raw_labels}   
    
     #Apply segmentation color map
     labels = labelAde20k_to_color_image(labels)   
     labels = np.array(Image.fromarray(labels.astype('uint8')).resize((h, w)))
     new_img = cv2.cvtColor(labels, cv2.COLOR_RGB2BGR)
     
-    
+    if extract_segmented_objects == True:
+      segvalues, objects_masks = ade20k_map_color_mask(raw_labels, extract_segmented_objects = extract_segmented_objects)
+
+    else:
+      segvalues = ade20k_map_color_mask(raw_labels, extract_segmented_objects = extract_segmented_objects)
+
     if overlay == True:
       alpha = 0.7
       cv2.addWeighted(new_img, alpha, image_overlay, 1 - alpha,0, image_overlay)
@@ -446,39 +445,81 @@ class semantic_segmentation():
         cv2.imwrite(output_image_name, image_overlay)
         print("Processed Image saved successfully in your current working directory.")
 
-      return segvalues, image_overlay, objects_masks
+      """ Get list of each segmeneted object with their %ratio, masks, class name, class index, and color"""
+      if extract_segmented_objects == True:
+        resize_masks = np.array(Image.fromarray(segvalues["masks"].astype('uint8')).resize((h, w)))
+        segvalues["masks"] = resize_masks 
+        segvalues["masks"] = np.ma.make_mask(segvalues["masks"])
 
+        return segvalues, objects_masks, image_overlay
+
+      else:
+        resize_masks = np.array(Image.fromarray(segvalues["masks"].astype('uint8')).resize((h, w)))
+        segvalues["masks"] = resize_masks  
+        segvalues["masks"] = np.ma.make_mask(segvalues["masks"])
+             
+        return segvalues, image_overlay  
+            
         
     else:  
-        if output_image_name is not None:
+      if output_image_name is not None:
   
-          cv2.imwrite(output_image_name, new_img)
+        cv2.imwrite(output_image_name, new_img)
 
-          print("Processed Image saved successfuly in your current working directory.")
+        print("Processed Image saved successfuly in your current working directory.")
 
-        return segvalues, new_img, objects_masks
+      if extract_segmented_objects == True:     
+        resize_masks = np.array(Image.fromarray(segvalues["masks"].astype('uint8')).resize((h, w)))
+        segvalues["masks"] = resize_masks 
+        segvalues["masks"] = np.ma.make_mask(segvalues["masks"])
+
+        return segvalues, objects_masks, new_img
+
+      else:
+        resize_masks = np.array(Image.fromarray(segvalues["masks"].astype('uint8')).resize((h, w)))
+        segvalues["masks"] = resize_masks    
+        segvalues["masks"] = np.ma.make_mask(segvalues["masks"])
+
+        return segvalues, new_img  
+
+        
+       
 
 
-  def segmentFrameAsAde20k(self, frame, output_frame_name=None,overlay=False, verbose = None):  
+
+  def segmentFrameAsAde20k(self, frame, output_frame_name=None,overlay=False, verbose = None, extract_segmented_objects = False):  
     if overlay == True:
-      raw_labels, frame_overlay, _  = self.segmentAsAde20k(frame, overlay=True, process_frame= True)
-      
+      if extract_segmented_objects == False:    
+        segvalues, frame_overlay = self.segmentAsAde20k(frame, overlay=True, process_frame= True, extract_segmented_objects = False)
+        return segvalues, frame_overlay
+
+      else:
+        segvalues, extracted_objects, frame_overlay = self.segmentAsAde20k(frame, overlay=True, process_frame= True, extract_segmented_objects = True)
+   
+        return segvalues, extracted_objects, frame_overlay   
+
       if output_frame_name is not None:
         cv2.imwrite(output_frame_name, frame_overlay)
 
-      return raw_labels, frame_overlay 
-
-    else:
-      raw_labels, new_frame, _  = self.segmentAsAde20k(frame, process_frame= True)
       
+    else:
+      if extract_segmented_objects == False:
+        segvalues, new_frame  = self.segmentAsAde20k(frame, process_frame= True, extract_segmented_objects= False)
+
+        return segvalues, new_frame
+      
+      else:
+        segvalues,extracted_objects, new_frame  = self.segmentAsAde20k(frame, process_frame= True, extract_segmented_objects= True)
+
+        return segvalues, extracted_objects, new_frame
+
       if output_frame_name is not None:
         cv2.imwrite(output_frame_name, new_frame)
 
-      return raw_labels, new_frame 
-
 
   
-  def process_video_ade20k(self, video_path, overlay = False, frames_per_second = None, output_video_name = None):
+  def process_video_ade20k(self, video_path, overlay = False, frames_per_second = None, output_video_name = None,
+  extract_segmented_objects = False):
     capture = cv2.VideoCapture(video_path)
     width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -495,11 +536,17 @@ class semantic_segmentation():
         ret, frame = capture.read()
         
         if ret:
-          raw_labels, frame_overlay, _  = self.segmentAsAde20k(frame, overlay=True, process_frame= True)
+          if  extract_segmented_objects == False:
+            segvalues, frame_overlay = self.segmentAsAde20k(frame, overlay=True, process_frame= True, extract_segmented_objects=False)
+          
+          else:
+            segvalues, extracted_objects, frame_overlay = self.segmentAsAde20k(frame, overlay=True, process_frame= True, extract_segmented_objects=True)
+              
           print("No. of frames:", counter)
           output = cv2.resize(frame_overlay, (width,height), interpolation=cv2.INTER_AREA)
           if output_video_name is not None:
             save_video.write(output)
+
         else:
           break   
  
@@ -508,7 +555,12 @@ class semantic_segmentation():
       capture.release()
       if output_video_name is not None:
         save_video.release()
-      return  raw_labels, output
+
+      if extract_segmented_objects == False:  
+        return  segvalues, output
+
+      else:
+        return segvalues, extracted_objects, output  
 
     else:
       while True:
@@ -517,7 +569,12 @@ class semantic_segmentation():
         ret, frame = capture.read()
         
         if ret:
-          raw_labels, new_frame, _  = self.segmentAsAde20k(frame, process_frame= True)  
+          if extract_segmented_objects == False:
+            segvalues, new_frame  = self.segmentAsAde20k(frame, process_frame= True, extract_segmented_objects=False)  
+
+          else:
+            segvalues, extracted_objects, new_frame  = self.segmentAsAde20k(frame, process_frame= True, extract_segmented_objects=True)  
+  
           print("No. of frames:", counter)
           output = cv2.resize(new_frame, (width,height), interpolation=cv2.INTER_AREA)
           if output_video_name is not None:
@@ -533,12 +590,16 @@ class semantic_segmentation():
       
       if frames_per_second is not None:
         save_video.release()
+      if extract_segmented_objects == False:
+        return  segvalues,  output
 
-      return  raw_labels,  output
+      else:
+        return segvalues, extracted_objects, new_frame  
 
   
 
-  def process_camera_ade20k(self, cam, overlay = False,  check_fps = False, frames_per_second = None, output_video_name = None, show_frames = False, frame_name = None, verbose = None):
+  def process_camera_ade20k(self, cam, overlay = False,  check_fps = False, frames_per_second = None, output_video_name = None, 
+  show_frames = False, frame_name = None, verbose = None, extract_segmented_objects = False):
     capture = cam
     
     if output_video_name is not None:
@@ -555,7 +616,13 @@ class semantic_segmentation():
         
         ret, frame = capture.read()
         if ret:
-          raw_labels, frame_overlay, _  = self.segmentAsAde20k(frame, overlay=True, process_frame= True)
+          if extract_segmented_objects == False:    
+            segvalues, frame_overlay = self.segmentAsAde20k(frame, overlay=True, process_frame= True, extract_segmented_objects=False)
+
+          else:
+            segvalues,extracted_objects, frame_overlay = self.segmentAsAde20k(frame, overlay=True, process_frame= True, 
+            extract_segmented_objects=True)  
+
           counter += 1
           if show_frames == True:
             if frame_name is not None:
@@ -585,13 +652,22 @@ class semantic_segmentation():
       if output_video_name is not None:
         save_video.release()
 
-      return  raw_labels, frame_overlay
+      if extract_segmented_objects == False:
+        return  segvalues, frame_overlay
+
+      else:
+        return segvalues, extracted_objects, frame_overlay  
 
     else:
       while True:
         ret, frame = capture.read()
         if ret:
-          raw_labels, new_frame, _  = self.segmentAsAde20k(frame, process_frame= True)
+          if extract_segmented_objects == False:
+            segvalues, new_frame  = self.segmentAsAde20k(frame, process_frame= True, extract_segmented_objects=False)
+
+          else:
+            segvalues, extracted_objects, new_frame  = self.segmentAsAde20k(frame, process_frame= True, extract_segmented_objects=True)    
+
           counter += 1
           
           if show_frames == True:
@@ -621,8 +697,11 @@ class semantic_segmentation():
 
       if output_video_name is not None:
         save_video.release()
+      if extract_segmented_objects == False:
+        return segvalues, new_frame
 
-      return raw_labels, new_frame
+      else:
+        return segvalues, extracted_objects, new_frame  
 
   
 
@@ -715,7 +794,7 @@ def labelP_to_color_image(label):
   return colormap[label]   
 
 ## Extracting class index, masks, names, % ratios, and classes
-def ade20k_map_color_mask(raw_mask):
+def ade20k_map_color_mask(raw_mask, extract_segmented_objects):
     names = create_ade20k_label_namemap()
     colors = create_ade20k_label_colormap()
 
@@ -730,28 +809,36 @@ def ade20k_map_color_mask(raw_mask):
     d_dict = []
 
     for idx in np.argsort(counts)[::-1]:
-        index_label = uniques[idx]
-        label_mask = raw_mask == index_label
+      index_label = uniques[idx]
+      label_mask = raw_mask == index_label
 
-        class_index.append(index_label)
-        masks.append(label_mask)
-        ratios.append(counts[idx]/raw_mask.size *100)
-        class_name.append(names[index_label])
-        class_color.append(colors[index_label])
+      class_index.append(index_label)
+      masks.append(label_mask)
+      ratios.append(counts[idx]/raw_mask.size *100)
+      class_name.append(names[index_label])
+      class_color.append(colors[index_label])
 
-        d_dict.append({"classes": index_label,
-                        "names": names[index_label], 
-                        "colors": colors[index_label], 
+      if extract_segmented_objects == True:
+
+        d_dict.append({"class_id": index_label,
+                        "class_name": names[index_label], 
+                        "class_color": colors[index_label], 
                         "masks": label_mask, 
-                        "ratios": counts[idx]/raw_mask.size *100})
-    
-    d_segment = {"classes": class_index,
-                 "names": class_name, 
-                 "colors": class_color, 
+                        "ratio": counts[idx]/raw_mask.size *100})
+        
+        
+
+    d_segment = {"class_ids": class_index,
+                 "class_names": class_name, 
+                 "class_colors": class_color, 
                  "masks": label_mask, 
                  "ratios": ratios}
 
-    return d_segment, d_dict
+    if extract_segmented_objects == False:
+      return d_segment
+
+    else:
+      return d_segment, d_dict  
 
 
 ##Create Ade20k namemap format ##
