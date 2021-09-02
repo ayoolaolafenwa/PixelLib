@@ -100,7 +100,7 @@ We imported cv2 and included the code to capture camera frames.
 
 In the code for blurring camera's frames, we replaced the video filepath to capture i.e we are going to process a stream of camera frames instead of a video file.We added extra parameters for the purpose of showing the camera frames:
 
-**show_frames:** this parameter handles showing of segmented camera frames and press q to exist.
+**show_frames:** this parameter handles showing of segmented camera frames and press q to exit.
 **frame_name:** this is the name given to the shown camera's frame.
 
 
