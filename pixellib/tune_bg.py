@@ -639,7 +639,7 @@ class alter_bg():
   ####  BLUR THE BACKGROUND OF A VIDEO #####
 
   def blur_video(self, video_path, low = False, moderate = False, extreme = False, frames_per_second = None,
-  output_video_name = None, detect = None):
+  output_video_name = None, detect = None, detect_except = None):
     capture = cv2.VideoCapture(video_path)
     width = int(capture.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(capture.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -656,9 +656,16 @@ class alter_bg():
             
             seg_frame = self.segmentAsPascalvoc(frame, process_frame=True)
             print("No. of frames:", counter)
+
+            if detect_except is not None:
+              for obj in detect_except:
+                target_class = self.target_obj(obj)
+                seg_frame[1][seg_frame[1] != target_class] = 0
+
             if detect is not None:
-              target_class = self.target_obj(detect)
-              seg_frame[1][seg_frame[1] != target_class] = 0
+              for obj in detect:
+                target_class = self.target_obj(detect)
+                seg_frame[1][seg_frame[1] != target_class] = 0
 
             if low == True:
                 blur_frame = cv2.blur(frame, (21,21), 0)
@@ -668,8 +675,10 @@ class alter_bg():
 
             if extreme == True:
                 blur_frame = cv2.blur(frame, (81,81), 0)
-
-            out = np.where(seg_frame[1], frame, blur_frame)
+            if detect_except:
+              out = np.where(seg_frame[1], blur_frame, frame)
+            else:
+              out = np.where(seg_frame[1], frame, blur_frame)
             
 
             output = cv2.resize(out, (width,height), interpolation=cv2.INTER_AREA)
