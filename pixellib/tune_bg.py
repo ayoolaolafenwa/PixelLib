@@ -6,6 +6,11 @@ from .semantic import obtain_segmentation
 import cv2
 import time
 from datetime import datetime
+from matplotlib import pyplot as plt
+import numpy as np
+from PIL import Image
+from IPython.display import Image as img
+from pylab import rcParams
 
 
 class alter_bg():
@@ -18,6 +23,7 @@ class alter_bg():
     global model_file
     self.model_type = model_type
     model_file = model_type
+    
 
     self.model = Deeplab_xcep_pascal()
 
@@ -67,7 +73,7 @@ class alter_bg():
       labels = obtain_segmentation(seg_image)
       labels = np.array(Image.fromarray(labels.astype('uint8')).resize((w, h)))
       labels = cv2.cvtColor(labels, cv2.COLOR_RGB2BGR)
-
+      print("Called")
       return raw_labels, labels 
 
     else:               
@@ -232,6 +238,7 @@ class alter_bg():
   def change_bg_img(self, f_image_path,b_image_path, output_image_name = None, verbose = None, detect = None):
     if verbose is not None:
       print("processing image......")
+      print("change_bg_img")
 
     seg_image = self.segmentAsPascalvoc(f_image_path)
     
@@ -255,6 +262,7 @@ class alter_bg():
   def change_frame_bg(self, frame,b_image_path,  verbose = None, detect = None):
     if verbose is not None:
       print("processing frame......")
+      print("change_bg_img")
 
     seg_frame = self.segmentAsPascalvoc(frame, process_frame= True)
     
@@ -388,6 +396,7 @@ class alter_bg():
   def color_bg(self, image_path, colors, output_image_name = None, verbose = None, detect = None):
     if verbose is not None:
       print("processing image......")
+      print("color_bg")
       
     seg_image = self.segmentAsPascalvoc(image_path)
     if detect is not None:
@@ -416,6 +425,7 @@ class alter_bg():
   def color_frame(self, frame, colors, verbose = None, detect = None):
     if verbose is not None:
       print("processing frame....")
+      print("color_frame")
 
     seg_frame = self.segmentAsPascalvoc(frame, process_frame=True)
 
@@ -555,15 +565,26 @@ class alter_bg():
 
   ##### BLUR THE BACKGROUND OF AN IMAGE #####
 
-  def blur_bg(self, image_path,low = False, moderate = False, extreme = False, output_image_name = None, verbose = None, detect = None):
+  def blur_bg(self, image_path,low = False, moderate = False, extreme = False, output_image_name = None, verbose = None, detect = None, detect_execpt = None):
     if verbose is not None:
       print("processing image......")
+      print("blur_bg")
       
     seg_image = self.segmentAsPascalvoc(image_path)
 
+    #print(seg_image)
+    if detect_execpt is not None:
+      for obj in detect_execpt:
+        print(obj)
+        target_class = self.target_obj(obj)
+        seg_image[1][seg_image[1] != target_class] = 0
+
     if detect is not None:
-      target_class = self.target_obj(detect)
-      seg_image[1][seg_image[1] != target_class] = 0
+      
+      for obj in detect:
+        print(obj)
+        target_class = self.target_obj(obj)
+        seg_image[1][seg_image[1] != target_class] = 0
     
     ori_img = cv2.imread(image_path)
 
@@ -575,8 +596,12 @@ class alter_bg():
 
     if extreme == True:
         blur_img = cv2.blur(ori_img, (81,81), 0)
-
-    out = np.where(seg_image[1], ori_img, blur_img)
+    #print(blur_img)
+    if detect_execpt:
+      out = np.where(seg_image[1],  blur_img,ori_img)
+    else:
+      out = np.where(seg_image[1], ori_img, blur_img)
+    #cv2.imwrite("seg_image.png", seg_image[1])
     
     if output_image_name is not None:
         cv2.imwrite(output_image_name, out)
@@ -590,6 +615,7 @@ class alter_bg():
   def blur_frame(self, frame,low = False, moderate = False, extreme = False, verbose = None, detect = None):
     if verbose is not None:
       print("processing frame......")
+      print("blur_frame")
       
     seg_frame = self.segmentAsPascalvoc(frame, process_frame=True)
     if detect is not None:
