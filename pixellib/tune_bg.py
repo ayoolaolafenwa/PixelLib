@@ -660,7 +660,7 @@ class alter_bg():
             if detect_except is not None:
               for obj in detect_except:
                 target_class = self.target_obj(obj)
-                seg_frame[1][seg_frame[1] != target_class] = 0
+                seg_frame[1][seg_frame[1] == target_class] = 1
 
             if detect is not None:
               for obj in detect:
@@ -676,7 +676,8 @@ class alter_bg():
             if extreme == True:
                 blur_frame = cv2.blur(frame, (81,81), 0)
             if detect_except:
-              out = np.where(seg_frame[1], blur_frame, frame)
+              print("detect_except")
+              out = np.where(seg_frame[1],blur_frame, frame)
             else:
               out = np.where(seg_frame[1], frame, blur_frame)
             
