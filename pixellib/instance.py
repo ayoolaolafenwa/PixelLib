@@ -193,6 +193,7 @@ class instance_segmentation():
         # Run detection
         if verbose is not None:
             print("Processing image...")
+            print("From segmentImage")
         results = self.model.detect([new_img])    
 
 
@@ -440,6 +441,7 @@ class instance_segmentation():
         # Run detection
         if verbose is not None:
             print("Processing image...")
+            print("segmentFrame")
         results = self.model.detect([new_frame])    
 
 
@@ -703,6 +705,7 @@ class custom_segmentation:
         # Run detection
         if verbose is not None:
             print("Processing image...")
+            print("SegmentImage")
         results = self.model.detect([new_img])    
 
 
@@ -939,6 +942,7 @@ class custom_segmentation:
         # Run detection
         if verbose is not None:
             print("Processing image...")
+            print("segmentFrame")
         results = self.model.detect([new_frame])    
 
 

@@ -148,6 +148,7 @@ class semantic_segmentation():
 
       if verbose is not None:
         print("Processing image....")
+        print("segmentAsPascalvoc")
 
       #run prediction
       res = self.model.predict(np.expand_dims(resized_image, 0))
@@ -408,6 +409,7 @@ class semantic_segmentation():
 
     if verbose is not None:
       print("Processing image....")
+      print("segmentAsAde20k")
     #run prediction
     res = self.model2.predict(np.expand_dims(resized_image, 0))
     
