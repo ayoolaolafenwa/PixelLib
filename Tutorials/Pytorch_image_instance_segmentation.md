@@ -29,14 +29,18 @@ ins.segmentImage("image.jpg", show_bboxes=True, output_image_name="output_image.
 **Line 1–4:** PixelLib package was imported and we also imported the class instanceSegmentation from the the module pixellib.torchbackend.instance (importing instance segmentation class from pytorch support). We created an instance of the class and finally loaded the PointRend model we have downloaded.
 
 **Line 5:** We called the function segmentImage to perform segmentation of objects in images and added the following parameters to the function:
-    *image_path:* This is the path to the image to be segmented.
+    **image_path:** This is the path to the image to be segmented.
 
-    *show_bbox:* This is an optional parameter to show the segmented results with bounding boxes.
+    **show_bbox:** This is an optional parameter to show the segmented results with bounding boxes.
 
-    *output_image_name:* This is the name of the saved segmented image. 
+    **output_image_name:** This is the name of the saved segmented image. 
 
 ## Sample Image for Segmentation
-![sample1](pytorchsamples/sample.jpg) <br/> <br/>
+
+![sample1](pytorchsamples/sample.jpg) 
+
+<br/>
+<br/>
 
 ``` python
 ins.segmentImage("image.jpg",output_image_name="output.jpg")
@@ -44,13 +48,18 @@ ins.segmentImage("image.jpg",output_image_name="output.jpg")
 
 ## Image after Segmentation
 
-![sample2](pytorchsamples/seg.jpg) <br/> <br/>
+![sample2](pytorchsamples/seg.jpg) 
+
+<br/> <br/>
 
 ```
 The checkpoint state_dict contains keys that are not used by the model: proposal_generator.anchor_generator.cell_anchors.{0, 1, 2, 3, 4}
 ```
 
-*This log above may appeared if you are running the segmentation code! It is not an error and the code will work fine!* <br/> <br/>
+**This log above may appeared if you are running the segmentation code! It is not an error and the code will work fine!**
+
+ <br/> 
+ <br/>
 
 ## Obtain Segmentation Results
 ``` python
@@ -58,7 +67,9 @@ results, output = ins.segmentImage("image.jpg", show_bboxes=True, output_image_n
 print(results)
 ```
 
-The segmentation results return a dictionary with a lot of values associated with the objects segmented in the image. The results printed will be in the following format: <br/> <br/>
+The segmentation results return a dictionary with a lot of values associated with the objects segmented in the image. The results printed will be in the following format: 
+<br/>
+
 ```
 {'boxes':  array([[ 579,  462, 1105,  704],
        [   1,  486,  321,  734],
@@ -136,7 +147,9 @@ ins.segmentImage("sample.jpg", show_bboxes=True, mask_points_values=True,  outpu
        [436, 115],
        [433, 115],
        [432, 114]])]]
-``` <br/>       
+``` 
+<br/> 
+
 **extracted_objects:** This is the container value for the extracted objects values if we extract objects. It is empty, because we did not extract anything. We shall discuss later in this article on how to extract these segmented objects. <br/> <br/>
 
 ```python
@@ -392,7 +405,8 @@ ins.load_model("pointrend_resnet50.pkl")
 ins.segmentImage("image.jpg", show_bboxes=True, extract_segmented_objects=True, extract_from_box = True,
 save_extracted_objects=True, output_image_name="output_image.jpg" )
 ```
-<br/> <br/>
+<br/>
+<br/>
 
 # Image Segmentation Output Visualization
 
