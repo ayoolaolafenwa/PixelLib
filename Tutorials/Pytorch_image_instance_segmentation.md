@@ -96,30 +96,41 @@ The segmentation results return a dictionary with a lot of values associated wit
 **boxes:** These are the bounding boxes coordinates of the objects segmented. I did not display all the boxes coordinates, this is because the list would have been too long.  <br/> 
 
 ```
-{'boxes': array([[5.790e+02, 4.620e+02, 1.105e+03, 7.050e+02],[1.000e+00, 4.870e+02, 3.220e+02, 7.340e+02],[1.142e+03, 3.640e+02, 1.161e+03, 4.060e+02]], dtype=float32),
+'boxes':  array([[ 579,  462, 1105,  704],
+       [   1,  486,  321,  734],
+       [ 321,  371,  423,  742],
+       [ 436,  369,  565,  788],
+       [ 191,  397,  270,  532],
+       [1138,  357, 1197,  482],
+       [ 877,  382,  969,  477],),
 ```
 <br/>
+
 **class_ids:** These are the class ids of the objects segmented. 
 ```
 'class_ids': array([ 2,  2,  0,  0,  0,  0,  0,  2,  0,  0,  0,  0,  2, 24, 24,2,  2,2,  0,  0,  0,  0,  0,  0], dtype=int64),
 ```
 <br/>
+
 **class_names:** These are the class names of the objects segmented. 
 ```
 'class_names': ['car', 'car', 'person', 'person', 'person', 'person', 'person', 'car', 'person', 'person', 'person', 'person', 'car', 'backpack', 'backpack', 'car', 'car', 'car', 'person', 'person', 'person', 'person', 'person', 'person'],
 ```
 <br/>
+
 **object_counts:** These are the counts of each of the classes segmented in the image. I used the python inbuilt counter to count the objects. In this case there are 15 persons, 7 cars, and 2 backpacks segmented in the image.  
 ```
 'object_counts': Counter({'person': 15, 'car': 7, 'backpack': 2}),
 ```
 <br/>
+
 **scores:** These are the confidence scores for each of the objects segmented. <br/>
 
 ```
 'scores': array([100., 100., 100., 100.,  99.,  99.,  98.,  98.,  97.,  96.,  95.,95.,  95.,  95.,  94.,  94.,  93.,  91.,  90.,  88.,  82.,  72.,69.,  66.], dtype=float32),
 ```
 <br/>
+
 **masks:** These are the mask values of each of the objects segmented. I did not display all the mask values, this is because the list would have been too long. 
 
 ```
@@ -136,6 +147,7 @@ The default values of masks returned are in bolean. It is possible to obtain the
 ins.segmentImage("sample.jpg", show_bboxes=True, mask_points_values=True,  output_image_name="output.jpg")
 ``` 
 <br/>
+
 **mask_points_values** parameter was added to the segmentImage function and set to true and the new mask values will be:
 ```
 [[array([[295, 497]])
@@ -349,8 +361,8 @@ segmented_object_6.jpg
 
 <table>
   <tr>
-    <td><img src="Pytorchsamples/img1mask.jpg"></td>
-    <td><img src="Pytorchsamples/img2mask.jpg"></td>
+    <td><img src="pytorchsamples/img1mask.jpg"></td>
+    <td><img src="pytorchsamples/img2mask.jpg"></td>
   </tr>
   
  </table>
@@ -358,7 +370,7 @@ segmented_object_6.jpg
 **Extracted Objects from Mask coordinates**
  
 
-<br/> <br/>
+<br/> 
 
 **Note**
 All the objects in the image are extracted and I chose to display only two of them.
@@ -386,8 +398,8 @@ object_extract6.jpg
 
 <table>
   <tr>
-    <td><img src="Pytorchsamples/img1box.jpg"></td>
-    <td><img src="Pytorchsamples/img2box.jpg"></td>
+    <td><img src="pytorchsamples/img1box.jpg"></td>
+    <td><img src="pytorchsamples/img2box.jpg"></td>
   </tr>
   
  </table>
