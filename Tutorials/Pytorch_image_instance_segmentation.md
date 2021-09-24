@@ -300,9 +300,12 @@ ins.segmentImage("image.jpg", segment_target_classes = target_classes, output_im
 ```
 The function **select_target_classes** function was called to select the target objects to be segmented. The function segmentImage got a new parameter segment_target_classes to choose from the target classes and filter the detections based on them.
 
-![sample3](pytorchsample/segperson.jpg)
-**Great!!! PixelLib detects only the people present in the image. **
-<br/> <br/>
+![sample3](pytorchsamples/segperson.jpg)
+
+**Great!!! PixelLib detects only the people present in the image.**
+
+<br/> 
+<br/>
 
 
 ## Full Code for Custom Object Detection
