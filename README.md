@@ -31,6 +31,9 @@ The pytorch version of PixelLib uses PointRend object segmentation architecture 
   
  </table>
 
+<br/>
+<br/>
+
 <table>
   <tr>
     <td><img src="Images/compare3.jpg"></td>
