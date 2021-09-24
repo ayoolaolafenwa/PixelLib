@@ -52,7 +52,6 @@ ins.process_video("sample_video.mp4", show_bboxes=True,  extract_segmented_objec
 ```
 The process_video function have new parameters extract_segmented_objects and save_extracted_objects to extract and save segmented objects respectively.
 
-</br>
 
 <table>
   <tr>
@@ -83,9 +82,9 @@ ins.process_video("sample.mp4", show_bboxes=True, extract_segmented_objects=True
 
 <table>
   <tr>
-    <td><img src="Pytorchsamples/vidbox1.jpg"></td>
-    <td><img src="Pytorchsamples/vidbox2.jpg"></td>
-    <td><img src="Pytorchsamples/vidbox3.jpg"></td>
+    <td><img src="pytorchsamples/vidbox1.jpg"></td>
+    <td><img src="pytorchsamples/vidbox2.jpg"></td>
+    <td><img src="pytorchsamples/vidbox3.jpg"></td>
   </tr>
   
  </table>
