@@ -68,7 +68,6 @@ print(results)
 ```
 
 The segmentation results return a dictionary with a lot of values associated with the objects segmented in the image. The results printed will be in the following format: 
-<br/>
 
 ```
 {'boxes':  array([[ 579,  462, 1105,  704],
