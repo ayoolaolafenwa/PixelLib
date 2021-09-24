@@ -29,11 +29,12 @@ ins.segmentImage("image.jpg", show_bboxes=True, output_image_name="output_image.
 **Line 1–4:** PixelLib package was imported and we also imported the class instanceSegmentation from the the module pixellib.torchbackend.instance (importing instance segmentation class from pytorch support). We created an instance of the class and finally loaded the PointRend model we have downloaded.
 
 **Line 5:** We called the function segmentImage to perform segmentation of objects in images and added the following parameters to the function:
-    **image_path:** This is the path to the image to be segmented.
 
-    **show_bbox:** This is an optional parameter to show the segmented results with bounding boxes.
+ * image_path: This is the path to the image to be segmented.
 
-    **output_image_name:** This is the name of the saved segmented image. 
+ * show_bbox: This is an optional parameter to show the segmented results with bounding boxes.
+
+ * output_image_name: This is the name of the saved segmented image. 
 
 ## Sample Image for Segmentation
 
