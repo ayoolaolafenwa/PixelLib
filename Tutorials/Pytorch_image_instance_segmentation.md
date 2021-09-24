@@ -1,18 +1,5 @@
 # Instance Segmentation of Images in Pytorch
 
-## Pytorch Backend PixelLib
-
-The previous version of PixelLib uses tensorflow deep learning library as its backend and utilizes Mask R-CNN and DeepLab to perform instance segmentation and semantic segmentation respectively. I am so excited to announce that PixelLib now provide support for pytorch backend to perform faster, more accurate segmentation and extraction of objects in images and videos using PointRend segmentation architecture.
-
-## PointRend for Object Segmentation
-
-The pytorch version of PixelLib uses PointRend object segmentation architecture by [Alexander Kirillov et al](https://arxiv.org/abs/1912.08193) to replace Mask R-CNN for performing instance segmentation of objects. PointRend is an excellent state of the art neural network for implementing object segmentation. It generates accurate segmentation masks and run at high inference speeds that match the increasing demand for an accurate and real time computer vision applications.
-
-## Multiple OS Supports
-
-PixelLib is a library built to provide support for different operating systems. I integrated PixelLib with the python implementation of [PointRend by Detectron2](https://github.com/facebookresearch/detectron2/tree/main/projects/PointRend) which supports only Linux OS. 
-I made modifications to the original Detectron2 PointRend implementation to support Windows OS. I am happy to give the wonderful news that the PointRend implementation used for PixelLib supports both Linux and Windows OS.
-
 # Image Segmentation
 
 PixelLib uses five lines of python code for performing object segmentation in images and videos with PointRend model. Download the [PointRend model](https://github.com/ayoolaolafenwa/PixelLib/releases/download/0.2.0/pointrend_resnet50.pkl). This is the code for image segmentation.

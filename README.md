@@ -6,7 +6,7 @@
 [![Downloads](https://pepy.tech/badge/pixellib)](https://pepy.tech/project/pixellib)  [![Downloads](https://pepy.tech/badge/pixellib/month)](https://pepy.tech/project/pixellib/month)  [![Downloads](https://pepy.tech/badge/pixellib/week)](https://pepy.tech/project/pixellib/week) 
 
 
-### Update: The new version of PixelLib makes it possible to  extract segmented objects in images, videos and filter coco model detections to segment a user's target class. Read the [tutorial](https://olafenwaayoola.medium.com/extraction-of-objects-in-images-and-videos-using-5-lines-of-code-6a9e35677a31) on how to perform object extraction in images and videos.<br> Paper, *Simplifying Object Segmentation with PixelLib Library* is available on [paperswithcode](https://paperswithcode.com/paper/simplifying-object-segmentation-with-pixellib) <br> <br>
+### Update: PixelLib provides support for Pytorch and it uses PointRend for performing more accurate and real time instance segmentation of objects in images and videos. Read the [tutorial](https://olafenwaayoola.medium.com/real-time-image-segmentation-using-5-lines-of-code-7c480abdb835) on how to use Pytorch and PointRend to perform instance segmentation in images and videos.<br> Paper, *Simplifying Object Segmentation with PixelLib Library* is available on [paperswithcode](https://paperswithcode.com/paper/simplifying-object-segmentation-with-pixellib) <br> <br>
 
 
 Pixellib is a library for performing segmentation of objects in images and videos. It supports the two major types of image segmentation: 
@@ -15,9 +15,118 @@ Pixellib is a library for performing segmentation of objects in images and video
 
 **2.Instance segmentation**
 
-Install PixelLib and its dependencies
+PixelLib supports two deep learning libraries for image segmentation which are **Pytorch** and **Tensorflow**. 
 
-**Install Tensorflow**:
+# PixelLib Pytorch Version 
+
+The pytorch version of PixelLib uses PointRend object segmentation architecture by [Alexander Kirillov et al](https://arxiv.org/abs/1912.08193) to replace Mask R-CNN for performing instance segmentation of objects. PointRend is an excellent state of the art neural network for implementing object segmentation. It generates accurate segmentation masks and run at high inference speed that matches the increasing demand for an accurate and real time computer vision applications. PixelLib is a library built to provide support for different operating systems. I integrated PixelLib with the python implementation of [PointRend by Detectron2](https://github.com/facebookresearch/detectron2/tree/main/projects/PointRend) which supports only Linux OS. I made modifications to the original Detectron2 PointRend implementation to support Windows OS. The PointRend implementation used for PixelLib supports both Linux and Windows OS.
+
+<table>
+  <tr>
+    <td><img src="Images/compare1.jpg"></td>
+    <h2> Mask R-CNN </h2>
+    <td><img src="Images/compare2.jpg"></td>
+    <h2> PointRend </h2>
+  </tr>
+  
+ </table>
+
+<table>
+  <tr>
+    <td><img src="Images/compare3.jpg"></td>
+    <h2> Mask R-CNN </h2>
+    <td><img src="Images/compare4.jpg"></td>
+    <h2> PointRend </h2>
+  </tr>
+  
+ </table>
+
+The sample images above are examples of the differences in the segmentation results of PointRend compared to Mask RCNN. It is obvious that the PointRend image results are better segmentation outputs compared to Mask R-CNN results.
+
+## PointRend Instance Segmentation Records
+
+#### Inference Speeds:** 
+<br/>
+
+* **Using A TargetSize of *1333 * 800* : It achieves 0.26 seconds for processing a single image and 4fps for live camera feeds**. <br/>
+* **Using A TargetSize of *667 * 447*: It achieves 0.20 seconds for processing a single image and 6fps for live camera feeds**.<br/>
+* **Using A TargetSize of *333 * 200*: It achieves 0.15 seconds for processing a single image and 9fps for live camera feeds**.<br/>
+
+
+### Install PixelLib and its dependencies
+
+**Download Python**
+
+PixelLib pytorch version supports python version 3.7 and above. Download a [compatible python version](https://www.python.org/).
+
+**Install Pytorch**
+
+PixelLib Pytorch version supports these versions of pytorch(1.6.0, 1.7.1,1.8.0 and 1.9.0).
+
+*Note:* Pytorch 1.7.0 is not supported and do not use any pytorch version less than 1.6.0. Install a compatible [Pytorch version](https://pytorch.org/).
+
+<br/>
+
+**Install Pycocotools**
+```
+pip3 install pycocotools
+```
+<br/>
+
+**Install PixelLib**
+```
+pip3 install pixellib
+```
+<br/>
+
+If installed, upgrade to the latest version using:
+```
+pip3 install pixellib — upgrade
+```
+
+
+# Image Segmentation in 5 Lines of Code Using PointRend
+
+![p1](Images/github.jpg)
+
+```python
+
+  import pixellib
+  from pixellib.torchbackend.instance import instanceSegmentation
+
+  ins = instanceSegmentation()
+  ins.load_model("pointrend_resnet50.pkl")
+  ins.segmentImage("image.jpg", show_bboxes=True, output_image_name="output_image.jpg")
+```
+
+![p2](Images/a1.jpg)
+
+**[Image Segmentation with Pytorch Using PointRend](Tutorials/Pytorch_image_instance_segmentation.md)**
+
+<br/>
+<br/>
+
+# Video Segmentation in 5 Lines of Code Using PointRend
+
+```python
+  import pixellib
+  from pixellib.torchbackend.instance import instanceSegmentation
+
+  ins = instanceSegmentation()
+  ins.load_model("pointrend_resnet50.pkl")
+  ins.process_video("sample_video.mp4", show_bboxes=True, frames_per_second=3, output_video_name="output_video.mp4")
+  
+```
+
+[![p3](Images/vid1.png)](https://www.youtube.com/watch?v=o4Ies6YEces&list=PLtFkVrcr8LqNgbwdOb6of5X19ytm4ycHC&index=22&t=3s)
+
+**[Tutorial on Instance Segmentation of Videos](Tutorials/Pytorch_video_instance_segmentation.md)** 
+
+
+<br/>
+<br/>
+
+# PixelLib Tensorflow Version 
 
 PixelLib supports **tensorflow's version (2.0 - 2.4.1)**. Install tensorflow using:
 
