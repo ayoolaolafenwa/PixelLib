@@ -23,10 +23,10 @@ The pytorch version of PixelLib uses PointRend object segmentation architecture 
 
 <table>
   <tr>
-    <td><img src="Images/compare1.jpg">  </td>
-   
+    <td><img src="Images/compare1.jpg"></td>
+    <h2> Mask R-CNN </h2>
     <td><img src="Images/compare2.jpg"></td>
-    
+    <h2> PointRend </h2>
   </tr>
   
  </table>
@@ -34,9 +34,9 @@ The pytorch version of PixelLib uses PointRend object segmentation architecture 
 <table>
   <tr>
     <td><img src="Images/compare3.jpg"></td>
-    
+    <h2> Mask R-CNN </h2>
     <td><img src="Images/compare4.jpg"></td>
-    
+    <h2> PointRend </h2>
   </tr>
   
  </table>
