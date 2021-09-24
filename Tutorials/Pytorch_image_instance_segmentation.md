@@ -215,7 +215,8 @@ ins.load_model("pointrend_resnet50.pkl", confidence = 0.3)
 # Speed Records
 
 PixelLib makes it possible to perform real time object segmentation and added the ability to adjust the inference speed to suit real time predictions. The default inference speed for processing a single image using Nvidia GPU with 4GB capacity is about **0.26** seconds. 
-<br>
+<br/>
+
 **Speed Adjustments**
 PixelLib supports speed adjustments and there are two types of speed adjustment modes which are fast and rapid mode;
 
@@ -256,9 +257,12 @@ ins.segmentImage("image.jpg", show_bboxes=True, output_image_name="output_image.
 
 # PointRend Models
 
-There are two types of PointRend models used for object segmentation and they are of resnet50 variant and resnet101 variant. The resnet50 variant is used throughout this article because it is faster and of good accuracy. The resnet101 variant is more accurate but it is slower than resnet50 variant. According to the official reports of the models on Detectron2 the resnet50 variant achieves **38.3 mAP** on COCO and resnet101 variant achieves **40.1 mAP** on COCO. <br/>
+There are two types of PointRend models used for object segmentation and they are of resnet50 variant and resnet101 variant. The resnet50 variant is used throughout this article because it is faster and of good accuracy. The resnet101 variant is more accurate but it is slower than resnet50 variant. According to the official reports of the models on Detectron2 the resnet50 variant achieves **38.3 mAP** on COCO and resnet101 variant achieves **40.1 mAP** on COCO.
+ <br/>
 
 **Speed Records for Resnet101:** The default speed for segmentation is 0.5 seconds, fast mode is 0.3 seconds and while the rapid mode is **0.25** seconds. 
+<br/>
+
 **Code for Resnet101 variant**
 ```python
 import pixellib
