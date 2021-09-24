@@ -82,32 +82,42 @@ The segmentation results return a dictionary with a lot of values associated wit
 <br/>
 
 ## Values from The Results Printed Above Include: <br/>
-```
-{'boxes': array([[5.790e+02, 4.620e+02, 1.105e+03, 7.050e+02],[1.000e+00, 4.870e+02, 3.220e+02, 7.340e+02],[1.142e+03, 3.640e+02, 1.161e+03, 4.060e+02]], dtype=float32),
-```
+
 **boxes:** These are the bounding boxes coordinates of the objects segmented. I did not display all the boxes coordinates, this is because the list would have been too long.  <br/> 
 
 ```
+{'boxes': array([[5.790e+02, 4.620e+02, 1.105e+03, 7.050e+02],[1.000e+00, 4.870e+02, 3.220e+02, 7.340e+02],[1.142e+03, 3.640e+02, 1.161e+03, 4.060e+02]], dtype=float32),
+```
+<br/>
+**class_ids:** These are the class ids of the objects segmented. 
+```
 'class_ids': array([ 2,  2,  0,  0,  0,  0,  0,  2,  0,  0,  0,  0,  2, 24, 24,2,  2,2,  0,  0,  0,  0,  0,  0], dtype=int64),
 ```
-**class_ids:** These are the class ids of the objects segmented. <br/>
+<br/>
+**class_names:** These are the class names of the objects segmented. 
 ```
 'class_names': ['car', 'car', 'person', 'person', 'person', 'person', 'person', 'car', 'person', 'person', 'person', 'person', 'car', 'backpack', 'backpack', 'car', 'car', 'car', 'person', 'person', 'person', 'person', 'person', 'person'],
 ```
-**class_names:** These are the class names of the objects segmented. <br/>
+<br/>
+**object_counts:** These are the counts of each of the classes segmented in the image. I used the python inbuilt counter to count the objects. In this case there are 15 persons, 7 cars, and 2 backpacks segmented in the image.  
 ```
 'object_counts': Counter({'person': 15, 'car': 7, 'backpack': 2}),
 ```
-**object_counts:** These are the counts of each of the classes segmented in the image. I used the python inbuilt counter to count the objects. In this case there are 15 persons, 7 cars, and 2 backpacks segmented in the image.  </br>
+<br/>
+**scores:** These are the confidence scores for each of the objects segmented. <br/>
+
 ```
 'scores': array([100., 100., 100., 100.,  99.,  99.,  98.,  98.,  97.,  96.,  95.,95.,  95.,  95.,  94.,  94.,  93.,  91.,  90.,  88.,  82.,  72.,69.,  66.], dtype=float32),
 ```
-**scores:** These are the confidence scores for each of the objects segmented. <br/>
+<br/>
+**masks:** These are the mask values of each of the objects segmented. I did not display all the mask values, this is because the list would have been too long. 
+
 ```
 'masks': array([[[False, False, False, ..., False, False, False],
 [False, False, False, ..., False, False, False],
 ```
-**masks:** These are the mask values of each of the objects segmented. I did not display all the mask values, this is because the list would have been too long. <br/>
+<br/>
+
 
 ## Note <br/>
 The default values of masks returned are in bolean. It is possible to obtain the masks' coordinates by using a new parameter **mask_points_values**.
@@ -134,6 +144,7 @@ results, output = ins.segmentImage("image.jpg", show_bboxes=True, output_image_n
 ```
 ## Access Values Rendered by The Segmentation Results  
 <br/>
+
 **Bounding box coordinate values**
 ```python
 results["boxes"]
@@ -141,6 +152,7 @@ results["boxes"]
 <br/>
 
 **Class ids values**
+
 ``` python
 results["class_ids"]
 ```
@@ -153,12 +165,14 @@ results["class_names"]
 <br/>
 
 **Object counts values**
+
 ``` python
 results["object_counts"]
 ```
 <br/>
 
 **Mask values**
+
 ```python
 results["masks"]
 ```
@@ -177,7 +191,7 @@ ins.load_model("pointrend_resnet50.pkl", confidence = 0.3)
 # Speed Records
 
 PixelLib makes it possible to perform real time object segmentation and added the ability to adjust the inference speed to suit real time predictions. The default inference speed for processing a single image using Nvidia GPU with 4GB capacity is about **0.26** seconds. 
-
+<br>
 **Speed Adjustments**
 PixelLib supports speed adjustments and there are two types of speed adjustment modes which are fast and rapid mode;
 
@@ -198,10 +212,12 @@ ins.segmentImage("image.jpg", show_bboxes=True, output_image_name="output_image.
 ```
 
 **2 Rapid Mode**
+
 ``` python
 ins.load_model("pointrend_resnet50.pkl", detection_speed = "fast")
 ```
 <br/>
+
 In the **load_model** function we added the parameter **detection_speed** and set the value to **rapid*. The rapid mode achieves **0.15** seconds for processing a single image.
 
 ## Full Code for Rapid Mode Detection
@@ -309,6 +325,7 @@ results["extracted_objects"]
 <br/>
 
 **save_extracted_objects:** This is the parameter that will save each of the extracted objects as an image. Each of the segmented objects will be saved as segmented_object_index e.g segmented_object_1. The objects are saved based on the order in which they are extracted. 
+
 ```
 segmented_object_1.jpg
 segmented_object_2.jpg
@@ -317,13 +334,15 @@ segmented_object_4.jpg
 segmented_object_5.jpg
 segmented_object_6.jpg
 ```
+
 <table>
   <tr>
-    <td><img src="Pytorchsamples/img1_mask.jpg"></td>
-    <td><img src="Pytorchsamples/img2_mask.jpg"></td>
+    <td><img src="Pytorchsamples/img1mask.jpg"></td>
+    <td><img src="Pytorchsamples/img2mask.jpg"></td>
   </tr>
   
  </table>
+
 **Extracted Objects from Mask coordinates**
  
 
@@ -352,6 +371,17 @@ object_extract5.jpg
 object_extract6.jpg
 ```
 
+
+<table>
+  <tr>
+    <td><img src="Pytorchsamples/img1box.jpg"></td>
+    <td><img src="Pytorchsamples/img2box.jpg"></td>
+  </tr>
+  
+ </table>
+
+**Extracted Objects from Box coordinates**
+
 ## Full Code for Object Extraction using Bounding Box Coordinates
 ``` python
 import pixellib
@@ -376,6 +406,7 @@ ins.segmentImage("sample.jpg", show_bboxes=True, output_image_name= "output.jpg"
 The visualization wasn't visible because the text size, and box thickness are too slim. We can regulate the text size, thickness, and box thickness to regulate the visualizations.
 
 ## Modifications for Better Visualization
+
 ```python
 ins.segmentImage("sample.jpg", show_bboxes=True, text_size=5, text_thickness=3, box_thickness=8, output_image_name="output.jpg")
 ```
@@ -389,7 +420,7 @@ The segmentImage function accepted new parameters that regulate the thickness of
 <br/>
 <br/>
 
- ## Output Image with A Better Visualization
+## Output Image with A Better Visualization
 
 ![sample5](pytorchsamples/reg2.jpg)
 <br/>

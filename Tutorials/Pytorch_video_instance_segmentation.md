@@ -45,17 +45,20 @@ ins.process_video("sample.mp4", show_bboxes=True, extract_segmented_objects=True
 save_extracted_objects=True, frames_per_second=3, output_video_name="output_video.mp4")
 ```
 <br/>
-```python
+
+``` python
 ins.process_video("sample_video.mp4", show_bboxes=True,  extract_segmented_objectsframes_per_second=5, output_video_name="output_video.mp4")
 ```
 <br/>
 The process_video function have new parameters extract_segmented_objects and save_extracted_objects to extract and save segmented objects respectively.
 
+</br>
+
 <table>
   <tr>
-    <td><img src="Pytorchsamples/vid_mask1.jpg"></td>
-    <td><img src="Pytorchsamples/vid_mask2.jpg"></td>
-    <td><img src="Pytorchsamples/vid_mask3.jpg"></td>
+    <td><img src="Pytorchsamples/vidmask1.jpg"></td>
+    <td><img src="Pytorchsamples/vidmask2.jpg"></td>
+    <td><img src="Pytorchsamples/vidmask3.jpg"></td>
   </tr>
   
  </table>
@@ -80,9 +83,9 @@ ins.process_video("sample.mp4", show_bboxes=True, extract_segmented_objects=True
 
 <table>
   <tr>
-    <td><img src="Pytorchsamples/vid_box1.jpg"></td>
-    <td><img src="Pytorchsamples/vid_box2.jpg"></td>
-    <td><img src="Pytorchsamples/vid_box3.jpg"></td>
+    <td><img src="Pytorchsamples/vidbox1.jpg"></td>
+    <td><img src="Pytorchsamples/vidbox2.jpg"></td>
+    <td><img src="Pytorchsamples/vidbox3.jpg"></td>
   </tr>
   
  </table>
