@@ -113,7 +113,6 @@ pip3 install pixellib — upgrade
 **[Tutorial on Image Segmentation with Pytorch Using PointRend](Tutorials/Pytorch_image_instance_segmentation.md)**
 
 <br/>
-<br/>
 
 # Video Segmentation in 5 Lines of Code Using PointRend
 
@@ -133,6 +132,11 @@ pip3 install pixellib — upgrade
 
 
 <br/>
+
+# Note
+
+The recent version of PixelLib Pytorch supports only instance segmentation of objects. Custom training will be released soon!!!!
+
 <br/>
 
 # PixelLib Tensorflow Version 

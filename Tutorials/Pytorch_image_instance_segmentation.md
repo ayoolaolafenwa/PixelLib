@@ -1,7 +1,5 @@
 # Instance Segmentation of Images in Pytorch
 
-# Image Segmentation
-
 PixelLib uses five lines of python code for performing object segmentation in images and videos with PointRend model. Download the [PointRend model](https://github.com/ayoolaolafenwa/PixelLib/releases/download/0.2.0/pointrend_resnet50.pkl). This is the code for image segmentation.
 
 ``` python
