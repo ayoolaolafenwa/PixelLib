@@ -75,19 +75,16 @@ PixelLib Pytorch version supports these versions of pytorch(1.6.0, 1.7.1,1.8.0 a
 *Note:* Pytorch 1.7.0 is not supported and do not use any pytorch version less than 1.6.0. Install a compatible [Pytorch version](https://pytorch.org/).
 
 <br/>
-
 **Install Pycocotools**
 ```
 pip3 install pycocotools
 ```
 <br/>
-
 **Install PixelLib**
 ```
 pip3 install pixellib
 ```
 <br/>
-
 If installed, upgrade to the latest version using:
 ```
 pip3 install pixellib — upgrade
@@ -111,7 +108,6 @@ pip3 install pixellib — upgrade
 ![p2](Images/a1.jpg)
 
 **[Tutorial on Image Segmentation with Pytorch Using PointRend](Tutorials/Pytorch_image_instance_segmentation.md)**
-
 <br/>
 
 # Video Segmentation in 5 Lines of Code Using PointRend
@@ -129,14 +125,11 @@ pip3 install pixellib — upgrade
 [![p3](Images/vid1.png)](https://www.youtube.com/watch?v=o4Ies6YEces&list=PLtFkVrcr8LqNgbwdOb6of5X19ytm4ycHC&index=22&t=3s)
 
 **[Tutorial on Video Segmentation with Pytorch Using PointRend](Tutorials/Pytorch_video_instance_segmentation.md)** 
-
-
 <br/>
 
 # Note
 
-The recent version of PixelLib Pytorch supports only instance segmentation of objects. Custom training will be released soon!!!!
-
+**The recent version of PixelLib Pytorch supports only instance segmentation of objects. Custom training will be released soon!!!!**
 <br/>
 
 # PixelLib Tensorflow Version 
