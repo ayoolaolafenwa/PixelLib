@@ -36,7 +36,6 @@ The pytorch version of PixelLib uses PointRend object segmentation architecture 
   </tr>
   
  </table>
->>>>>>> f581a7805f810bfed177f414a135bd8cc57bca4d
 
 <table>
   <tr>
@@ -111,7 +110,7 @@ pip3 install pixellib — upgrade
 
 ![p2](Images/a1.jpg)
 
-**[Image Segmentation with Pytorch Using PointRend](Tutorials/Pytorch_image_instance_segmentation.md)**
+**[Tutorial on Image Segmentation with Pytorch Using PointRend](Tutorials/Pytorch_image_instance_segmentation.md)**
 
 <br/>
 <br/>
@@ -130,7 +129,7 @@ pip3 install pixellib — upgrade
 
 [![p3](Images/vid1.png)](https://www.youtube.com/watch?v=o4Ies6YEces&list=PLtFkVrcr8LqNgbwdOb6of5X19ytm4ycHC&index=22&t=3s)
 
-**[Tutorial on Instance Segmentation of Videos](Tutorials/Pytorch_video_instance_segmentation.md)** 
+**[Tutorial on Video Segmentation with Pytorch Using PointRend](Tutorials/Pytorch_video_instance_segmentation.md)** 
 
 
 <br/>
