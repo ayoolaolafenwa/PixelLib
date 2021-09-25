@@ -6,7 +6,9 @@
 [![Downloads](https://pepy.tech/badge/pixellib)](https://pepy.tech/project/pixellib)  [![Downloads](https://pepy.tech/badge/pixellib/month)](https://pepy.tech/project/pixellib/month)  [![Downloads](https://pepy.tech/badge/pixellib/week)](https://pepy.tech/project/pixellib/week) 
 
 
-### Update: PixelLib provides support for Pytorch and it uses PointRend for performing more accurate and real time instance segmentation of objects in images and videos. Read the [tutorial](https://olafenwaayoola.medium.com/real-time-image-segmentation-using-5-lines-of-code-7c480abdb835) on how to use Pytorch and PointRend to perform instance segmentation in images and videos.<br> Paper, *Simplifying Object Segmentation with PixelLib Library* is available on [paperswithcode](https://paperswithcode.com/paper/simplifying-object-segmentation-with-pixellib) <br> <br>
+### Update: PixelLib provides support for Pytorch and it uses PointRend for performing more accurate and real time instance segmentation of objects in images and videos. Read the [tutorial](https://olafenwaayoola.medium.com/real-time-image-segmentation-using-5-lines-of-code-7c480abdb835) on how to use Pytorch and PointRend to perform instance segmentation in images and videos.
+
+### Paper, *Simplifying Object Segmentation with PixelLib Library* is available on [paperswithcode](https://paperswithcode.com/paper/simplifying-object-segmentation-with-pixellib) <br> <br>
 
 
 Pixellib is a library for performing segmentation of objects in images and videos. It supports the two major types of image segmentation: 
@@ -23,13 +25,37 @@ The pytorch version of PixelLib uses PointRend object segmentation architecture 
 
 
 
+<table>
+  <tr>
+    <td><h2> Mask R-CNN</h2> </td>
+    <td><h2> PointRend </h2> </td>
+  </tr>
+  <tr>
+    <td><img title = "Mask R-CNN", src="Images/compare1.jpg"></td>
+    <td><img src="Images/compare2.jpg"></td>
+  </tr>
+  
+ </table>
+>>>>>>> f581a7805f810bfed177f414a135bd8cc57bca4d
+
+<table>
+  <tr>
+    <td><h2> Mask R-CNN </h2> </td>
+    <td><h2> PointRend </h2></td>
+  </tr>
+  <tr>
+    <td><img title = "Mask R-CNN", src="Images/compare3.jpg"></td>
+    <td><img src="Images/compare4.jpg"></td>
+  </tr>
+  
+ </table>
 
 
 The sample images above are examples of the differences in the segmentation results of PointRend compared to Mask RCNN. It is obvious that the PointRend image results are better segmentation outputs compared to Mask R-CNN results.
 
 ## PointRend Instance Segmentation Records
 
-#### Inference Speeds:** 
+#### Inference Speeds:
 <br/>
 
 * **Using A TargetSize of *1333 * 800* : It achieves 0.26 seconds for processing a single image and 4fps for live camera feeds**. <br/>
