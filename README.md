@@ -21,25 +21,9 @@ PixelLib supports two deep learning libraries for image segmentation which are *
 
 The pytorch version of PixelLib uses PointRend object segmentation architecture by [Alexander Kirillov et al](https://arxiv.org/abs/1912.08193) to replace Mask R-CNN for performing instance segmentation of objects. PointRend is an excellent state of the art neural network for implementing object segmentation. It generates accurate segmentation masks and run at high inference speed that matches the increasing demand for an accurate and real time computer vision applications. PixelLib is a library built to provide support for different operating systems. I integrated PixelLib with the python implementation of [PointRend by Detectron2](https://github.com/facebookresearch/detectron2/tree/main/projects/PointRend) which supports only Linux OS. I made modifications to the original Detectron2 PointRend implementation to support Windows OS. The PointRend implementation used for PixelLib supports both Linux and Windows OS.
 
-<table>
-  <tr>
-    <td><img src="Images/compare1.jpg"></td>
-    <h2> Mask R-CNN </h2>
-    <td><img src="Images/compare2.jpg"></td>
-    <h2> PointRend </h2>
-  </tr>
-  
- </table>
 
-<table>
-  <tr>
-    <td><img src="Images/compare3.jpg"></td>
-    <h2> Mask R-CNN </h2>
-    <td><img src="Images/compare4.jpg"></td>
-    <h2> PointRend </h2>
-  </tr>
-  
- </table>
+
+
 
 The sample images above are examples of the differences in the segmentation results of PointRend compared to Mask RCNN. It is obvious that the PointRend image results are better segmentation outputs compared to Mask R-CNN results.
 
