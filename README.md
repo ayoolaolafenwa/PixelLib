@@ -109,7 +109,7 @@ pip3 install pixellib — upgrade
 
 ![p2](Images/a1.jpg)
 
-### [Tutorial on Image Segmentation with Pytorch Using PointRend](Tutorials/Pytorch_image_instance_segmentation.md)**
+### [Tutorial on Image Segmentation with Pytorch Using PointRend](Tutorials/Pytorch_image_instance_segmentation.md)
 <br/>
 
 # Video Segmentation in 5 Lines of Code Using PointRend
@@ -126,7 +126,7 @@ pip3 install pixellib — upgrade
 
 [![p3](Images/vid1.png)](https://www.youtube.com/watch?v=o4Ies6YEces&list=PLtFkVrcr8LqNgbwdOb6of5X19ytm4ycHC&index=22&t=3s)
 
-### [Tutorial on Video Segmentation with Pytorch Using PointRend](Tutorials/Pytorch_video_instance_segmentation.md)** 
+### [Tutorial on Video Segmentation with Pytorch Using PointRend](Tutorials/Pytorch_video_instance_segmentation.md)
 <br/>
 
 # Note
@@ -189,7 +189,7 @@ change_bg.blur_bg("sample.jpg", extreme = True, detect = "person", output_image_
 
 ![alt_bg1](Images/blur_person.jpg)
 
-**[Tutorial on Background Editing in Images](Tutorials/change_image_bg.md)**
+### [Tutorial on Background Editing in Images](Tutorials/change_image_bg.md)
 
 
 ```python
@@ -203,7 +203,7 @@ change_bg.change_video_bg("sample_video.mp4", "bg.jpg", frames_per_second = 10, 
 
 [![video2](Images/video2.png)](https://www.youtube.com/watch?v=699Hyi6oZFs)
 
-**[Tutorial on Background Editing in Videos](Tutorials/change_video_bg.md)** <br/> <br/>
+### [Tutorial on Background Editing in Videos](Tutorials/change_video_bg.md) <br/> <br/>
 
 
 
@@ -253,7 +253,7 @@ PixelLib supports the implementation of instance segmentation  of objects in ima
 
 ![img1](Images/ins.jpg)
 
-**[Tutorial on Instance Segmentation of Images](Tutorials/image_instance.md)**
+### [Tutorial on Instance Segmentation of Images](Tutorials/image_instance.md)
 
 ```python
 
@@ -267,7 +267,7 @@ PixelLib supports the implementation of instance segmentation  of objects in ima
 
 [![img3](Images/vid_ins.jpg)](https://www.youtube.com/watch?v=bGPO1bCZLAo)
 
-**[Tutorial on Instance Segmentation of Videos](Tutorials/video_instance.md)** <br/> <br/>
+**[Tutorial on Instance Segmentation of Videos](Tutorials/video_instance.md) <br/> <br/>
 
 
 # Custom Training with 7 Lines of Code
@@ -289,7 +289,7 @@ PixelLib supports the ability to train a custom segmentation model using just se
 
 **This is a result from a model trained with PixelLib.**
 
-**[Tutorial on Custom Instance Segmentation Training](Tutorials/custom_train.md)**
+### [Tutorial on Custom Instance Segmentation Training](Tutorials/custom_train.md)
 
 
 Perform inference on objects in images and videos with your custom model.
@@ -308,7 +308,7 @@ Perform inference on objects in images and videos with your custom model.
 
 [![alt_infer](Images/but_vid.png)](https://www.youtube.com/watch?v=bWQGxaZIPOo)
 
-**[Tutorial on Instance Segmentation of objects in images and videos With A Custom Model](Tutorials/custom_inference.md)** <br/> <br/>
+### [Tutorial on Instance Segmentation of objects in images and videos With A Custom Model](Tutorials/custom_inference.md) <br/> <br/>
 
 
 
@@ -328,7 +328,7 @@ PixelLib makes it possible to perform state of the art semantic segmentation of 
 ```
 ![img5](Images/a5.jpg)
 
-**[Tutorial on Semantic Segmentation of 150 Classes of Objects in Images ](Tutorials/image_ade20k.md)**
+### [Tutorial on Semantic Segmentation of 150 Classes of Objects in Images ](Tutorials/image_ade20k.md)
 
 ```python
 
@@ -343,7 +343,7 @@ PixelLib makes it possible to perform state of the art semantic segmentation of 
 [![alt_vid2](Images/new_vid2.jpg)](https://www.youtube.com/watch?v=hxczTe9U8jY)
 
 
-**[Tutorial on Semantic Segmentation of 150 Classes of Objects Videos](Tutorials/video_ade20k.md)** <br /> <br />
+### [Tutorial on Semantic Segmentation of 150 Classes of Objects Videos](Tutorials/video_ade20k.md) <br /> <br />
 
 
 # Semantic Segmentation of 20 Common Objects with 5 Lines of Code
@@ -363,7 +363,7 @@ segment_image.segmentAsPascalvoc("sample.jpg", output_image_name = "image_new.jp
 
 ![img6](Images/pascal.jpg)
 
-**[Tutorial on Semantic Segmentation of objects in Images With PixelLib Using Pascalvoc model](Tutorials/image_pascalvoc.md)**
+### [Tutorial on Semantic Segmentation of objects in Images With PixelLib Using Pascalvoc model](Tutorials/image_pascalvoc.md)
 
 ```python
 
@@ -376,7 +376,7 @@ segment_image.segmentAsPascalvoc("sample.jpg", output_image_name = "image_new.jp
 ```  
 [![alt_vid2](Images/pascal_voc.png)](https://www.youtube.com/watch?v=l9WMqT2znJE)
 
-**[Tutorial on Semantic Segmentation of objects in Videos With PixelLib Using Pascalvoc model](Tutorials/video_pascalvoc.md)** <br/> <br/>
+### [Tutorial on Semantic Segmentation of objects in Videos With PixelLib Using Pascalvoc model](Tutorials/video_pascalvoc.md)<br/> <br/>
 
 
 ## Projects Using PixelLib
@@ -395,20 +395,21 @@ segment_image.segmentAsPascalvoc("sample.jpg", output_image_name = "image_new.jp
 
 
 ## References
-1. Bonlime, Keras implementation of Deeplab v3+ with pretrained weights  https://github.com/bonlime/keras-deeplab-v3-plus
+1. PointRend Detectron2 Implementation https://github.com/facebookresearch/detectron2/tree/main/projects/PointRend
+2. Bonlime, Keras implementation of Deeplab v3+ with pretrained weights  https://github.com/bonlime/keras-deeplab-v3-plus
 
-2. Liang-Chieh Chen. et al, Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation https://arxiv.org/abs/1802.02611
+3. Liang-Chieh Chen. et al, Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation https://arxiv.org/abs/1802.02611
 
 3. Matterport, Mask R-CNN for object detection and instance segmentation on Keras and TensorFlow https://github.com/matterport/Mask_RCNN
 
-4. Mask R-CNN code made compatible with tensorflow 2.0, https://github.com/tomgross/Mask_RCNN/tree/tensorflow-2.0
+5. Mask R-CNN code made compatible with tensorflow 2.0, https://github.com/tomgross/Mask_RCNN/tree/tensorflow-2.0
 
-5. Kaiming He et al, Mask R-CNN https://arxiv.org/abs/1703.06870
+6. Kaiming He et al, Mask R-CNN https://arxiv.org/abs/1703.06870
 
-6. TensorFlow DeepLab Model Zoo https://github.com/tensorflow/models/blob/master/research/deeplab/g3doc/model_zoo.md
+7. TensorFlow DeepLab Model Zoo https://github.com/tensorflow/models/blob/master/research/deeplab/g3doc/model_zoo.md
 
-7. Pascalvoc and Ade20k datasets' colormaps https://github.com/tensorflow/models/blob/master/research/deeplab/utils/get_dataset_colormap.py
+8. Pascalvoc and Ade20k datasets' colormaps https://github.com/tensorflow/models/blob/master/research/deeplab/utils/get_dataset_colormap.py
 
-8. Object-Detection-Python https://github.com/Yunus0or1/Object-Detection-Python
+9. Object-Detection-Python https://github.com/Yunus0or1/Object-Detection-Python
 
 [Back To Top](#pixellib)
