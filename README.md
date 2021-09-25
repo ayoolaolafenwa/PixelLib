@@ -55,7 +55,6 @@ The sample images above are examples of the differences in the segmentation resu
 ## PointRend Instance Segmentation Records
 
 #### Inference Speeds:
-<br/>
 
 * **Using A TargetSize of *1333 * 800* : It achieves 0.26 seconds for processing a single image and 4fps for live camera feeds**. <br/>
 * **Using A TargetSize of *667 * 447*: It achieves 0.20 seconds for processing a single image and 6fps for live camera feeds**.<br/>
@@ -110,7 +109,7 @@ pip3 install pixellib — upgrade
 
 ![p2](Images/a1.jpg)
 
-**[Tutorial on Image Segmentation with Pytorch Using PointRend](Tutorials/Pytorch_image_instance_segmentation.md)**
+### [Tutorial on Image Segmentation with Pytorch Using PointRend](Tutorials/Pytorch_image_instance_segmentation.md)**
 <br/>
 
 # Video Segmentation in 5 Lines of Code Using PointRend
@@ -127,13 +126,14 @@ pip3 install pixellib — upgrade
 
 [![p3](Images/vid1.png)](https://www.youtube.com/watch?v=o4Ies6YEces&list=PLtFkVrcr8LqNgbwdOb6of5X19ytm4ycHC&index=22&t=3s)
 
-**[Tutorial on Video Segmentation with Pytorch Using PointRend](Tutorials/Pytorch_video_instance_segmentation.md)** 
+### [Tutorial on Video Segmentation with Pytorch Using PointRend](Tutorials/Pytorch_video_instance_segmentation.md)** 
 <br/>
 
 # Note
 
 **The recent version of PixelLib Pytorch supports only instance segmentation of objects. Custom training will be released soon!!!!**
 <br/>
+
 
 # PixelLib Tensorflow Version 
 
