@@ -102,6 +102,7 @@ class instance_custom_training:
         
 
     def train_model(self, num_epochs, path_trained_models,  layers = "all", augmentation = False):
+        validation_present = True
         if augmentation == False:
             print("No Augmentation")
 
@@ -120,9 +121,15 @@ class instance_custom_training:
 
         print('Train %d' % len(self.dataset_train.image_ids), "images")
         print('Validate %d' % len(self.dataset_test.image_ids), "images")
-
-        self.model.train(self.dataset_train, self.dataset_test,models = path_trained_models, augmentation = augmentation, 
-        epochs=num_epochs,layers=layers)
+        
+        if self.dataset_test.image_ids != 0:            
+            self.model.train(self.dataset_train, self.dataset_test,models = path_trained_models, augmentation = augmentation, 
+            epochs=num_epochs,layers=layers)
+        else:
+            print("No validation data found")
+            validation_present = False
+            self.model.train(self.dataset_train, self.dataset_test,models = path_trained_models, augmentation = augmentation, 
+            epochs=num_epochs,layers=layers,validation_present =validation_present )
                              
         
     def evaluate_model(self, model_path, iou_threshold = 0.5):
