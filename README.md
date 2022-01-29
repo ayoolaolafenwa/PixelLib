@@ -392,7 +392,13 @@ segment_image.segmentAsPascalvoc("sample.jpg", output_image_name = "image_new.jp
 4. PixelLib is used to perform image segmentation to find similar contents in images for image recommendation https://github.com/lukoucky/image_recommendation
 ![img11](Images/similar.png) <br/> <br/>
 
+5. PixelLib can also be easily integrated with [Streamlit](https://docs.streamlit.io/), which is an open-source Python library that makes it easy to create and share beautiful, custom web apps for machine learning and data science. In just a few minutes you can build and deploy powerful data apps.
 
+Link to the repo : https://github.com/prateekralhan/Instance-Segmentation-using-PixelLib
+
+![1](https://media.githubusercontent.com/media/prateekralhan/Instance-Segmentation-using-PixelLib/master/gifs/image.gif)
+
+![2](https://media.githubusercontent.com/media/prateekralhan/Instance-Segmentation-using-PixelLib/master/gifs/video.gif)
 
 ## References
 1. PointRend Detectron2 Implementation https://github.com/facebookresearch/detectron2/tree/main/projects/PointRend
