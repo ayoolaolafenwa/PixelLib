@@ -2220,7 +2220,7 @@ class MaskRCNN(object):
         self.model_name = 'mask_rcnn_model.{epoch:03d}-{val_loss:01f}.h5'
         
     def train(self, train_dataset, val_dataset, epochs,layers,models,
-                augmentation=False, no_augmentation_sources=None):
+                augmentation=False, no_augmentation_sources=None,validation_present = True):
         """Train the model.
         train_dataset, val_dataset: Training and validation Dataset objects.
         learning_rate: The learning rate to train with
@@ -2281,12 +2281,20 @@ class MaskRCNN(object):
         if not os.path.isdir(self.save_directory):
             os.makedirs(self.save_directory)
         self.checkpoint_path = os.path.join(self.save_directory, self.model_name)
-
-        callb = [
-            ModelCheckpoint(self.checkpoint_path,save_weights_only=True,save_best_only = True, monitor = "val_loss", verbose = 0), 
-            lr_rate ,
+        
+        if validation_present:
+    
+            callb = [
+                ModelCheckpoint(self.checkpoint_path,save_weights_only=True,save_best_only = True, monitor = "val_loss", verbose = 0), 
+                lr_rate ,
      
-        ] 
+            ] 
+        else:
+            callb = [
+                ModelCheckpoint(self.checkpoint_path,save_weights_only=True,save_best_only = True, monitor = "loss", verbose = 0), 
+                lr_rate ,
+         
+            ] 
 
     
         # Train
@@ -2303,21 +2311,37 @@ class MaskRCNN(object):
             workers = 0
         else:
             workers = multiprocessing.cpu_count()
+        
+        if validation_present == True:
+            self.keras_model.fit(
+                train_generator,
+                initial_epoch=self.epoch,
+                epochs=epochs,
+                steps_per_epoch=self.config.STEPS_PER_EPOCH,
+                callbacks=callb,
+                validation_data=val_generator,
+                validation_steps=self.config.VALIDATION_STEPS,
+                max_queue_size=100,
+                workers=workers,  
+                verbose = 1
+                
+            )
+            self.epoch = max(self.epoch, epochs)
+        else:
+            self.keras_model.fit(
+                train_generator,
+                initial_epoch=self.epoch,
+                epochs=epochs,
+                steps_per_epoch=self.config.STEPS_PER_EPOCH,
+                #callbacks=callb,
+                max_queue_size=100,
+                workers=workers,  
+                verbose = 1
+                
+            )
+            self.epoch = max(self.epoch, epochs)
             
-        self.keras_model.fit(
-            train_generator,
-            initial_epoch=self.epoch,
-            epochs=epochs,
-            steps_per_epoch=self.config.STEPS_PER_EPOCH,
-            callbacks=callb,
-            validation_data=val_generator,
-            validation_steps=self.config.VALIDATION_STEPS,
-            max_queue_size=100,
-            workers=workers,  
-            verbose = 1
             
-        )
-        self.epoch = max(self.epoch, epochs)
 
     def mold_inputs(self, images):
         """Takes a list of images and modifies them to the format expected
