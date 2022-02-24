@@ -12,7 +12,7 @@ from tensorflow.python.keras.layers import Activation
 from tensorflow.python.keras.layers import Concatenate
 from tensorflow.python.keras.layers import Add
 from tensorflow.python.keras.layers import Dropout
-from tensorflow.python.keras.layers import BatchNormalization
+from keras.layers.normalization.batch_normalization import BatchNormalization
 from tensorflow.python.keras.layers import Conv2D
 from tensorflow.python.keras.layers import DepthwiseConv2D
 from tensorflow.python.keras.layers import ZeroPadding2D
