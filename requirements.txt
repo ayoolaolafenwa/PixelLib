@@ -1,9 +1,9 @@
 numpy 
-pillow
+pillow==9.0.0
 scipy
 opencv-python
 scikit-image
 tensorflow
 imgaug
 matplotlib
-labelme2coco
+labelme2coco==0.1.2
