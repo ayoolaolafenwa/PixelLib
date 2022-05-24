@@ -1,1 +1,5 @@
 .vs/
+.vscode/
+__pycache__/
+pixellib.egg-info/
+CustomTrainExample.ipynb

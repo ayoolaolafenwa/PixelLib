@@ -5,21 +5,43 @@ Implement custom training on your own dataset using PixelLib's Library. In just 
 # Prepare your dataset
 
 Our goal is to create a model that can perform instance segmentation and object detection on butterflies and squirrels.
-Collect images for the objects you want to detect and annotate your dataset for custom training. Labelme is the tool employed to perform polygon annotation of objects. Create a root directory or folder and within it create train and test folder. Separate the images required for training (a minimum of 300) and test.Put the images you want to use for training in the train folder and put the images you want to use for testing in the test folder. You will annotate both images in the train and test folder. Download [Nature's dataset](https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.0.0/Nature.zip) used as a sample dataset in this article, unzip it to extract the images' folder. This dataset will serve as a guide for you to know how to organize your images.Ensure that the format of the directory of your own dataset directory is not different from it. Nature is a dataset with two categories butterfly and squirrel. There is 300 images for each class for training and 100 images for each class for testing i.e 600 images for training and 200 images for validation. Nature is a dataset with 800 images. 
+Collect images for the objects you want to detect and annotate your dataset for custom training. Labelme is the tool employed to perform polygon annotation of objects. Create a root directory or folder and within it create train and test folder. Separate the images required for training (a minimum of 300) and test.Put the images you want to use for training in the train folder and put the images you want to use for testing in the test folder. You will annotate both images in the train and test folder. Download [Nature's dataset](https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.0.0/Nature.zip) used as a sample dataset in this article, unzip it to extract the images' folder. This dataset will serve as a guide for you to know how to organize your images.Ensure that the format of the directory of your own dataset directory is not different from it. Nature is a dataset with two categories butterfly and squirrel. There is 300 images for each class for training and 100 images for each class for testing i.e 600 images for training and 200 images for validation. Nature is a dataset with 800 images.
 
-## Labelme annotation tool is employed to perform polygon annotation of objects, read this article on [medium](https://medium.com/@olafenwaayoola/image-annotation-with-labelme-81687ac2d077) on how to annotate objects with Labelme. 
+### NOTE: Fixing the sample Nature Dataset
+There's some minor data integrity errors in the sample dataset, as [reported and addressed here](https://github.com/ayoolaolafenwa/PixelLib/issues/143)
 
-``` 
+You can fix the issue by running the following starter code:
+
+```python
+import json
+import os
+from tqdm import tqdm
+DATA_DIR = "Datasets/Nature"
+for _dir in os.listdir(f"{DATA_DIR}"):
+    DATA_SET = f"{DATA_DIR}/{_dir}"
+    for file in tqdm(os.listdir(DATA_SET)):
+        if file.endswith(".json"):
+            with open(os.path.join(DATA_SET, file), 'r') as f:
+                data = json.load(f)
+            data['imagePath'] = data['imagePath'].replace(
+                '..\\', '').replace("images\\", "")
+            with open(os.path.join(DATA_SET, file), 'w') as f:
+                json.dump(data, f)
+```
+
+## Labelme annotation tool is employed to perform polygon annotation of objects, read this article on [medium](https://medium.com/@olafenwaayoola/image-annotation-with-labelme-81687ac2d077) on how to annotate objects with Labelme.
+
+```
 Nature >>train>>>>>>>>>>>> image1.jpg
                            image1.json
                            image2.jpg
                            image2.json
-      
+
        >>test>>>>>>>>>>>>  img1.jpg
                            img1.json
                            img2.jpg
-                           img2.json   
-```                           
+                           img2.json
+```
 
 Sample of folder directory after annotation.
 
@@ -27,7 +49,7 @@ Sample of folder directory after annotation.
 
 Visualize a sample image before training to confirm that the masks and bounding boxes are well generated.
 
-```python 
+```python
 
    import pixellib
    from pixellib.custom_train import instance_custom_training
@@ -47,7 +69,7 @@ Visualize a sample image before training to confirm that the masks and bounding 
 We imported in pixellib, from pixellib import the class instance_custom_training and created an instance of the class. 
 
 ```python
-   
+
    vis_img.load_dataset("Nature")
 ```
 
@@ -59,12 +81,12 @@ Nature >>>>>>>>train>>>>>>>>>>>>>>> image1.jpg
                train.json           image1.json
                                     image2.jpg
                                     image2.json
-                                 
+
        >>>>>>>>>>>test>>>>>>>>>>>>>>> img1.jpg
                   test.json           img1.json
                                       img2.jpg
                                       img2.json
-```                                      
+```
 
 
 Inside the load_dataset function annotations are extracted from the jsons's files. Bitmap masks are generated from the polygon points of the annotations and bounding boxes are generated from the masks. The smallest box that encapsulates all the pixels of the mask is used as a bounding box.
@@ -104,8 +126,8 @@ This is the code for performing training, in just seven lines of code you train 
 
 ```python
 
-  train_maskrcnn.modelConfig(network_backbone = "resnet101", num_classes= 2, batch_size = 4) 
-```                        
+  train_maskrcnn.modelConfig(network_backbone = "resnet101", num_classes= 2, batch_size = 4)
+```
 We called the function modelConfig, i.e model's configuration. It takes the following parameters:
 
 **network_backbone:** This the CNN network used as a feature extractor for mask-rcnn. The feature extractor used is resnet101.
@@ -125,7 +147,7 @@ We are going to employ the technique of transfer learning for training the model
 Download coco model from [here](https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.2/mask_rcnn_coco.h5)
 
 ```python
-   
+
    train_maskrcnn.train_model(num_epochs = 300, augmentation=True,path_trained_models = "mask_rcnn_models")
 ```
 
@@ -133,13 +155,13 @@ Finally, we called the train function for training maskrcnn model. We called *tr
 
 **num_epochs:** The number of epochs required for training the model. It is set to 300.
 
-**augmentation:** 
+**augmentation:**
 
-[Data Augmentation](https://towardsdatascience.com/data-augmentation-for-deep-learning-4fe21d1a4eb9) is applied on the dataset, this is because we want the model to learn different representations of the objects.  
-Often performed when you have a small dataset, you can improve evaluation scores using this technique.  
+[Data Augmentation](https://towardsdatascience.com/data-augmentation-for-deep-learning-4fe21d1a4eb9) is applied on the dataset, this is because we want the model to learn different representations of the objects.
+Often performed when you have a small dataset, you can improve evaluation scores using this technique.
 PixelLib now supports a custom `imgaug` augmentation pipeline. You can read the [imgaug docs](https://imgaug.readthedocs.io/) and perform augmentation as :
 ```python
-   
+
    import imgaug as ia
    import imgaug.augmenters as iaa
    # Define our augmentation pipeline.
@@ -151,9 +173,9 @@ PixelLib now supports a custom `imgaug` augmentation pipeline. You can read the 
    train_maskrcnn.train_model(num_epochs = 300, augmentation=augmentation_sequence_pipeline,path_trained_models = "mask_rcnn_models")
 ```
 
-**Note** This is the default imgaug augmentation values used by PixelLib when the **augmentation** parameter is set to **True** in the **train_model** function. 
+**Note** This is the default imgaug augmentation values used by PixelLib when the **augmentation** parameter is set to **True** in the **train_model** function.
 ```python
-   
+
 augmentation = imgaug.augmenters.Sometimes(0.5, [
 			        imgaug.augmenters.Fliplr(0.5),
 			        iaa.Flipud(0.5),
@@ -168,9 +190,9 @@ If all of this is too intimidating, you can just set `augmentation=True` and you
 
 ```
 Using resnet101 as network backbone For Mask R-CNN model
-Train 600 images 
-Validate 200 images 
-Applying augmentation on dataset 
+Train 600 images
+Validate 200 images
+Applying augmentation on dataset
 Checkpoint Path: mask_rcnn_models
 Selecting layers to train
 Epoch 1/200
@@ -197,14 +219,14 @@ Google colab: Google Colab provides a single 12GB NVIDIA Tesla K80 GPU that can 
 
 **Using Resnet101:** Training Mask-RCNN consumes alot of memory. On google colab using resnet101 as network backbone you will be able to train with a batchsize of 4. The default network backbone is resnet101. Resnet101 is used as a default backbone because it appears to reach a lower validation loss during training faster than resnet50. It also works better for a dataset with multiple classes and much more images.
 
-**Using Resnet50:** The advantage with resnet50 is that it consumes lesser memory, you can use a batch_size of 6 or 8 on google colab depending on how colab randomly allocates gpu. 
+**Using Resnet50:** The advantage with resnet50 is that it consumes lesser memory, you can use a batch_size of 6 or 8 on google colab depending on how colab randomly allocates gpu.
 The modified code supporting resnet50 will be like this.
 
 
 Full code
 
 ``` python
-   
+
    import pixellib
    from pixellib.custom_train import instance_custom_training
 
@@ -229,13 +251,13 @@ It shows that we are using *resnet50* for training.
 
 
 **Note:** The batch_sizes given are samples used for google colab. If you are using a less powerful GPU, reduce your batch size, for example a PC with a 4G RAM GPU you should use a batch size of 1 for both resnet50 or resnet101. I used a batch size of 1 to train my model on my PC's GPU, train for less than 100 epochs and it produced a validation loss of 0.263. This is favourable because my dataset is not large. A PC with a more powerful GPU you can use a batch size of 2. If you have a large dataset with more classes and much more images use google colab where you have free access to a single 12GB NVIDIA Tesla K80 GPU that can be used up to 12 hours continuously. Most importantly try and use a more powerful GPU and train for more epochs to produce a custom model that will perform efficiently across multiple classes. Achieve better results by training with much more images. 300 images for each each class is recommended to be the minimum required for training.
- 
+
 # Model Evaluation
 
-When we are done with training we should evaluate models with lowest validation losses. Model evaluation is used to access the performance of the trained model on the test dataset.The model trained on Nature dataset and the dataset are available on the [release](https://github.com/ayoolaolafenwa/PixelLib/releases) of this github's repository. Download the trained model from [here](https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.0.0/Nature_model_resnet101.h5). 
+When we are done with training we should evaluate models with lowest validation losses. Model evaluation is used to access the performance of the trained model on the test dataset.The model trained on Nature dataset and the dataset are available on the [release](https://github.com/ayoolaolafenwa/PixelLib/releases) of this github's repository. Download the trained model from [here](https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.0.0/Nature_model_resnet101.h5).
 
 ```python
-  
+
   import pixellib
   from pixellib.custom_train import instance_custom_training
 
@@ -256,7 +278,7 @@ The mAP(Mean Avearge Precision) of the model is *0.89*.
 You can evaluate multiple models at once, what you just need is to pass in the folder directory of the models.
 
 ```python
-  
+
   import pixellib
   from pixellib.custom_train import instance_custom_training
 
@@ -280,7 +302,7 @@ mask_rcnn_models\mask_rcnn_model_058.h5 evaluation using iou_threshold 0.5 is 0.
 
 
 ```python
-  
+
   import pixellib
   from pixellib.custom_train import instance_custom_training
 
