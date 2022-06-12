@@ -32,7 +32,7 @@ class instanceSegmentation:
         add_pointrend_config(self.cfg)
 
 
-        self.class_names = ["person", "bicycle", "car", "motorcycle", "airplane",
+        self.class_names = ["person", "bicycle", "car", "motorbike", "aeroplane",
                          "bus", "train", "truck", "boat", "traffic light", "fire hydrant", "stop sign",
                          "parking meter", "bench", "bird", "cat", "dog", "horse", "sheep", "cow", "elephant", "bear",
                          "zebra",
@@ -42,12 +42,12 @@ class instanceSegmentation:
                          "tennis racket",
                          "bottle", "wine glass", "cup", "fork", "knife", "spoon", "bowl", "banana", "apple", "sandwich",
                          "orange",
-                         "broccoli", "carrot", "hot dog", "pizza", "donut", "cake", "chair", "couch", "potted plant",
+                         "broccoli", "carrot", "hot dog", "pizza", "donut", "cake", "chair", "sofa", "pottedplant",
                          "bed",
-                         "dining table", "toilet", "tv", "laptop", "mouse", "remote", "keyboard", "cell phone",
+                         "diningtable", "toilet", "tvmonitor", "laptop", "mouse", "remote", "keyboard", "cell phone",
                          "microwave",
                          "oven", "toaster", "sink", "refrigerator", "book", "clock", "vase", "scissors", "teddy bear",
-                         "hair dryer",
+                         "hair drier",
                          "toothbrush"]
 
     def load_model(self, model_path, confidence = None, detection_speed = None, network_backbone = "resnet50"):
