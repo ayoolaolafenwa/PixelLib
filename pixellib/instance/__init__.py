@@ -183,8 +183,8 @@ class instance_segmentation():
 
 
     
-    def segmentImage(self, image_path, show_bboxes = False,  segment_target_classes = None, extract_segmented_objects = False, 
-    save_extracted_objects = False,mask_points_values = False,  output_image_name = None,  text_thickness = 0,
+    def segmentImage(self, image_path, output_segment_image_path,show_bboxes = False,  segment_target_classes = None, extract_segmented_objects = False, 
+    save_extracted_objects = False,mask_points_values = False,  output_image_name = None,output_segment_image_path=None,  text_thickness = 0,
     text_size = 0.6, box_thickness = 2, verbose = None):
         image = cv2.imread(image_path)
 
@@ -256,7 +256,10 @@ class instance_segmentation():
                     
                     ex.append(extracted_objects)
                     if save_extracted_objects == True:
-                        save_path = os.path.join("segmented_object" + "_" + str(m) + ".jpg")
+                        image_name = image_path.split(".png|.jpg|.jpeg")[0]
+                        image_name = image_name.split("/")[1]
+                        path = image_name + "-segmented_object" + "_" + str(m) + ".jpg"
+                        save_path = os.path.join(output_segment_image_path + path)
                         cv2.imwrite(save_path, extracted_objects)
 
                 extracted_objects = np.array(ex, dtype = object)
