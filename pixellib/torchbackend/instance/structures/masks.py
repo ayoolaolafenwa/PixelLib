@@ -31,7 +31,7 @@ def polygons_to_bitmask(polygons: List[np.ndarray], height: int, width: int) -> 
     assert len(polygons) > 0, "COCOAPI does not support empty polygons"
     rles = mask_util.frPyObjects(polygons, height, width)
     rle = mask_util.merge(rles)
-    return mask_util.decode(rle).astype(np.bool)
+    return mask_util.decode(rle).astype(bool)
 
 
 def rasterize_polygons_within_box(
@@ -336,7 +336,7 @@ class PolygonMasks:
                 a BoolTensor which represents whether each mask is empty (False) or not (True).
         """
         keep = [1 if len(polygon) > 0 else 0 for polygon in self.polygons]
-        return torch.from_numpy(np.asarray(keep, dtype=np.bool))
+        return torch.from_numpy(np.asarray(keep, dtype=bool))
 
     def __getitem__(self, item: Union[int, slice, List[int], torch.BoolTensor]) -> "PolygonMasks":
         """
